@@ -1,0 +1,263 @@
+/* ===== CONTAINER ===== */
+.join-container {
+  width: 100%;
+  max-width: 650px;
+  margin: 40px auto;
+  text-align: center;
+  padding: 10px;
+}
+
+/* ===== TITLE ===== */
+.join-title {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+/* ===== STEP INDICATOR ===== */
+.step-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid #00a5a3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  color: #00a5a3;
+  background: #fff;
+}
+
+.circle.active {
+  background: #00a5a3;
+  color: #fff;
+}
+
+.line {
+  width: 45px;
+  height: 2px;
+  background: #00a5a3;
+}
+
+/* ===== STEP 1 & STEP 3 CARD BOX ===== */
+.step-box,
+.step-box-small {
+  background: #fff;
+  padding: 22px;
+  border-radius: 12px;
+  border: 1px solid #e1e1e1;
+}
+
+/* Step 3 slightly narrower */
+.step-box-small {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* ===== TABS ===== */
+.tabs {
+  display: flex;
+  justify-content: center;
+  border-bottom: 2px solid #eee;
+  margin-bottom: 18px;
+  font-weight: 600;
+}
+
+.tab {
+  flex: 1;
+  padding: 10px 0;
+  font-size: 16px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  color: #777;
+  border-bottom: 2px solid transparent;
+}
+
+.tab.active {
+  color: #00a5a3;
+  border-bottom: 2px solid #00a5a3;
+}
+
+/* ===== INPUTS ===== */
+.join-input {
+  width: 100%;
+  height: 44px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-top: 12px;
+  font-size: 15px;
+}
+
+/* Referral bottom */
+.referral {
+  margin-top: 25px !important;
+}
+
+/* ===== PASSWORD RULES ===== */
+.password-rules {
+  text-align: left;
+  color: #777;
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+/* ===== NEXT BUTTON ===== */
+.next-btn {
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  background: #00a5a3;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+/* ===== OR DIVIDER ===== */
+.or {
+  margin: 20px 0;
+  color: #777;
+  font-size: 14px;
+}
+
+/* ===== GOOGLE BUTTON ===== */
+.google-btn {
+  width: 65%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 8px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin: 0 auto;
+  transition: background-color 0.2s ease;
+}
+
+.google-btn:hover {
+  background: #e4f6ff;
+  border-color: #b9e2ff;
+}
+
+.google-btn img {
+  width: 20px;
+}
+
+/* ========================================================= */
+/* ===== STEP 2 SECTION (UPDATED TO MATCH HOUSESIGMA) ====== */
+/* ========================================================= */
+
+.step-box {
+  border: none !important; /* remove card styling for step 2 */
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+/* Exactly HouseSigma look */
+.scroll-card {
+  width: 90%;
+  max-width: 520px;
+  margin: 0 auto 22px auto;
+  background: #fff;
+  border: 1px solid #dcdcdc;
+  border-radius: 14px;
+  padding: 18px;
+  height: 165px; /* HouseSigma height */
+  overflow-y: auto;
+  text-align: left;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.scroll-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.scroll-card p {
+  font-size: 14px;
+  line-height: 1.45;
+  color: #444;
+}
+
+/* Scrollbar slimmer like HouseSigma */
+.scroll-card::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scroll-card::-webkit-scrollbar-thumb {
+  background: #00a5a3;
+  border-radius: 5px;
+}
+
+/* ===== STEP 2 BUTTONS ===== */
+.step2-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+  gap: 18px;
+}
+
+.reject-btn,
+.agree-btn {
+  width: 120px;
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.reject-btn {
+  border: 2px solid #00a5a3;
+  color: #00a5a3;
+  background: #fff;
+}
+
+.agree-btn {
+  background: #00a5a3;
+  color: #fff;
+  border: none;
+}
+
+/* ========== STEP 3 ========== */
+.verification-text {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.verification-email {
+  color: #00a5a3;
+  font-weight: 600;
+}
+
+.checkbox-label {
+  display: flex;
+  gap: 8px;
+  font-size: 15px;
+  margin-top: 20px;
+}
+
+.agent-section {
+  text-align: left;
+  margin-top: 20px;
+}
+
+.agent-section label {
+  margin-top: 12px;
+  display: block;
+  font-size: 15px;
+}
