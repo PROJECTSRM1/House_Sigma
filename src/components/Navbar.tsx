@@ -1,26 +1,28 @@
-import { Home, Search, ChevronDown } from 'lucide-react';
-import { Button } from './ui/button';
+import { NavLink } from "react-router-dom";
+import { Home, Search, ChevronDown } from "lucide-react";
+import { Button } from "./ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from './ui/dropdown-menu';
-import styles from './Navbar.module.css';
+} from "./ui/dropdown-menu";
+import styles from "./Navbar.module.css";
 
 const Navbar = () => {
   return (
     <header className={styles.header}>
       <div className={styles.container}>
         <div className={styles.navWrapper}>
+          
           {/* Left Section */}
           <div className={styles.leftSection}>
             {/* Logo */}
-            <a href="/" className={styles.logo}>
+            <NavLink to="/" className={styles.logo}>
               <div className={styles.logoBox}>
                 <Home className={styles.logoIcon} />
               </div>
-            </a>
+            </NavLink>
 
             {/* Province Dropdown */}
             <DropdownMenu>
@@ -36,7 +38,7 @@ const Navbar = () => {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            {/* Small Search - Hidden on mobile */}
+            {/* Search Box */}
             <div className={styles.searchBox}>
               <Search className={styles.searchIcon} />
               <input
@@ -47,50 +49,91 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Center Navigation - Hidden on mobile/tablet */}
+          {/* Center Navigation */}
           <nav className={styles.centerNav}>
-            <a href="#" className={styles.navLink}>
+            <NavLink
+              to="/map-search"
+              className={({ isActive }) =>
+                isActive ? styles.activeNavLink : styles.navLink
+              }
+            >
               Map Search
-            </a>
-            <a href="#" className={styles.navLink}>
+            </NavLink>
+
+            <NavLink
+              to="/market-trends"
+              className={({ isActive }) =>
+                isActive ? styles.activeNavLink : styles.navLink
+              }
+            >
               Market Trends
-            </a>
-            <a href="#" className={styles.navLink}>
+            </NavLink>
+
+            <NavLink
+              to="/home-valuation"
+              className={({ isActive }) =>
+                isActive ? styles.activeNavLink : styles.navLink
+              }
+            >
               Home Valuation
-            </a>
-            <a href="#" className={styles.navLink}>
+            </NavLink>
+
+            <NavLink
+              to="/agents"
+              className={({ isActive }) =>
+                isActive ? styles.activeNavLink : styles.navLink
+              }
+            >
               Agents
-            </a>
+            </NavLink>
+
+            {/* Tools Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <button className={styles.toolsButton}>
                   Tools <ChevronDown className="h-4 w-4" />
                 </button>
               </DropdownMenuTrigger>
+
               <DropdownMenuContent className="bg-background border-border">
-                <DropdownMenuItem>Blog</DropdownMenuItem>
-                <DropdownMenuItem>Recommend Communities</DropdownMenuItem>
-                <DropdownMenuItem>Contact Us</DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <NavLink to="/blog">Blog</NavLink>
+                </DropdownMenuItem>
+
+                <DropdownMenuItem asChild>
+                  <NavLink to="/recommend-communities">
+                    Recommend Communities
+                  </NavLink>
+                </DropdownMenuItem>
+
+                <DropdownMenuItem asChild>
+                  <NavLink to="/contact">
+                    Contact Us
+                  </NavLink>
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </nav>
 
           {/* Right Section */}
           <div className={styles.rightSection}>
-            <Button 
-              variant="outline" 
-              size="sm"
-              className="border-white/80 bg-transparent text-white hover:bg-white hover:text-primary transition-colors"
-            >
-              Log in
-            </Button>
-            <Button 
-              size="sm"
-              className="bg-white text-primary hover:bg-white/90"
-            >
-              Join
-            </Button>
+            <NavLink to="/login">
+              <Button
+                variant="outline"
+                size="sm"
+                className="border-white/80 bg-transparent text-white hover:bg-white hover:text-primary transition-colors"
+              >
+                Log in
+              </Button>
+            </NavLink>
+
+            <NavLink to="/join">
+              <Button size="sm" className="bg-white text-primary hover:bg-white/90">
+                Join
+              </Button>
+            </NavLink>
           </div>
+
         </div>
       </div>
     </header>
