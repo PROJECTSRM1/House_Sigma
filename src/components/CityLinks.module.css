@@ -1,0 +1,65 @@
+.section {
+  background-color: hsl(var(--muted) / 0.3);
+  padding: 3rem 0;
+  margin-bottom: 0;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.block {
+  margin-bottom: 3rem;
+}
+
+.blockTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: hsl(var(--foreground));
+  margin-bottom: 1.5rem;
+}
+
+.grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.column {
+  background-color: hsl(var(--card));
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+}
+
+.columnTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  margin-bottom: 1rem;
+}
+
+.cityList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cityLink {
+  font-size: 0.875rem;
+  color: hsl(var(--primary));
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.cityLink:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
