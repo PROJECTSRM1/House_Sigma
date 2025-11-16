@@ -4,15 +4,15 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+// Pages
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-// Newly added pages
 import MapSearch from "./pages/MapSearch";
 import MarketTrends from "./pages/MarketTrends";
 import HomeValuation from "./pages/HomeValuation";
 import Agents from "./pages/Agents";
 import Blog from "./pages/Blog";
-import RecommendCommunities from "./pages/RecommendCommunities";
+import RecommendCommunities from "./pages/RecommendedCommunities";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import Join from "./pages/Join";
@@ -30,22 +30,22 @@ const App = () => (
           {/* Home */}
           <Route path="/" element={<Index />} />
 
-          {/* Navbar linked routes */}
+          {/* Navbar Pages */}
           <Route path="/map-search" element={<MapSearch />} />
           <Route path="/market-trends" element={<MarketTrends />} />
           <Route path="/home-valuation" element={<HomeValuation />} />
           <Route path="/agents" element={<Agents />} />
 
-          {/* Tools dropdown */}
+          {/* Tools Dropdown */}
           <Route path="/blog" element={<Blog />} />
           <Route path="/recommend-communities" element={<RecommendCommunities />} />
           <Route path="/contact" element={<Contact />} />
 
-          {/* Auth pages */}
+          {/* Auth Pages */}
           <Route path="/login" element={<Login />} />
           <Route path="/join" element={<Join />} />
 
-          {/* Catch-all */}
+          {/* Catch-All */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
