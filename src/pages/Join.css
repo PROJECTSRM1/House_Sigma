@@ -55,7 +55,6 @@
   border: 1px solid #e1e1e1;
 }
 
-/* Step 3 slightly narrower */
 .step-box-small {
   max-width: 480px;
   margin: 0 auto;
@@ -97,7 +96,6 @@
   font-size: 15px;
 }
 
-/* Referral bottom */
 .referral {
   margin-top: 25px !important;
 }
@@ -124,7 +122,7 @@
   font-weight: 500;
 }
 
-/* ===== OR DIVIDER ===== */
+/* ===== OR ===== */
 .or {
   margin: 20px 0;
   color: #777;
@@ -157,16 +155,112 @@
 }
 
 /* ========================================================= */
-/* ===== STEP 2 SECTION (UPDATED TO MATCH HOUSESIGMA) ====== */
+/*         MOBILE NUMBER INPUT (HouseSigma Style)            */
+/* ========================================================= */
+
+.mobile-outer-box {
+  width: 100%;
+  height: 44px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  background: white;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  position: relative;
+}
+
+/* Left Country Box */
+.country-box {
+  width: 85px;
+  height: 100%;
+  border-right: 1px solid #e0e0e0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #fff;
+  cursor: pointer;
+  position: relative;
+
+  font-size: 15px;
+  color: #333;
+}
+
+.country-box .arrow {
+  margin-left: 5px;
+  font-size: 11px;
+  color: #777;
+}
+
+/* Dropdown List (updated narrower width) */
+.country-dropdown-list {
+  position: absolute;
+  top: 48px;
+  left: 0;
+  width: 160px;   /* ← reduced width */
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  z-index: 999;
+
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+
+  max-height: 230px;
+  overflow-y: auto;
+}
+
+/* Scrollbar */
+.country-dropdown-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.country-dropdown-list::-webkit-scrollbar-thumb {
+  background: #00a5a3;
+  border-radius: 5px;
+}
+
+/* Dropdown Items (left aligned + tighter padding) */
+.country-item {
+  padding: 8px 12px;   /* ↓ reduced padding */
+  font-size: 15px;
+  cursor: pointer;
+  color: #222;
+  text-align: left;
+  display: block;      /* full clickable width */
+  transition: 0.15s ease;
+}
+
+.country-item:hover {
+  background: #f2fafa;
+}
+
+/* Phone Input */
+.phone-input-join {
+  flex: 1;
+  height: 100%;
+  padding-left: 12px;
+  border: none;
+  outline: none;
+  font-size: 15px;
+}
+
+.phone-input-join::placeholder {
+  color: #9b9b9b;
+}
+
+/* ========================================================= */
+/* ===== STEP 2 SECTION (HouseSigma Look) =================== */
 /* ========================================================= */
 
 .step-box {
-  border: none !important; /* remove card styling for step 2 */
+  border: none !important;
   padding: 0 !important;
   background: transparent !important;
 }
 
-/* Exactly HouseSigma look */
 .scroll-card {
   width: 90%;
   max-width: 520px;
@@ -175,7 +269,7 @@
   border: 1px solid #dcdcdc;
   border-radius: 14px;
   padding: 18px;
-  height: 165px; /* HouseSigma height */
+  height: 165px;
   overflow-y: auto;
   text-align: left;
   box-shadow: 0 1px 4px rgba(0,0,0,0.05);
@@ -193,7 +287,6 @@
   color: #444;
 }
 
-/* Scrollbar slimmer like HouseSigma */
 .scroll-card::-webkit-scrollbar {
   width: 6px;
 }
@@ -207,7 +300,6 @@
 .step2-actions {
   display: flex;
   justify-content: center;
-  margin-top: 5px;
   gap: 18px;
 }
 
@@ -232,7 +324,8 @@
   border: none;
 }
 
-/* ========== STEP 3 ========== */
+/* ================= STEP 3 ================= */
+
 .verification-text {
   font-size: 16px;
   color: #333;
@@ -260,4 +353,11 @@
   margin-top: 12px;
   display: block;
   font-size: 15px;
+}
+
+.error-text {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+  text-align: left;
 }

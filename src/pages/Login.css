@@ -1,37 +1,37 @@
 /* ====== OVERLAY BACKGROUND ====== */
 .login-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 999;
+  z-index: 9999;
+  backdrop-filter: blur(2px);
 }
 
-/* ====== LOGIN CARD ====== */
+/* ====== LOGIN MODAL CARD ====== */
 .login-modal {
-  width: 420px;                     /* Matches HouseSigma size */
+  width: 420px;
   max-width: 90%;
   background: #fff;
-  padding: 25px 30px;
-  border-radius: 12px;
+  padding: 25px 32px;
+  border-radius: 14px;
+  border: 1px solid #d7d7d7;
+  box-shadow: 0 4px 25px rgba(0,0,0,0.25);
   position: relative;
-  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.25);
+  z-index: 10000;
 }
 
 /* Close button */
 .close-btn {
-  border: none;
-  background: transparent;
-  font-size: 20px;
-  cursor: pointer;
   position: absolute;
-  top: 12px;
-  right: 12px;
+  right: 14px;
+  top: 14px;
+  font-size: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 /* Title */
@@ -42,132 +42,223 @@
   margin-bottom: 20px;
 }
 
-/* ====== TABS ====== */
+/* ====== TABS (Email / Mobile Phone) ====== */
 .tabs {
   display: flex;
-  justify-content: center;
+  border-bottom: 2px solid #e6e6e6;
   margin-bottom: 20px;
-  border-bottom: 2px solid #eee;
-  font-weight: 600;         /* Bold text */
 }
 
 .tab {
   flex: 1;
-  padding: 8px 0;
   text-align: center;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  color: #777;
+  padding: 10px 0;
   font-size: 15px;
+  color: #777;
+  background: none;
+  border: none;
   border-bottom: 2px solid transparent;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .tab.active {
   color: #00b8b0;
-  font-weight: 600;
   border-bottom: 2px solid #00b8b0;
 }
 
-/* ====== INPUTS ====== */
-.input-group,
-.input-row {
-  margin-bottom: 15px;
+/* ===== INPUT GROUP ===== */
+.input-group {
+  margin-bottom: 18px;
 }
 
-.input-group input,
-.input-row input,
-.country-code {
+.input-group input {
   width: 100%;
-  height: 42px;
-  padding: 10px;
+  padding: 12px;
   border-radius: 6px;
   border: 1px solid #ccc;
-  font-size: 14px;
+  font-size: 15px;
+  outline: none;
 }
 
-.input-row {
+.input-group input:focus {
+  border-color: #00b8b0;
+}
+
+/* ======================================= */
+/*   PERFECT MOBILE NUMBER FIELD (FINAL)   */
+/* ======================================= */
+.combined-mobile-box {
   display: flex;
-  gap: 10px;
+  align-items: center;
+
+  height: 48px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  overflow: hidden;
+
+  padding: 0;
+  margin-bottom: 18px;
+  transition: border-color 0.2s ease;
 }
 
-.country-code {
-  width: 80px;
+.combined-mobile-box:focus-within {
+  border-color: #00b8b0;
 }
 
-/* Password eye icon */
-.password-group {
+/* Left Country Selector */
+.country-box {
+  width: 75px;
+  padding: 12px 10px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: #fafafa;
+  cursor: pointer;
+  font-size: 15px;
+  border-right: 1px solid #ddd;
+}
+
+.arrow {
+  font-size: 10px;
+  opacity: 0.7;
+}
+
+/* Phone Input area */
+.phone-input {
+  flex: 1;
+  height: 100%;
+  padding: 0 12px;
+
+  border: none !important;
+  outline: none !important;
+
+  font-size: 15px;
+  color: #333;
+}
+
+/* ============================================ */
+/*           UPDATED COUNTRY DROPDOWN           */
+/* ============================================ */
+.country-dropdown {
+  position: absolute;
+  top: 54px;              /* moved DOWN for spacing */
+  left: 0;
+  width: 160px;           /* reduced width */
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  z-index: 999;
+
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+
+  max-height: 230px;
+  overflow-y: auto;
+}
+
+.country-item {
+  padding: 8px 12px;      /* smaller padding */
+  font-size: 13px;        /* smaller text */
+  cursor: pointer;
+}
+
+.country-item:hover {
+  background: #f3f3f3;
+}
+
+/* ===== PASSWORD FIELD ===== */
+.password-wrapper {
+  margin-bottom: 18px;
   position: relative;
 }
 
-.toggle-password {
+.password-wrapper input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  outline: none;
+}
+
+.password-wrapper input:focus {
+  border-color: #00b8b0;
+}
+
+.eye-btn {
   position: absolute;
-  right: 10px;
+  right: 12px;
   top: 12px;
   cursor: pointer;
 }
 
-/* ====== LOGIN BUTTON ====== */
+/* ===== LOGIN BUTTON ===== */
 .login-btn {
   width: 100%;
-  padding: 8px;
+  padding: 10px;
   background: #00a5a3;
-  color: #fff;
+  color: white;
   border: none;
   border-radius: 6px;
-  margin-top: 5px;
+  margin-top: 4px;
   font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
-  font-weight: 500;
+  transition: 0.2s ease;
+}
+
+.login-btn:hover {
+  background: #00918f;
 }
 
 /* Forgot Password */
 .forgot-text {
   text-align: center;
-  margin-top: 10px;
+  margin-top: 12px;
   color: #00a5a3;
   cursor: pointer;
+  font-size: 14px;
 }
 
 /* Divider */
 .divider {
-  text-align: center;
-  margin: 15px 0;
-  position: relative;
+  width: 100%;
+  height: 1px;
+  background: #e0e0e0;
+  margin: 18px 0;
 }
 
-.divider span {
-  font-size: 14px;
-  color: #666;
-}
-
-/* ====== GOOGLE LOGIN BUTTON ====== */
+/* ===== GOOGLE SIGN-IN BUTTON ===== */
 .google-btn {
-  width: 65%;
-  padding: 8px;
-  margin: 0 auto;
+  width: 100%;
+  padding: 10px;
   border: 1px solid #ccc;
   background: #fff;
   border-radius: 8px;
+
   display: flex;
-  gap: 12px;
   justify-content: center;
   align-items: center;
+  gap: 10px;
+
   cursor: pointer;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  transition: 0.2s ease;
+  white-space: nowrap;
 }
 
 .google-btn img {
   width: 22px;
-  height: 22px;
 }
 
 .google-btn:hover {
-  background-color: #e9f7ff;  /* light sky blue */
-  border-color: #c9eaff;
+  background: #eefaff;
+  border-color: #bde4ff;
 }
 
-/* New user sign-up */
+/* Signup text */
 .signup-text {
   text-align: center;
   margin-top: 15px;
@@ -178,4 +269,37 @@
   color: #00a5a3;
   font-weight: 600;
   text-decoration: none;
+}
+/* Make parent the reference for dropdown */
+.combined-mobile-box {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  overflow: visible;      /* Important */
+  padding: 0;
+  margin-bottom: 18px;
+  transition: border-color 0.2s ease;
+  position: relative;      /* SUPER IMPORTANT */
+}
+
+/* Final dropdown */
+.country-dropdown {
+  position: absolute;
+  top: 55px;
+  left: 0;
+  width: 165px;
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #eee;
+  padding: 6px 0;
+
+  box-shadow: 0px 6px 25px rgba(0,0,0,0.18);
+
+  max-height: unset;
+  overflow-y: visible;
+
+  z-index: 999999 !important;   /* Bring dropdown to front */
 }

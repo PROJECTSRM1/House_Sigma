@@ -77,9 +77,18 @@ const Navbar: React.FC = () => {
                   sideOffset={8}
                   className={styles.dropdownContent}
                 >
-                  <DropdownMenuItem>Ontario (ON)</DropdownMenuItem>
-                  <DropdownMenuItem>British Columbia (BC)</DropdownMenuItem>
-                  <DropdownMenuItem>Alberta (AB)</DropdownMenuItem>
+                  {/* Convert dropdown items into NavLink navigation */}
+                  <DropdownMenuItem asChild>
+                    <NavLink to="/province/on">Ontario (ON)</NavLink>
+                  </DropdownMenuItem>
+
+                  <DropdownMenuItem asChild>
+                    <NavLink to="/province/bc">British Columbia (BC)</NavLink>
+                  </DropdownMenuItem>
+
+                  <DropdownMenuItem asChild>
+                    <NavLink to="/province/ab">Alberta (AB)</NavLink>
+                  </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
 

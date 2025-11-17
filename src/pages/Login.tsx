@@ -6,11 +6,24 @@ interface LoginModalProps {
   onClose: () => void;
 }
 
+const countryList = [
+  { name: "China", code: "+86" },
+  { name: "Hongkong", code: "+852" },
+  { name: "India", code: "+91" },
+  { name: "Canada", code: "+1" },
+  { name: "United States", code: "+1" },
+  { name: "United Kingdom", code: "+44" }
+];
+
 const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
   const [activeTab, setActiveTab] = useState<"email" | "mobile">("email");
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-  if (!isOpen) return null;  // Hide modal when closed
+  // Dropdown
+  const [showCountryList, setShowCountryList] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState(countryList[2]); // India
+
+  if (!isOpen) return null;
 
   return (
     <div className="login-overlay">
@@ -43,38 +56,68 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
           </div>
         )}
 
-        {/* Mobile */}
+        {/* Mobile Input (HouseSigma Style) */}
         {activeTab === "mobile" && (
-          <div className="input-row">
-            <select className="country-code">
-              <option value="+91">+91</option>
-              <option value="+1">+1</option>
-            </select>
+          <div className="combined-mobile-box">
 
-            <input type="text" placeholder="Phone number" />
+            {/* Left Country dropdown button */}
+            <div
+              className="country-box"
+              onClick={() => setShowCountryList(!showCountryList)}
+            >
+              {selectedCountry.code}
+              <span className="arrow">▲</span>
+            </div>
+
+            {/* Dropdown list */}
+            {showCountryList && (
+              <div className="country-dropdown">
+                {countryList.map((c) => (
+                  <div
+                    key={c.name}
+                    className="country-item"
+                    onClick={() => {
+                      setSelectedCountry(c);
+                      setShowCountryList(false);
+                    }}
+                  >
+                    {c.name}
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Phone input */}
+            <input
+              className="phone-input"
+              type="text"
+              placeholder="Phone number"
+            />
           </div>
         )}
 
         {/* Password */}
-        <div className="input-group password-group">
+        <div className="password-wrapper">
           <input
             type={passwordVisible ? "text" : "password"}
             placeholder="Enter password"
           />
           <span
-            className="toggle-password"
+            className="eye-btn"
             onClick={() => setPasswordVisible(!passwordVisible)}
           >
             {passwordVisible ? "🙈" : "👁️"}
           </span>
         </div>
 
+        {/* Login button */}
         <button className="login-btn">Log in</button>
+
         <p className="forgot-text">Forgot Password?</p>
 
-        <div className="divider"><span>or</span></div>
+        <div className="divider"></div>
 
-        {/* Google login */}
+        {/* Google Button */}
         <button className="google-btn">
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
