@@ -1,4 +1,4 @@
-import { ontarioCities, bcCities, albertaCities } from '@/data/mockData';
+import { ontarioCities, bcCities, albertaCities, soldAlbertaCities,soldBcCities,soldOntarioCities } from '@/data/mockData';
 import styles from './CityLinks.module.css';
 
 const CityLinks = () => {
@@ -49,7 +49,7 @@ const CityLinks = () => {
             <div className={styles.column}>
               <h3 className={styles.columnTitle}>Ontario</h3>
               <div className={styles.cityList}>
-                {ontarioCities.map((city, index) => (
+                {soldOntarioCities.map((city, index) => (
                   <a key={index} href="#" className={styles.cityLink}>
                     {city}
                   </a>
@@ -59,7 +59,7 @@ const CityLinks = () => {
             <div className={styles.column}>
               <h3 className={styles.columnTitle}>British Columbia</h3>
               <div className={styles.cityList}>
-                {bcCities.map((city, index) => (
+                {soldBcCities.map((city, index) => (
                   <a key={index} href="#" className={styles.cityLink}>
                     {city}
                   </a>
@@ -69,7 +69,7 @@ const CityLinks = () => {
             <div className={styles.column}>
               <h3 className={styles.columnTitle}>Alberta</h3>
               <div className={styles.cityList}>
-                {albertaCities.map((city, index) => (
+                {soldAlbertaCities.map((city, index) => (
                   <a key={index} href="#" className={styles.cityLink}>
                     {city}
                   </a>

@@ -23,11 +23,11 @@
 
 .grid {
   display: grid;
-  gap: 2rem;
+  gap: 1rem;
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
-/* ❌ REMOVE background card styling */
+
 .column {
   background: none !important;
   padding: 0 !important;
@@ -41,30 +41,29 @@
   font-weight: 600;
   color: hsl(var(--foreground));
   margin-bottom: 1.25rem;
-  text-align: center;   /* match screenshot */
+  text-align: center;  
 }
 
 .cityList {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.1rem;
   align-items: center;  /* center align like original */
 }
 
-/* UPDATED CITY LINK STYLE — MATCHING ORIGINAL WEBSITE */
 .cityLink {
   font-size: 16px;     
   font-weight: 400;
   line-height: 24px;
 
-  color: #333333;           /* screenshot color */
+  color: #333333;         
   text-decoration: none;
   transition: opacity 0.2s ease;
 }
 
 .cityLink:hover {
   opacity: 0.7;
-  text-decoration: none;    /* no underline */
+  text-decoration: none;    
   color: #333333;
 }
 
