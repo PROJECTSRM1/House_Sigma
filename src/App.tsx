@@ -9,7 +9,6 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import MapSearch from "./pages/MapSearch";
 import MarketTrends from "./pages/MarketTrends";
-import HomeValuation from "./pages/HomeValuation";
 import Agents from "./pages/Agents";
 import Blog from "./pages/Blog";
 import RecommendCommunities from "./pages/RecommendedCommunities";
@@ -33,7 +32,7 @@ const App = () => (
           {/* Navbar Pages */}
           <Route path="/map-search" element={<MapSearch />} />
           <Route path="/market-trends" element={<MarketTrends />} />
-          <Route path="/home-valuation" element={<HomeValuation />} />
+        
           <Route path="/agents" element={<Agents />} />
 
           {/* Tools Dropdown */}
@@ -42,7 +41,9 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
 
           {/* Auth Pages */}
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login isOpen={false} onClose={function (): void {
+            throw new Error("Function not implemented.");
+          } } />} />
           <Route path="/join" element={<Join />} />
 
           {/* Catch-All */}
