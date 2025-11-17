@@ -40,7 +40,7 @@ const Hero = () => {
             <Button
               variant="outline"
               size="sm"
-              className="bg-white/95 border-white/50 text-foreground hover:bg-white font-medium"
+              className="bg-transparent text-white font-medium"
             >
               <AlertCircle className="h-4 w-4 mr-2" />
               Scam Alert

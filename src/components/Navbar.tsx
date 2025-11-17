@@ -6,6 +6,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from './ui/dropdown-menu';
+
 import styles from './Navbar.module.css';
 
 const Navbar = () => {
