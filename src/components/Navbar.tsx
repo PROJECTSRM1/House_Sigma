@@ -8,6 +8,9 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+} from './ui/dropdown-menu';
+
+import styles from './Navbar.module.css';
 } from "./ui/dropdown-menu";
 import styles from "./Navbar.module.css";
 
