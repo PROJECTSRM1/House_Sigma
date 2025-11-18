@@ -2,26 +2,11 @@
    GLOBAL PAGE LAYOUT
 ================================================ */
 .market-trends-page {
-  /* width: 100%; */
   background: #ffffff;
   min-height: 100vh;
-  padding: 0;                 /* no extra spacing */
+  padding: 0;
   margin: 0;
 }
-
-/* NAVBAR sits at full width normally (no change needed here) */
-
-
-/* ===============================
-   MAIN PAGE FLEX CONTAINER
-=============================== */
-/* .market-trends-container {
-  width: 100%;
-  max-width: 1280px;          
-  margin: 0;
-  padding: 0;
-} */
-
 
 /* ======================================
    MAIN CONTENT AREA (Stats, Charts, Form)
@@ -29,15 +14,15 @@
 .market-trends-main {
   display: flex;
   justify-content: center;
-  margin-top: 0;              /* remove gap above charts */
+  margin-top: 0;
   padding-top: 0;
 }
 
 .market-trends-content {
   display: flex;
   flex-direction: column;
-  gap: 40px;                  /* spacing BETWEEN sections */
-  padding-top: 20px;           
+  gap: 40px;
+  padding-top: 20px;
 }
 
 .market-trends-main-content {
@@ -45,7 +30,6 @@
   flex-direction: column;
   gap: 32px;
 }
-
 
 /* ======================================
    REMOVE GAP BETWEEN NAVBAR & FILTER BAR
@@ -68,14 +52,14 @@ nav,
   width: 100%;
   background: #ffffff;
   position: sticky;
-  top: 50px;  
+  top: 50px;
   z-index: 50;
   border-bottom: 1px solid #e5e7eb;
 }
 
 .market-filters {
   width: 100%;
-  max-width: 1280px;       /* Same as NAVBAR */
+  max-width: 1280px;
   margin: 0 auto;
   padding: 12px 20px;
 
@@ -85,7 +69,6 @@ nav,
   flex-wrap: wrap;
   justify-content: center;
 }
-
 
 /* TABS (5 yrs / 10 yrs / 15 yrs) */
 .filter-tabs {
@@ -110,7 +93,6 @@ nav,
   display: flex;
   align-items: center;
   justify-content: center;
-
   transition: 0.2s ease-in-out;
 }
 
@@ -123,8 +105,6 @@ nav,
   color: #ffffff;
   font-weight: 600;
 }
-
-
 
 /* DROPDOWN BUTTONS */
 .filter-select {
@@ -192,7 +172,7 @@ nav,
 }
 
 /* ================================================
-   MARKET STATS — EXACT HOUSE SIGMA DESIGN
+   MARKET STATS
 ================================================ */
 .market-stats {
   width: 100%;
@@ -211,7 +191,6 @@ nav,
   grid-template-columns: repeat(3, 1fr);
   padding: 0 40px;
   gap: 20px;
-  position: relative;
 }
 
 .stat-card {
@@ -219,7 +198,6 @@ nav,
   text-align: center;
 }
 
-/* Middle vertical separators */
 .market-stats-grid > div:not(:last-child) {
   border-right: 1px solid #e5e7eb;
 }
@@ -239,9 +217,8 @@ nav,
   margin-top: 6px;
   font-size: 22px;
   font-weight: 700;
-  color: #ef4444;     /* red like screenshot */
+  color: #ef4444;
 }
-
 
 /* Value Change */
 .stat-change {
@@ -271,10 +248,8 @@ nav,
   color: #10b981;
 }
 
-
-
 /* ================================================
-   CHART SECTIONS — CONTINUOUS PAGE (NO CARDS)
+   CHART SECTIONS
 ================================================ */
 .chart-section {
   padding: 0 0 30px 0;
@@ -296,10 +271,8 @@ nav,
   color: #6b7280;
 }
 
-
-
 /* ================================================
-   CONTACT FORM — LIKE HOUSE SIGMA
+   CONTACT FORM
 ================================================ */
 .contact-form {
   width: 100%;
@@ -351,21 +324,12 @@ nav,
   background: #138a9f;
 }
 
-
-
-/* ================================================
-   RESPONSIVE
-================================================ */
 /* ============================================================
-   RESPONSIVE — WORKS FOR ALL PHONES & TABLETS
-   Breakpoints: 1024, 768, 600, 480, 375
+   RESPONSIVE LAYOUT BREAKPOINTS
 ============================================================ */
-
-/* =============== TABLETS LANDSCAPE (iPad) — max 1024px =============== */
 @media (max-width: 1024px) {
   .market-filters {
     flex-wrap: wrap;
-    justify-content: center;
     gap: 18px;
   }
 
@@ -373,19 +337,13 @@ nav,
   .filter-select {
     min-width: 220px;
   }
-
-  .market-stats-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
 }
 
-/* =============== TABLETS PORTRAIT — max 768px =============== */
 @media (max-width: 768px) {
   .market-filters {
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 16px;
     padding: 12px;
+    gap: 16px;
   }
 
   .filter-tabs {
@@ -399,7 +357,6 @@ nav,
 
   .market-stats-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
     padding: 0;
   }
 
@@ -417,57 +374,63 @@ nav,
   }
 }
 
-/* =============== LARGE PHONES — max 600px =============== */
 @media (max-width: 600px) {
   .market-filters {
     flex-direction: column;
     align-items: stretch;
-    gap: 14px;
   }
 
+  .filter-select,
   .filter-tabs {
     width: 100%;
   }
-
-  .filter-select {
-    width: 100%;
-  }
-
-  .market-stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
-/* =============== REGULAR PHONES — max 480px =============== */
 @media (max-width: 480px) {
-  .market-filters {
-    padding: 10px;
-    gap: 12px;
-  }
-
-  .filter-tabs,
-  .filter-select {
-    width: 100%;
-  }
-
   .chart-title {
     font-size: 16px;
   }
 }
 
-/* =============== SMALL PHONES (iPhone SE) — max 375px =============== */
 @media (max-width: 360px) {
-  .market-filters {
-    padding: 8px;
-  }
-
   .market-stats-grid {
     grid-template-columns: 1fr;
-    gap: 14px;
   }
+}
 
-  .filter-select,
-  .filter-tabs {
-    min-width: 100%;
+/* ============================================================
+   RESPONSIVE CHART HEIGHT (NEW + IMPORTANT)
+============================================================ */
+
+/* Desktop default */
+.recharts-responsive-container {
+  height: 400px !important;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .recharts-responsive-container {
+    height: 340px !important;
+  }
+}
+
+/* Mobile large */
+@media (max-width: 768px) {
+  .recharts-responsive-container {
+    height: 300px !important;
+  }
+}
+
+/* Mobile normal */
+@media (max-width: 480px) {
+  .recharts-responsive-container {
+    height: 260px !important;
+  }
+}
+
+/* Small phones */
+@media (max-width: 360px) {
+  .recharts-responsive-container {
+    height: 220px !important;
   }
 }
