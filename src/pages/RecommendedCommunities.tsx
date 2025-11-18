@@ -252,11 +252,18 @@ export default function CommunityRecommendations() {
               </div>
             );
           })}
+<div className="mt-4 max-w-[1000px] mx-auto">
+  <div className="w-full border-t border-gray-300 mb-3"></div>
 
-          <p className="text-[14px] md:text-[16px] text-gray-500 leading-relaxed mt-4">
-            * Good School, Value Appreciation, Rental field and Land Size are estimated based
-            on HouseSigma's internal algorithm.
-          </p>
+  <p className="text-[16px] md:text-[18px] text-gray-500 leading-relaxed">
+    * Good School, Value Appreciation, Rental Yield and Land Size are estimated value based on
+    HouseSigma's internal algorithm. Use it as a starting point to find your perfect investment home.
+  </p>
+
+  <div className="w-full border-t border-gray-300 mt-3"></div>
+</div>
+
+
         </div>
       </div>
 
