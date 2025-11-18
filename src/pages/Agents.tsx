@@ -375,7 +375,7 @@ export default function AgentsPage(): JSX.Element {
     <>
       <Navbar />
       <main className={styles.agentsPage}>
-        <h1 className={styles.pageTitle}>Agents</h1>
+        
 
         <Filters
           provinces={PROVINCES}

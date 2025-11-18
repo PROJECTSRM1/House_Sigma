@@ -3,8 +3,10 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-import Index from "./pages/Index"
+//Dashboard pages
+import Index from "./pages/Index";
+import Alberta from "./pages/Alberta";
+import BritishCoulmbia from "./pages/BritishCoulmbia";
 import NotFound from "./pages/NotFound";
 
 // Newly added pages
@@ -34,7 +36,10 @@ const App = () => (
         <Routes>
           {/* Home */}
           <Route path="/" element={<Index />} />
-          
+          {/*Dashboard Navigation*/}
+          <Route path ="/province/on" element={<Index/>}/>
+          <Route path ="/province/bc" element={<BritishCoulmbia/>}/>
+          <Route path ="/province/ab" element={<Alberta/>}/>
 
           {/* Navbar navigation */}
           <Route path="/map-search" element={<MapSearch />} />
