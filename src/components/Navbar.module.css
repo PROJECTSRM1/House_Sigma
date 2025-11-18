@@ -1,404 +1,346 @@
+/* ================================================
+   GLOBAL FIX — Removes unwanted space
+================================================ */
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-/* Header - fixed to top like HouseSigma */
+/* Ensure page content appears below fixed header */
+.market-trends-page,
+.page-wrapper,
+.main-content {
+  padding-top: 50px !important;
+}
+
+
+/* ================================================
+   FIXED HEADER
+================================================ */
 .header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 50px; 
+  height: 50px;
   background-color: #28a3b3;
   color: #fff;
   display: flex;
   align-items: center;
   z-index: 2000;
   box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-  overflow: hidden;
+  overflow: visible; /* keeps hamburger working */
 }
 
-/* If you keep the body padding, ensure it's present in global CSS: */
-   body { padding-top: 45px !important; } 
+/* Fix anti-alias white gap under header */
+.header::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: #28a3b3;
+  pointer-events: none;
+  z-index: -1;
+}
 
-/* container centers content; nav uses full header height */
+
+/* ================================================
+   HEADER INNER CONTAINER
+================================================ */
 .container {
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
   padding: 0 1rem;
-  box-sizing: border-box;
   display: flex;
   align-items: center;
-  height: 72px;
+  height: 50px;
 }
 
-.logoImage {
-  width: 30px;         /* adjust size as you want */
-  height: 30px;
-  object-fit: contain; /* keeps proper ratio */
-}
-
-
-/* nav wrapper */
 .navWrapper {
   display: flex;
   width: 100%;
   align-items: center;
-  justify-content: space-between; /* left - center - right */
+  justify-content: space-between;
   gap: 1rem;
-  height: 72px;
+  height: 50px;
 }
 
-/* LEFT */
+
+/* ================================================
+   LEFT SECTION
+================================================ */
 .leftSection {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  flex: 0 0 auto;
 }
 
-.logo {
+.logoBox {
+  padding: 0.35rem;
+  border-radius: 0.5rem;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-}
-.logoBox {
-  border-radius: 0.5rem;
-  padding: 0.35rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-.logoIcon {
-  height: 1.25rem;
-  width: 1.25rem;
-  color: hsl(var(--primary));
 }
 
-/* Province Button */
+.logoImage {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
 .provinceDropdown {
   display: flex;
-  align-items:center;
-  gap:0.25rem;
-  border-radius:0.375rem;
-  background-color: rgba(255,255,255,0.08);
+  align-items: center;
+  gap: 0.25rem;
   padding: 0.3rem 0.6rem;
-  font-size:0.85rem;
-  font-weight:600;
-  color:white;
-  border:none;
-  cursor:pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: white;
+  background: rgba(255,255,255,0.08);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
-.provinceDropdown:hover { background-color: rgba(255,255,255,0.14); }
+.provinceDropdown:hover {
+  background: rgba(255,255,255,0.14);
+}
 
+
+/* ================================================
+   DESKTOP SEARCH BAR
+================================================ */
 .searchBox {
-  display: none; /* visible on large screens */
+  display: none;
   align-items: center;
   gap: 10px;
-  border-radius: 8px;
   background: white;
+  border-radius: 8px;
   padding: 0 14px;
-  width: 380px;      
-  height: 35px;     
-  flex: 0 0 auto;
-  box-sizing: border-box;
   border: 1px solid #e6e6e6;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* search icon & input style */
-.searchIcon {
-  width: 18px;
-  height: 18px;
-  color: #666;
-  flex: 0 0 18px;
+  width: 380px;
+  height: 35px;
 }
 .searchInput {
   flex: 1;
   border: none;
   outline: none;
+  background: none;
   font-size: 15px;
-  color: #333;
-  background: transparent;
-  padding: 0;
-  margin: 0;
-  line-height: 1;
 }
-
-/* Show the large search on wide screens */
 @media (min-width: 1024px) {
   .searchBox { display: flex; }
 }
 
+
+/* ================================================
+   MOBILE SEARCH BUTTON
+================================================ */
 .compactSearch {
   display: inline-flex;
-  align-items: center;
   gap: 8px;
+  align-items: center;
   background: rgba(255,255,255,0.06);
   border-radius: 8px;
   padding: 6px;
-  min-width: 40px;
   height: 36px;
   cursor: pointer;
 }
+@media (min-width: 1024px) {
+  .compactSearch { display: none; }
+}
 
-/* small input inside mobile menu (when expanded) */
-.mobileSearchBox {
+
+/* ================================================
+   DESKTOP NAV MENU
+================================================ */
+.centerNav {
   display: none;
   align-items: center;
-  gap: 10px;
-  border-radius: 8px;
-  background: white;
-  padding: 0 12px;
-  width: 100%;
-  height: 40px;
-  box-sizing: border-box;
-  border: 1px solid #e6e6e6;
-}
-
-/* Show compactSearch on small screens and hide large search */
-@media (max-width: 1023px) {
-  .compactSearch { display: inline-flex; }
-  .searchBox { display: none !important; }
-  .mobileSearchBox { display: flex; }
-}
-
-.centerNav {
-  display: none; /* hidden on small screens */
-  align-items: center;
   gap: 1.2rem;
-  flex: 1 1 auto;
+  flex: 1;
   justify-content: center;
 }
-
-/* desktop: show inline center nav */
 @media (min-width: 1024px) {
   .centerNav { display: flex; }
 }
 
-/* NAV LINKS (desktop) */
 .navLink {
+  color: white;
   font-size: 0.95rem;
   font-weight: 600;
-  color: white;
   text-decoration: none;
   padding: 0.18rem 0.5rem;
   border-radius: 6px;
-  display: inline-block;
-  transition: color 0.12s, background 0.12s;
-  white-space: nowrap;
-  position: relative; /* for underline pseudo-element */
+  position: relative;
 }
 .navLink:hover {
   background: rgba(255,255,255,0.05);
-  color: rgba(255,255,255,0.98);
 }
 
-/* Active underline for links */
-.activeNavLink,
-.navLink.active {
-  color: white;
-}
-.activeNavLink::after,
+
+/* Active underline */
 .navLink.active::after {
   content: "";
   position: absolute;
-  left: 0;
-  right: 0;
+  left: 0; right: 0;
+  bottom: -10px;
   height: 3px;
-  border-radius: 2px;
   background: white;
-  bottom: -10px;
-  transform-origin: center;
-}
-.navLink:hover::after {
-  content: "";
-  position: absolute;
-  left: 15%;
-  right: 15%;
-  height: 2px;
-  background: rgba(255,255,255,0.12);
-  bottom: -10px;
-  border-radius: 1px;
-  transition: all 120ms ease;
+  border-radius: 2px;
 }
 
 
+/* ================================================
+   RIGHT SECTION
+================================================ */
 .rightSection {
-  display:flex;
-  align-items:center;
-  gap:0.5rem;
-  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-/* Tools button */
+
+/* ================================================
+   FIX: TOOLS BUTTON (arrow beside text)
+================================================ */
 .toolsButton {
-  display:flex;
-  align-items:center;
-  gap:0.25rem;
-  font-size:0.85rem;
-  font-weight:600;
-  color:white;
-  background:none;
-  border:none;
-  cursor:pointer;
-  transition:0.15s;
+  display: inline-flex;
+  flex-direction: row; /* keep inline */
+  align-items: center;
+  gap: 4px;
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: none;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap; /* prevents arrow moving below */
 }
-.toolsButton:hover { color: rgba(255,255,255,0.88); }
 
+/* Arrow beside Tools */
+.toolsButton .arrowDown {
+  display: inline-block;
+  font-size: 11px;
+  transform: translateY(1px); /* perfect vertical alignment */
+}
+
+/* Dropdown */
 .dropdownContent {
   background: white !important;
-  border-radius: 10px !important;
-  padding: 6px 0 !important;
-  min-width: 230px !important;
-  border: 1px solid #e5e7eb !important;
-  box-shadow: 0 5px 22px rgba(0, 0, 0, 0.15) !important;
-  margin-top: 8px !important;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  min-width: 230px;
+  padding: 6px 0;
+  box-shadow: 0 5px 22px rgba(0,0,0,0.15);
   z-index: 10001 !important;
 }
-[data-radix-popper-content-wrapper] { z-index: 10001 !important; }
-.dropdownContent a { font-size:14px; padding:10px 16px; color:#222 !important; display:block; }
-.dropdownContent a:hover { background:#f4f4f4; }
 
+
+/* ================================================
+   HAMBURGER MENU
+================================================ */
+/* PERFECT HAMBURGER ICON */
 .menuToggle {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 38px;
   height: 34px;
+  background: rgba(255, 255, 255, 0.10);
   border-radius: 8px;
-  background: rgba(255,255,255,0.06);
   border: none;
-  color: white;
   cursor: pointer;
-  transition: background 0.12s;
-  flex: 0 0 auto;
+  transition: background 0.15s ease;
 }
-.menuToggle:hover { background: rgba(255,255,255,0.12); }
 
+.menuToggle:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* 3 straight lines */
 .bar {
-  display: block;
-  width: 16px;
+  position: relative;
+  width: 20px;
   height: 2px;
   background: white;
-  border-radius: 2px;
-  position: relative;
+  border-radius: 4px;       /* smooth edges */
 }
+
+/* Top + Bottom Lines - perfectly aligned */
 .bar::before,
 .bar::after {
   content: "";
   position: absolute;
   left: 0;
-  width: 16px;
+  width: 20px;
   height: 2px;
   background: white;
-  border-radius: 2px;
+  border-radius: 4px;
 }
-.bar::before { top: -5px; }
-.bar::after  { top: 5px; }
 
+/* top line */
+.bar::before {
+  top: -6px;               /* evenly spaced */
+}
+
+/* bottom line */
+.bar::after {
+  top: 6px;
+}
+
+@media (min-width: 1024px) {
+  .menuToggle { display: none; }
+}
+
+
+/* ================================================
+   MOBILE MENU PANEL
+================================================ */
 .mobileMenu {
   display: none;
 }
 
-/* show mobile menu when header has menuOpen class (applied by React) */
 .header.menuOpen .mobileMenu {
   display: block;
   position: absolute;
-  left: 0;
-  right: 0;
   top: 100%;
-  background: hsl(var(--primary));
-  z-index: 9999;
-  padding: 0.75rem 1rem;
+  left: 0; right: 0;
+  background: #28a3b3;
+  padding: 1rem;
   box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-  transform-origin: top;
+  z-index: 9999;
 }
 
-/* mobile extras row (search etc.) */
-.mobileExtras {
-  display:flex;
-  gap:0.5rem;
-  align-items:center;
-  margin-bottom: 0.5rem;
-}
-
-/* mobile search (full width inside mobile panel) */
-.mobileSearchBox {
-  display: none; /* shown in mobile via media */
-}
-
-/* mobile nav container */
 .mobileNav {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  padding: 0.25rem 0;
+  gap: 0.75rem;
 }
-
-/* mobile nav link style */
 .mobileNavLink {
-  display: block;
+  color: white;
   padding: 0.6rem 0.75rem;
   font-size: 0.95rem;
   font-weight: 600;
-  color: white;
   text-decoration: none;
-  border-radius: 6px;
-  transition: background 0.12s;
-  position: relative;
 }
-.mobileNavLink:hover { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.95); }
-
-/* mobile underline */
-.mobileNavLink.active::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: white;
-  bottom: -8px;
-  border-radius: 2px;
+.mobileNavLink:hover {
+  background: rgba(255,255,255,0.06);
 }
 
-/* ensure dropdown content floats above mobile panel */
-.header.menuOpen .dropdownContent {
-  z-index: 10005 !important;
-}
-
-/* Hide mobile toggle on large screens */
 @media (min-width: 1024px) {
-  .menuToggle { display: none; }
   .mobileMenu { display: none !important; }
 }
 
-/* Mobile layout tweaks */
-@media (max-width: 1023px) {
-  /* show compact search in header */
-  .compactSearch { display: inline-flex; }
 
-  /* hide desktop nav center links */
-  .centerNav { display: none; }
-
-  /* show mobileSearchBox in mobile panel when menu open */
-  .header.menuOpen .mobileSearchBox { display: flex; }
-
-  /* make mobile menu links and search look good */
-  .mobileMenu .mobileSearchBox { margin-bottom: 0.6rem; }
-  .mobileMenu .mobileSearchBox .searchInput { font-size: 15px; }
-}
-
-/* Slightly smaller header footprint on very small screens */
+/* ================================================
+   RESPONSIVE TWEAKS
+================================================ */
 @media (max-width: 420px) {
-  .container {
-    padding: 0 0.75rem;
-  }
-  .logoBox { padding: 0.25rem; }
-  .provinceDropdown { padding: 0.25rem 0.45rem; font-size: 0.8rem }
-  .menuToggle { width: 36px; height: 32px; }
-}
-
-/* Large screens tweak */
-@media (min-width: 1280px) {
-  .container { max-width: 1400px; }
+  .container { padding: 0 0.75rem; }
+  .menuToggle { width: 34px; height: 30px; }
+  .provinceDropdown { padding: 0.25rem 0.45rem; }
 }
