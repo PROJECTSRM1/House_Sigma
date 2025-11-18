@@ -11,7 +11,7 @@ import NotFound from "./pages/NotFound";
 import MapSearch from "./pages/MapSearch";
 import MarketTrends from "./pages/MarketTrends";
 import Agents from "./pages/Agents";
-
+import HomeValuation from "./pages/HomeValuation";
 // Tools dropdown pages
 import Blog from "./pages/Blog";
 import RecommendCommunities from "./pages/RecommendedCommunities";
@@ -39,7 +39,7 @@ const App = () => (
           {/* Navbar navigation */}
           <Route path="/map-search" element={<MapSearch />} />
           <Route path="/market-trends" element={<MarketTrends />} />
-        
+           <Route path="/home-valuation" element={<HomeValuation/>}/>
           <Route path="/agents" element={<Agents />} />
 
           {/* Tools Dropdown */}
