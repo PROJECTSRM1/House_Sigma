@@ -24,6 +24,7 @@ export default function HomeValuation() {
   const [garage, setGarage] = useState(0);
 
   const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [openChat, setOpenChat] = useState(false);
 
   return (
     <>
