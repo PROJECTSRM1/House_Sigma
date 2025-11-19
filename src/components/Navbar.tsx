@@ -193,7 +193,7 @@ const Navbar: React.FC = () => {
               </Button>
 
               <NavLink to="/join">
-                <Button size="sm" className="bg-white text-primary hover:bg-white/90">
+                <Button size="sm"  className="bg-white text-primary hover:bg-white/90 px-5 py-2">
                   Join
                 </Button>
               </NavLink>

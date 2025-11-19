@@ -16,14 +16,7 @@ import {
   soldBelow
 } from '@/data/mockData';
 
-import FloatingChatButton from "../components/floatingWindowChatBot";
-import ChatBot from "../components/chatbot";
-import { useState } from 'react';
-
-const Index = () => {
-
-  const [openChat, setOpenChat] = useState(false);
-
+const Alberta = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
@@ -40,11 +33,8 @@ const Index = () => {
       <AgentSection />
       <CityLinks />
       <Footer />
-
-      {openChat && <ChatBot onClose={() => setOpenChat(false)} />}
-      <FloatingChatButton onOpen={() => setOpenChat(true)} />
     </div>
   );
 };
 
-export default Index;
+export default Alberta;

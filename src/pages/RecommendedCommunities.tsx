@@ -4,6 +4,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import styles from "./RecommendedCommunities.module.css";
 
+import FloatingChatButton from "../components/floatingWindowChatBot";
+import ChatBot from "../components/chatbot";
+
 const priceMarks = ["$0", "$450K", "$850K", "$1.8M", "$3.8M", "Max"];
 
 const investmentOptions = ["School", "Growth", "Rental Yield", "Land"];
@@ -50,6 +53,8 @@ export default function CommunityRecommendations() {
     else setState([...state, item]);
   };
 
+  const [openChat, setOpenChat] = useState(false);
+
   const clearAll = () => {
     setSelectedInvestment([]);
     setSelectedProperty([]);
@@ -66,21 +71,26 @@ export default function CommunityRecommendations() {
     <>
       <Navbar />
 
-      <div className="pt-[1rem] p-6 max-w-[1000px] mx-auto">
-        <h2 className="text-[20px] font-semibold text-[#374751] mb-5">Community Recommendations</h2>
-
-        {/* -------------------------------------------------------- */}
+      {/* PAGE CONTAINER RESPONSIVE */}
+      <div className="pt-6 px-4 md:px-6 max-w-[1000px] mx-auto">
+        <h4 className="text-[18px] md:text-[24px] font-semibold text-[#374751] mb-5 mt-[45px]">
+          Community Recommendations
+        </h4>
+        {/* ========================================== */}
         {/* PRICE RANGE */}
-        <div className="mb-5 border-b border-[#E5E7EB] pb-4">
-          <h3 className="text-[20px] font-semibold text-[#374751] mb-2">Price range</h3>
+        <div className="mb-6 pb-4 border-b border-gray-300">
+          <h3 className="text-[18px] md:text-[20px] font-semibold text-[#374751] mb-2">
+            Price Range
+          </h3>
 
-          <p className="text-[18px] text-[#374751] mb-3">
+          <p className="text-[16px] md:text-[18px] mb-2 text-[#374751]">
             {formatPrice(priceMin)} – {formatPrice(priceMax)}
           </p>
 
-          <div className="relative w-[960px]">
+          {/* SLIDER CONTAINER RESPONSIVE */}
+          <div className="relative w-full">
             <div className="relative h-1 mb-6">
-              <div className="absolute top-1/2 -translate-y-1/2 w-full h-[3px] bg-[#d9e3ea] rounded-full"></div>
+              <div className="absolute top-1/2 -translate-y-1/2 w-full h-[3px] bg-[#d9e3ea]" />
 
               <div
                 className="absolute top-1/2 -translate-y-1/2 h-[3px] bg-[#1BA8C5] rounded-full"
@@ -88,8 +98,9 @@ export default function CommunityRecommendations() {
                   left: `${(priceMin / 5000000) * 100}%`,
                   width: `${((priceMax - priceMin) / 5000000) * 100}%`,
                 }}
-              ></div>
+              />
 
+              {/* Range Sliders */}
               <input
                 type="range"
                 min="0"
@@ -110,7 +121,8 @@ export default function CommunityRecommendations() {
               />
             </div>
 
-            <div className="flex justify-between text-[16px] text-[#9BA3AF]">
+            {/* PRICE LABELS RESPONSIVE */}
+            <div className="flex justify-between text-[12px] md:text-[15px] text-gray-400">
               {priceMarks.map((mark) => (
                 <span key={mark}>{mark}</span>
               ))}
@@ -118,15 +130,16 @@ export default function CommunityRecommendations() {
           </div>
         </div>
 
-        {/* -------------------------------------------------------- */}
+        {/* ========================================== */}
         {/* INVESTMENT REQUIREMENT */}
-        <div className="mb-5 border-b border-[#E5E7EB] pb-4">
+        <div className="mb-6 pb-4 border-b border-gray-300">
           <div className="flex justify-between items-center mb-2">
-            <h3 className="text-[20px] font-semibold text-[#374751]">Investment Requirement</h3>
+            <h3 className="text-[18px] md:text-[20px] font-semibold text-[#374751]">
+              Investment Requirement
+            </h3>
 
-            {/* SELECT ALL / UNSELECT ALL */}
             <button
-              className="text-[16px] text-[#1BA8C5] hover:underline"
+              className="text-[14px] md:text-[16px] text-[#1BA8C5] hover:underline"
               onClick={() => {
                 const all = investmentOptions.every((opt) =>
                   selectedInvestment.includes(opt)
@@ -144,7 +157,7 @@ export default function CommunityRecommendations() {
             {investmentOptions.map((opt) => (
               <Button
                 key={opt}
-                className="font-normal text-[16px] px-4 py-[7px]"
+                className="font-normal text-[14px] md:text-[16px] px-3 md:px-4 py-[6px]"
                 variant={selectedInvestment.includes(opt) ? "default" : "outline"}
                 onClick={() => toggleSelect(opt, selectedInvestment, setSelectedInvestment)}
               >
@@ -154,14 +167,16 @@ export default function CommunityRecommendations() {
           </div>
         </div>
 
-        {/* -------------------------------------------------------- */}
+        {/* ========================================== */}
         {/* PROPERTY TYPE */}
-        <div className="mb-5 border-b border-[#E5E7EB] pb-4">
+        <div className="mb-6 pb-4 border-b border-gray-300">
           <div className="flex justify-between items-center mb-2">
-            <h3 className="text-[20px] font-semibold text-[#374751]">Property Type</h3>
+            <h3 className="text-[18px] md:text-[20px] font-semibold text-[#374751]">
+              Property Type
+            </h3>
 
             <button
-              className="text-[16px] text-[#1BA8C5] hover:underline"
+              className="text-[14px] md:text-[16px] text-[#1BA8C5] hover:underline"
               onClick={() => {
                 const all = propertyTypes.every((t) => selectedProperty.includes(t));
                 setSelectedProperty(all ? [] : [...propertyTypes]);
@@ -177,7 +192,7 @@ export default function CommunityRecommendations() {
             {propertyTypes.map((type) => (
               <Button
                 key={type}
-                className="font-normal text-[16px] px-4 py-[7px]"
+                className="font-normal text-[14px] md:text-[16px] px-3 md:px-4 py-[6px]"
                 variant={selectedProperty.includes(type) ? "default" : "outline"}
                 onClick={() => toggleSelect(type, selectedProperty, setSelectedProperty)}
               >
@@ -187,10 +202,12 @@ export default function CommunityRecommendations() {
           </div>
         </div>
 
-        {/* -------------------------------------------------------- */}
-        {/* CITY GROUP */}
-        <div className="mb-2">
-          <h3 className="text-[20px] font-semibold text-[#374751] mb-3">City</h3>
+        {/* ========================================== */}
+        {/* CITY GROUPS RESPONSIVE */}
+        <div className="mb-6">
+          <h3 className="text-[18px] md:text-[20px] font-semibold text-[#374751] mb-3">
+            City
+          </h3>
 
           {Object.keys(cities).map((group, index) => {
             const allSelected = cities[group].every((c) => selectedCities.includes(c));
@@ -198,18 +215,17 @@ export default function CommunityRecommendations() {
             return (
               <div
                 key={group}
-                className={`${
-                  index !== Object.keys(cities).length - 1
-                    ? "mb-5 pb-4 border-b border-[#E5E7EB]"
-                    : "mb-2 pb-2"
-                }`}
+                className={`${index !== Object.keys(cities).length - 1
+                  ? "mb-5 pb-4 border-b border-gray-300"
+                  : "pb-2"}`}
               >
                 <div className="flex justify-between items-center mb-2">
-                  <h4 className="text-[18px] font-semibold text-[#374751]">{group}</h4>
+                  <h4 className="text-[16px] md:text-[18px] font-semibold text-[#374751]">
+                    {group}
+                  </h4>
 
-                  {/* SELECT ALL / UNSELECT ALL */}
                   <button
-                    className="text-[16px] text-[#1BA8C5] hover:underline"
+                    className="text-[14px] md:text-[16px] text-[#1BA8C5] hover:underline"
                     onClick={() => {
                       if (allSelected) {
                         setSelectedCities((prev) =>
@@ -230,7 +246,7 @@ export default function CommunityRecommendations() {
                   {cities[group].map((city) => (
                     <Button
                       key={city}
-                      className="font-normal text-[16px] px-4 py-[7px]"
+                      className="font-normal text-[14px] md:text-[16px] px-3 md:px-4 py-[6px]"
                       variant={selectedCities.includes(city) ? "default" : "outline"}
                       onClick={() => toggleSelect(city, selectedCities, setSelectedCities)}
                     >
@@ -241,47 +257,47 @@ export default function CommunityRecommendations() {
               </div>
             );
           })}
+<div className="mt-4 max-w-[1000px] mx-auto">
+  <div className="w-full border-t border-gray-300 mb-3"></div>
 
-          {/* LINE ABOVE PARAGRAPH */}
-          <div className="max-w-[1000px] mx-auto mb-2 mt-2">
-            <div className="border-t border-[#E5E7EB] w-full"></div>
-          </div>
+  <p className="text-[16px] md:text-[18px] text-gray-500 leading-relaxed">
+    * Good School, Value Appreciation, Rental Yield and Land Size are estimated value based on
+    HouseSigma's internal algorithm. Use it as a starting point to find your perfect investment home.
+  </p>
 
-          {/* DESCRIPTION TEXT */}
-          <p className="text-[17px] text-[#6B7280] mt-2 mb-[-18px] leading-relaxed">
+  <div className="w-full border-t border-gray-300 mt-3"></div>
+</div>
 
-            * Good School, Value Appreciation, Rental field and Land Size are estimated value based
-            on HouseSigma's internal algorithm. Use it as a starting point to find your perfect
-            investment home.
-          </p>
+
         </div>
       </div>
 
-      {/* -------------------------------------------------------- */}
-      {/* STICKY BOTTOM BAR */}
-      <div className={styles.stickyBarWrapper}>
-        <div className="max-w-[1000px] mx-auto flex justify-end gap-4 pb-4">
-          <div className="border-t border-[#E5E7EB] w-full"></div>
-        </div>
+      {/* =================================================== */}
+      {/* STICKY BOTTOM BAR (RESPONSIVE) */}
+      <div className={`${styles.stickyBarWrapper} px-4`}>
+        <div className="max-w-[1000px] mx-auto flex flex-col sm:flex-row justify-end gap-3 pb-4">
 
-        <div className="max-w-[1000px] mx-auto flex justify-end gap-4 pb-4">
           <button
             onClick={clearAll}
-            className="px-5 py-2 text-[17px] border-2 border-[#1BA8C5] text-[#1BA8C5] rounded-md hover:bg-[#e8f7fa]"
+            className="px-4 sm:px-5 py-2 text-[15px] md:text-[17px] border-2 border-[#1BA8C5] text-[#1BA8C5] rounded-md hover:bg-[#e8f7fa] w-full sm:w-auto"
           >
             Clear All
           </button>
 
           <button
             onClick={handleStartRecommendation}
-            className="px-5 py-2 text-[17px] bg-[#1BA8C5] text-white rounded-md hover:bg-[#1293ac]"
+            className="px-4 sm:px-5 py-2 text-[15px] md:text-[17px] bg-[#1BA8C5] text-white rounded-md hover:bg-[#1293ac] w-full sm:w-auto"
           >
             Start Recommendation
           </button>
+
         </div>
       </div>
 
       <Footer />
+
+      {openChat && <ChatBot onClose={() => setOpenChat(false)} />}
+      <FloatingChatButton onOpen={() => setOpenChat(true)} />
     </>
   );
 }
