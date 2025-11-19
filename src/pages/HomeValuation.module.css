@@ -38,7 +38,7 @@
   margin-bottom: 40px;
 }
 
-Input Container
+/* Input Container */
 .inputContainer {
   flex: 1;
   display: flex;
@@ -51,7 +51,6 @@ Input Container
   display: flex;
   flex-direction: column;
   position: relative;
-  /* height: 40px; */
   border-radius: 8px;
 }
 
@@ -66,7 +65,6 @@ Input Container
 .inputBoxWrapper {
   position: relative;
   width: 100%;
-  /* height: 30px; */
 }
 
 .inputBoxInner {
@@ -96,14 +94,10 @@ Input Container
   pointer-events: none;
 }
 
-/* Spinner Control */
+/* Disable spinner */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   opacity: 0;
-}
-.inputBoxInner:focus::-webkit-inner-spin-button,
-.inputBoxInner:focus::-webkit-outer-spin-button {
-  opacity: 1;
 }
 
 /* ---------------- SELECT BOX ---------------- */
@@ -121,14 +115,21 @@ input[type="number"]::-webkit-outer-spin-button {
   align-items: center;
 }
 
-/* Selected state */
+/* Focus state (dropdown OPEN) */
 .selectedBox {
   background: #1e9aa5 !important;
   border-color: #1e9aa5 !important;
-  color:white;
+  color: white;
 }
-.selectedText {
+
+/* Selected text when dropdown OPEN */
+.selectedTextOpen {
   color: white !important;
+}
+
+/* Selected text when closed */
+.selectedTextClosed {
+  color: black !important;
 }
 
 /* Dropdown */
@@ -168,6 +169,37 @@ input[type="number"]::-webkit-outer-spin-button {
 .radioSelected {
   background: #1e9aa5;
   border-color: #1e9aa5;
+}
+
+/* Cross (×) */
+.clearSelection {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  font-weight: bold;
+  color: #1e9aa5;
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* Arrow */
+.arrowDown,
+.arrowUp {
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+}
+.arrowDown {
+  border-top: 7px solid #555;
+}
+.arrowUp {
+  border-bottom: 7px solid #555;
+}
+
+/* Hide arrow */
+.hideArrow {
+  display: none !important;
 }
 
 /* Counter */
@@ -224,16 +256,8 @@ input[type="number"]::-webkit-outer-spin-button {
   border-radius: 20px;
   margin-top: 64px;
 }
-.contactHeading {
-  font-size: 24px;
-  font-weight: 600;
-}
-.contactText {
-  font-size: 16px;
-}
 
-/* ---------------- CLEAN DISCLAIMER AREA ---------------- */
-
+/* Disclaimer */
 .disclaimerSection {
   margin-top: 40px;
   margin-bottom: 60px;
@@ -243,20 +267,48 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .disclaimerText {
   max-width: 1200px;
-  text-align: left;      /* IMPORTANT! Sentences start from left */
+  text-align: left;
   font-size: 16px;
   line-height: 1.7;
   color: #6b7280;
 }
 
-.arrowDown {
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-top: 7px solid #666;
+/* Responsive */
+@media (max-width: 1024px) {
+  .wrapper {
+    padding: 40px 20px;
+  }
+  .row,
+  .counterRow {
+    gap: 16px;
+  }
 }
 
-.arrowUp {
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-bottom: 7px solid #666;
+@media (max-width: 768px) {
+  .row,
+  .counterRow {
+    flex-direction: column;
+  }
+  .customSelectBox {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .heading {
+    font-size: 20px;
+  }
+  .subheading {
+    font-size: 16px;
+  }
+  .label {
+    font-size: 16px;
+  }
+  .counterButton {
+    width: 50px;
+  }
+  .button {
+    font-size: 15px;
+    height: 40px;
+  }
 }
