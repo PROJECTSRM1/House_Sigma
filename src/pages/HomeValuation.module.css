@@ -40,7 +40,7 @@
   flex-wrap: wrap;                   /* IMPORTANT for responsiveness */
 }
 
-/* Input Containers */
+/* Input Container */
 .inputContainer {
   flex: 1;
   min-width: 250px;                 /* Helps break into new rows */
@@ -95,15 +95,10 @@
   pointer-events: none;
 }
 
-/* Remove number spinner */
+/* Disable spinner */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   opacity: 0;
-}
-
-.inputBoxInner:focus::-webkit-inner-spin-button,
-.inputBoxInner:focus::-webkit-outer-spin-button {
-  opacity: 1;
 }
 
 /* ---------------- SELECT BOX ---------------- */
@@ -121,13 +116,21 @@ input[type="number"]::-webkit-outer-spin-button {
   align-items: center;
 }
 
+/* Focus state (dropdown OPEN) */
 .selectedBox {
   background: #1e9aa5 !important;
   border-color: #1e9aa5 !important;
   color: white;
 }
-.selectedText {
+
+/* Selected text when dropdown OPEN */
+.selectedTextOpen {
   color: white !important;
+}
+
+/* Selected text when closed */
+.selectedTextClosed {
+  color: black !important;
 }
 
 /* Dropdown */
@@ -157,7 +160,50 @@ input[type="number"]::-webkit-outer-spin-button {
   background: #eef5f6;
 }
 
-/* ---------------- COUNTER ---------------- */
+/* Radio */
+.radioCircle {
+  width: 12px;
+  height: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 70%;
+}
+.radioSelected {
+  background: #1e9aa5;
+  border-color: #1e9aa5;
+}
+
+/* Cross (×) */
+.clearSelection {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  font-weight: bold;
+  color: #1e9aa5;
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* Arrow */
+.arrowDown,
+.arrowUp {
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+}
+.arrowDown {
+  border-top: 7px solid #555;
+}
+.arrowUp {
+  border-bottom: 7px solid #555;
+}
+
+/* Hide arrow */
+.hideArrow {
+  display: none !important;
+}
+
+/* Counter */
 .counterContainer {
   flex: 1;
   min-width: 200px;
@@ -216,16 +262,7 @@ input[type="number"]::-webkit-outer-spin-button {
   margin-top: 64px;
 }
 
-.contactHeading {
-  font-size: 24px;
-  font-weight: 600;
-}
-
-.contactText {
-  font-size: 16px;
-}
-
-/* ---------------- DISCLAIMER ---------------- */
+/* Disclaimer */
 .disclaimerSection {
   margin-top: 40px;
   margin-bottom: 60px;
@@ -241,136 +278,42 @@ input[type="number"]::-webkit-outer-spin-button {
   color: #6b7280;
 }
 
-.arrowDown,
-.arrowUp {
-  margin-left: 8px;
-}
-
-/* ---------------- RESPONSIVE BREAKPOINTS ---------------- */
-
-
-/* 📌 LARGE TABLETS & SMALL LAPTOPS (1024px) */
+/* Responsive */
 @media (max-width: 1024px) {
   .wrapper {
     padding: 40px 20px;
   }
-
-  .heading {
-    font-size: 22px;
-  }
-
-  .label {
-    font-size: 17px;
-  }
-
-  .dropdownMenu {
-    width: 220px;
-  }
-}
-
-/* 📌 TABLETS (768px) */
-@media (max-width: 768px) {
-  .heading {
-    font-size: 20px;
-  }
-
   .row,
   .counterRow {
     gap: 16px;
   }
-
-  .customSelectBox {
-    font-size: 15px;
-  }
-
-  .dropdownMenu {
-    width: 200px;
-  }
 }
 
-/* 📌 LARGE PHONES (480px–640px) */
-@media (max-width: 640px) {
-
-  .wrapper {
-    padding: 32px 16px;
-  }
-
-  .heading {
-    font-size: 19px;
-    margin-bottom: 24px;
-  }
-
-  .subheading {
-    font-size: 16px;
-  }
-
+@media (max-width: 768px) {
   .row,
   .counterRow {
     flex-direction: column;
-    gap: 18px;
   }
-
-  .inputContainer,
-  .inputContainerWide,
-  .counterContainer {
-    width: 100%;
-  }
-
   .customSelectBox {
     width: 100%;
   }
-
-  .dropdownMenu {
-    width: 100%;
-  }
-
-  .contactBox {
-    padding: 24px;
-  }
-
-  .contactHeading {
-    font-size: 20px;
-  }
 }
 
-/* 📌 SMALL PHONES (320px–480px) */
 @media (max-width: 480px) {
-
-  .wrapper {
-    padding: 24px 14px;
-  }
-
   .heading {
-    font-size: 18px;
+    font-size: 20px;
   }
-
+  .subheading {
+    font-size: 16px;
+  }
   .label {
     font-size: 16px;
   }
-
-  .inputBoxInner {
-    font-size: 15px;
-  }
-
   .counterButton {
-    width: 45px;
-    font-size: 20px;
+    width: 50px;
   }
-
-  .counterValue {
-    font-size: 18px;
-  }
-
   .button {
-    height: 42px;
     font-size: 15px;
-  }
-
-  .contactBox {
-    padding: 20px;
-  }
-
-  .disclaimerText {
-    font-size: 14px;
+    height: 40px;
   }
 }
