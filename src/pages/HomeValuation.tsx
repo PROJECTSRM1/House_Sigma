@@ -23,7 +23,7 @@ export default function HomeValuation() {
   const [bath, setBath] = useState(0);
   const [garage, setGarage] = useState(0);
 
-  const [openChat, setOpenChat] = useState(false);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
 
   return (
     <>
@@ -56,30 +56,32 @@ export default function HomeValuation() {
         <div className={styles.noteBox}>
           Note that Sigma Estimate is still under beta testing. There might be
           inaccuracy or inconsistency in our estimated value. Please use this
-          information only as a starting point for property valuation
+          information only as a starting point for property valuation.
         </div>
 
-        <button className={styles.button}>Log In to Get Estimate</button>
+        <button className={styles.button} onClick={() => setIsLoginOpen(true)}>
+          Log In to Get Estimate
+        </button>
 
-        {/* CONTACT BLOCK */}
         <div className={styles.contactBox}>
           <h2 className={styles.contactHeading}>Contact HouseSigma Agent</h2>
-          <br></br>
+          <br />
           <p className={styles.contactText}>
             Sorry we don´t have a community agent working in this area. Are you
             a REALTOR® working actively in this community?
           </p>
         </div>
-          <br></br>
-        {/* PERFECT DISCLAIMER BLOCK */}
-      <div className={styles.disclaimerSection}>
-  <p className={styles.disclaimerText}>
-    The information provided herein must only be used by consumers that have a bona fide
-    interest in the purchase, sale, or lease of real estate and may not be used for any 
-    commercial purpose or any other purpose.
-  </p>
-</div>
 
+        <br />
+
+        <div className={styles.disclaimerSection}>
+          <p className={styles.disclaimerText}>
+            The information provided herein must only be used by consumers that
+            have a bona fide interest in the purchase, sale, or lease of real
+            estate and may not be used for any commercial purpose or any other
+            purpose.
+          </p>
+        </div>
       </div>
 
       <Footer />
@@ -91,59 +93,18 @@ export default function HomeValuation() {
 }
 
 /* ---------------- INPUT ---------------- */
-/* ---------------- INPUT ---------------- */
 function Input({ label, suffix }: InputProps) {
   const [value, setValue] = useState("0");
   const isLong = suffix === "per year";
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let v = e.target.value;
+    let v = e.target.value.replace("-", "").replace(/[^0-9.]/g, "");
+    if (v === "") return setValue("");
 
-    // Remove "-" if typed
-    v = v.replace("-", "");
-
-    // Remove any non-digit characters except dot
-    v = v.replace(/[^0-9.]/g, "");
-
-    // If empty, allow empty temporarily
-    if (v === "") {
-      setValue("");
-      return;
-    }
-
-    // Convert to number
     const num = parseFloat(v);
-
-    // Prevent negative or NaN
-    if (isNaN(num) || num < 0) {
-      setValue("0");
-      return;
-    }
+    if (isNaN(num) || num < 0) return setValue("0");
 
     setValue(String(num));
-  };
-
-  const handleBlur = () => {
-    // When input left empty -> set back to 0
-    if (value === "" || parseFloat(value) < 0) {
-      setValue("0");
-    }
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    // Block minus, plus, e, E
-    if (["-", "+", "e", "E"].includes(e.key)) {
-      e.preventDefault();
-    }
-  };
-
-  const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
-    const text = e.clipboardData.getData("text");
-
-    // Block negative or invalid paste
-    if (text.includes("-") || isNaN(Number(text))) {
-      e.preventDefault();
-    }
   };
 
   return (
@@ -155,9 +116,6 @@ function Input({ label, suffix }: InputProps) {
           type="number"
           value={value}
           onChange={handleChange}
-          onBlur={handleBlur}
-          onKeyDown={handleKeyDown}
-          onPaste={handlePaste}
           min={0}
           step="1"
           className={`${styles.inputBoxInner} ${
@@ -179,12 +137,10 @@ function Input({ label, suffix }: InputProps) {
   );
 }
 
-
-/* ---------------- DROPDOWN ---------------- */
-/* ---------------- DROPDOWN ---------------- */
+/* ---------------- SELECT INPUT ---------------- */
 function SelectInput() {
   const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState("Select");
+  const [selected, setSelected] = useState("");
   const ref = useRef<HTMLDivElement>(null);
 
   const OPTIONS = [
@@ -196,35 +152,57 @@ function SelectInput() {
   ];
 
   useEffect(() => {
-    function closeOutside(e: any) {
-      if (ref.current && !ref.current.contains(e.target)) {
-        setOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", closeOutside);
-    return () => document.removeEventListener("mousedown", closeOutside);
+    const close = (e: any) => {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
+    };
+    document.addEventListener("mousedown", close);
+    return () => document.removeEventListener("mousedown", close);
   }, []);
 
   return (
     <div className={styles.inputContainerWide} ref={ref}>
       <label className={styles.label}>Property Type</label>
 
-      {/* SELECT BOX */}
+      {/* Select Box */}
       <div
         className={`${styles.customSelectBox} ${
           open ? styles.selectedBox : ""
         }`}
         onClick={() => setOpen(!open)}
+        style={{ position: "relative" }}
       >
-        <span className={open ? styles.selectedText : ""}>
-          {selected}
+        <span
+          className={
+            selected
+              ? open
+                ? styles.selectedTextOpen
+                : styles.selectedTextClosed
+              : ""
+          }
+        >
+          {selected || "Select"}
         </span>
 
-        {/* 🔽 DEFAULT: Down arrow, 🔼 when open */}
-        <span className={open ? styles.arrowUp : styles.arrowDown}></span>
+        {/* Cross (×) */}
+        {selected && !open && (
+          <span
+            className={styles.clearSelection}
+            onClick={(e) => {
+              e.stopPropagation();
+              setSelected("");
+            }}
+          >
+            ×
+          </span>
+        )}
+
+        {/* Arrow (only if not selected) */}
+        {!selected && (
+          <span className={open ? styles.arrowUp : styles.arrowDown}></span>
+        )}
       </div>
 
-      {/* DROPDOWN MENU */}
+      {/* Dropdown Menu */}
       {open && (
         <div className={styles.dropdownMenu}>
           {OPTIONS.map((item) => (
@@ -250,7 +228,6 @@ function SelectInput() {
   );
 }
 
-
 /* ---------------- COUNTER ---------------- */
 function Counter({ label, value, setValue }: CounterProps) {
   return (
@@ -267,7 +244,10 @@ function Counter({ label, value, setValue }: CounterProps) {
 
         <div className={styles.counterValue}>{value}</div>
 
-        <button onClick={() => setValue(value + 1)} className={styles.counterButton}>
+        <button
+          onClick={() => setValue(value + 1)}
+          className={styles.counterButton}
+        >
           +
         </button>
       </div>
