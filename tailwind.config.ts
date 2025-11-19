@@ -70,6 +70,18 @@ export default {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      teal: {
+          primary: "hsl(var(--teal-primary))",
+        },
+        navy: {
+          dark: "hsl(var(--navy-dark))",
+        },
+        text: {
+          body: "hsl(var(--text-body))",
+        },
+        tag: {
+          blue: "hsl(var(--tag-blue))",
+        },
       keyframes: {
         "accordion-down": {
           from: {
