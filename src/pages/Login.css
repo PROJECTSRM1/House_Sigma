@@ -76,6 +76,7 @@
   border: 1px solid #ccc;
   font-size: 15px;
   outline: none;
+  margin-bottom: 16px;
 }
 
 .input-group input:focus {
