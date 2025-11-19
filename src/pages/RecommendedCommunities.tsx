@@ -4,6 +4,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import styles from "./RecommendedCommunities.module.css";
 
+import FloatingChatButton from "../components/floatingWindowChatBot";
+import ChatBot from "../components/chatbot";
+
 const priceMarks = ["$0", "$450K", "$850K", "$1.8M", "$3.8M", "Max"];
 
 const investmentOptions = ["School", "Growth", "Rental Yield", "Land"];
@@ -49,6 +52,8 @@ export default function CommunityRecommendations() {
     if (state.includes(item)) setState(state.filter((i) => i !== item));
     else setState([...state, item]);
   };
+
+  const [openChat, setOpenChat] = useState(false);
 
   const clearAll = () => {
     setSelectedInvestment([]);
@@ -283,6 +288,9 @@ export default function CommunityRecommendations() {
       </div>
 
       <Footer />
+
+      {openChat && <ChatBot onClose={() => setOpenChat(false)} />}
+      <FloatingChatButton onOpen={() => setOpenChat(true)} />
     </>
   );
 }

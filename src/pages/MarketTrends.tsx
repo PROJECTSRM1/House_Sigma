@@ -8,6 +8,9 @@ import './MarketTrends.css';
 // Icons
 import { TrendingDown, TrendingUp } from "lucide-react";
 
+import FloatingChatButton from "../components/floatingWindowChatBot";
+import ChatBot from "../components/chatbot";
+
 // Recharts
 import {
   ComposedChart,
@@ -83,6 +86,7 @@ const MarketFilters = () => {
     "Condo Apt",
     "Link"
   ];
+
 
   return (
     <div className="market-filter-wrapper">
@@ -640,6 +644,9 @@ const ContactForm = () => {
 // FINAL PAGE (NO PropertySection, NO newlyListed)
 // ------------------------------------------------------
 const MarketTrends = () => {
+
+  const [openChat, setOpenChat] = useState(false);
+
   return (
     <div className="market-trends-page">
 
@@ -665,6 +672,9 @@ const MarketTrends = () => {
 
       {/* FOOTER */}
       <Footer />
+
+      {openChat && <ChatBot onClose={() => setOpenChat(false)} />}
+      <FloatingChatButton onOpen={() => setOpenChat(true)} />
 
     </div>
   );

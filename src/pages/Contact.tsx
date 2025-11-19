@@ -4,6 +4,9 @@ import Footer from "@/components/Footer";
 
 import styles from "./Contact.module.css";
 
+import FloatingChatButton from "../components/floatingWindowChatBot";
+import ChatBot from "../components/chatbot";
+
 export default function Contact() {
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -12,6 +15,8 @@ export default function Contact() {
       window.open("https://housesigma.com/blog-en/faq", "_blank");
     }
   };
+
+  const [openChat, setOpenChat] = useState(false);
 
   return (
     <>
@@ -192,6 +197,9 @@ export default function Contact() {
       </div>
 
       <Footer />
+
+      {openChat && <ChatBot onClose={() => setOpenChat(false)} />}
+      <FloatingChatButton onOpen={() => setOpenChat(true)} />
     </>
   );
 }

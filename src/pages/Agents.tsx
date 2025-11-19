@@ -4,6 +4,10 @@ import Footer from "@/components/Footer";
 import agentsData from "../data/agents";
 import styles from "./Agent.module.css";
 
+import FloatingChatButton from "../components/floatingWindowChatBot";
+import ChatBot from "../components/chatbot";
+
+
 /* Types */
 export type Agent = {
   id: number;
@@ -313,6 +317,8 @@ export default function AgentsPage(): JSX.Element {
     [activeProvince]
   );
 
+  const [openChat, setOpenChat] = useState(false);
+
   const areas = useMemo(
     () => Array.from(new Set(provinceAgents.map((a) => a.area))).sort(),
     [provinceAgents]
@@ -401,6 +407,9 @@ export default function AgentsPage(): JSX.Element {
         </section>
       </main>
       <Footer />
+
+      {openChat && <ChatBot onClose={() => setOpenChat(false)} />}
+      <FloatingChatButton onOpen={() => setOpenChat(true)} />
     </>
   );
 }

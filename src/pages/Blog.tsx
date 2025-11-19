@@ -39,6 +39,10 @@ import mainRendering from "@/assets/main-rendering.jpg";
 import threeHeroRendering from "@/assets/316-Hero-Rendering.jpg";
 import aboveHeroRendering from "@/assets/ABOVE-Hero-Rendering.jpg";
 
+import FloatingChatButton from "../components/floatingWindowChatBot";
+import ChatBot from "../components/chatbot";
+import { useState } from "react";
+
 const Blog = () => {
   const analyticsItems = [
     {
@@ -241,6 +245,8 @@ const Blog = () => {
     },
   ];
 
+  const [openChat, setOpenChat] = useState(false);
+
  return (
   <>
     <Navbar />
@@ -281,6 +287,9 @@ const Blog = () => {
     </div>
 
     <Footer />
+
+    {openChat && <ChatBot onClose={() => setOpenChat(false)} />}
+      <FloatingChatButton onOpen={() => setOpenChat(true)} />
   </>
 );
 }
