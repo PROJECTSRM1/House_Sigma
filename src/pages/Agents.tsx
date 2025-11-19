@@ -21,6 +21,16 @@ export type Agent = {
 
 const PROVINCES = ["Ontario", "British Columbia", "Alberta"] as const;
 
+/* ---------------------- CustomSelect component ---------------------- */
+/* Lightweight accessible custom dropdown that shows radio items in the panel.
+   Props:
+     - options: string[]
+     - value: string
+     - onChange: (value: string) => void
+     - placeholder: string
+     - width?: number (px) - width of the rendered button
+     - menuWidth?: number (px) - width of the dropdown menu (white box)
+*/
 function CustomSelect({
   options,
   value,
@@ -242,7 +252,7 @@ function Filters(props: {
   const {
     provinces,
     activeProvince,
-    setActiveProvince,
+    setActiveProvince,   /* this is the setActiveProvince */
     areas,
     selectedArea,
     setSelectedArea,
@@ -381,7 +391,7 @@ export default function AgentsPage(): JSX.Element {
     <>
       <Navbar />
       <main className={styles.agentsPage}>
-        
+       
 
         <Filters
           provinces={PROVINCES}
