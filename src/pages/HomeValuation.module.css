@@ -13,7 +13,7 @@
   font-size: 23px;
   font-weight: 450;
   margin-bottom: 40px;
-  padding-top: 25px !important; 
+  padding-top: 25px !important;
 }
 
 .subheading {
@@ -21,7 +21,6 @@
   margin-bottom: 12px;
 }
 
-/* Address Input */
 .addressInput {
   width: 100%;
   border: 1px solid #d1d5db;
@@ -31,19 +30,17 @@
   margin-bottom: 48px;
 }
 
-/* ROWS */
 .row,
 .counterRow {
   display: flex;
   gap: 24px;
   margin-bottom: 40px;
-  flex-wrap: wrap;                   /* IMPORTANT for responsiveness */
+  flex-wrap: wrap;
 }
 
-/* Input Container */
 .inputContainer {
   flex: 1;
-  min-width: 250px;                 /* Helps break into new rows */
+  min-width: 250px;
   display: flex;
   flex-direction: column;
 }
@@ -63,7 +60,8 @@
   font-weight: 500;
 }
 
-/* Input Box */
+/* ------------ INPUT BOX --------------- */
+
 .inputBoxWrapper {
   position: relative;
   width: 100%;
@@ -78,16 +76,20 @@
   font-size: 16px;
 }
 
+/* Fixed padding to avoid overlap */
 .inputShort {
-  padding-right: 55px;
-}
-.inputLong {
-  padding-right: 80px;
+  padding-right: 45px; /* sqft, feet */
 }
 
-.suffixPlaceholder {
+.inputLong {
+  padding-right: 75px; /* per year */
+}
+
+/* ---------- SUFFIX (sqft, feet) ----------- */
+
+.suffixInside {
   position: absolute;
-  right: 18px;
+  right: 12px;
   top: 50%;
   transform: translateY(-50%);
   font-size: 16px;
@@ -95,13 +97,26 @@
   pointer-events: none;
 }
 
-/* Disable spinner */
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  opacity: 0;
+/* -------- per year (INSIDE INPUT) -------- */
+
+.suffixAfterSpinner {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #9ca3af;
+  pointer-events: none;
+}
+
+/* Show spinner */
+.showSpinner::-webkit-inner-spin-button,
+.showSpinner::-webkit-outer-spin-button {
+  opacity: 1 !important;
 }
 
 /* ---------------- SELECT BOX ---------------- */
+
 .customSelectBox {
   width: 100%;
   height: 38px;
@@ -116,24 +131,18 @@ input[type="number"]::-webkit-outer-spin-button {
   align-items: center;
 }
 
-/* Focus state (dropdown OPEN) */
-.selectedBox {
-  background: #1e9aa5 !important;
-  border-color: #1e9aa5 !important;
-  color: white;
-}
-
-/* Selected text when dropdown OPEN */
-.selectedTextOpen {
-  color: white !important;
-}
-
-/* Selected text when closed */
-.selectedTextClosed {
+.selectedClosed {
+  background: white !important;
+  border-color: #d1d5db !important;
   color: black !important;
 }
 
-/* Dropdown */
+.openState {
+  background: #1e9aa5 !important;
+  border-color: #1e9aa5 !important;
+  color: white !important;
+}
+
 .dropdownMenu {
   position: absolute;
   top: calc(100% + 6px);
@@ -160,19 +169,18 @@ input[type="number"]::-webkit-outer-spin-button {
   background: #eef5f6;
 }
 
-/* Radio */
 .radioCircle {
   width: 12px;
   height: 12px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 70%;
 }
+
 .radioSelected {
   background: #1e9aa5;
   border-color: #1e9aa5;
 }
 
-/* Cross (×) */
 .clearSelection {
   position: absolute;
   right: 18px;
@@ -185,25 +193,26 @@ input[type="number"]::-webkit-outer-spin-button {
   z-index: 10;
 }
 
-/* Arrow */
 .arrowDown,
 .arrowUp {
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
 }
+
 .arrowDown {
   border-top: 7px solid #555;
 }
+
 .arrowUp {
   border-bottom: 7px solid #555;
 }
 
-/* Hide arrow */
 .hideArrow {
   display: none !important;
 }
 
-/* Counter */
+/* ------------- COUNTER ---------------- */
+
 .counterContainer {
   flex: 1;
   min-width: 200px;
@@ -236,6 +245,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 /* ---------------- NOTE ---------------- */
+
 .noteBox {
   background: #e9f6f7;
   color: #28a3b3;
@@ -244,6 +254,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 /* ---------------- BUTTON ---------------- */
+
 .button {
   width: 100%;
   height: 43px;
@@ -255,6 +266,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 /* ---------------- CONTACT ---------------- */
+
 .contactBox {
   background: #f3f3f3;
   padding: 40px;
@@ -262,7 +274,6 @@ input[type="number"]::-webkit-outer-spin-button {
   margin-top: 64px;
 }
 
-/* Disclaimer */
 .disclaimerSection {
   margin-top: 40px;
   margin-bottom: 60px;
@@ -278,7 +289,8 @@ input[type="number"]::-webkit-outer-spin-button {
   color: #6b7280;
 }
 
-/* Responsive */
+/* ---------------- RESPONSIVE ---------------- */
+
 @media (max-width: 1024px) {
   .wrapper {
     padding: 40px 20px;

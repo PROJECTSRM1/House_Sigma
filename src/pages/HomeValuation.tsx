@@ -51,9 +51,8 @@ export default function HomeValuation() {
         </div>
 
         <div className={styles.noteBox}>
-          Note that Sigma Estimate is still under beta testing. There might be
-          inaccuracy or inconsistency in our estimated value. Please use this
-          information only as a starting point for property valuation.
+          Note that Sigma Estimate is still under beta testing. 
+          There might be inaccuracy or inconsistency in our estimated value.
         </div>
 
         <button className={styles.button} onClick={() => setIsLoginOpen(true)}>
@@ -61,11 +60,11 @@ export default function HomeValuation() {
         </button>
 
         <div className={styles.contactBox}>
-          <h2 className={styles.contactHeading}>Contact HouseSigma Agent</h2>
+          <h2>Contact HouseSigma Agent</h2>
           <br />
-          <p className={styles.contactText}>
-            Sorry we don´t have a community agent working in this area. Are you
-            a REALTOR® working actively in this community?
+          <p>
+            Sorry we don't have a community agent working in this area.
+            Are you a REALTOR® working actively in this community?
           </p>
         </div>
 
@@ -73,10 +72,8 @@ export default function HomeValuation() {
 
         <div className={styles.disclaimerSection}>
           <p className={styles.disclaimerText}>
-            The information provided herein must only be used by consumers that
-            have a bona fide interest in the purchase, sale, or lease of real
-            estate and may not be used for any commercial purpose or any other
-            purpose.
+            The information provided herein must only be used by consumers with
+            a bona fide interest in the purchase or sale of real estate.
           </p>
         </div>
       </div>
@@ -89,7 +86,6 @@ export default function HomeValuation() {
 /* ---------------- INPUT ---------------- */
 function Input({ label, suffix }: InputProps) {
   const [value, setValue] = useState("0");
-  const isLong = suffix === "per year";
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let v = e.target.value.replace("-", "").replace(/[^0-9.]/g, "");
@@ -113,19 +109,20 @@ function Input({ label, suffix }: InputProps) {
           min={0}
           step="1"
           className={`${styles.inputBoxInner} ${
-            isLong ? styles.inputLong : styles.inputShort
-          }`}
+            suffix === "per year" ? styles.inputLong : styles.inputShort
+          } ${styles.showSpinner}`}
         />
 
-        {suffix && (
-          <span
-            className={`${styles.suffixPlaceholder} ${
-              isLong ? styles.suffixLong : styles.suffixShort
-            }`}
-          >
-            {suffix}
-          </span>
-        )}
+        {/* All suffixes now go INSIDE the input */}
+        <span
+          className={
+            suffix === "per year"
+              ? styles.suffixAfterSpinner
+              : styles.suffixInside
+          }
+        >
+          {suffix}
+        </span>
       </div>
     </div>
   );
@@ -157,28 +154,16 @@ function SelectInput() {
     <div className={styles.inputContainerWide} ref={ref}>
       <label className={styles.label}>Property Type</label>
 
-      {/* Select Box */}
       <div
-        className={`${styles.customSelectBox} ${
-          open ? styles.selectedBox : ""
-        }`}
+        className={`${styles.customSelectBox} 
+          ${open ? styles.openState : ""} 
+          ${selected && !open ? styles.selectedClosed : ""}`}
         onClick={() => setOpen(!open)}
         style={{ position: "relative" }}
       >
-        <span
-          className={
-            selected
-              ? open
-                ? styles.selectedTextOpen
-                : styles.selectedTextClosed
-              : ""
-          }
-        >
-          {selected || "Select"}
-        </span>
+        <span>{selected || "Select"}</span>
 
-        {/* Cross (×) */}
-        {selected && !open && (
+        {selected && !open ? (
           <span
             className={styles.clearSelection}
             onClick={(e) => {
@@ -188,15 +173,15 @@ function SelectInput() {
           >
             ×
           </span>
-        )}
-
-        {/* Arrow (only if not selected) */}
-        {!selected && (
-          <span className={open ? styles.arrowUp : styles.arrowDown}></span>
+        ) : (
+          <span
+            className={`${open ? styles.arrowUp : styles.arrowDown} ${
+              selected ? styles.hideArrow : ""
+            }`}
+          ></span>
         )}
       </div>
 
-      {/* Dropdown Menu */}
       {open && (
         <div className={styles.dropdownMenu}>
           {OPTIONS.map((item) => (
