@@ -1,4 +1,5 @@
-/* Layout wrapper */
+/* ---------------- BASE LAYOUT ---------------- */
+
 .wrapper {
   max-width: 1100px;
   margin: 0 auto;
@@ -8,11 +9,11 @@
   overflow: visible !important;
 }
 
-/* Heading */
 .heading {
   font-size: 23px;
   font-weight: 450;
   margin-bottom: 40px;
+  padding-top: 25px !important; 
 }
 
 .subheading {
@@ -30,38 +31,39 @@
   margin-bottom: 48px;
 }
 
-/* Rows */
+/* ROWS */
 .row,
 .counterRow {
   display: flex;
   gap: 24px;
   margin-bottom: 40px;
+  flex-wrap: wrap;                   /* IMPORTANT for responsiveness */
 }
 
 /* Input Container */
 .inputContainer {
   flex: 1;
+  min-width: 250px;                 /* Helps break into new rows */
   display: flex;
   flex-direction: column;
 }
 
 .inputContainerWide {
   flex: 2;
-  min-width: 350px;
+  min-width: 300px;
   display: flex;
   flex-direction: column;
   position: relative;
   border-radius: 8px;
 }
 
-/* Label */
 .label {
   margin-bottom: 1px;
   font-size: 18px;
   font-weight: 500;
 }
 
-/* Input */
+/* Input Box */
 .inputBoxWrapper {
   position: relative;
   width: 100%;
@@ -76,7 +78,6 @@
   font-size: 16px;
 }
 
-/* Suffix Fix */
 .inputShort {
   padding-right: 55px;
 }
@@ -102,7 +103,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 /* ---------------- SELECT BOX ---------------- */
 .customSelectBox {
-  width: 90%;
+  width: 100%;
   height: 38px;
   border-radius: 8px;
   border: 1px solid #d1d5db;
@@ -145,7 +146,6 @@ input[type="number"]::-webkit-outer-spin-button {
   z-index: 3000;
 }
 
-/* Dropdown Item */
 .dropdownItem {
   display: flex;
   align-items: center;
@@ -155,6 +155,7 @@ input[type="number"]::-webkit-outer-spin-button {
   font-size: 17px;
   cursor: pointer;
 }
+
 .dropdownItem:hover {
   background: #eef5f6;
 }
@@ -205,9 +206,11 @@ input[type="number"]::-webkit-outer-spin-button {
 /* Counter */
 .counterContainer {
   flex: 1;
+  min-width: 200px;
   display: flex;
   flex-direction: column;
 }
+
 .counterBox {
   display: flex;
   border: 1px solid #d1d5db;
@@ -215,12 +218,14 @@ input[type="number"]::-webkit-outer-spin-button {
   border-radius: 8px;
   overflow: hidden;
 }
+
 .counterButton {
   width: 60px;
   background: #f3f4f6;
   font-size: 22px;
   border: none;
 }
+
 .counterValue {
   flex: 1;
   display: flex;
@@ -230,7 +235,7 @@ input[type="number"]::-webkit-outer-spin-button {
   font-weight: 500;
 }
 
-/* Note */
+/* ---------------- NOTE ---------------- */
 .noteBox {
   background: #e9f6f7;
   color: #28a3b3;
@@ -238,7 +243,7 @@ input[type="number"]::-webkit-outer-spin-button {
   border-radius: 10px;
 }
 
-/* Button */
+/* ---------------- BUTTON ---------------- */
 .button {
   width: 100%;
   height: 43px;
@@ -249,7 +254,7 @@ input[type="number"]::-webkit-outer-spin-button {
   margin-top: 24px;
 }
 
-/* Contact */
+/* ---------------- CONTACT ---------------- */
 .contactBox {
   background: #f3f3f3;
   padding: 40px;
