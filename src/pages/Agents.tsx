@@ -4,6 +4,10 @@ import Footer from "@/components/Footer";
 import agentsData from "../data/agents";
 import styles from "./Agent.module.css";
 
+import FloatingChatButton from "../components/floatingWindowChatBot";
+import ChatBot from "../components/chatbot";
+
+
 /* Types */
 export type Agent = {
   id: number;
@@ -17,6 +21,16 @@ export type Agent = {
 
 const PROVINCES = ["Ontario", "British Columbia", "Alberta"] as const;
 
+/* ---------------------- CustomSelect component ---------------------- */
+/* Lightweight accessible custom dropdown that shows radio items in the panel.
+   Props:
+     - options: string[]
+     - value: string
+     - onChange: (value: string) => void
+     - placeholder: string
+     - width?: number (px) - width of the rendered button
+     - menuWidth?: number (px) - width of the dropdown menu (white box)
+*/
 function CustomSelect({
   options,
   value,
@@ -238,7 +252,7 @@ function Filters(props: {
   const {
     provinces,
     activeProvince,
-    setActiveProvince,
+    setActiveProvince,   /* this is the setActiveProvince */
     areas,
     selectedArea,
     setSelectedArea,
@@ -313,6 +327,8 @@ export default function AgentsPage(): JSX.Element {
     [activeProvince]
   );
 
+  const [openChat, setOpenChat] = useState(false);
+
   const areas = useMemo(
     () => Array.from(new Set(provinceAgents.map((a) => a.area))).sort(),
     [provinceAgents]
@@ -375,7 +391,7 @@ export default function AgentsPage(): JSX.Element {
     <>
       <Navbar />
       <main className={styles.agentsPage}>
-        <h1 className={styles.pageTitle}>Agents</h1>
+       
 
         <Filters
           provinces={PROVINCES}
@@ -401,6 +417,9 @@ export default function AgentsPage(): JSX.Element {
         </section>
       </main>
       <Footer />
+
+      {openChat && <ChatBot onClose={() => setOpenChat(false)} />}
+      <FloatingChatButton onOpen={() => setOpenChat(true)} />
     </>
   );
 }

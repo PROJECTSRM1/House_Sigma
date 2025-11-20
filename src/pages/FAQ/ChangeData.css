@@ -1,0 +1,92 @@
+/* WRAPPER */
+.faq-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* ---------------------------------------------
+   PAGE LAYOUT (2 COLUMN)
+   LEFT = Search + Title + Content
+   RIGHT = Sidebar
+---------------------------------------------- */
+.page-layout {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+/* LEFT COLUMN */
+.left-panel {
+  flex: 1;
+}
+
+/* RIGHT COLUMN (SIDEBAR) */
+.right-panel {
+  width: 320px;
+  flex-shrink: 0;
+}
+
+/* ---------------------------------------------
+   CONTENT BOX
+---------------------------------------------- */
+.article-content-box {
+  background: white;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+  padding: 25px;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+/* LIST */
+.article-list {
+  margin-left: 20px;
+  line-height: 1.7;
+}
+
+/* NOTES */
+.article-note {
+  margin-top: 14px;
+  font-size: 14px;
+  color: #333;
+}
+
+/* ---------------------------------------------
+   TITLE ROW
+---------------------------------------------- */
+.article-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0 15px 0;
+}
+
+.article-title {
+  font-size: 26px;
+  font-weight: 600;
+}
+
+/* CONTENT INNER */
+.article-content-inner {
+  margin-top: 10px;
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+/* ---------------------------------------------
+   BREADCRUMB
+---------------------------------------------- */
+.breadcrumb-link {
+  cursor: pointer;       /* mouse pointer */
+  color: #2f55d4;
+  font-weight: 500;
+}
+
+.breadcrumb-link:hover {
+  text-decoration: underline;
+}
+
+/* Make category title also show pointer cursor */
+.breadcrumb span:last-child {
+  cursor: pointer;
+}

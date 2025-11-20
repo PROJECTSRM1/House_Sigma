@@ -3,8 +3,11 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-import Index from "./pages/Index"
+import ArticlePage from "./pages/FAQ/ArticlePage";
+//Dashboard pages
+import Index from "./pages/Index";
+import Alberta from "./pages/Alberta";
+// import BritishCoulmbia from "./pages/BritishCoulmbia";
 import NotFound from "./pages/NotFound";
 
 // Newly added pages
@@ -21,7 +24,13 @@ import Contact from "./pages/Contact";
 import Join from "./pages/Join";
 
 import Login from "./pages/Login";
-
+import FAQ from "./pages/FAQ/FAQ";
+import Looking from "./pages/FAQ/Looking";
+import ChangeData from "./pages/FAQ/ChangeData";
+import ContactUs from "./pages/FAQ/Contact-us";
+import Features from "./pages/FAQ/Features";
+import Others from "./pages/FAQ/Others";
+import CategoryPage from "./pages/FAQ/Categorys";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -34,7 +43,10 @@ const App = () => (
         <Routes>
           {/* Home */}
           <Route path="/" element={<Index />} />
-          
+          {/*Dashboard Navigation*/}
+          <Route path ="/province/on" element={<Index/>}/>
+          {/* <Route path ="/province/bc" element={<BritishCoulmbia/>}/> */}
+          <Route path ="/province/ab" element={<Alberta/>}/>
 
           {/* Navbar navigation */}
           <Route path="/map-search" element={<MapSearch />} />
@@ -52,6 +64,16 @@ const App = () => (
             throw new Error("Function not implemented.");
           } } />} />
           <Route path="/join" element={<Join />} />
+          <Route path="/faq" element={<FAQ/>}/>
+          <Route path="/faq/:categoryId" element={<CategoryPage />} />
+          <Route path="/faq/user-account/:articleSlug" element={<ArticlePage />} />
+          <Route path="/faq/looking-for-properties/:articleSlug" element={<Looking />} />
+          <Route path="/faq/change-data/:articleSlug" element={<ChangeData/>} />
+          <Route path="/faq/contact-us/:articleSlug" element={<ContactUs/>} />
+           <Route path="/faq/features/:articleSlug" element={<Features/>} />
+            <Route path="/faq/others/:articleSlug" element={<Others/>} />
+
+
 
           {/* Catch-All */}
           <Route path="*" element={<NotFound />} />

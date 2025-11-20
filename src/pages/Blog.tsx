@@ -39,6 +39,10 @@ import mainRendering from "@/assets/main-rendering.jpg";
 import threeHeroRendering from "@/assets/316-Hero-Rendering.jpg";
 import aboveHeroRendering from "@/assets/ABOVE-Hero-Rendering.jpg";
 
+import FloatingChatButton from "../components/floatingWindowChatBot";
+import ChatBot from "../components/chatbot";
+import { useState } from "react";
+
 const Blog = () => {
   const analyticsItems = [
     {
@@ -241,46 +245,52 @@ const Blog = () => {
     },
   ];
 
-  return (
-    <>
-      <Navbar />
+  const [openChat, setOpenChat] = useState(false);
 
-      <div className="pt-[4.5rem] p-6 md:p-10 max-w-[1400px] mx-auto">
-        <h2 className={styles.headingPrimary}>Blog</h2>
+ return (
+  <>
+    <Navbar />
 
-        <h3 className={styles.subHeading}>HouseSigma Analytics</h3>
+    <div className="pt-[4.5rem] p-6 md:p-10 max-w-[1000px] mx-auto">
+      <h2 className={styles.headingPrimary}>Blog</h2>
 
-        <div className={styles.gridLayout}>
-          {analyticsItems.map((item, index) => (
-            <ReportCard
-              key={index}
-              image={item.image}
-              title={item.title}
-              description={item.description}
-            />
-          ))}
-        </div>
+      <h3 className={styles.subHeading}>HouseSigma Analytics</h3>
 
-        <h3 className={styles.subHeading}>HouseSigma Real Estate Blog</h3>
-
-        <div className={styles.gridLayout}>
-          {blogItems.map((item, index) => (
-            <div key={index} className={styles.card}>
-              <img src={item.image} alt={item.title} className={styles.cardImage} />
-
-              <div className={styles.cardBody}>
-                <h3 className={styles.cardTitle}>{item.title}</h3>
-                <p className={styles.cardDate}>{item.date}</p>
-                <p className={styles.cardText}>{item.text}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+      {/* 2 cards per row */}
+      <div className={styles.gridLayout}>
+        {analyticsItems.map((item, index) => (
+          <ReportCard
+            key={index}
+            image={item.image}
+            title={item.title}
+            description={item.description}
+          />
+        ))}
       </div>
 
-      <Footer />
-    </>
-  );
-};
+      <h3 className={styles.subHeading}>HouseSigma Real Estate Blog</h3>
 
+      {/* 2 cards per row */}
+      <div className={styles.gridLayout}>
+        {blogItems.map((item, index) => (
+          <div key={index} className={styles.card}>
+            <img src={item.image} alt={item.title} className={styles.cardImage} />
+
+            <div className={styles.cardBody}>
+              <h3 className={styles.cardTitle}>{item.title}</h3>
+              <p className={styles.cardDate}>{item.date}</p>
+              <p className={styles.cardText}>{item.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <Footer />
+
+    {openChat && <ChatBot onClose={() => setOpenChat(false)} />}
+      <FloatingChatButton onOpen={() => setOpenChat(true)} />
+  </>
+);
+}
 export default Blog;

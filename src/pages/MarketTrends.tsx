@@ -9,6 +9,9 @@ import "./MarketTrends.css";
 // Icons
 import { TrendingDown, TrendingUp } from "lucide-react";
 
+import FloatingChatButton from "../components/floatingWindowChatBot";
+import ChatBot from "../components/chatbot";
+
 // Recharts
 import {
   ComposedChart,
@@ -361,6 +364,7 @@ const MarketFilters = ({
     "Condo Apt",
     "Link",
   ];
+
 
   return (
     <div className="market-filter-wrapper">
@@ -940,7 +944,6 @@ const MarketTrends = () => {
     if (first == null || last == null || first === 0) return null;
     return ((last - first) / first) * 100;
   };
-
   // Changes are relative to the current sliced window:
   // - 1y / 5y / 10y labels remain (UI), but they will all compute using the same window
   //   the labels still make sense because the window changes when you click the tabs.
@@ -1016,8 +1019,8 @@ const MarketTrends = () => {
           </div>
         </main>
       </div>
-
       <Footer />
+        
     </div>
   );
 };
