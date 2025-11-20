@@ -44,6 +44,18 @@
   width: fit-content;
 }
 
+/* MOBILE RESPONSIVE */
+@media (max-width: 600px) {
+  .filterGroup {
+    flex-direction: column;        /* Stack items vertically */
+    gap: 10px;                     /* Smaller gap */
+    padding: 10px 14px;            /* Smaller padding */
+    width: 100%;                   /* Take full width on mobile */
+    align-items: flex-start;       /* Align left for better UI */
+  }
+}
+
+
 /* button wrapper */
 .provinceBtn {
   border: none;
