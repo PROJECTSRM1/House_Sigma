@@ -2,25 +2,63 @@
   background-color: hsl(var(--card));
   border-radius: 0.5rem;
   padding: 2rem;
-  margin-bottom: 3rem;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  margin: 0 auto 1rem auto;   /* centers the box */
+  max-width: 1300px;          /* ⬅ your required width */
+  width: 100%;                /* responsive */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
+/* Smaller title like HouseSigma */
 .title {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: hsl(var(--foreground));
-  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 1rem;
 }
 
-.chartWrapper {
-  width: 100%;
-  height: 400px;
+.topLegend {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 10px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.legendItemBlue {
+  color: #2563eb;
+}
+
+.legendItemOrange {
+  color: #f59e0b;
 }
 
 .source {
-  font-size: 0.75rem;
-  color: hsl(var(--muted-foreground));
-  margin-top: 1rem;
+  font-size: 0.92rem;
+  color: #6b7280;
+  margin-top: 0rem;
+  margin-bottom: 0rem;
   font-style: italic;
+}
+
+.buttonRow {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0rem;
+}
+
+.statsButton {
+  background: #199fb1;
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.statsButton:hover {
+  background: #138aa1;
 }
