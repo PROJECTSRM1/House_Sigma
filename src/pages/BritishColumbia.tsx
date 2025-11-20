@@ -5,6 +5,7 @@ import FilterBar from '@/components/FilterBar';
 import PropertySection from '@/components/PropertySection';
 import StatsChart from './bcStatsChart';
 import Footer from '@/components/Footer';
+import britishHero from "@/assets/Britishcolumbia_files/BC.jpg";
 
 import {
   newlyAdded,
@@ -50,11 +51,12 @@ const toListing = (p: BCProperty): MockPropertyListing => ({
   status: p.status ?? '',
   badge: p.badge ?? undefined,
   date: normalizeDate(p.soldDate, p.listed),
-  agent: p.agent ?? ''
+  agent: p.agent ?? '',
+  loginRequired: p.loginRequired ?? false
 } as MockPropertyListing);
 
 const newlyAddedListings = newlyAdded.map(toListing);
-const rentalInvestmentListings = (highReturns ?? []).map(toListing);
+const rentalInvestmentListings = newlyAdded.map(toListing);
 const bestForSchoolsListings = bestForSchools.map(toListing);
 const featuredListingsConverted = featuredListings.map(toListing);
 const highGrowthListings = highGrowth.map(toListing);
@@ -65,7 +67,7 @@ const justSoldListings = (justSold ?? []).map(toListing);
 const BritishColumbia: React.FC = () => {
   return (
     <>
-    <Hero />
+     <Hero backgroundImage={britishHero} />
      <Navbar />
        <FilterBar />
       <div className="min-h-screen container">
