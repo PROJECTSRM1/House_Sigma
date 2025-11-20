@@ -6,6 +6,7 @@ import StatsChart from "@/components/StatsChart";
 import Footer from "@/components/Footer";
 import CityLinks from "@/components/CityLinks";
 import AlbertaDisclaimer from "@/components/AlbertaDisclaimer";
+import albertaHero from "@/assets/alberta_Files/alberta.jpg";
 
 import {
   newlyAdded,
@@ -21,7 +22,7 @@ const Alberta = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <Hero />
+       <Hero backgroundImage={albertaHero} />
       <FilterBar />
       
       <PropertySection title="Newly Added to HouseSigma" properties={newlyAdded} />

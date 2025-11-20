@@ -6,6 +6,7 @@ import StatsChart from '@/components/StatsChart';
 import AgentSection from '@/components/AgentSection';
 import CityLinks from '@/components/CityLinks';
 import Footer from '@/components/Footer';
+import ontarioHero from "@/assets/hero-home.jpg";
 import {
   exclusivePrecon,
   newlyListed,
@@ -27,7 +28,7 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <Hero />
+      <Hero backgroundImage={ontarioHero} />
       <FilterBar />
       <PropertySection title="Exclusive Precon Assignment" properties={exclusivePrecon} />
       <PropertySection title="Newly Listed" properties={newlyListed} />

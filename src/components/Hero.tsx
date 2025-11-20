@@ -1,10 +1,13 @@
 import { Search, AlertCircle } from 'lucide-react';
 import { Button } from './ui/button';
-import heroImage from '@/assets/hero-home.jpg';
 import styles from './Hero.module.css';
 import { useNavigate } from 'react-router-dom';
 
-const Hero = () => {
+interface HeroProps {
+  backgroundImage: string;
+}
+
+const Hero = ({ backgroundImage }: HeroProps) => {
   const navigate = useNavigate();
 
   const handleLearnMore = () => {
@@ -15,7 +18,7 @@ const Hero = () => {
     <section className={styles.hero}>
       <div 
         className={styles.background}
-        style={{ backgroundImage: `url(${heroImage})` }}
+        style={{ backgroundImage: `url(${backgroundImage})` }}
       >
         <div className={styles.overlay} />
       </div>
@@ -49,7 +52,6 @@ const Hero = () => {
               Scam Alert
             </Button>
 
-            {/* Learn More Button → Navigate */}
             <Button
               variant="outline"
               size="sm"
