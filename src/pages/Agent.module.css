@@ -355,3 +355,108 @@
     width: 100%;
   }
 }
+
+/* -------------------- Additional responsiveness (appended only) -------------------- */
+
+/* Between 821px and 1024px: 3 columns for small laptops / large tablets */
+@media (min-width: 821px) and (max-width: 1024px) {
+  .agentsGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  /* slightly reduce avatar sizes to fit more comfortably */
+  .avatar {
+    width: 140px;
+    height: 140px;
+  }
+
+  .avatarWrap {
+    width: 160px;
+    height: 160px;
+  }
+}
+
+/* Large screens: keep 4 columns (original), but increase spacing and allow slightly larger avatars */
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .agentsGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 32px 36px;
+  }
+
+  .avatar {
+    width: 170px;
+    height: 170px;
+  }
+
+  .avatarWrap {
+    width: 190px;
+    height: 190px;
+  }
+
+  .agentsPage {
+    padding: 40px 32px;
+  }
+}
+
+/* Extra large: 5 columns */
+@media (min-width: 1400px) {
+  .agentsGrid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 32px 36px;
+  }
+
+  .avatar {
+    width: 180px;
+    height: 180px;
+  }
+
+  .avatarWrap {
+    width: 200px;
+    height: 200px;
+  }
+
+  .agentsPage {
+    max-width: 1600px;
+    padding: 48px 24px;
+  }
+}
+
+/* Very small screens: tighten paddings and pill sizes without changing core rules */
+@media (max-width: 360px) {
+  .agentsPage {
+    padding: 20px 12px;
+    margin-top: 24px;
+  }
+
+  .pageTitle {
+    font-size: 20px;
+  }
+
+  .filterGroup {
+    padding: 8px 12px;
+    gap: 12px;
+  }
+
+  .provinceInner {
+    padding: 8px 16px;
+  }
+
+  .customSelectButton {
+    height: 40px;
+    padding: 0 12px 0 10px;
+  }
+
+  .selectWrap,
+  .customSelectWrap {
+    width: 100%;
+  }
+}
+
+/* Accessibility: ensure focus outlines remain visible on keyboard navigation */
+.provinceBtn:focus,
+.customSelectButton:focus,
+.selectWrap:focus {
+  outline: 3px solid rgba(31, 182, 178, 0.12);
+  outline-offset: 3px;
+}

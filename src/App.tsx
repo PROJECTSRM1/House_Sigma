@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 //Dashboard pages
 import Index from "./pages/Index";
 import Alberta from "./pages/Alberta";
-import BritishCoulmbia from "./pages/BritishCoulmbia";
+import BritishColumbia from "./pages/BritishColumbia";
 import NotFound from "./pages/NotFound";
 
 // Newly added pages
@@ -36,15 +36,15 @@ const App = () => (
         <Routes>
           {/* Home */}
           <Route path="/" element={<Index />} />
-          {/*Dashboard Navigation*/}
-          <Route path ="/province/on" element={<Index/>}/>
-          <Route path ="/province/bc" element={<BritishCoulmbia/>}/>
-          <Route path ="/province/ab" element={<Alberta/>}/>
+          {/* Dashboard Navigation */}
+          <Route path="/province/on" element={<Index />} />
+          <Route path="/province/bc" element={<BritishColumbia />} />
+          <Route path="/province/ab" element={<Alberta />} />
 
           {/* Navbar navigation */}
           <Route path="/map-search" element={<MapSearch />} />
           <Route path="/market-trends" element={<MarketTrends />} />
-           <Route path="/home-valuation" element={<HomeValuation/>}/>
+          <Route path="/home-valuation" element={<HomeValuation />} />
           <Route path="/agents" element={<Agents />} />
 
           {/* Tools Dropdown */}
@@ -53,9 +53,17 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
 
           {/* Auth Pages */}
-          <Route path="/login" element={<Login isOpen={false} onClose={function (): void {
-            throw new Error("Function not implemented.");
-          } } />} />
+          <Route
+            path="/login"
+            element={
+              <Login
+                isOpen={false}
+                onClose={function (): void {
+                  throw new Error("Function not implemented.");
+                }}
+              />
+            }
+          />
           <Route path="/join" element={<Join />} />
 
           {/* Catch-All */}

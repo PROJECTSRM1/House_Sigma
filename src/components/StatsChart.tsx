@@ -35,6 +35,7 @@ const StatsChart = () => {
       <p className={styles.source}>
         Source: Based on analysis of information from past listings from respective real estate boards.
       </p>
+      
     </div>
   );
 };

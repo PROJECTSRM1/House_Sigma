@@ -1,0 +1,120 @@
+/* BritishColumbia page CSS (place at src/pages/BritishColumbia.css) */
+
+.container {
+  min-height: 100vh;
+  background-color:transparent;
+
+  /* Set max width to 1300px */
+  max-width: 1300px !important;
+  width: 100%;
+  margin: 0 auto !important;   /* center the page */
+  padding: 0 1rem;             /* small left/right padding */
+  box-sizing: border-box;
+}
+
+/* Sections adapt automatically inside container */
+.section {
+  padding: 3rem 0;
+  width: 100%;
+  margin: 0;
+}
+
+.sectionTitle {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+/* Stats & popular cities */
+.bc-stats .stats-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.bc-stats .stats-text {
+  flex: 1;
+  font-size: 0.95rem;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+.muted {
+  color: #6b7280;
+}
+
+/* CTA button */
+.stats-cta {
+  flex-shrink: 0;
+}
+
+.btn-stats {
+  background-color: #18A6A6;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.btn-stats:hover {
+  background-color: #139393;
+}
+
+.divider {
+  border: 0;
+  border-top: 1px solid #e5e7eb;
+  margin: 1rem 0 1.25rem 0;
+}
+
+/* Cities Section */
+.cities-grid {
+  display: grid !important;
+  grid-template-columns: repeat(5, 1fr) !important;
+  gap: 0.25rem 2.5rem !important;
+  margin-top: 0.75rem !important;
+  align-items: start;
+  color: #0b6f6f;
+  font-size: 0.95rem;
+}
+
+.cities-col {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cities-col li {
+  margin: 0.35rem 0;
+  line-height: 1.6;
+}
+
+.cities-col a {
+  color: #0ea5a5;
+  text-decoration: none;
+  font-weight: 500;
+}
+.cities-col a:hover {
+  text-decoration: underline;
+}
+
+/* Breakpoints */
+@media (max-width: 1200px) {
+  .cities-grid { grid-template-columns: repeat(4, 1fr) !important; }
+}
+@media (max-width: 992px) {
+  .cities-grid { grid-template-columns: repeat(3, 1fr) !important; }
+  .stats-row { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 720px) {
+  .cities-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+@media (max-width: 420px) {
+  .cities-grid { grid-template-columns: 1fr !important; }
+}
