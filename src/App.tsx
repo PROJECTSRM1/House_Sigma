@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Index from "./pages/Index";
 import Alberta from "./pages/Alberta";
-import BritishCoulmbia from "./pages/BritishCoulmbia";
+import BritishColumbia from "./pages/BritishColumbia";
 import NotFound from "./pages/NotFound";
 
 import MapSearch from "./pages/MapSearch";
