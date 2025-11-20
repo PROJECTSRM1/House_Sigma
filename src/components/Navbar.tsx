@@ -3,7 +3,8 @@ import { NavLink } from "react-router-dom";
 import { Search, ChevronDown } from "lucide-react";
 import { Button } from "./ui/button";
 import LoginModal from "../pages/Login";
-import logo from "@/assets/logo.png"; 
+import ResetPasswordModal from "../pages/ResetPasswordModal";   
+import logo from "@/assets/logo.png";
 
 import {
   DropdownMenu,
@@ -16,6 +17,8 @@ import styles from "./Navbar.module.css";
 
 const Navbar: React.FC = () => {
   const [showLogin, setShowLogin] = useState(false);
+  const [showReset, setShowReset] = useState(false);  
+
   const [menuOpen, setMenuOpen] = useState(false);
   const [selectedProvince, setSelectedProvince] = useState("ON");
   const headerRef = useRef<HTMLElement | null>(null);
@@ -26,6 +29,11 @@ const Navbar: React.FC = () => {
     window.addEventListener("open-login-modal", handler);
     return () => window.removeEventListener("open-login-modal", handler);
   }, []);
+  // Handle Forgot Password (open reset modal)
+  const handleForgotPassword = () => {
+    setShowLogin(false);
+    setShowReset(true);
+  };
 
   // Close mobile menu when clicking outside
   useEffect(() => {
@@ -40,6 +48,7 @@ const Navbar: React.FC = () => {
   }, [menuOpen]);
 
   // Close when screen becomes large
+  // Close the mobile menu on large screens
   useEffect(() => {
     function onResize() {
       if (window.innerWidth >= 1024 && menuOpen) {
@@ -88,6 +97,8 @@ const Navbar: React.FC = () => {
                   className={styles.dropdownContent}
                 >
                   <DropdownMenuItem onClick={() => setSelectedProvince("ON")}>
+                <DropdownMenuContent align="start" sideOffset={8} className={styles.dropdownContent}>
+                  <DropdownMenuItem asChild>
                     <NavLink to="/province/on">Ontario (ON)</NavLink>
                   </DropdownMenuItem>
 
@@ -116,36 +127,28 @@ const Navbar: React.FC = () => {
             <nav className={styles.centerNav} aria-label="Primary">
               <NavLink
                 to="/map-search"
-                className={({ isActive }) =>
-                  isActive ? styles.activeNavLink : styles.navLink
-                }
+                className={({ isActive }) => (isActive ? styles.activeNavLink : styles.navLink)}
               >
                 Map Search
               </NavLink>
 
               <NavLink
                 to="/market-trends"
-                className={({ isActive }) =>
-                  isActive ? styles.activeNavLink : styles.navLink
-                }
+                className={({ isActive }) => (isActive ? styles.activeNavLink : styles.navLink)}
               >
                 Market Trends
               </NavLink>
 
               <NavLink
                 to="/home-valuation"
-                className={({ isActive }) =>
-                  isActive ? styles.activeNavLink : styles.navLink
-                }
+                className={({ isActive }) => (isActive ? styles.activeNavLink : styles.navLink)}
               >
                 Home Valuation
               </NavLink>
 
               <NavLink
                 to="/agents"
-                className={({ isActive }) =>
-                  isActive ? styles.activeNavLink : styles.navLink
-                }
+                className={({ isActive }) => (isActive ? styles.activeNavLink : styles.navLink)}
               >
                 Agents
               </NavLink>
@@ -231,7 +234,9 @@ const Navbar: React.FC = () => {
               to="/map-search"
               onClick={() => setMenuOpen(false)}
               className={({ isActive }) =>
-                isActive ? `${styles.mobileNavLink} ${styles.activeNavLink}` : styles.mobileNavLink
+                isActive
+                  ? `${styles.mobileNavLink} ${styles.activeNavLink}`
+                  : styles.mobileNavLink
               }
             >
               Map Search
@@ -241,7 +246,9 @@ const Navbar: React.FC = () => {
               to="/market-trends"
               onClick={() => setMenuOpen(false)}
               className={({ isActive }) =>
-                isActive ? `${styles.mobileNavLink} ${styles.activeNavLink}` : styles.mobileNavLink
+                isActive
+                  ? `${styles.mobileNavLink} ${styles.activeNavLink}`
+                  : styles.mobileNavLink
               }
             >
               Market Trends
@@ -251,7 +258,9 @@ const Navbar: React.FC = () => {
               to="/home-valuation"
               onClick={() => setMenuOpen(false)}
               className={({ isActive }) =>
-                isActive ? `${styles.mobileNavLink} ${styles.activeNavLink}` : styles.mobileNavLink
+                isActive
+                  ? `${styles.mobileNavLink} ${styles.activeNavLink}`
+                  : styles.mobileNavLink
               }
             >
               Home Valuation
@@ -261,7 +270,9 @@ const Navbar: React.FC = () => {
               to="/agents"
               onClick={() => setMenuOpen(false)}
               className={({ isActive }) =>
-                isActive ? `${styles.mobileNavLink} ${styles.activeNavLink}` : styles.mobileNavLink
+                isActive
+                  ? `${styles.mobileNavLink} ${styles.activeNavLink}`
+                  : styles.mobileNavLink
               }
             >
               Agents
@@ -305,6 +316,22 @@ const Navbar: React.FC = () => {
 
       {/* LOGIN POPUP */}
       <LoginModal isOpen={showLogin} onClose={() => setShowLogin(false)} />
+      {/* LOGIN MODAL */}
+      <LoginModal
+        isOpen={showLogin}
+        onClose={() => setShowLogin(false)}
+        onForgotPassword={handleForgotPassword}   
+      />
+
+      {/* RESET PASSWORD MODAL */}
+      <ResetPasswordModal
+        isOpen={showReset}
+        closeReset={() => setShowReset(false)}     // 
+        onBackToLogin={() => {
+          setShowReset(false);                    // CLOSE reset modal
+          setShowLogin(true);                     
+        }}
+      />
     </>
   );
 };

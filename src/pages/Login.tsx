@@ -6,6 +6,7 @@ import googleLogo from "@/assets/google.png";
 interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onForgotPassword: () => void;   
 }
 
 const countryList = [
@@ -14,16 +15,15 @@ const countryList = [
   { name: "India", code: "+91" },
   { name: "Canada", code: "+1" },
   { name: "United States", code: "+1" },
-  { name: "United Kingdom", code: "+44" }
+  { name: "United Kingdom", code: "+44" },
 ];
 
-const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
+const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onForgotPassword }) => {
   const [activeTab, setActiveTab] = useState<"email" | "mobile">("email");
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-  // Dropdown
   const [showCountryList, setShowCountryList] = useState(false);
-  const [selectedCountry, setSelectedCountry] = useState(countryList[2]); // India
+  const [selectedCountry, setSelectedCountry] = useState(countryList[2]); // default India
 
   if (!isOpen) return null;
 
@@ -51,18 +51,17 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
           </button>
         </div>
 
-        {/* Email */}
+        {/* Email Input */}
         {activeTab === "email" && (
           <div className="input-group">
             <input type="email" placeholder="Enter email" />
           </div>
         )}
 
-        {/* Mobile Input (HouseSigma Style) */}
+        {/* Mobile Input */}
         {activeTab === "mobile" && (
           <div className="combined-mobile-box">
-
-            {/* Left Country dropdown button */}
+            {/* Country Dropdown */}
             <div
               className="country-box"
               onClick={() => setShowCountryList(!showCountryList)}
@@ -71,7 +70,6 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
               <span className="arrow">▲</span>
             </div>
 
-            {/* Dropdown list */}
             {showCountryList && (
               <div className="country-dropdown">
                 {countryList.map((c) => (
@@ -89,16 +87,11 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
               </div>
             )}
 
-            {/* Phone input */}
-            <input
-              className="phone-input"
-              type="text"
-              placeholder="Phone number"
-            />
+            <input className="phone-input" type="text" placeholder="Phone number" />
           </div>
         )}
 
-        {/* Password */}
+        {/* Password Input */}
         <div className="password-wrapper">
           <input
             type={passwordVisible ? "text" : "password"}
@@ -112,22 +105,25 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
           </span>
         </div>
 
-        {/* Login button */}
+        {/* Login Button */}
         <button className="login-btn">Log in</button>
 
-        <p className="forgot-text">Forgot Password?</p>
+        
+        <p
+          className="forgot-text"
+          onClick={onForgotPassword}           
+          style={{ cursor: "pointer" }}
+        >
+          Forgot Password?
+        </p>
 
         <div className="divider"></div>
 
-        {/* Google Button */}
-       <button className="google-btn">
-  <img
-    src={googleLogo}
-    alt="google"
-    className="google-icon"
-  />
-  Sign in with Google
-</button>
+        {/* Google Login */}
+        <button className="google-btn">
+          <img src={googleLogo} alt="google" className="google-icon" />
+          Sign in with Google
+        </button>
 
         <p className="signup-text">
           New user? <NavLink to="/join">Sign-up here</NavLink>
