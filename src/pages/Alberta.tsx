@@ -1,20 +1,21 @@
-import Navbar from '@/components/Navbar';
-import Hero from '@/components/Hero';
-import FilterBar from '@/components/FilterBar';
-import PropertySection from '@/components/PropertySection';
-import StatsChart from '@/components/StatsChart';
-import AgentSection from '@/components/AgentSection';
-import CityLinks from '@/components/CityLinks';
-import Footer from '@/components/Footer';
+import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
+import FilterBar from "@/components/FilterBar";
+import PropertySection from "@/components/PropertySection";
+import StatsChart from "@/components/StatsChart";
+import Footer from "@/components/Footer";
+import CityLinks from "@/components/CityLinks";
+import AlbertaDisclaimer from "@/components/AlbertaDisclaimer";
+
 import {
-  exclusivePrecon,
-  newlyListed,
-  rentalInvestment,
+  newlyAdded,
   bestForSchools,
   featuredListings,
   highGrowth,
-  soldBelow
-} from '@/data/mockData';
+  soldBelowBought,
+  highReturns,
+  justSold  
+} from "@/data/albertaData";
 
 const Alberta = () => {
   return (
@@ -22,16 +23,18 @@ const Alberta = () => {
       <Navbar />
       <Hero />
       <FilterBar />
-      <PropertySection title="Exclusive Precon Assignment" properties={exclusivePrecon} />
-      <PropertySection title="Newly Listed" properties={newlyListed} />
-      <PropertySection title="Best For Rental Investment" properties={rentalInvestment} />
+      
+      <PropertySection title="Newly Added to HouseSigma" properties={newlyAdded} />
       <PropertySection title="Best For Schools" properties={bestForSchools} />
       <PropertySection title="Featured Listings" properties={featuredListings} />
       <PropertySection title="High Growth" properties={highGrowth} />
-      <PropertySection title="Sold Below Bought" properties={soldBelow} />
+      <PropertySection title="Sold Below Bought" properties={soldBelowBought} />
+      <PropertySection title="High Returns" properties={highReturns} />
+      <PropertySection title="Just Sold" properties={justSold} />
+
       <StatsChart />
-      <AgentSection />
       <CityLinks />
+      <AlbertaDisclaimer />
       <Footer />
     </div>
   );

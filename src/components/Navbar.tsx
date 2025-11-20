@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Home, Search, ChevronDown } from "lucide-react";
+import { Search, ChevronDown } from "lucide-react";
 import { Button } from "./ui/button";
 import LoginModal from "../pages/Login";
 import logo from "@/assets/logo.png"; 
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,7 +17,15 @@ import styles from "./Navbar.module.css";
 const Navbar: React.FC = () => {
   const [showLogin, setShowLogin] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [selectedProvince, setSelectedProvince] = useState("ON");
   const headerRef = useRef<HTMLElement | null>(null);
+
+  // ✅ LISTEN FOR GLOBAL LOGIN EVENT
+  useEffect(() => {
+    const handler = () => setShowLogin(true);
+    window.addEventListener("open-login-modal", handler);
+    return () => window.removeEventListener("open-login-modal", handler);
+  }, []);
 
   // Close mobile menu when clicking outside
   useEffect(() => {
@@ -26,19 +35,17 @@ const Navbar: React.FC = () => {
         setMenuOpen(false);
       }
     }
-
     document.addEventListener("click", onDocClick);
     return () => document.removeEventListener("click", onDocClick);
   }, [menuOpen]);
 
-  // Close the mobile menu when viewport becomes large
+  // Close when screen becomes large
   useEffect(() => {
     function onResize() {
       if (window.innerWidth >= 1024 && menuOpen) {
         setMenuOpen(false);
       }
     }
-
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, [menuOpen]);
@@ -57,19 +64,21 @@ const Navbar: React.FC = () => {
         aria-hidden={false}
       >
         <div className={styles.container}>
-  <div className={styles.navWrapper}>
-    {/* LEFT */}
-    <div className={styles.leftSection}>
-      <NavLink to="/" className={styles.logo}>
-        <div className={styles.logoBox}>
-          <img src={logo} alt="Logo" className={styles.logoImage} />
-        </div>
-      </NavLink>
+          <div className={styles.navWrapper}>
 
+            {/* LEFT */}
+            <div className={styles.leftSection}>
+              <NavLink to="/" className={styles.logo}>
+                <div className={styles.logoBox}>
+                  <img src={logo} alt="Logo" className={styles.logoImage} />
+                </div>
+              </NavLink>
+
+              {/* Province Dropdown */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <button className={styles.provinceDropdown}>
-                    ON <ChevronDown className="h-4 w-4" />
+                    {selectedProvince} <ChevronDown className="h-4 w-4" />
                   </button>
                 </DropdownMenuTrigger>
 
@@ -78,22 +87,21 @@ const Navbar: React.FC = () => {
                   sideOffset={8}
                   className={styles.dropdownContent}
                 >
-                  {/* Convert dropdown items into NavLink navigation */}
-                  <DropdownMenuItem asChild>
+                  <DropdownMenuItem onClick={() => setSelectedProvince("ON")}>
                     <NavLink to="/province/on">Ontario (ON)</NavLink>
                   </DropdownMenuItem>
 
-                  <DropdownMenuItem asChild>
+                  <DropdownMenuItem onClick={() => setSelectedProvince("BC")}>
                     <NavLink to="/province/bc">British Columbia (BC)</NavLink>
                   </DropdownMenuItem>
 
-                  <DropdownMenuItem asChild>
+                  <DropdownMenuItem onClick={() => setSelectedProvince("AB")}>
                     <NavLink to="/province/ab">Alberta (AB)</NavLink>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
 
-              {/* Desktop search box - hidden on small screens */}
+              {/* Desktop search box */}
               <div className={styles.searchBox} role="search">
                 <Search className={styles.searchIcon} />
                 <input
@@ -104,7 +112,7 @@ const Navbar: React.FC = () => {
               </div>
             </div>
 
-            {/* CENTER NAV (desktop) */}
+            {/* CENTER NAV */}
             <nav className={styles.centerNav} aria-label="Primary">
               <NavLink
                 to="/map-search"
@@ -159,7 +167,9 @@ const Navbar: React.FC = () => {
                   </DropdownMenuItem>
 
                   <DropdownMenuItem asChild>
-                    <NavLink to="/recommend-communities">Recommend Communities</NavLink>
+                    <NavLink to="/recommend-communities">
+                      Recommend Communities
+                    </NavLink>
                   </DropdownMenuItem>
 
                   <DropdownMenuItem asChild>
@@ -171,7 +181,6 @@ const Navbar: React.FC = () => {
 
             {/* RIGHT */}
             <div className={styles.rightSection}>
-              {/* Mobile hamburger toggle */}
               <button
                 className={styles.menuToggle}
                 onClick={toggleMenu}
@@ -193,7 +202,10 @@ const Navbar: React.FC = () => {
               </Button>
 
               <NavLink to="/join">
-                <Button size="sm"  className="bg-white text-primary hover:bg-white/90 px-5 py-2">
+                <Button
+                  size="sm"
+                  className="bg-white text-primary hover:bg-white/90 px-5 py-2"
+                >
                   Join
                 </Button>
               </NavLink>
@@ -201,10 +213,10 @@ const Navbar: React.FC = () => {
           </div>
         </div>
 
-        {/* Mobile slide-down panel */}
+        {/* MOBILE MENU */}
         <div id="mobileMenu" className={styles.mobileMenu} aria-hidden={!menuOpen}>
           <div className={styles.mobileExtras}>
-            <div className={styles.searchBox} style={{ display: "flex", flex: 1 }} role="search">
+            <div className={styles.searchBox} role="search">
               <Search className={styles.searchIcon} />
               <input
                 type="text"
@@ -214,7 +226,6 @@ const Navbar: React.FC = () => {
             </div>
           </div>
 
-          {/* Mobile nav (separate from desktop) */}
           <nav className={styles.mobileNav} aria-label="Mobile Primary">
             <NavLink
               to="/map-search"
@@ -259,7 +270,10 @@ const Navbar: React.FC = () => {
             <div className={styles.mobileToolsWrap}>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <button className={`${styles.mobileNavLink} ${styles.toolsButton}`} style={{ textAlign: "left" }}>
+                  <button
+                    className={`${styles.mobileNavLink} ${styles.toolsButton}`}
+                    style={{ textAlign: "left" }}
+                  >
                     Tools <ChevronDown className="h-4 w-4" />
                   </button>
                 </DropdownMenuTrigger>
@@ -289,7 +303,7 @@ const Navbar: React.FC = () => {
         </div>
       </header>
 
-      {/* LOGIN MODAL */}
+      {/* LOGIN POPUP */}
       <LoginModal isOpen={showLogin} onClose={() => setShowLogin(false)} />
     </>
   );
