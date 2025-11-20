@@ -22,6 +22,7 @@ export interface Property {
   discount?: string;
 
   agent?: string;
+  loginRequired?: boolean;
 }
 
 /* ======================================================
@@ -239,7 +240,8 @@ export const soldBelowBought: Property[] = [
     soldFor: "$317,000",
     discount: "30%",
     soldDate: "2025-09-26",
-    agent: "A2238054, RE/MAX House of Real Estate"
+    agent: "A2238054, RE/MAX House of Real Estate",
+    loginRequired: true
   },
   {
     id: 14,
@@ -254,7 +256,8 @@ export const soldBelowBought: Property[] = [
     soldFor: "$90,100",
     discount: "35%",
     soldDate: "2025-10-15",
-    agent: "Edmonton Realtor"
+    agent: "Edmonton Realtor",
+    loginRequired: true
   },
   {
     id: 15,
@@ -269,7 +272,8 @@ export const soldBelowBought: Property[] = [
     soldFor: "$175,000",
     discount: "38%",
     soldDate: "7 days",
-    agent: "Bonnyville Realtor"
+    agent: "Bonnyville Realtor",
+    loginRequired: true
   }
 ];
 
@@ -289,7 +293,8 @@ export const highReturns: Property[] = [
     parking: 1,
     status: "For Sale",
     listed: "3 days ago",
-    agent: "Investment Realty"
+    agent: "Investment Realty",
+    loginRequired: true
   },
   {
     id: 17,
@@ -303,7 +308,8 @@ export const highReturns: Property[] = [
     parking: 1,
     status: "For Sale",
     listed: "1 week ago",
-    agent: "High Returns Realty"
+    agent: "High Returns Realty",
+    loginRequired: true
   },
   {
     id: 18,
@@ -317,7 +323,8 @@ export const highReturns: Property[] = [
     parking: 2,
     status: "For Sale",
     listed: "5 days ago",
-    agent: "Investment Pro Realty"
+    agent: "Investment Pro Realty",
+    loginRequired: true
   }
 ];
 
@@ -339,7 +346,8 @@ export const justSold: Property[] = [
     bathrooms: 3,
     parking: 2,
     discount: "4%",
-    agent: "A2272511, Royal LePage Benchmark"
+    agent: "A2272511, Royal LePage Benchmark",
+    loginRequired: true
   },
   {
     id: 20,
@@ -355,7 +363,8 @@ export const justSold: Property[] = [
     bathrooms: 3,
     parking: 1,
     discount: "3%",
-    agent: "A2272467, MaxWell Polaris"
+    agent: "A2272467, MaxWell Polaris",
+    loginRequired: true
   },
   {
     id: 21,
@@ -371,6 +380,7 @@ export const justSold: Property[] = [
     bathrooms: 2,
     parking: 1,
     discount: "4%",
-    agent: "A2272232, RE/MAX Real Estate"
+    agent: "A2272232, RE/MAX Real Estate",
+    loginRequired: true
   }
 ];

@@ -42,7 +42,7 @@ const App = () => (
 
           {/* Provinces */}
           <Route path="/province/on" element={<Index />} />
-          <Route path="/province/bc" element={<BritishCoulmbia />} />
+          <Route path="/province/bc" element={<BritishColumbia />} />
           <Route path="/province/ab" element={<Alberta />} />
           <Route path="/learn-more" element={<LearnMore />} />
           <Route path="/contact-us" element={<ContactUs />} />
