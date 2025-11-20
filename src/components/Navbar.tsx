@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Home, Search, ChevronDown } from "lucide-react";
+import { Search, ChevronDown } from "lucide-react";
 import { Button } from "./ui/button";
 import LoginModal from "../pages/Login";
-import logo from "@/assets/logo.png"; 
+import ResetPasswordModal from "../pages/ResetPasswordModal";
+import logo from "@/assets/logo.png";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,10 +17,25 @@ import styles from "./Navbar.module.css";
 
 const Navbar: React.FC = () => {
   const [showLogin, setShowLogin] = useState(false);
+  const [showReset, setShowReset] = useState(false);
+
   const [menuOpen, setMenuOpen] = useState(false);
+  const [selectedProvince, setSelectedProvince] = useState("ON");
   const headerRef = useRef<HTMLElement | null>(null);
 
-  // Close mobile menu when clicking outside
+  // GLOBAL LOGIN EVENT
+  useEffect(() => {
+    const handler = () => setShowLogin(true);
+    window.addEventListener("open-login-modal", handler);
+    return () => window.removeEventListener("open-login-modal", handler);
+  }, []);
+
+  const handleForgotPassword = () => {
+    setShowLogin(false);
+    setShowReset(true);
+  };
+
+  // Click outside closes menu
   useEffect(() => {
     function onDocClick(e: MouseEvent) {
       const target = e.target as Node;
@@ -26,19 +43,17 @@ const Navbar: React.FC = () => {
         setMenuOpen(false);
       }
     }
-
     document.addEventListener("click", onDocClick);
     return () => document.removeEventListener("click", onDocClick);
   }, [menuOpen]);
 
-  // Close the mobile menu when viewport becomes large
+  // Close menu when screen becomes large
   useEffect(() => {
     function onResize() {
       if (window.innerWidth >= 1024 && menuOpen) {
         setMenuOpen(false);
       }
     }
-
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, [menuOpen]);
@@ -49,27 +64,23 @@ const Navbar: React.FC = () => {
 
   return (
     <>
-      <header
-        className={headerClass}
-        ref={(el) => {
-          headerRef.current = el;
-        }}
-        aria-hidden={false}
-      >
+      <header className={headerClass} ref={(el) => (headerRef.current = el)}>
         <div className={styles.container}>
-  <div className={styles.navWrapper}>
-    {/* LEFT */}
-    <div className={styles.leftSection}>
-      <NavLink to="/" className={styles.logo}>
-        <div className={styles.logoBox}>
-          <img src={logo} alt="Logo" className={styles.logoImage} />
-        </div>
-      </NavLink>
+          <div className={styles.navWrapper}>
 
+            {/* LEFT */}
+            <div className={styles.leftSection}>
+              <NavLink to="/" className={styles.logo}>
+                <div className={styles.logoBox}>
+                  <img src={logo} alt="Logo" className={styles.logoImage} />
+                </div>
+              </NavLink>
+
+              {/* Province Dropdown */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <button className={styles.provinceDropdown}>
-                    ON <ChevronDown className="h-4 w-4" />
+                    {selectedProvince} <ChevronDown className="h-4 w-4" />
                   </button>
                 </DropdownMenuTrigger>
 
@@ -78,23 +89,31 @@ const Navbar: React.FC = () => {
                   sideOffset={8}
                   className={styles.dropdownContent}
                 >
-                  {/* Convert dropdown items into NavLink navigation */}
-                  <DropdownMenuItem asChild>
+                  <DropdownMenuItem
+                    onClick={() => setSelectedProvince("ON")}
+                    asChild
+                  >
                     <NavLink to="/province/on">Ontario (ON)</NavLink>
                   </DropdownMenuItem>
 
-                  <DropdownMenuItem asChild>
+                  <DropdownMenuItem
+                    onClick={() => setSelectedProvince("BC")}
+                    asChild
+                  >
                     <NavLink to="/province/bc">British Columbia (BC)</NavLink>
                   </DropdownMenuItem>
 
-                  <DropdownMenuItem asChild>
+                  <DropdownMenuItem
+                    onClick={() => setSelectedProvince("AB")}
+                    asChild
+                  >
                     <NavLink to="/province/ab">Alberta (AB)</NavLink>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
 
-              {/* Desktop search box - hidden on small screens */}
-              <div className={styles.searchBox} role="search">
+              {/* Desktop search */}
+              <div className={styles.searchBox}>
                 <Search className={styles.searchIcon} />
                 <input
                   type="text"
@@ -104,40 +123,32 @@ const Navbar: React.FC = () => {
               </div>
             </div>
 
-            {/* CENTER NAV (desktop) */}
-            <nav className={styles.centerNav} aria-label="Primary">
+            {/* CENTER */}
+            <nav className={styles.centerNav}>
               <NavLink
                 to="/map-search"
-                className={({ isActive }) =>
-                  isActive ? styles.activeNavLink : styles.navLink
-                }
+                className={({ isActive }) => (isActive ? styles.activeNavLink : styles.navLink)}
               >
                 Map Search
               </NavLink>
 
               <NavLink
                 to="/market-trends"
-                className={({ isActive }) =>
-                  isActive ? styles.activeNavLink : styles.navLink
-                }
+                className={({ isActive }) => (isActive ? styles.activeNavLink : styles.navLink)}
               >
                 Market Trends
               </NavLink>
 
               <NavLink
                 to="/home-valuation"
-                className={({ isActive }) =>
-                  isActive ? styles.activeNavLink : styles.navLink
-                }
+                className={({ isActive }) => (isActive ? styles.activeNavLink : styles.navLink)}
               >
                 Home Valuation
               </NavLink>
 
               <NavLink
                 to="/agents"
-                className={({ isActive }) =>
-                  isActive ? styles.activeNavLink : styles.navLink
-                }
+                className={({ isActive }) => (isActive ? styles.activeNavLink : styles.navLink)}
               >
                 Agents
               </NavLink>
@@ -171,29 +182,25 @@ const Navbar: React.FC = () => {
 
             {/* RIGHT */}
             <div className={styles.rightSection}>
-              {/* Mobile hamburger toggle */}
               <button
                 className={styles.menuToggle}
                 onClick={toggleMenu}
-                aria-controls="mobileMenu"
                 aria-expanded={menuOpen}
-                aria-label={menuOpen ? "Close menu" : "Open menu"}
-                type="button"
               >
-                <span className={styles.bar} aria-hidden />
+                <span className={styles.bar} />
               </button>
 
               <Button
                 onClick={() => setShowLogin(true)}
                 variant="outline"
                 size="sm"
-                className="border-white/80 bg-transparent text-white hover:bg-white hover:text-primary transition-colors"
+                className="border-white/80 bg-transparent text-white hover:bg-white hover:text-primary"
               >
                 Log in
               </Button>
 
               <NavLink to="/join">
-                <Button size="sm"  className="bg-white text-primary hover:bg-white/90 px-5 py-2">
+                <Button size="sm" className="bg-white text-primary hover:bg-white/90 px-5 py-2">
                   Join
                 </Button>
               </NavLink>
@@ -201,10 +208,10 @@ const Navbar: React.FC = () => {
           </div>
         </div>
 
-        {/* Mobile slide-down panel */}
+        {/* MOBILE MENU */}
         <div id="mobileMenu" className={styles.mobileMenu} aria-hidden={!menuOpen}>
           <div className={styles.mobileExtras}>
-            <div className={styles.searchBox} style={{ display: "flex", flex: 1 }} role="search">
+            <div className={styles.searchBox}>
               <Search className={styles.searchIcon} />
               <input
                 type="text"
@@ -214,83 +221,70 @@ const Navbar: React.FC = () => {
             </div>
           </div>
 
-          {/* Mobile nav (separate from desktop) */}
-          <nav className={styles.mobileNav} aria-label="Mobile Primary">
-            <NavLink
-              to="/map-search"
-              onClick={() => setMenuOpen(false)}
-              className={({ isActive }) =>
-                isActive ? `${styles.mobileNavLink} ${styles.activeNavLink}` : styles.mobileNavLink
-              }
-            >
+          <nav className={styles.mobileNav}>
+            <NavLink to="/map-search" onClick={() => setMenuOpen(false)} className={styles.mobileNavLink}>
               Map Search
             </NavLink>
 
-            <NavLink
-              to="/market-trends"
-              onClick={() => setMenuOpen(false)}
-              className={({ isActive }) =>
-                isActive ? `${styles.mobileNavLink} ${styles.activeNavLink}` : styles.mobileNavLink
-              }
-            >
+            <NavLink to="/market-trends" onClick={() => setMenuOpen(false)} className={styles.mobileNavLink}>
               Market Trends
             </NavLink>
 
-            <NavLink
-              to="/home-valuation"
-              onClick={() => setMenuOpen(false)}
-              className={({ isActive }) =>
-                isActive ? `${styles.mobileNavLink} ${styles.activeNavLink}` : styles.mobileNavLink
-              }
-            >
+            <NavLink to="/home-valuation" onClick={() => setMenuOpen(false)} className={styles.mobileNavLink}>
               Home Valuation
             </NavLink>
 
-            <NavLink
-              to="/agents"
-              onClick={() => setMenuOpen(false)}
-              className={({ isActive }) =>
-                isActive ? `${styles.mobileNavLink} ${styles.activeNavLink}` : styles.mobileNavLink
-              }
-            >
+            <NavLink to="/agents" onClick={() => setMenuOpen(false)} className={styles.mobileNavLink}>
               Agents
             </NavLink>
 
-            <div className={styles.mobileToolsWrap}>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <button className={`${styles.mobileNavLink} ${styles.toolsButton}`} style={{ textAlign: "left" }}>
-                    Tools <ChevronDown className="h-4 w-4" />
-                  </button>
-                </DropdownMenuTrigger>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button className={`${styles.mobileNavLink} ${styles.toolsButton}`}>
+                  Tools <ChevronDown className="h-4 w-4" />
+                </button>
+              </DropdownMenuTrigger>
 
-                <DropdownMenuContent align="start" sideOffset={6} className={styles.dropdownContent}>
-                  <DropdownMenuItem asChild>
-                    <NavLink to="/blog" onClick={() => setMenuOpen(false)}>
-                      Blog
-                    </NavLink>
-                  </DropdownMenuItem>
+              <DropdownMenuContent align="start" sideOffset={6} className={styles.dropdownContent}>
+                <DropdownMenuItem asChild>
+                  <NavLink to="/blog" onClick={() => setMenuOpen(false)}>
+                    Blog
+                  </NavLink>
+                </DropdownMenuItem>
 
-                  <DropdownMenuItem asChild>
-                    <NavLink to="/recommend-communities" onClick={() => setMenuOpen(false)}>
-                      Recommend Communities
-                    </NavLink>
-                  </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <NavLink to="/recommend-communities" onClick={() => setMenuOpen(false)}>
+                    Recommend Communities
+                  </NavLink>
+                </DropdownMenuItem>
 
-                  <DropdownMenuItem asChild>
-                    <NavLink to="/contact" onClick={() => setMenuOpen(false)}>
-                      Contact Us
-                    </NavLink>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
+                <DropdownMenuItem asChild>
+                  <NavLink to="/contact" onClick={() => setMenuOpen(false)}>
+                    Contact Us
+                  </NavLink>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </nav>
         </div>
       </header>
 
       {/* LOGIN MODAL */}
-      <LoginModal isOpen={showLogin} onClose={() => setShowLogin(false)} />
+      <LoginModal
+        isOpen={showLogin}
+        onClose={() => setShowLogin(false)}
+        onForgotPassword={handleForgotPassword}
+      />
+
+      {/* RESET PASSWORD */}
+      <ResetPasswordModal
+        isOpen={showReset}
+        closeReset={() => setShowReset(false)}
+        onBackToLogin={() => {
+          setShowReset(false);
+          setShowLogin(true);
+        }}
+      />
     </>
   );
 };

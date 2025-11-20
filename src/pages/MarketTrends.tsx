@@ -960,6 +960,8 @@ const MarketTrends = () => {
 
   const statsTitle = `Real Estate Market Trends – ${location}, ${community}, ${property}`;
 
+  const [openChat, setOpenChat] = useState(false);
+
   return (
     <div className="market-trends-page">
       <Navbar />
@@ -1020,7 +1022,10 @@ const MarketTrends = () => {
         </main>
       </div>
       <Footer />
-        
+
+      {openChat && <ChatBot onClose={() => setOpenChat(false)} />}
+      <FloatingChatButton onOpen={() => setOpenChat(true)} />
+
     </div>
   );
 };

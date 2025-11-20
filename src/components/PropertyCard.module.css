@@ -1,148 +1,6 @@
-/* .card {
-  position: relative;
-  border-radius: 0.5rem;
-  overflow: hidden;
-  background-color: hsl(var(--card));
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.2s;
-  cursor: pointer;
-}
-
-.card:hover {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-}
-
-.imageContainer {
-  position: relative;
-  width: 100%;
-  height: 12rem;
-  overflow: hidden;
-}
-
-.image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.blurredImage {
-  filter: blur(8px);
-}
-
-.badge {
-  position: absolute;
-  top: 0.5rem;
-  left: 0.5rem;
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.25rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: white;
-}
-
-.badgeExclusive {
-  background-color: #10b981;
-}
-
-.badgeNewly {
-  background-color: #3b82f6;
-}
-
-.badgeRental {
-  background-color: #8b5cf6;
-}
-
-.badgeFeatured {
-  background-color: #f97316;
-}
-
-.badgeSchool {
-  background-color: #06b6d4;
-}
-
-.badgeDefault {
-  background-color: #6b7280;
-}
-
-.forSaleTag {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.25rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  background-color: white;
-  color: hsl(var(--primary));
-}
-
-.restrictedOverlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.cardContent {
-  padding: 1rem;
-}
-
-.price {
-  font-size: 1.25rem;
-  font-weight: bold;
-  color: hsl(var(--primary));
-  margin-bottom: 0.25rem;
-}
-
-.timestamp {
-  font-size: 0.75rem;
-  color: hsl(var(--muted-foreground));
-  margin-bottom: 0.5rem;
-}
-
-.address {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: hsl(var(--foreground));
-  margin-bottom: 0.25rem;
-}
-
-.propertyType {
-  font-size: 0.75rem;
-  color: hsl(var(--muted-foreground));
-  margin-bottom: 0.75rem;
-}
-
-.features {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding-top: 0.75rem;
-  border-top: 1px solid hsl(var(--border));
-  margin-bottom: 0.5rem;
-}
-
-.feature {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  font-size: 0.75rem;
-  color: hsl(var(--muted-foreground));
-}
-
-.featureIcon {
-  height: 0.875rem;
-  width: 0.875rem;
-}
-
-.agent {
-  font-size: 0.75rem;
-  color: hsl(var(--muted-foreground));
-} */
-
-
+/* =====================================================
+   CARD WRAPPER
+===================================================== */
 .card {
   background: #ffffff;
   border-radius: 8px;
@@ -153,136 +11,163 @@
   cursor: pointer;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
-/* hover - gentle lift */
 .card:hover {
   box-shadow: 0 8px 20px rgba(0,0,0,0.12);
   transform: translateY(-4px);
 }
 
-/* Image area - increased height */
-.cardImage,
+/* BLUR WHEN LOGIN REQUIRED */
+.cardBlur {
+  filter: blur(5px) brightness(0.90);
+}
+
+
+/* =====================================================
+   IMAGE BLOCK
+===================================================== */
 .imageContainer {
   width: 100%;
-  height: 250px;           /* ↑ increased image height (desktop) */
-  overflow: hidden;
-  display: block;
+  height: 250px;
   position: relative;
+  overflow: hidden;
   background: #f3f4f6;
 }
 
-.cardImage img,
-.image img,
 .image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
+  object-position: center;
 }
 
-/* Optional blurred background variant */
-.blurredImage {
-  filter: blur(8px);
-  transform: scale(1.03);
-}
 
-/* Badges (top-left) - nudge down a bit for larger image */
-.badge {
+/* =====================================================
+   LOGIN REQUIRED OVERLAY
+===================================================== */
+.restrictedOverlay {
   position: absolute;
-  top: 16px;
-  left: 16px;
-  padding: 6px 10px;
-  border-radius: 16px;
-  font-size: 16px;
-  font-weight: 400px;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.loginButton {
+  background-color: #28a3b3 !important;
+  color: white !important;
+  padding: 14px 32px;
+  border-radius: 12px;
+  font-size: 17px;
+  font-weight: 700;
+  z-index: 60;
+}
+
+
+/* =====================================================
+   BADGES (PILLS + RECTANGULAR SALE)
+===================================================== */
+
+
+.badge,
+.topLeftBadge,
+.badgeTopLeft {
+  padding: 4px 10px;
+  border-radius: 20px; 
+  font-size: 14px;
+  font-weight: 600;
   color: white;
-  line-height: 24px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  line-height: 1;
 }
 
-/* Badge color variants */
+/* Badge Color Variants */
 .badgeExclusive { background-color: #10b981; }
-.badgeNewly     { background-color: #3b82f6; }
-.badgeRental    { background-color: #28a3b3; }
-.badgeFeatured  { background-color: #ee9e01 ; }
-.badgeSchool    { background-color: #28a3b3; }
-.badgeDefault   { background-color: #6b7280; }
+.badgeNewly { background-color: #3b82f6; }
+.badgeRental { background-color: #0ea5e9; }
+.badgeFeatured { background-color: #f59e0b !important; } /* ORANGE */
+.badgeSchool { background-color: #0284c7; }
+.badgeDefault { background-color: #6b7280; }
 
-/* For sale tag (top-right) */
-.forSaleTag {
+
+.badgeTopLeft {
   position: absolute;
-  top: 16px;
-  right: 16px;
-  padding: 6px 10px;
-  border-radius: 8px;
+  top: 10px;
+  left: 10px;
+  z-index: 22;
+}
+
+
+.topLeftBadge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #0284c7; /* blue */
+  z-index: 30;
+}
+
+/* =====================================================
+   FOR SALE (RECTANGULAR, SLIGHTLY ROUNDED)
+===================================================== */
+.bottomLeftBadge {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+
+  background-color: hsl(180, 100%, 100%); 
+
+  padding: 6px 14px;
+  border-radius: 7px;     
   font-size: 12px;
   font-weight: 700;
-  background-color: #ffffff;
-  color: #0f172a;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+
+  color: #0284c7;
+  z-index: 20;
 }
 
-/* Card body (content area) - reduced size */
-.cardBody,
+
+/* =====================================================
+   CONTENT AREA
+===================================================== */
 .cardContent {
-  padding: 12px 14px;           /* ↓ smaller padding */
+  padding: 12px 14px;
   display: flex;
   flex-direction: column;
-  gap: 4px;                     /* ↓ tighter gap */
-}
-
-/* Price + timestamp row */
-.topRow {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 8px;
+  gap: 4px;
 }
 
 .price {
-  font-size: 16px;     /* ↓ slightly smaller */
+  font-size: 16px;
   font-weight: 700;
   color: #0f172a;
-  margin: 0;
 }
 
 .timestamp {
-  font-size: 12px;     /* ↓ slightly smaller */
+  font-size: 12px;
   color: #6b7280;
-  margin: 0;
 }
 
-/* Address and property type */
 .address {
-  font-size: 14px;     /* ↓ slightly smaller */
+  font-size: 14px;
   font-weight: 600;
   color: #0f172a;
-  margin: 2px 0;
-  line-height: 1.2;
-  word-break: break-word;
 }
 
 .propertyType {
-  font-size: 12px;     /* ↓ slightly smaller */
+  font-size: 12px;
   color: #6b7280;
-  margin: 0;
 }
 
-/* Short description (optional) */
-.cardText {
-  font-size: 13px;
-  color: #374151;
-  line-height: 1.45;
-  margin-top: 4px;
-}
 
-/* Features row (beds, baths, sqft) */
+/* =====================================================
+   FEATURES (Beds / Baths / Parking)
+===================================================== */
 .features {
   display: flex;
-  align-items: center;
-  gap: 10px;                      /* slightly tighter */
-  padding-top: 10px;              /* reduced */
+  gap: 10px;
+  padding-top: 10px;
   border-top: 1px solid #eef2f6;
   margin-top: 6px;
 }
@@ -291,72 +176,20 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 12px;               /* smaller */
+  font-size: 12px;
   color: #6b7280;
 }
 
-/* Feature icon sizing */
 .featureIcon {
-  width: 14px;                   /* smaller icon */
+  width: 14px;
   height: 14px;
-  display: inline-block;
 }
 
-/* Agent / footer row inside card */
-.cardFooter {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  margin-top: 6px;
-}
 
+/* =====================================================
+   AGENT
+===================================================== */
 .agent {
-  font-size: 12px;               /* smaller */
+  font-size: 12px;
   color: #6b7280;
-}
-
-/* Restricted overlay (centered message) */
-.restrictedOverlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(0,0,0,0.5);
-  color: white;
-  font-weight: 700;
-  font-size: 16px;
-}
-
-/* Responsive tweaks */
-@media (max-width: 640px) {
-  .cardImage,
-  .imageContainer {
-    height: 220px;    /* mobile: still taller than before but reduced from desktop */
-  }
-  .price { font-size: 15px; }
-  .address { font-size: 13px; }
-}
-
-@media (min-width: 1024px) {
-  .cardBody {
-    padding: 14px 16px; /* slightly larger on big screens but still compact */
-  }
-}
-
-/* Utility: small rounded thumbnail for agent/avatar if used */
-.agentAvatar {
-  width: 34px;
-  height: 34px;
-  border-radius: 9999px;
-  object-fit: cover;
-  margin-right: 8px;
-}
-
-/* Optional: clickable entire card but preserve accessible focus outline */
-.card:focus,
-.card:focus-within {
-  outline: 3px solid rgba(59,130,246,0.08);
-  outline-offset: 3px;
 }

@@ -3,6 +3,7 @@
   margin-bottom: 2rem;
   width: 100%;
   margin-top: 2rem;
+  padding: 0; /* ensures no unwanted spacing */
 }
 
 /* TOP ROW = header left + buttons right */
@@ -11,8 +12,10 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding:  0 6.75rem; /* 4rem left + 4rem right spacing */
+  padding: 0 2rem; /* small padding like HouseSigma */
+  max-width: 100%;   /* removes fixed width feeling */
 }
+
 
 /* Header text */
 .header {

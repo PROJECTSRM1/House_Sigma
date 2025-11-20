@@ -1,0 +1,135 @@
+/* bcStatsChart.module.css — optimized and corrected */
+
+/* Card container (1300px centered) */
+.chartSection {
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: hsl(var(--card));
+  border-radius: 0.5rem;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+  box-sizing: border-box;
+}
+
+/* Title */
+.title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 1.5rem;
+  padding-left: 6px;
+}
+
+/* Chart wrapper - responsive */
+.chartWrapper {
+  width: 100%;
+  height: 400px;
+  margin-bottom: 18px;
+}
+
+/* Tooltip/legend tweaks */
+.recharts-default-tooltip {
+  font-size: 0.85rem;
+}
+.recharts-legend-wrapper {
+  margin-bottom: 8px !important;
+}
+
+/* Source line */
+.source {
+  font-size: 0.75rem;
+  color: hsl(var(--muted-foreground));
+  margin-top: 1rem;
+  font-style: italic;
+  line-height: 1.5;
+  padding-left: 6px;
+}
+
+/* Footer: left source + right button */
+.chartFooter {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  padding-top: 18px;
+  flex-wrap: wrap;
+}
+
+/* Left source text section */
+.sourceText {
+  flex: 1 1 60%;
+  min-width: 220px;
+  padding-left: 6px;
+  color: hsl(var(--muted-foreground));
+}
+
+.sourceLead {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  color: hsl(var(--muted-foreground));
+}
+
+/* Source list */
+.sourceList {
+  margin: 0;
+  padding-left: 18px;
+  list-style: none;
+  color: hsl(var(--muted-foreground));
+  font-size: 16px;
+}
+
+.sourceList li {
+  margin: 4px 0;
+}
+
+/* Button area */
+.buttonWrap {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+/* Teal button */
+.statsButton {
+  background-color: #19a8a7;
+  border: none;
+  color: #fff;
+  padding: 10px 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+  white-space: nowrap;
+}
+
+/* Hover/focus */
+.statsButton:hover {
+  filter: brightness(0.95);
+}
+.statsButton:focus {
+  outline: 3px solid rgba(25,168,167,0.18);
+  outline-offset: 2px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .chartSection {
+    padding: 1rem;
+  }
+  .title {
+    font-size: 1.15rem;
+  }
+  .chartWrapper {
+    height: 320px;
+  }
+  .sourceText {
+    flex-basis: 100%;
+    padding-left: 0;
+  }
+  .buttonWrap {
+    margin-top: 10px;
+    width: 100%;
+    justify-content: flex-end;
+  }
+}

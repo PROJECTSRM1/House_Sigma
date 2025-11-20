@@ -1,0 +1,12 @@
+.disclaimerSection {
+  max-width: 1300px;
+  margin: 1.2rem auto 1.8rem auto;   /* ⬅ less space above & below */
+  padding: 0 1.2rem;
+  font-size: 0.80rem;                /* ⬅ smaller font */
+  line-height: 1.45;                 /* ⬅ tighter spacing */
+  color: #666;
+}
+
+.disclaimerSection p {
+  margin-bottom: 0.8rem;             /* ⬅ reduce paragraph gap */
+}
