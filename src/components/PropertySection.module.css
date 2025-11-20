@@ -1,7 +1,7 @@
 
 .section {
   /* center and constrain content like the original site */
-  max-width: 1200px;        /* adjust to taste (1100 - 1300 is common) */
+  max-width: 1300px;        /* adjust to taste (1100 - 1300 is common) */
   margin: 0 auto 3rem;      /* center horizontally and keep bottom spacing */
   padding: 0 24px;          /* horizontal gutter on small screens */
   box-sizing: border-box;
