@@ -3,26 +3,22 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-//Dashboard pages
+
 import Index from "./pages/Index";
 import Alberta from "./pages/Alberta";
 import BritishCoulmbia from "./pages/BritishCoulmbia";
 import NotFound from "./pages/NotFound";
 
-// Newly added pages
 import MapSearch from "./pages/MapSearch";
 import MarketTrends from "./pages/MarketTrends";
 import Agents from "./pages/Agents";
 import HomeValuation from "./pages/HomeValuation";
-// Tools dropdown pages
+
 import Blog from "./pages/Blog";
 import RecommendCommunities from "./pages/RecommendedCommunities";
 import Contact from "./pages/Contact";
 
-// Join page
 import Join from "./pages/Join";
-
-import Login from "./pages/Login";
 
 const queryClient = new QueryClient();
 
@@ -36,15 +32,16 @@ const App = () => (
         <Routes>
           {/* Home */}
           <Route path="/" element={<Index />} />
-          {/*Dashboard Navigation*/}
-          <Route path ="/province/on" element={<Index/>}/>
-          <Route path ="/province/bc" element={<BritishCoulmbia/>}/>
-          <Route path ="/province/ab" element={<Alberta/>}/>
+
+          {/* Provinces */}
+          <Route path="/province/on" element={<Index />} />
+          <Route path="/province/bc" element={<BritishCoulmbia />} />
+          <Route path="/province/ab" element={<Alberta />} />
 
           {/* Navbar navigation */}
           <Route path="/map-search" element={<MapSearch />} />
           <Route path="/market-trends" element={<MarketTrends />} />
-           <Route path="/home-valuation" element={<HomeValuation/>}/>
+          <Route path="/home-valuation" element={<HomeValuation />} />
           <Route path="/agents" element={<Agents />} />
 
           {/* Tools Dropdown */}
@@ -52,13 +49,10 @@ const App = () => (
           <Route path="/recommend-communities" element={<RecommendCommunities />} />
           <Route path="/contact" element={<Contact />} />
 
-          {/* Auth Pages */}
-          <Route path="/login" element={<Login isOpen={false} onClose={function (): void {
-            throw new Error("Function not implemented.");
-          } } />} />
+          {/* Auth */}
           <Route path="/join" element={<Join />} />
 
-          {/* Catch-All */}
+          {/* 404 */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
