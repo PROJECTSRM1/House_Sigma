@@ -1,0 +1,238 @@
+/* =========================================================
+   GLOBAL WRAPPER + PAGE SETUP
+   ========================================================= */
+.faq-container {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  color: #333;
+  background: #fff;
+  padding: 30px 18px;
+}
+
+.faq-wrapper {
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+.faq-title {
+  font-size: 18px;
+  color: #7f8a93;
+  margin: 6px 0 18px;
+  font-weight: 500;
+}
+
+/* =========================================================
+   LAYOUT (Main content + Sidebar)
+   ========================================================= */
+.faq-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 28px;
+  align-items: start;
+}
+
+/* =========================================================
+   SEARCH BAR
+   ========================================================= */
+
+/* =========================================================
+   CATEGORY GRID (2 columns)
+   ========================================================= */
+.faq-categories-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* =========================================================
+   CATEGORY CARD
+   ========================================================= */
+.faq-category-card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(18, 35, 44, 0.06);
+  overflow: hidden;
+  border: 1px solid #e9e9e9;
+  position: relative;
+  transition: all 0.25s ease;
+}
+
+/* =========================================================
+   CATEGORY HEADER (PERMANENT RED BAR + GREY BG)
+   ========================================================= */
+.faq-category-card {
+  position: relative;
+}
+
+/* permanent red bar ONLY for the category header */
+.faq-category-accent {
+  background: #c83b3b !important;
+  width: 6px;
+  height: 44px;         /* match header height */
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+/* category header always active */
+.faq-category-header {
+  background: #f2f2f2 !important;     /* same grey as article hover */
+  padding: 12px 20px 12px 32px;       /* shift right from red bar */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  position: relative;
+  z-index: 1;
+}
+
+/* prevent hover darkening */
+.faq-category-card:hover .faq-category-header {
+  background: #f2f2f2 !important;
+}
+
+.faq-category-icon {
+  width: 18px;
+  height: 18px;
+  color: #6b6f73;
+}
+
+.faq-category-title {
+  font-size: 16px;
+  margin: 0;
+  font-weight: 700;
+  color: #222;
+}
+
+.faq-category-count {
+  font-weight: 600;
+  color: #6d6f72;
+  font-size: 13px;
+  margin-left: 8px;
+}
+
+/* =========================================================
+   CARD HOVER EFFECT
+   ========================================================= */
+.faq-category-card:hover {
+  box-shadow: 0 12px 36px rgba(18, 35, 44, 0.12);
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   ARTICLE LIST
+   ========================================================= */
+.faq-articles-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+
+.faq-articles-list li {
+  position: relative;
+}
+
+/* article link */
+.faq-article-link {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: #444;
+  font-size: 14px;
+  padding: 12px 20px 12px 26px;
+  text-decoration: none !important;
+  transition: background 0.25s ease;
+  position: relative;
+}
+
+/* red left bar on hover */
+.faq-article-link::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 6px;
+  height: 100%;
+  background: transparent;
+  transition: background 0.25s ease;
+}
+
+.faq-article-link:hover {
+  background: #f2f2f2;
+}
+
+.faq-article-link:hover::before {
+  background: #c83b3b;
+}
+
+.faq-article-icon {
+  width: 14px;
+  height: 14px;
+  margin-top: 2px;
+  color: #b0b0b0;
+}
+
+/* =========================================================
+   VIEW ALL LINK
+   ========================================================= */
+.faq-view-all-link {
+  color: #2a7db8;
+  font-size: 13px;
+  padding: 12px 20px;
+  display: inline-block;
+  text-decoration: none !important;
+  transition: color 0.25s ease;
+}
+
+.faq-view-all-link:hover {
+  color: #1c5a86;
+}
+
+/* =========================================================
+   SIDEBAR (MATCH ARTICLE HOVER)
+   ========================================================= */
+
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 980px) {
+  .faq-layout {
+    grid-template-columns: 1fr;
+  }
+  .faq-categories-grid {
+    grid-template-columns: 1fr;
+  }
+  .faq-sidebar {
+    margin-top: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .faq-title { font-size: 16px; }
+  .faq-search-input { font-size: 15px; }
+  .faq-category-title { font-size: 15px; }
+  .faq-article-link { font-size: 13px; }
+}
+
+/* Make card content stretch fully */
+.faq-category-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Article list grows, pushing view-all down */
+.faq-articles-list {
+  flex-grow: 1;
+}
+
+/* View All sticks to bottom */
+.view-all-container {
+  margin-top: auto;
+}
+
