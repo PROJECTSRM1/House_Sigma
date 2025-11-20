@@ -18,11 +18,14 @@ import HomeValuation from "./pages/HomeValuation";
 import Blog from "./pages/Blog";
 import RecommendCommunities from "./pages/RecommendedCommunities";
 import Contact from "./pages/Contact";
-
+import ContactUs from "./pages/ContactUs";
+import BlogLM from "./pages/BlogLM";
 // Join page
 import Join from "./pages/Join";
 
 import Login from "./pages/Login";
+
+import LearnMore from "./pages/LearnMore";
 
 const queryClient = new QueryClient();
 
@@ -36,6 +39,9 @@ const App = () => (
         <Routes>
           {/* Home */}
           <Route path="/" element={<Index />} />
+          <Route path="/learn-more" element={<LearnMore />} />
+          <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/blog-lm" element={<BlogLM/>}/>
           {/*Dashboard Navigation*/}
           <Route path ="/province/on" element={<Index/>}/>
           <Route path ="/province/bc" element={<BritishCoulmbia/>}/>
