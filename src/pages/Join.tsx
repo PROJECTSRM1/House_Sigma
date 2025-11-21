@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "./Join.css";
+import { useNavigate } from "react-router-dom";     // ⬅️ Added
 import googleLogo from "@/assets/google.png";
 
-const API_BASE = " http://127.0.0.1:8000"; // FastAPI backend
+const API_BASE = "http://127.0.0.1:8000"; // FastAPI backend
 
 const countryList = [
   { name: "India", code: "+91" },
@@ -15,6 +16,7 @@ const countryList = [
 
 const Join: React.FC = () => {
   const [step, setStep] = useState(1);
+  const navigate = useNavigate();   // ⬅️ Added
 
   // Tab (Email / Mobile)
   const [activeTab, setActiveTab] = useState<"email" | "mobile">("email");
@@ -32,10 +34,6 @@ const Join: React.FC = () => {
 
   // Step 3 fields (OTP)
   const [verificationCode, setVerificationCode] = useState("");
-  const [isAgent, setIsAgent] = useState(false);
-  const [province, setProvince] = useState("");
-  const [board, setBoard] = useState("");
-  const [broker, setBroker] = useState("");
 
   // ==========================================================
   // VALIDATE STEP 1
@@ -128,8 +126,11 @@ const Join: React.FC = () => {
       const data = await response.json();
 
       if (response.ok) {
-        alert("OTP Verified Successfully!");
-        setStep(4); // next step (you can decide)
+        alert("Account Created Successfully!");
+
+        // Redirect to Dashboard
+        navigate("/");  
+
       } else {
         setError(data.detail || "Invalid OTP");
       }
@@ -316,3 +317,4 @@ const Join: React.FC = () => {
 };
 
 export default Join;
+ 
