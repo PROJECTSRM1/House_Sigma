@@ -1,10 +1,12 @@
-import { useParams,useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { FileText } from "lucide-react";
 import SearchBar from "./search";
 import Sidebar from "./Sidebar";
 
+import ScamNav from "../ScamNav";
+
 import "./Sidebar.css";
-import './Looking.css'
+import "./Looking.css";
 
 import { faqData } from "../FAQ/FAQ";
 
@@ -78,31 +80,36 @@ const ChangeData = () => {
   };
 
   return (
-    <div className="faq-container">
-      <div className="faq-wrapper">
 
+    <>
+    {/* NAVBAR AT TOP */}
+      <ScamNav />
+    
+    <div className="faq-container">
+
+      <div className="faq-wrapper">
         {/* Breadcrumb */}
         <div className="breadcrumb">
-            <span
-                className="breadcrumb-link"
-                onClick={() => navigate("/faq")}
-            >
-                FAQ
-            </span>
+          <span
+            className="breadcrumb-link"
+            onClick={() => navigate("/faq")}
+          >
+            FAQ
+          </span>
 
-            <span> › </span>
+          <span> › </span>
 
-            <span
-                className="breadcrumb-link"
-                onClick={() => navigate("/faq/change-data")}
-            >
-                Change Data on HouseSigma
-            </span>
+          <span
+            className="breadcrumb-link"
+            onClick={() => navigate("/faq/change-data")}
+          >
+            Change Data on HouseSigma
+          </span>
 
-            <span> › </span>
+          <span> › </span>
 
-            <span>{article?.question}</span>
-            </div>
+          <span>{article?.question}</span>
+        </div>
 
         {/* FULL 2-COLUMN PAGE LAYOUT */}
         <div className="page-layout">
@@ -125,7 +132,9 @@ const ChangeData = () => {
 
             {/* CONTENT BOX */}
             <div className="article-content-box">
-              <div className="article-content-inner">{renderContent()}</div>
+              <div className="article-content-inner">
+                {renderContent()}
+              </div>
             </div>
           </div>
 
@@ -139,9 +148,23 @@ const ChangeData = () => {
               highlightArticleSlug={articleSlug}
             />
           </div>
+
         </div>
       </div>
+      
     </div>
+    <footer className="footer">
+        <div className="footer-content">
+          <div className="footer-links">
+            <a className="footer-link">HouseSigma Inc. Brokerage</a>
+            <a className="footer-link">Legal</a>
+            <a className="footer-link">Privacy & Security</a>
+            <a className="footer-link">Terms & Conditions</a>
+            <a className="footer-link">Accessibility</a>
+          </div>
+        </div>
+      </footer>
+    </>
   );
 };
 

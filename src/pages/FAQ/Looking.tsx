@@ -7,6 +7,7 @@ import './Looking.css';
 import "./Sidebar.css";
 
 import { faqData } from "../FAQ/FAQ";
+import ScamNav from "../ScamNav";
 
 const Looking = () => {
   const { articleSlug } = useParams();
@@ -83,6 +84,9 @@ const Looking = () => {
   };
 
   return (
+    <>
+    <ScamNav/>
+    
     <div className="faq-container">
       <div className="faq-wrapper">
         {/* Breadcrumb */}
@@ -151,6 +155,19 @@ const Looking = () => {
         </div>
       </div>
     </div>
+     {/* FOOTER AT BOTTOM */}
+      <footer className="footer">
+        <div className="footer-content">
+          <div className="footer-links">
+            <a className="footer-link">HouseSigma Inc. Brokerage</a>
+            <a className="footer-link">Legal</a>
+            <a className="footer-link">Privacy & Security</a>
+            <a className="footer-link">Terms & Conditions</a>
+            <a className="footer-link">Accessibility</a>
+          </div>
+        </div>
+      </footer>
+    </>
   );
 };
 

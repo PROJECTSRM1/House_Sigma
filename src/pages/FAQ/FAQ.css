@@ -21,7 +21,7 @@
 }
 
 /* =========================================================
-   LAYOUT (Main content + Sidebar)
+   LAYOUT (CONTENT + SIDEBAR)
    ========================================================= */
 .faq-layout {
   display: grid;
@@ -29,10 +29,6 @@
   gap: 28px;
   align-items: start;
 }
-
-/* =========================================================
-   SEARCH BAR
-   ========================================================= */
 
 /* =========================================================
    CATEGORY GRID (2 columns)
@@ -59,38 +55,25 @@
 }
 
 /* =========================================================
-   CATEGORY HEADER (PERMANENT RED BAR + GREY BG)
+   CATEGORY HEADER (RED BAR + GREY BG)
    ========================================================= */
-.faq-category-card {
-  position: relative;
-}
-
-/* permanent red bar ONLY for the category header */
 .faq-category-accent {
   background: #c83b3b !important;
   width: 6px;
-  height: 44px;         /* match header height */
+  height: 44px;
   position: absolute;
   top: 0;
   left: 0;
   z-index: 2;
 }
 
-/* category header always active */
 .faq-category-header {
-  background: #f2f2f2 !important;     /* same grey as article hover */
-  padding: 12px 20px 12px 32px;       /* shift right from red bar */
+  background: #f2f2f2 !important;
+  padding: 12px 20px 12px 32px;
   display: flex;
   align-items: center;
   gap: 12px;
   min-height: 44px;
-  position: relative;
-  z-index: 1;
-}
-
-/* prevent hover darkening */
-.faq-category-card:hover .faq-category-header {
-  background: #f2f2f2 !important;
 }
 
 .faq-category-icon {
@@ -113,9 +96,7 @@
   margin-left: 8px;
 }
 
-/* =========================================================
-   CARD HOVER EFFECT
-   ========================================================= */
+/* Hover */
 .faq-category-card:hover {
   box-shadow: 0 12px 36px rgba(18, 35, 44, 0.12);
   transform: translateY(-2px);
@@ -128,14 +109,13 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  border-top: 1px solid rgba(0,0,0,0.06);
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .faq-articles-list li {
   position: relative;
 }
 
-/* article link */
 .faq-article-link {
   display: flex;
   align-items: flex-start;
@@ -148,7 +128,6 @@
   position: relative;
 }
 
-/* red left bar on hover */
 .faq-article-link::before {
   content: "";
   position: absolute;
@@ -175,9 +154,7 @@
   color: #b0b0b0;
 }
 
-/* =========================================================
-   VIEW ALL LINK
-   ========================================================= */
+/* View All Link */
 .faq-view-all-link {
   color: #2a7db8;
   font-size: 13px;
@@ -192,47 +169,97 @@
 }
 
 /* =========================================================
-   SIDEBAR (MATCH ARTICLE HOVER)
+   FOOTER / SIDEBAR
    ========================================================= */
-
 
 
 /* =========================================================
-   RESPONSIVE
+   RESPONSIVE BREAKPOINTS
    ========================================================= */
+
+/* ---------- Large Tablets & Small Screens (<= 980px) ---------- */
 @media (max-width: 980px) {
   .faq-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* sidebar drops below */
   }
+
   .faq-categories-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* 1 column on smaller screens */
   }
+
   .faq-sidebar {
     margin-top: 18px;
   }
 }
 
-@media (max-width: 480px) {
-  .faq-title { font-size: 16px; }
-  .faq-search-input { font-size: 15px; }
-  .faq-category-title { font-size: 15px; }
-  .faq-article-link { font-size: 13px; }
+/* ---------- Mobile (<= 600px) ---------- */
+@media (max-width: 600px) {
+  .faq-container {
+    padding: 22px 14px;
+  }
+
+  .faq-title {
+    font-size: 17px;
+  }
+
+  .faq-category-title {
+    font-size: 15px;
+  }
+
+  .faq-article-link {
+    font-size: 13px;
+    padding: 12px 16px 12px 22px;
+  }
+
+  .faq-category-header {
+    padding: 12px 16px 12px 30px;
+  }
 }
 
-/* Make card content stretch fully */
+/* ---------- Small Phones (<= 400px) ---------- */
+@media (max-width: 400px) {
+  .faq-container {
+    padding: 18px 12px;
+  }
+
+  .faq-category-header {
+    padding: 10px 14px 10px 26px;
+  }
+
+  .faq-category-title {
+    font-size: 14px;
+  }
+
+  .faq-category-card {
+    border-radius: 2px;
+  }
+}
+
+/* ---------- Very Small Phones (<= 350px) ---------- */
+@media (max-width: 350px) {
+  .faq-category-title {
+    font-size: 13px;
+  }
+
+  .faq-article-link {
+    font-size: 12px;
+    padding: 10px 14px 10px 20px;
+  }
+}
+
+/* =========================================================
+   FLEX FIXES (FULL HEIGHT CARD)
+   ========================================================= */
 .faq-category-content {
   display: flex;
   flex-direction: column;
   height: 100%;
 }
 
-/* Article list grows, pushing view-all down */
 .faq-articles-list {
   flex-grow: 1;
 }
 
-/* View All sticks to bottom */
 .view-all-container {
   margin-top: auto;
 }
-

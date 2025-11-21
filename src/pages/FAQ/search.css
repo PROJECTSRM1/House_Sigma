@@ -37,3 +37,81 @@
   letter-spacing: 0.6px;
   font-size: 14px;
 }
+
+/* =========================================================
+   RESPONSIVE BREAKPOINTS
+   ========================================================= */
+
+/* ---------- Tablets (<= 980px) ---------- */
+@media (max-width: 980px) {
+  .faq-search-form {
+    padding: 16px;
+  }
+
+  .faq-search-input {
+    font-size: 17px;
+  }
+
+  .faq-search-button {
+    font-size: 14px;
+  }
+}
+
+/* ---------- Mobile (<= 600px) ---------- */
+@media (max-width: 600px) {
+  .faq-search-form {
+    padding: 14px;
+  }
+
+  .faq-search-input {
+    font-size: 16px;
+    padding: 8px 10px;
+  }
+
+  .faq-search-input::placeholder {
+    font-size: 15px;
+  }
+
+  .faq-search-button {
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+}
+
+/* ---------- Small Phones (<= 400px) ---------- */
+@media (max-width: 400px) {
+  .faq-search-form {
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .faq-search-input {
+    width: 100%;
+    font-size: 15px;
+    padding: 8px 10px;
+  }
+
+  .faq-search-button {
+    width: 100%;
+    padding: 10px;
+    font-size: 13px;
+    text-align: center;
+  }
+}
+
+/* ---------- Very Small Phones (<= 350px) ---------- */
+@media (max-width: 350px) {
+  .faq-search-input {
+    font-size: 14px;
+  }
+
+  .faq-search-input::placeholder {
+    font-size: 14px;
+  }
+
+  .faq-search-button {
+    font-size: 12px;
+    padding: 8px;
+  }
+}
