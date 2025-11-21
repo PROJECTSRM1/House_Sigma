@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink,useNavigate } from "react-router-dom";
 import "./Login.css";
 import googleLogo from "@/assets/google.png";
 
+
 interface LoginModalProps {
+
   isOpen: boolean;
   onClose: () => void;
   onForgotPassword: () => void;   
@@ -18,14 +20,59 @@ const countryList = [
   { name: "United Kingdom", code: "+44" },
 ];
 
-const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onForgotPassword }) => {
+const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
+   const navigate = useNavigate(); 
   const [activeTab, setActiveTab] = useState<"email" | "mobile">("email");
   const [passwordVisible, setPasswordVisible] = useState(false);
+
+  // States
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onForgotPassword }) => {
 
   const [showCountryList, setShowCountryList] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState(countryList[2]); // default India
 
   if (!isOpen) return null;
+
+  // =====================================
+  //            LOGIN FUNCTION
+  // =====================================
+  const handleLogin = async () => {
+    const username = activeTab === "email" ? email : phone;
+
+    if (!username || !password) {
+      alert("Enter both username and password");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username_or_email: username,
+          password: password,
+        }),
+
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        alert(data.detail);
+        return;
+      }
+
+      alert("Login successful!");
+      onClose();
+      navigate("/");
+
+    } catch (error) {
+      alert("Server error while logging in.");
+    }
+  };
 
   return (
     <div className="login-overlay">
@@ -54,7 +101,12 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onForgotPasswo
         {/* Email Input */}
         {activeTab === "email" && (
           <div className="input-group">
-            <input type="email" placeholder="Enter email" />
+            <input
+              type="email"
+              placeholder="Enter email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </div>
         )}
 
@@ -87,7 +139,13 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onForgotPasswo
               </div>
             )}
 
-            <input className="phone-input" type="text" placeholder="Phone number" />
+            <input
+              className="phone-input"
+              type="text"
+              placeholder="Phone number"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
           </div>
         )}
 
@@ -96,6 +154,8 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onForgotPasswo
           <input
             type={passwordVisible ? "text" : "password"}
             placeholder="Enter password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <span
             className="eye-btn"
@@ -105,8 +165,10 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onForgotPasswo
           </span>
         </div>
 
-        {/* Login Button */}
-        <button className="login-btn">Log in</button>
+        {/* Login */}
+        <button className="login-btn" onClick={handleLogin}>
+          Log in
+        </button>
 
         
         <p
