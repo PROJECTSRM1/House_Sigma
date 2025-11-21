@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import { NavLink,useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./Login.css";
 import googleLogo from "@/assets/google.png";
 
-
 interface LoginModalProps {
-
   isOpen: boolean;
   onClose: () => void;
   onForgotPassword: () => void;   
@@ -20,25 +18,25 @@ const countryList = [
   { name: "United Kingdom", code: "+44" },
 ];
 
-const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
-   const navigate = useNavigate(); 
+const LoginModal: React.FC<LoginModalProps> = ({ 
+  isOpen, 
+  onClose, 
+  onForgotPassword 
+}) => {
+  const navigate = useNavigate();
+
   const [activeTab, setActiveTab] = useState<"email" | "mobile">("email");
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-  // States
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
-const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onForgotPassword }) => {
 
   const [showCountryList, setShowCountryList] = useState(false);
-  const [selectedCountry, setSelectedCountry] = useState(countryList[2]); // default India
+  const [selectedCountry, setSelectedCountry] = useState(countryList[2]); 
 
   if (!isOpen) return null;
 
-  // =====================================
-  //            LOGIN FUNCTION
-  // =====================================
   const handleLogin = async () => {
     const username = activeTab === "email" ? email : phone;
 
@@ -55,13 +53,12 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onForgotPasswo
           username_or_email: username,
           password: password,
         }),
-
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        alert(data.detail);
+        alert(data.detail || "Login failed");
         return;
       }
 
@@ -113,7 +110,6 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onForgotPasswo
         {/* Mobile Input */}
         {activeTab === "mobile" && (
           <div className="combined-mobile-box">
-            {/* Country Dropdown */}
             <div
               className="country-box"
               onClick={() => setShowCountryList(!showCountryList)}
@@ -170,10 +166,10 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onForgotPasswo
           Log in
         </button>
 
-        
+        {/* Forgot Password */}
         <p
           className="forgot-text"
-          onClick={onForgotPassword}           
+          onClick={onForgotPassword}
           style={{ cursor: "pointer" }}
         >
           Forgot Password?
