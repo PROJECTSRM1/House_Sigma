@@ -1,0 +1,213 @@
+/* =========================================================
+   SIDEBAR BASE STYLES
+========================================================= */
+.faq-sidebar nav {
+  background: #fff;
+  border: 1px solid #e9e9e9;
+  border-radius: 3px;
+  box-shadow: 0 18px 60px rgba(18, 35, 44, 0.06);
+  padding: 18px;
+}
+
+.faq-sidebar-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.faq-sidebar-link {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px 10px 8px;
+  color: #333;
+  text-decoration: none !important;
+  transition: background 0.25s ease;
+  cursor: pointer;
+}
+
+.faq-sidebar-link::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 6px;
+  height: 100%;
+  background: transparent;
+  transition: background 0.25s ease;
+}
+
+.faq-sidebar-link:hover {
+  background: #f2f2f2;
+}
+
+.faq-sidebar-link:hover::before {
+  background: #c83b3b;
+}
+
+/* ------------------------------
+   FIXED ALIGNMENTS
+-------------------------------*/
+.faq-sidebar-link-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.faq-sidebar-folder-icon {
+  width: 17px;
+  height: 17px;
+  color: #5a5a5a;
+  margin-top: 1px;
+}
+
+.faq-sidebar-link-content span {
+  font-size: 15px;
+  font-weight: 400;
+  color: #333;
+  line-height: 1.4;
+  display: flex;
+  align-items: center;
+}
+
+.faq-sidebar-chevron {
+  width: 15px;
+  height: 15px;
+  color: #707070;
+  margin-top: 1px;
+}
+
+/* Expanded section articles */
+.faq-sidebar-articles {
+  list-style: none;
+  margin: 6px 0 6px 26px;
+  padding-left: 0;
+  border-left: 1px solid #e0e0e0;
+}
+
+.faq-sidebar-article-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background 0.25s ease;
+}
+
+.faq-sidebar-article-link:hover {
+  background: #f2f2f2;
+}
+
+.faq-sidebar-article-link svg {
+  width: 14px;
+  height: 14px;
+  color: #b0b0b0;
+  min-width: 14px;
+}
+
+/* =========================================================
+   RESPONSIVE — MOBILE + TABLETS
+========================================================= */
+
+/* ---------- Tablets (<= 980px) ---------- */
+@media (max-width: 980px) {
+  .faq-sidebar nav {
+    padding: 16px;
+  }
+
+  .faq-sidebar-link {
+    padding: 10px 12px 10px 8px;
+  }
+
+  .faq-sidebar-link-content span {
+    font-size: 15px;
+  }
+}
+
+/* ---------- Mobile (<= 600px) ---------- */
+@media (max-width: 600px) {
+  .faq-sidebar nav {
+    padding: 14px;
+    box-shadow: none;         /* mobile-friendly */
+    border-radius: 2px;
+  }
+
+  .faq-sidebar-link {
+    padding: 12px 10px;
+  }
+
+  .faq-sidebar-link-content span {
+    font-size: 14px;
+  }
+
+  .faq-sidebar-folder-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .faq-sidebar-chevron {
+    width: 14px;
+    height: 14px;
+  }
+
+  .faq-sidebar-articles {
+    margin-left: 20px;
+    border-left: 1px solid #ddd;
+  }
+
+  .faq-sidebar-article-link {
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+}
+
+/* ---------- Small Phones (<= 400px) ---------- */
+@media (max-width: 400px) {
+  .faq-sidebar nav {
+    padding: 12px;
+  }
+
+  .faq-sidebar-link {
+    padding: 10px 8px;
+    gap: 8px;
+  }
+
+  .faq-sidebar-link-content {
+    gap: 8px;
+  }
+
+  .faq-sidebar-link-content span {
+    font-size: 13.5px;
+  }
+
+  .faq-sidebar-folder-icon,
+  .faq-sidebar-chevron {
+    width: 14px;
+    height: 14px;
+  }
+
+  .faq-sidebar-article-link {
+    padding: 6px 8px;
+    font-size: 12.5px;
+  }
+}
+
+/* ---------- Very Small Phones (<= 350px) ---------- */
+@media (max-width: 350px) {
+  .faq-sidebar-link {
+    padding: 8px 6px;
+  }
+
+  .faq-sidebar-link-content span {
+    font-size: 12.8px;
+  }
+
+  .faq-sidebar-article-link {
+    font-size: 12px;
+    padding: 6px 6px;
+  }
+}

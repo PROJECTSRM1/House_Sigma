@@ -13,6 +13,7 @@ export interface PropertyListing {
   parking: number | string;
   agent?: string;
   restricted?: boolean;
+  loginRequired?: boolean;
 }
 
 export interface Agent {
@@ -79,6 +80,7 @@ export const newlyListed: PropertyListing[] = [
     beds: 2,
     baths: 2,
     parking: 0,
+    loginRequired: true
   },
   {
     id: '5',
@@ -91,6 +93,7 @@ export const newlyListed: PropertyListing[] = [
     beds: '2+2',
     baths: 3,
     parking: 1,
+    loginRequired: true
   },
   {
     id: '6',
@@ -103,6 +106,7 @@ export const newlyListed: PropertyListing[] = [
     beds: 2,
     baths: 1,
     parking: 0,
+    loginRequired: true
   },
 ];
 
@@ -184,6 +188,7 @@ export const bestForSchools: PropertyListing[] = [
     baths: 2,
     parking: 1,
     agent: 'N12526384, RE/MAX ALL-STARS REALTY INC.',
+    loginRequired: true
   },
   {
     id: '12',
@@ -232,6 +237,7 @@ export const featuredListings: PropertyListing[] = [
     baths: 3,
     parking: 1,
     agent: 'N12526384, RE/MAX ALL-STARS REALTY INC.',
+    loginRequired: true
   },
   {
     id: '15',
@@ -312,6 +318,7 @@ export const soldBelow: PropertyListing[] = [
     baths: 2,
     parking: 2,
     agent: 'N12531354, RE/MAX REALTRON REALTY INC.',
+    loginRequired: true
   },
   {
     id: '20',
@@ -326,6 +333,7 @@ export const soldBelow: PropertyListing[] = [
     baths: 3,
     parking: 1,
     agent: 'N12526384, RE/MAX ALL-STARS REALTY INC.',
+    loginRequired: true
   },
   {
     id: '21',
@@ -340,6 +348,7 @@ export const soldBelow: PropertyListing[] = [
     baths: 3,
     parking: 2,
     agent: 'N12522550, RE/MAX ELITE REAL ESTATE',
+    loginRequired: true
   },
 ];
 

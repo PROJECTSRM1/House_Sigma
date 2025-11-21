@@ -8,6 +8,7 @@ interface LoginModalProps {
 
   isOpen: boolean;
   onClose: () => void;
+  onForgotPassword: () => void;   
 }
 
 const countryList = [
@@ -16,7 +17,7 @@ const countryList = [
   { name: "India", code: "+91" },
   { name: "Canada", code: "+1" },
   { name: "United States", code: "+1" },
-  { name: "United Kingdom", code: "+44" }
+  { name: "United Kingdom", code: "+44" },
 ];
 
 const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
@@ -28,9 +29,10 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
+const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onForgotPassword }) => {
 
   const [showCountryList, setShowCountryList] = useState(false);
-  const [selectedCountry, setSelectedCountry] = useState(countryList[2]);
+  const [selectedCountry, setSelectedCountry] = useState(countryList[2]); // default India
 
   if (!isOpen) return null;
 
@@ -96,7 +98,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
           </button>
         </div>
 
-        {/* Email */}
+        {/* Email Input */}
         {activeTab === "email" && (
           <div className="input-group">
             <input
@@ -108,9 +110,10 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
           </div>
         )}
 
-        {/* Mobile */}
+        {/* Mobile Input */}
         {activeTab === "mobile" && (
           <div className="combined-mobile-box">
+            {/* Country Dropdown */}
             <div
               className="country-box"
               onClick={() => setShowCountryList(!showCountryList)}
@@ -146,7 +149,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
           </div>
         )}
 
-        {/* Password */}
+        {/* Password Input */}
         <div className="password-wrapper">
           <input
             type={passwordVisible ? "text" : "password"}
@@ -167,10 +170,18 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
           Log in
         </button>
 
-        <p className="forgot-text">Forgot Password?</p>
+        
+        <p
+          className="forgot-text"
+          onClick={onForgotPassword}           
+          style={{ cursor: "pointer" }}
+        >
+          Forgot Password?
+        </p>
 
         <div className="divider"></div>
 
+        {/* Google Login */}
         <button className="google-btn">
           <img src={googleLogo} alt="google" className="google-icon" />
           Sign in with Google
