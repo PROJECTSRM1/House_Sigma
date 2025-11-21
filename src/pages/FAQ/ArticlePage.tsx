@@ -1,12 +1,12 @@
-import { useParams,useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { FileText } from "lucide-react";
 import SearchBar from "./search";
-import './Sidebar.css';
+import "./Sidebar.css";
 import Sidebar from "./Sidebar";
-import './Sidebar.css';
-import './ArticlePage.css';
+import "./ArticlePage.css";
 import img1 from "../../assets/image-2.png";
 import img2 from "../../assets/image.png";
+import ScamNav from "@/pages/ScamNav";
 
 import { faqData } from "../FAQ/FAQ";
 
@@ -35,7 +35,7 @@ const ArticlePage = () => {
 
               <li>
                 Do not use corporate email. Many companies have very aggressive
-                spam blockers, which blocked our email.
+                spam blockers, which block our email.
               </li>
 
               <li>
@@ -115,7 +115,7 @@ const ArticlePage = () => {
 
             <ul>
               <li>
-                Method 1: Login to HouseSigma App, use app &gt; account &gt; profile &gt; delete
+                Method 1: Login to HouseSigma App, use app → account → profile → delete
               </li>
               <li>
                 Method 2: Use the following form, a technical support person will assist you.
@@ -161,22 +161,22 @@ const ArticlePage = () => {
           </>
         );
 
-
       default:
         return <p>No content available.</p>;
     }
   };
 
   return (
-    <div className="faq-container">
-  <div className="faq-wrapper">
+    <div className="faq-page-container">
 
-    {/* Breadcrumb */}
-    <div className="breadcrumb">
-          <span
-            className="breadcrumb-link"
-            onClick={() => navigate("/faq")}
-          >
+      {/* NAVBAR AT TOP */}
+      <ScamNav />
+
+      <div className="faq-wrapper">
+
+        {/* Breadcrumb */}
+        <div className="breadcrumb">
+          <span className="breadcrumb-link" onClick={() => navigate("/faq")}>
             FAQ
           </span>
 
@@ -194,46 +194,60 @@ const ArticlePage = () => {
           <span>{article?.question}</span>
         </div>
 
-    {/* FULL PAGE 2-COLUMN LAYOUT */}
-    <div className="page-layout">
+        {/* FULL PAGE 2-COLUMN LAYOUT */}
+        <div className="page-layout">
 
-      {/* LEFT COLUMN */}
-      <div className="left-panel">
+          {/* LEFT COLUMN */}
+          <div className="left-panel">
 
-        {/* SEARCH BAR */}
-        <SearchBar 
-          searchQuery="" 
-          setSearchQuery={() => {}} 
-          onSearch={() => {}} 
-        />
+            {/* SEARCH BAR */}
+            <SearchBar
+              searchQuery=""
+              setSearchQuery={() => {}}
+              onSearch={() => {}}
+            />
 
-        {/* TITLE */}
-        <div className="article-title-row">
-          <FileText className="article-title-icon" />
-          <h1 className="article-title">{article?.question}</h1>
+            {/* TITLE */}
+            <div className="article-title-row">
+              <FileText className="article-title-icon" />
+              <h1 className="article-title">{article?.question}</h1>
+            </div>
+
+            {/* CONTENT BOX */}
+            <div className="article-content-box">
+              <div className="article-content-inner">
+                {renderContent()}
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT COLUMN — SIDEBAR */}
+          <div className="right-panel">
+            <Sidebar
+              faqData={faqData}
+              sidebarCategories={faqData}
+              openSidebarId={"user-account"}
+              toggleSidebar={() => {}}
+              highlightArticleSlug={articleSlug}
+            />
+          </div>
+
         </div>
-
-        {/* CONTENT BOX */}
-        <div className="article-content-box">
-          <div className="article-content-inner">{renderContent()}</div>
-        </div>
-
       </div>
 
-      {/* RIGHT COLUMN — SIDEBAR */}
-      <div className="right-panel">
-        <Sidebar
-          faqData={faqData}
-          sidebarCategories={faqData}
-          openSidebarId={"user-account"}
-          toggleSidebar={() => {}}
-          highlightArticleSlug={articleSlug}
-        />
-      </div>
-
+      {/* FOOTER AT BOTTOM */}
+      <footer className="footer">
+        <div className="footer-content">
+          <div className="footer-links">
+            <a className="footer-link">HouseSigma Inc. Brokerage</a>
+            <a className="footer-link">Legal</a>
+            <a className="footer-link">Privacy & Security</a>
+            <a className="footer-link">Terms & Conditions</a>
+            <a className="footer-link">Accessibility</a>
+          </div>
+        </div>
+      </footer>
     </div>
-  </div>
-</div>
   );
 };
 

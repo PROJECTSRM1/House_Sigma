@@ -3,12 +3,12 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 40px;
+  margin-top: 40px;
+  padding-top: 85px !important;
 }
 
 /* ---------------------------------------------
    PAGE LAYOUT (2 COLUMN)
-   LEFT = Search + Title + Content
-   RIGHT = Sidebar
 ---------------------------------------------- */
 .page-layout {
   display: flex;
@@ -21,7 +21,7 @@
   flex: 1;
 }
 
-/* RIGHT COLUMN (SIDEBAR) */
+/* RIGHT COLUMN */
 .right-panel {
   width: 320px;
   flex-shrink: 0;
@@ -38,22 +38,18 @@
   margin-top: 10px;
 }
 
-/* LIST */
 .article-list {
   margin-left: 20px;
   line-height: 1.7;
 }
 
-/* NOTES */
 .article-note {
   margin-top: 14px;
   font-size: 14px;
   color: #333;
 }
 
-/* ---------------------------------------------
-   TITLE ROW
----------------------------------------------- */
+/* TITLE ROW */
 .article-title-row {
   display: flex;
   align-items: center;
@@ -66,18 +62,15 @@
   font-weight: 600;
 }
 
-/* CONTENT INNER */
 .article-content-inner {
   margin-top: 10px;
   line-height: 1.6;
   font-size: 15px;
 }
 
-/* ---------------------------------------------
-   BREADCRUMB
----------------------------------------------- */
+/* BREADCRUMB */
 .breadcrumb-link {
-  cursor: pointer;       /* mouse pointer */
+  cursor: pointer;
   color: #2f55d4;
   font-weight: 500;
 }
@@ -86,7 +79,6 @@
   text-decoration: underline;
 }
 
-/* Make category title also show pointer cursor */
 .breadcrumb span:last-child {
   cursor: pointer;
 }
@@ -158,4 +150,116 @@
   margin-top: 25px;
   font-size: 14px;
   color: #555;
+}
+
+
+/* ========================================================
+   RESPONSIVE DESIGN • (MOBILE → LAPTOP)
+======================================================== */
+
+/* ---------- Very Small Devices (<= 375px) ---------- */
+@media (max-width: 375px) {
+  .faq-wrapper {
+    padding: 0 12px;
+  }
+
+  .page-layout {
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .right-panel {
+    width: 100%;
+    order: -1;
+  }
+
+  .article-title {
+    font-size: 20px;
+  }
+
+  .article-content-box {
+    padding: 15px;
+  }
+
+  .article-content-inner {
+    font-size: 14px;
+  }
+
+  .article-list {
+    margin-left: 15px;
+    font-size: 14px;
+  }
+
+  .checkbox-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .send-btn {
+    width: 100%;
+  }
+}
+
+/* ---------- Mobile Phones (<= 600px) ---------- */
+@media (max-width: 600px) {
+  .faq-wrapper {
+    padding: 0 15px;
+  }
+
+  .page-layout {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .right-panel {
+    width: 100%;
+    order: -1;
+  }
+
+  .article-title {
+    font-size: 22px;
+  }
+
+  .article-content-box {
+    padding: 18px;
+  }
+
+  .checkbox-group {
+    flex-direction: column;
+  }
+
+  .send-btn {
+    width: 100%;
+  }
+}
+
+/* ---------- Tablets (<= 900px) ---------- */
+@media (max-width: 900px) {
+  .page-layout {
+    flex-direction: column;
+  }
+
+  .right-panel {
+    width: 100%;
+  }
+
+  .article-title {
+    font-size: 24px;
+  }
+
+  .checkbox-group {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+/* ---------- Small Laptops (<= 1200px) ---------- */
+@media (max-width: 1200px) {
+  .faq-wrapper {
+    padding: 0 25px;
+  }
+
+  .right-panel {
+    width: 280px;
+  }
 }

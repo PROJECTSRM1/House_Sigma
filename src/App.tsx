@@ -28,7 +28,7 @@ import Login from "./pages/Login";
 import FAQ from "./pages/FAQ/FAQ";
 import Looking from "./pages/FAQ/Looking";
 import ChangeData from "./pages/FAQ/ChangeData";
-import ContactUs from "./pages/FAQ/Contact-us";
+import Contact_FAQ from "./pages/FAQ/Contact-us";
 import Features from "./pages/FAQ/Features";
 import Others from "./pages/FAQ/Others";
 import CategoryPage from "./pages/FAQ/Categorys";
@@ -75,7 +75,7 @@ const App = () => (
           <Route path="/faq/user-account/:articleSlug" element={<ArticlePage />} />
           <Route path="/faq/looking-for-properties/:articleSlug" element={<Looking />} />
           <Route path="/faq/change-data/:articleSlug" element={<ChangeData/>} />
-          <Route path="/faq/contact-us/:articleSlug" element={<ContactUs/>} />
+          <Route path="/faq/contact-us/:articleSlug" element={<Contact_FAQ/>} />
            <Route path="/faq/features/:articleSlug" element={<Features/>} />
             <Route path="/faq/others/:articleSlug" element={<Others/>} />
 

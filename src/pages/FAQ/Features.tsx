@@ -2,6 +2,7 @@ import { useParams,useNavigate } from "react-router-dom";
 import { FileText } from "lucide-react";
 import SearchBar from "./search";
 import Sidebar from "./Sidebar";
+import ScamNav from "../ScamNav";
 
 import "./Sidebar.css";
 import './Feature.css';
@@ -104,6 +105,8 @@ const Features = () => {
   };
 
   return (
+    <>
+    <ScamNav />
     <div className="faq-container">
       <div className="faq-wrapper">
 
@@ -163,6 +166,21 @@ const Features = () => {
         </div>
       </div>
     </div>
+
+    {/* Footer */}
+      <footer className="footer">
+        <div className="footer-content">
+          <div className="footer-links">
+            <a className="footer-link">HouseSigma Inc. Brokerage</a>
+            <a className="footer-link">Legal</a>
+            <a className="footer-link">Privacy & Security</a>
+            <a className="footer-link">Terms & Conditions</a>
+            <a className="footer-link">Accessibility</a>
+          </div>
+        </div>
+      </footer>
+
+    </>
   );
 };
 

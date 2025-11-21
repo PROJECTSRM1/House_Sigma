@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "./FAQ.css";
 import SearchBar from "./search";
 import Sidebar from "./Sidebar";
+import ScamNav from "../ScamNav";
 
 interface FAQArticle {
   id: string;
@@ -133,6 +134,8 @@ const FAQ = () => {
   };
 
   return (
+    <>
+    <ScamNav/>
     <div className="faq-container">
       <div className="faq-wrapper">
         <h1 className="faq-title">FAQ</h1>
@@ -197,6 +200,19 @@ const FAQ = () => {
         </div>
       </div>
     </div>
+    {/* Footer */}
+      <footer className="footer">
+        <div className="footer-content">
+          <div className="footer-links">
+            <a className="footer-link">HouseSigma Inc. Brokerage</a>
+            <a className="footer-link">Legal</a>
+            <a className="footer-link">Privacy & Security</a>
+            <a className="footer-link">Terms & Conditions</a>
+            <a className="footer-link">Accessibility</a>
+          </div>
+        </div>
+      </footer>
+    </>
   );
 };
 

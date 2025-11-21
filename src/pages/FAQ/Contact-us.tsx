@@ -8,6 +8,7 @@ import "./ArticlePage.css";
 import './Contact-us.css'
 
 import { faqData } from "../FAQ/FAQ";
+import ScamNav from "../ScamNav";
 
 const ContactUs = () => {
   const { articleSlug } = useParams();
@@ -108,7 +109,10 @@ const ContactUs = () => {
   };
 
   return (
+    <>
+    <ScamNav />
     <div className="faq-container">
+      
       <div className="faq-wrapper">
 
         {/* Breadcrumb */}
@@ -173,7 +177,21 @@ const ContactUs = () => {
 
         </div>
       </div>
+       
     </div>
+    {/* Footer */}
+      <footer className="footer">
+        <div className="footer-content">
+          <div className="footer-links">
+            <a className="footer-link">HouseSigma Inc. Brokerage</a>
+            <a className="footer-link">Legal</a>
+            <a className="footer-link">Privacy & Security</a>
+            <a className="footer-link">Terms & Conditions</a>
+            <a className="footer-link">Accessibility</a>
+          </div>
+        </div>
+      </footer>
+      </>
   );
 };
 
