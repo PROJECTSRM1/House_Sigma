@@ -1,6 +1,6 @@
 
 import React, { useState } from "react";
-import styles from "./ChatBot.module.css";
+import styles from "./chatbot.module.css";
 
 export default function ChatBotWindow({ onClose }: any) {
   const [msg, setMsg] = useState("");
