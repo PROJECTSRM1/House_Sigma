@@ -21,7 +21,7 @@ import cambridge from "@/assets/Cambridge.jpg";
 import jewelBox from "@/assets/Jewel-Box.jpg";
 import marketOverview from "@/assets/Market-Overview.jpg";
 import mayToronto from "@/assets/May_Toronto.jpg";
-import normLi from "@/assets/NORM-Li.jpg";
+import normLi from "@/assets/NORM-LI.jpg";
 import ottawaNeighbourhood from "@/assets/Ottawa_Neighbourhood.jpg";
 import rendering from "@/assets/Rendering.jpg";
 import harbourwalkElevation from "@/assets/Harbourwalk-Elevation-East.jpg";
