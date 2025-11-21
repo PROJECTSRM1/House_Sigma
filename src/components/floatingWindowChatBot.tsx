@@ -1,6 +1,6 @@
 import React from "react";
 import { MessageSquare } from "lucide-react";
-import styles from "./ChatBot.module.css";
+import styles from "./chatbot.module.css";
 
 export default function FloatingChatButton({ onOpen }: any) {
   return (
