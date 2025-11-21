@@ -4,6 +4,8 @@ import Footer from "../components/Footer";
 import "./Join.css";
 import googleLogo from "@/assets/google.png";
 
+const API_BASE = " http://127.0.0.1:8000"; // FastAPI backend
+
 const countryList = [
   { name: "India", code: "+91" },
   { name: "Canada", code: "+1" },
@@ -19,31 +21,25 @@ const Join: React.FC = () => {
 
   // Step 1 fields
   const [fullName, setFullName] = useState("");
-
-  // Email
   const [email, setEmail] = useState("");
-
-  // Mobile
   const [selectedCountry, setSelectedCountry] = useState(countryList[0]);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
-
-  // Password
   const [password, setPassword] = useState("");
 
-  // Error
+  // Error message
   const [error, setError] = useState("");
 
-  // Step 3 fields
+  // Step 3 fields (OTP)
   const [verificationCode, setVerificationCode] = useState("");
   const [isAgent, setIsAgent] = useState(false);
   const [province, setProvince] = useState("");
   const [board, setBoard] = useState("");
   const [broker, setBroker] = useState("");
 
-  // ==========================================
-  //           VALIDATE STEP 1
-  // ==========================================
+  // ==========================================================
+  // VALIDATE STEP 1
+  // ==========================================================
   const validateStep1 = () => {
     if (!fullName.trim()) {
       setError("Full Name is required.");
@@ -55,7 +51,6 @@ const Join: React.FC = () => {
         setError("Please enter your email.");
         return false;
       }
-
       const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailPattern.test(email)) {
         setError("Please enter a valid email address.");
@@ -68,7 +63,6 @@ const Join: React.FC = () => {
         setError("Please enter your phone number.");
         return false;
       }
-
       if (phoneNumber.length < 6) {
         setError("Enter a valid phone number.");
         return false;
@@ -84,6 +78,67 @@ const Join: React.FC = () => {
     return true;
   };
 
+  // ==========================================================
+  // SEND OTP (STEP 1 SUBMIT)
+  // ==========================================================
+  const sendOtp = async () => {
+    try {
+      const response = await fetch(`${API_BASE}/api/sign`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: fullName,
+          email: email,
+          password: password
+        })
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log("OTP sent:", data);
+        setStep(2); // Move to Terms page
+      } else {
+        setError(data.detail || "Failed to send OTP");
+      }
+    } catch (error) {
+      console.error(error);
+      setError("Server error while sending OTP.");
+    }
+  };
+
+  // ==========================================================
+  // VERIFY OTP (STEP 3 SUBMIT)
+  // ==========================================================
+  const verifyOtp = async () => {
+    if (!verificationCode.trim()) {
+      setError("Enter the OTP sent to your email.");
+      return;
+    }
+
+    try {
+      const response = await fetch(`${API_BASE}/api/sign/otp`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          otp: verificationCode
+        })
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert("OTP Verified Successfully!");
+        setStep(4); // next step (you can decide)
+      } else {
+        setError(data.detail || "Invalid OTP");
+      }
+    } catch (error) {
+      console.error(error);
+      setError("Server error verifying OTP.");
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -91,7 +146,7 @@ const Join: React.FC = () => {
       <div className="join-container">
         <h2 className="join-title">Create Account</h2>
 
-        {/* ===== STEP INDICATOR ===== */}
+        {/* Step Indicator */}
         <div className="step-indicator">
           <div className={step >= 1 ? "circle active" : "circle"}>1</div>
           <div className="line"></div>
@@ -150,8 +205,6 @@ const Join: React.FC = () => {
             {/* MOBILE MODE */}
             {activeTab === "mobile" && (
               <div className="mobile-outer-box">
-
-                {/* Country dropdown trigger */}
                 <div
                   className="country-box"
                   onClick={() => setShowDropdown(!showDropdown)}
@@ -160,7 +213,6 @@ const Join: React.FC = () => {
                   <span className="arrow">▼</span>
                 </div>
 
-                {/* Dropdown list */}
                 {showDropdown && (
                   <div className="country-dropdown-list">
                     {countryList.map((c) => (
@@ -172,13 +224,12 @@ const Join: React.FC = () => {
                           setShowDropdown(false);
                         }}
                       >
-                        {c.name} 
+                        {c.name}
                       </div>
                     ))}
                   </div>
                 )}
 
-                {/* Number box */}
                 <input
                   type="text"
                   className="phone-input-join"
@@ -198,124 +249,33 @@ const Join: React.FC = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
 
-            <p className="password-rules">
-              Passwords must consist of at least 6 characters.<br />
-              Passwords must consist 2 of Alphabet, Number digit, Special character.
-            </p>
-
             {/* Error */}
             {error && <p className="error-text">{error}</p>}
 
-            {/* Next Button */}
+            {/* NEXT */}
             <button
               className="next-btn"
               onClick={() => {
-                if (validateStep1()) {
-                  setStep(2);
-                }
+                if (validateStep1()) sendOtp();
               }}
             >
               Next
             </button>
-
-            <div className="or">or</div>
-
-            <button className="google-btn">
-  <img
-    src={googleLogo}
-    alt="google"
-    className="google-icon"
-  />
-  Sign in with Google
-</button>
           </div>
         )}
 
-        {/* ==================== STEP 2 ==================== */}
+        {/* ==================== STEP 2 (TERMS) ==================== */}
         {step === 2 && (
           <div className="step-box">
-
             <div className="scroll-card">
-              <center><h3>HouseSigma Terms of Use</h3></center>
-            <p>
-              By using this website, you are agreeing to comply and be bound by the following terms of service and use.
-              Please review the following terms in their entirety and ensure their comprehension before using and
-              viewing this website.
-              <br /><br />
-
-              Acknowledge and understand that the Terms of Use do not create an agency relationship and do not impose
-              a financial obligation on the Registrant or create any representation agreement between the Registrant
-              and the Participant.
-              <br /><br />
-
-              Acknowledges that you are entering into a lawful broker-consumer relationship with the HouseSigma Inc.
-              Brokerage.
-              <br /><br />
-
-              Acknowledges that after the Terms of Use agreement is opened for viewing, a “mouse click” is sufficient
-              to acknowledge agreement to those terms.
-              <br /><br />
-
-              Understand that HouseSigma assumes no responsibility for the accuracy of any information shown on the
-              HouseSigma website and mobile app.
-              <br /><br />
-
-              Understand that all data obtained from the VOW (Virtual Office Website) is intended only for your
-              personal, non-commercial use.
-              <br /><br />
-
-              Do have a bona fide interest in the purchase, sale, or lease of real estate of the type being offered
-              through the VOW.
-              <br /><br />
-
-              Agree not to copy, redistribute, retransmit, or otherwise use any of the data or Listing Information
-              provided, except in connection with the Consumer’s consideration of the purchase, sale, or lease of an
-              individual property.
-              <br /><br />
-
-              Acknowledge the Board/Association ownership of and the validity of the copyright in the MLS® database.
-              <br /><br />
-
-              If at any time, an agreement is entered between HouseSigma Inc. and Consumer imposing a financial
-              obligation on the Consumer or creating representation of the Consumer by HouseSigma Inc., it must be
-              established separately from the Terms of Use and may not be accepted solely by mouse click.
-              <br /><br />
-
-              <strong>Copyright</strong><br />
-              The content on this website is protected by copyright laws and is intended solely for private,
-              non-commercial use. Any reproduction, distribution, or use beyond personal purposes is prohibited.
-              </p>
-            </div>
-
-            <div className="scroll-card">
-              <center><h3>Canadian Real Estate Association Terms of Use</h3></center>
-              <p>
-                You are agreeing to comply and be bound by the following terms of service and use.
-                <br /><br />
-
-                The information provided on this site is based in whole or in part on information provided by members of
-                The Canadian Real Estate Association, who are responsible for its accuracy. CREA assumes no responsibility
-                for its accuracy.
-                <br /><br />
-
-                CREA owns the REALTOR® and MLS® trademarks. These marks identify real estate professionals who are
-                members of CREA and who must follow CREA's rules, By-Laws, and REALTOR® Code.
-                <br /><br />
-
-                The information may only be used by consumers with a bona fide interest in real estate transactions and
-                cannot be used for commercial purposes.
-                <br /><br />
-
-                RAHB and OREB make no representations regarding the accuracy or suitability of the listing information.
-              </p>
-            
+              <h3>Terms of Use</h3>
+              <p>... your terms content ...</p>
             </div>
 
             <div className="step2-actions">
               <button className="reject-btn" onClick={() => setStep(1)}>
                 Reject
               </button>
-
               <button className="agree-btn" onClick={() => setStep(3)}>
                 Agree
               </button>
@@ -323,16 +283,14 @@ const Join: React.FC = () => {
           </div>
         )}
 
-        {/* ==================== STEP 3 ==================== */}
+        {/* ==================== STEP 3 (OTP) ==================== */}
         {step === 3 && (
           <div className="step-box-small">
+
             <p className="verification-text">
-              We sent you a code to verify your account<br />
-              <span className="verification-email">
-                {activeTab === "email"
-                  ? email
-                  : selectedCountry.code + phoneNumber}
-              </span>
+              Enter the verification code sent to:
+              <br />
+              <span className="verification-email">{email}</span>
             </p>
 
             <input
@@ -343,59 +301,11 @@ const Join: React.FC = () => {
               onChange={(e) => setVerificationCode(e.target.value)}
             />
 
-            <button className="next-btn">Confirm</button>
+            {error && <p className="error-text">{error}</p>}
 
-            <label className="checkbox-label">
-              <input
-                type="checkbox"
-                checked={isAgent}
-                onChange={() => setIsAgent(!isAgent)}
-              />
-              I am a licensed real estate agent.
-            </label>
-
-            {isAgent && (
-              <div className="agent-section">
-                <label>Province</label>
-                <select
-                  className="join-input"
-                  value={province}
-                  onChange={(e) => setProvince(e.target.value)}
-                >
-                  <option value="">Select</option>
-                  <option value="AB">AB – Alberta</option>
-                  <option value="QC">QC – Quebec</option>
-                  <option value="SK">SK – Saskatchewan</option>
-                  <option value="NS">NS – Nova Scotia</option>
-                  <option value="MB">MB – Manitoba</option>
-                  <option value="Other">Other</option>
-                </select>
-
-                <label>Board name</label>
-                <input
-                  type="text"
-                  className="join-input"
-                  placeholder="Enter board name"
-                  value={board}
-                  onChange={(e) => setBoard(e.target.value)}
-                />
-
-                <label>Brokerage name</label>
-                <input
-                  type="text"
-                  className="join-input"
-                  placeholder="Enter brokerage name"
-                  value={broker}
-                  onChange={(e) => setBroker(e.target.value)}
-                />
-              </div>
-            )}
-
-            <input
-              type="text"
-              className="join-input referral"
-              placeholder="Referral Code (Optional)"
-            />
+            <button className="next-btn" onClick={verifyOtp}>
+              Confirm
+            </button>
           </div>
         )}
       </div>
