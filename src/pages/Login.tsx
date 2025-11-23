@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./Login.css";
 import googleLogo from "@/assets/google.png";
 
 interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onForgotPassword: () => void;   
+  onForgotPassword: () => void;
+  onSuccess: () => void;   
 }
 
 const countryList = [
@@ -21,10 +22,9 @@ const countryList = [
 const LoginModal: React.FC<LoginModalProps> = ({ 
   isOpen, 
   onClose, 
-  onForgotPassword 
+  onForgotPassword,
+  onSuccess
 }) => {
-  const navigate = useNavigate();
-
   const [activeTab, setActiveTab] = useState<"email" | "mobile">("email");
   const [passwordVisible, setPasswordVisible] = useState(false);
 
@@ -63,8 +63,9 @@ const LoginModal: React.FC<LoginModalProps> = ({
       }
 
       alert("Login successful!");
-      onClose();
-      navigate("/");
+
+      onClose();      // close login modal
+      onSuccess();    // notify parent that login succeeded
 
     } catch (error) {
       alert("Server error while logging in.");
