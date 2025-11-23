@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "./Join.css";
-import { useNavigate } from "react-router-dom";     // ⬅️ Added
+import { useNavigate } from "react-router-dom"; 
 import googleLogo from "@/assets/google.png";
 
 const API_BASE = "http://127.0.0.1:8000"; // FastAPI backend
@@ -58,11 +58,11 @@ const Join: React.FC = () => {
 
     if (activeTab === "mobile") {
       if (!phoneNumber.trim()) {
-        setError("Please enter your phone number.");
+        setError("Please enter your Mobile number.");
         return false;
       }
       if (phoneNumber.length < 6) {
-        setError("Enter a valid phone number.");
+        setError("Enter a valid Mobile number.");
         return false;
       }
     }
@@ -179,7 +179,7 @@ const Join: React.FC = () => {
                   setError("");
                 }}
               >
-                Mobile Phone
+                Mobile Number
               </button>
             </div>
 

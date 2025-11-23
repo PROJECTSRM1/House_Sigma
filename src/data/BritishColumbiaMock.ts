@@ -167,7 +167,7 @@ export const featuredListings: Property[] = [
     parking: 1,
     status: "For Sale",
     badge: "Featured",
-    listed: "2025-09-05",
+    listed: "09-05-2025",
     agent: "Jay S Sandhu, HouseSigma Inc"
   }
 ];
@@ -239,7 +239,7 @@ export const soldBelowBought: Property[] = [
     status: "Sold",
     soldFor: "$317,000",
     discount: "30%",
-    soldDate: "2025-09-26",
+    soldDate: "09-26-2025",
     agent: "A2238054, RE/MAX House of Real Estate",
     loginRequired: true
   },
@@ -255,7 +255,7 @@ export const soldBelowBought: Property[] = [
     status: "Sold",
     soldFor: "$90,100",
     discount: "35%",
-    soldDate: "2025-10-15",
+    soldDate: "10-15-2025",
     agent: "Edmonton Realtor",
     loginRequired: true
   },
