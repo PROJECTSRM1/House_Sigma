@@ -234,7 +234,7 @@ const Join: React.FC = () => {
                 <input
                   type="text"
                   className="phone-input-join"
-                  placeholder="Phone number"
+                  placeholder="Mobile number"
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
                 />
