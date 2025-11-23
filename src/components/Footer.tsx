@@ -4,9 +4,6 @@ import appStoreImg from "../assets/apple-appstore.png";
 import googlePlayImg from "../assets/google-play.png";
 import logo from "../assets/logo.png";
 
-
-
-
 const Footer = () => {
   return (
     <footer className={styles.footer}>
@@ -95,7 +92,7 @@ const Footer = () => {
 
 
         <div className={styles.copyright}>
-          © COPYRIGHT 2025 BY HOUSESIGMA INC. BROKERAGE ALL RIGHTS RESERVED
+          © COPYRIGHT 2025 BY RM1 CODERS HUB INC. BROKERAGE ALL RIGHTS RESERVED
         </div>
       </div>
     </footer>

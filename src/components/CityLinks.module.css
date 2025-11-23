@@ -1,6 +1,6 @@
 .section {
   background-color: hsl(var(--card));
-  padding: 0rem 0;
+  padding: 0;
   margin: 0;
 }
 
@@ -21,12 +21,14 @@
   margin-bottom: 1.5rem;
 }
 
+/* Grid */
 .grid {
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
+/* Columns */
 .column {
   background: none !important;
   padding: 0 !important;
@@ -35,10 +37,11 @@
 
   display: flex;
   flex-direction: column;
-  align-items: center;     /* LEFT ALIGN title + cities */
-  text-align: left;            /* LEFT ALIGN text */
+  align-items: flex-start;    /* ✅ FIX: LEFT align content */
+  justify-content: flex-start;
+  text-align: left;
+  width: 100%;                /* ✅ Ensures full width */
 }
-
 
 /* Column Title */
 .columnTitle {
@@ -46,17 +49,20 @@
   font-weight: 600;
   color: hsl(var(--foreground));
   margin-bottom: 1.25rem;
-  text-align: center;
+  text-align: left;
+  width: 100%;                 /* ✅ Match width with links */
 }
 
-/* City list stays left-aligned */
+/* City List */
 .cityList {
   display: flex;
   flex-direction: column;
   gap: 0.1rem;
-  align-items: flex-start;   /* Left align city links */
+  align-items: flex-start;
+  width: 100%;                 /* ✅ Keep left alignment consistent */
 }
 
+/* Links */
 .cityLink {
   font-size: 16px;
   font-weight: 400;
@@ -64,6 +70,8 @@
   color: #666;
   text-decoration: none;
   transition: opacity 0.2s ease;
+  text-align: left;
+  width: 100%;                 /* ✅ Prevent block centering */
 }
 
 .cityLink:hover {
@@ -72,6 +80,7 @@
   color: #333333;
 }
 
+/* Responsive */
 @media (min-width: 768px) {
   .grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));

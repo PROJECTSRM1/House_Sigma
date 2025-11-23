@@ -91,7 +91,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
             className={activeTab === "mobile" ? "tab active" : "tab"}
             onClick={() => setActiveTab("mobile")}
           >
-            Mobile Phone
+            Mobile Number
           </button>
         </div>
 
@@ -138,7 +138,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
             <input
               className="phone-input"
               type="text"
-              placeholder="Phone number"
+              placeholder="Mobile number"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
             />

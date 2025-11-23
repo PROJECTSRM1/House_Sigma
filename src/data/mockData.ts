@@ -31,7 +31,7 @@ export const exclusivePrecon: PropertyListing[] = [
     badgeColor: 'green',
     status: 'For Sale',
     price: 933500,
-    date: '2024-01-30',
+    date: '01-30-2024',
     address: '1 Promenade Circle, Markham - Thornhill',
     type: 'Condo Apt',
     beds: '2+1',
@@ -45,7 +45,7 @@ export const exclusivePrecon: PropertyListing[] = [
     badgeColor: 'green',
     status: 'For Sale',
     price: 1118000,
-    date: '2025-09-18',
+    date: '09-18-2025',
     address: '292 Dundas St W, Toronto, Toronto - Junction',
     type: 'Condo Apt',
     beds: 3,
@@ -59,7 +59,7 @@ export const exclusivePrecon: PropertyListing[] = [
     badgeColor: 'green',
     status: 'For Sale',
     price: 499999,
-    date: '2023-10-31',
+    date: '10-31-2023',
     address: '286 Main St, Toronto - East End-Danforth',
     type: 'Condo Apt',
     beds: 1,
@@ -210,7 +210,7 @@ export const bestForSchools: PropertyListing[] = [
 export const featuredListings: PropertyListing[] = [
   {
     id: '13',
-    image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&q=80',
+    image: 'https://cache05.housesigma.com/file/pix-treb/N12568830/0af27_1_1200.webp?6c65a1f7',
     badge: 'Featured',
     badgeColor: 'orange',
     status: 'For Sale',
@@ -241,7 +241,7 @@ export const featuredListings: PropertyListing[] = [
   },
   {
     id: '15',
-    image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80',
+    image: 'https://cache16.housesigma.com/file/pix-treb/N12549086/13458_1_1200.webp?ad7ec36d',
     badge: 'Featured',
     badgeColor: 'orange',
     status: 'For Sale',
@@ -259,7 +259,7 @@ export const featuredListings: PropertyListing[] = [
 export const highGrowth: PropertyListing[] = [
   {
     id: '16',
-    image: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&q=80',
+    image: 'https://cache09.housesigma.com/file/pix-treb/N12551336/f43c4_1_1200.webp?fae22b16',
     badge: 'Growth Score: 9/10',
     badgeColor: 'blue',
     status: 'For Sale',
@@ -274,7 +274,7 @@ export const highGrowth: PropertyListing[] = [
   },
   {
     id: '17',
-    image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80',
+    image: 'https://cache-e12.housesigma.com/file/pix-treb/N12567266/0c5c3_1_1200.webp?0fd8a527',
     badge: 'Growth Score: 9/10',
     badgeColor: 'blue',
     status: 'For Sale',
@@ -289,7 +289,7 @@ export const highGrowth: PropertyListing[] = [
   },
   {
     id: '18',
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80',
+    image: 'https://cache-e18.housesigma.com/file/pix-itso/161462977/0a798_1_1200.webp?57942e88',
     badge: 'Growth Score: 9/10',
     badgeColor: 'blue',
     status: 'For Sale',
@@ -307,7 +307,7 @@ export const highGrowth: PropertyListing[] = [
 export const soldBelow: PropertyListing[] = [
   {
     id: '19',
-    image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&q=80',
+    image: 'https://cache09.housesigma.com/file/pix-treb/W12353547/06c55_1_1200.webp?b2c256a7',
     badgeColor: 'blue',
     status: 'Sold',
     price: 1898000,
@@ -322,7 +322,7 @@ export const soldBelow: PropertyListing[] = [
   },
   {
     id: '20',
-    image: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80',
+    image: 'https://cache-e12.housesigma.com/file/pix-treb/C12430158/e5895_1_1200.webp?8e9f53ef',
     badgeColor: 'blue',
     status: 'Sold',
     price: 728000,
@@ -337,7 +337,7 @@ export const soldBelow: PropertyListing[] = [
   },
   {
     id: '21',
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80',
+    image: 'https://cache-e15.housesigma.com/file/pix-treb/X12309876/6519d_1_1200.webp?742683e5',
     badgeColor: 'blue',
     status: 'Sold',
     price: 1490000,
