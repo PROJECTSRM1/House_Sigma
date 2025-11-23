@@ -66,11 +66,10 @@ const justSoldListings = (justSold ?? []).map(toListing);
 
 const BritishColumbia: React.FC = () => {
   return (
-    <>
+    <div className="min-h-screen">
      <Hero backgroundImage={britishHero} />
      <Navbar />
        <FilterBar />
-      <div className="min-h-screen container">
        
         
       
@@ -87,11 +86,10 @@ const BritishColumbia: React.FC = () => {
         {/* Stats chart */}
         <StatsChart />
         <CityLinks />
-      </div>
 
       {/* Footer placed outside the centered container so it can be wider */}
       <Footer />
-    </>
+    </div>
   );
 };
 

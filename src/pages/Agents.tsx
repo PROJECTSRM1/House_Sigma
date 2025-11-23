@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import agentsData from "../data/agents";
@@ -6,7 +6,6 @@ import styles from "./Agent.module.css";
 
 import FloatingChatButton from "../components/floatingWindowChatBot";
 import ChatBot from "../components/chatbot";
-
 
 /* Types */
 export type Agent = {
@@ -21,16 +20,109 @@ export type Agent = {
 
 const PROVINCES = ["Ontario", "British Columbia", "Alberta"] as const;
 
-/* ---------------------- CustomSelect component ---------------------- */
-/* Lightweight accessible custom dropdown that shows radio items in the panel.
-   Props:
-     - options: string[]
-     - value: string
-     - onChange: (value: string) => void
-     - placeholder: string
-     - width?: number (px) - width of the rendered button
-     - menuWidth?: number (px) - width of the dropdown menu (white box)
-*/
+/* Simple inline SVG placeholder (blank box) */
+const SVG_PLACEHOLDER =
+  "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><rect width='100%' height='100%' fill='%23f6f7f8'/></svg>";
+
+/**
+ * Global cache of successfully loaded image URLs.
+ * This avoids re-downloading the same avatar if components re-mount.
+ */
+const loadedUrlCache = new Set<string>();
+
+/* -------------------- AgentCard: show placeholder until image is loaded -------------------- */
+function AgentCard({ agent }: { agent: Agent }): JSX.Element {
+  const [loaded, setLoaded] = useState<boolean>(() => {
+    // if URL already known-loaded, start as loaded
+    return !!(agent.avatar && loadedUrlCache.has(agent.avatar));
+  });
+  const [errored, setErrored] = useState(false);
+
+  useEffect(() => {
+    // If there's no avatar, nothing to load.
+    const url = agent.avatar;
+    if (!url) return;
+
+    // If it's already cached as loaded, we are done.
+    if (loadedUrlCache.has(url)) {
+      setLoaded(true);
+      return;
+    }
+
+    let isMounted = true;
+    const img = new Image();
+
+    const onLoad = () => {
+      if (!isMounted) return;
+      loadedUrlCache.add(url);
+      setLoaded(true);
+    };
+    const onError = () => {
+      if (!isMounted) return;
+      setErrored(true);
+    };
+
+    img.onload = onLoad;
+    img.onerror = onError;
+    // start immediate parallel download
+    img.src = url;
+
+    return () => {
+      isMounted = false;
+      // remove listeners to be safe
+      img.onload = null;
+      img.onerror = null;
+    };
+  }, [agent.avatar]);
+
+  // Defensive DOM-level error handler (should rarely trigger because we preload)
+  const handleImgError = useCallback(
+    (e: React.SyntheticEvent<HTMLImageElement>) => {
+      if (errored) return;
+      setErrored(true);
+      const imgEl = e.currentTarget;
+      imgEl.onerror = null;
+      imgEl.src = SVG_PLACEHOLDER;
+    },
+    [errored]
+  );
+
+  // show placeholder while not loaded or errored; else show agent.avatar
+  const displaySrc = loaded && agent.avatar && !errored ? agent.avatar : SVG_PLACEHOLDER;
+
+  return (
+    <article className={styles.agentCard}>
+      <div className={styles.avatarWrap}>
+        <img
+          src={displaySrc}
+          alt={agent.name}
+          className={styles.avatar}
+          // since we preload via Image(), using "eager" or "auto" doesn't matter much, but eager hints browser
+          loading="eager"
+          decoding="async"
+          width={160}
+          height={160}
+          onError={handleImgError}
+          style={{
+            objectFit: "cover",
+            transition: "opacity 200ms ease, transform 200ms ease",
+            opacity: displaySrc === SVG_PLACEHOLDER ? 0.7 : 1,
+            transform: "none",
+          }}
+        />
+      </div>
+
+      <div className={styles.cardBody}>
+        <h3 className={styles.agentName}>{agent.name}</h3>
+        <p className={styles.agentRole}>{agent.role}</p>
+      </div>
+    </article>
+  );
+}
+/* -------------------- end AgentCard -------------------- */
+
+/* -------------------- CustomSelect and Filters (unchanged logic from your app) -------------------- */
+
 function CustomSelect({
   options,
   value,
@@ -50,7 +142,6 @@ function CustomSelect({
   const rootRef = useRef<HTMLDivElement | null>(null);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
 
-  // close when clicking outside
   useEffect(() => {
     function onDoc(e: MouseEvent) {
       if (!rootRef.current) return;
@@ -61,7 +152,6 @@ function CustomSelect({
     return () => document.removeEventListener("mousedown", onDoc);
   }, []);
 
-  // keyboard interactions: Escape to close
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if (!open) return;
@@ -71,7 +161,6 @@ function CustomSelect({
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
-  // compute button classes
   const buttonClass =
     styles.customSelectButton +
     " " +
@@ -103,7 +192,7 @@ function CustomSelect({
         <div
           className={styles.customSelectMenu}
           role="listbox"
-          style={{ width: menuWidth ? `${menuWidth}px` : "100%" }} // <-- only menuWidth affects dropdown panel
+          style={{ width: menuWidth ? `${menuWidth}px` : "100%" }}
         >
           <ul className={styles.customOptionsList}>
             <li key="__all__" className={styles.customOptionRow}>
@@ -118,7 +207,6 @@ function CustomSelect({
                     buttonRef.current?.focus();
                   }}
                 />
-                {/* custom radio visual */}
                 <span className={styles.customRadio} />
                 <span className={styles.customOptionLabel}>All areas</span>
               </label>
@@ -137,7 +225,6 @@ function CustomSelect({
                       buttonRef.current?.focus();
                     }}
                   />
-                  {/* custom radio visual */}
                   <span className={styles.customRadio} />
                   <span className={styles.customOptionLabel}>{opt}</span>
                 </label>
@@ -149,95 +236,7 @@ function CustomSelect({
     </div>
   );
 }
-/* -------------------- end CustomSelect -------------------- */
 
-/* -------------------- AgentCard (lazy load + fade) -------------------- */
-function AgentCard({ agent }: { agent: Agent }): JSX.Element {
-  const [isVisible, setIsVisible] = useState(false); // when near viewport
-  const [loaded, setLoaded] = useState(false); // when img loaded
-  const wrapRef = useRef<HTMLDivElement | null>(null);
-
-  // try to produce a smaller avatar URL for common providers (pravatar)
-  function smallAvatar(url?: string | undefined) {
-    if (!url) return "https://via.placeholder.com/160?text=Avatar";
-    try {
-      const u = new URL(url);
-      const host = u.hostname.toLowerCase();
-      if (host.includes("pravatar.cc") || host.includes("i.pravatar.cc")) {
-        const newPath = u.pathname.replace(/\/\d{2,4}(?=\/|$)/, "/160");
-        if (newPath !== u.pathname) {
-          u.pathname = newPath;
-          return u.toString();
-        }
-        u.searchParams.set("size", "160");
-        return u.toString();
-      }
-    } catch {
-      // not a full URL, fall back
-    }
-    return url;
-  }
-
-  useEffect(() => {
-    const node = wrapRef.current;
-    if (!node) return;
-
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-            io.disconnect();
-          }
-        });
-      },
-      {
-        root: null,
-        rootMargin: "600px 0px 600px 0px", // preload well before coming into view
-        threshold: 0.01,
-      }
-    );
-
-    io.observe(node);
-
-    return () => {
-      io.disconnect();
-    };
-  }, []);
-
-  const src = isVisible ? smallAvatar(agent.avatar) : undefined;
-  const srcSet = isVisible
-    ? `${smallAvatar(agent.avatar)} 160w, ${agent.avatar ?? ""} 320w`
-    : undefined;
-
-  return (
-    <article className={styles.agentCard}>
-      <div className={styles.avatarWrap} ref={wrapRef}>
-        <img
-          src={src}
-          srcSet={srcSet}
-          sizes="(max-width: 480px) 120px, 160px"
-          alt={agent.name}
-          className={`${styles.avatar} ${loaded ? styles.avatarLoaded : ""}`}
-          loading="lazy"
-          decoding="async"
-          onLoad={() => setLoaded(true)}
-          onError={() => {
-            setLoaded(true);
-          }}
-        />
-      </div>
-
-      <div className={styles.cardBody}>
-        <h3 className={styles.agentName}>{agent.name}</h3>
-        <p className={styles.agentRole}>{agent.role}</p>
-      </div>
-    </article>
-  );
-}
-/* -------------------- end AgentCard -------------------- */
-
-/* Filters Component — uses CSS class for active pill and uses CustomSelect */
 function Filters(props: {
   provinces: readonly string[];
   activeProvince: string;
@@ -252,7 +251,7 @@ function Filters(props: {
   const {
     provinces,
     activeProvince,
-    setActiveProvince,   /* this is the setActiveProvince */
+    setActiveProvince,
     areas,
     selectedArea,
     setSelectedArea,
@@ -263,7 +262,6 @@ function Filters(props: {
 
   return (
     <section className={styles.filters}>
-      {/* Province Pills */}
       <div className={styles.filterGroup}>
         {provinces.map((p) => {
           const isActive = p === activeProvince;
@@ -287,7 +285,6 @@ function Filters(props: {
         })}
       </div>
 
-      {/* Custom Select Filters (replaces native selects) */}
       <div className={styles.filterRow}>
         <div className={styles.selectWrap}>
           <CustomSelect
@@ -295,8 +292,8 @@ function Filters(props: {
             value={selectedArea}
             onChange={setSelectedArea}
             placeholder="All areas"
-            width={230} /* button width; menu width also follows */
-            menuWidth={330} /* <-- only the dropdown menu will be wider */
+            width={230}
+            menuWidth={330}
           />
         </div>
 
@@ -314,20 +311,19 @@ function Filters(props: {
   );
 }
 
+/* -------------------- AgentsPage (main) -------------------- */
+
 export default function AgentsPage(): JSX.Element {
   const [activeProvince, setActiveProvince] = useState<string>(PROVINCES[0]);
   const [selectedArea, setSelectedArea] = useState<string>("");
   const [selectedLanguage, setSelectedLanguage] = useState<string>("");
-  const [visibleCount, setVisibleCount] = useState<number>(12);
-  const loadingRef = useRef(false);
-  const scrollDebounceRef = useRef<number | null>(null);
+  const [openChat, setOpenChat] = useState(false);
 
+  // derive agents matching province
   const provinceAgents = useMemo(
     () => (agentsData as Agent[]).filter((a) => a.province === activeProvince),
     [activeProvince]
   );
-
-  const [openChat, setOpenChat] = useState(false);
 
   const areas = useMemo(
     () => Array.from(new Set(provinceAgents.map((a) => a.area))).sort(),
@@ -340,6 +336,7 @@ export default function AgentsPage(): JSX.Element {
     [provinceAgents]
   );
 
+  // Filtered result (no visibleCount slicing — show all at once)
   const filtered = useMemo(() => {
     return provinceAgents.filter((a) => {
       const matchArea = selectedArea ? a.area === selectedArea : true;
@@ -348,51 +345,39 @@ export default function AgentsPage(): JSX.Element {
     });
   }, [provinceAgents, selectedArea, selectedLanguage]);
 
-  const visibleAgents = filtered.slice(0, visibleCount);
-
+  /* ------------------ Preload all avatars immediately (start parallel downloads) ------------------ */
   useEffect(() => {
-    setVisibleCount(12);
-  }, [activeProvince, selectedArea, selectedLanguage]);
+    // preload all avatar URLs for the current filtered list
+    const urls = Array.from(new Set(filtered.map((a) => a.avatar).filter(Boolean) as string[]));
+    const imgs: HTMLImageElement[] = [];
 
-  const loadMore = (amount = 8) => {
-    if (loadingRef.current) return;
-    if (visibleCount >= filtered.length) return;
+    urls.forEach((u) => {
+      // if already cached by our global set, skip creating a new Image; the AgentCard will reflect loaded state
+      if (u && !loadedUrlCache.has(u)) {
+        const img = new Image();
+        img.src = u;
+        // record onload to populate global cache (helps if AgentCard mounts later)
+        img.onload = () => loadedUrlCache.add(u);
+        img.onerror = () => {
+          /* ignore errors here; AgentCard will show placeholder */
+        };
+        imgs.push(img);
+      }
+    });
 
-    loadingRef.current = true;
-
-    setTimeout(() => {
-      setVisibleCount((c) => Math.min(filtered.length, c + amount));
-      loadingRef.current = false;
-    }, 200);
-  };
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    const THRESHOLD_PX = 1000;
-    function handleScroll() {
-      if (scrollDebounceRef.current) window.clearTimeout(scrollDebounceRef.current);
-      scrollDebounceRef.current = window.setTimeout(() => {
-        const scrolledFromTop = window.scrollY || window.pageYOffset;
-        const viewportHeight = window.innerHeight;
-        const fullHeight = document.documentElement.scrollHeight;
-        const distanceFromBottom = fullHeight - (scrolledFromTop + viewportHeight);
-        if (distanceFromBottom <= THRESHOLD_PX) loadMore(8);
-      }, 120);
-    }
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
+    // cleanup: let browser continue but remove onload listeners to avoid memory leaks
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      if (scrollDebounceRef.current) window.clearTimeout(scrollDebounceRef.current);
+      imgs.forEach((im) => {
+        im.onload = null;
+        im.onerror = null;
+      });
     };
-  }, [filtered.length, visibleCount]);
+  }, [filtered]);
 
   return (
     <>
       <Navbar />
       <main className={styles.agentsPage}>
-       
-
         <Filters
           provinces={PROVINCES}
           activeProvince={activeProvince}
@@ -410,9 +395,10 @@ export default function AgentsPage(): JSX.Element {
         />
 
         <section className={styles.agentsGrid}>
-          {visibleAgents.map((agent) => (
+          {filtered.map((agent) => (
             <AgentCard key={agent.id} agent={agent} />
           ))}
+
           {filtered.length === 0 && <p className={styles.noResults}>No agents found.</p>}
         </section>
       </main>
