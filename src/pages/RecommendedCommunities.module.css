@@ -1,26 +1,27 @@
-/* --------------------------------------- */
-/*   PRICE DROPDOWNS (Flipkart Style)      */
-/* --------------------------------------- */
+/* ---------------------------------------
+   Inputs & labels
+--------------------------------------- */
+.priceInputRow {
+  margin-top: 16px;
+  margin-bottom: 18px;
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
 
-.priceSelect {
-  width: 150px;
+.priceInput {
+  width: 170px;
   padding: 8px 10px;
   font-size: 15px;
   border: 1px solid #cbd5e1;
   border-radius: 6px;
   background: #ffffff;
-  cursor: pointer;
-  outline: none;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
-.priceSelect:hover {
-  border-color: #1BA8C5;
-}
-
-.priceSelect:focus {
-  border-color: #1BA8C5;
-  box-shadow: 0 0 0 2px rgba(27, 168, 197, 0.2);
+.priceInput:focus {
+  border-color:  #1BA8C5;
+  box-shadow: 0 0 0 3px rgba(27, 168, 197, 0.08);
 }
 
 .inputLabel {
@@ -29,47 +30,80 @@
   margin-bottom: 4px;
 }
 
-/* --------------------------------------- */
-/*   PRICE RANGE EXTRA SPACING (NEW)       */
-/* --------------------------------------- */
-
-.priceDropdownRow {
-  margin-top: 16px;
-  margin-bottom: 22px;
-  display: flex;
-  gap: 18px;
-  align-items: center;
-}
-
 .priceSelectedText {
-  margin-bottom: 20px;
+  margin-bottom: 14px;
+  font-weight: 500;
 }
 
-/* --------------------------------------- */
-/*               SLIDER                    */
-/* --------------------------------------- */
+/* ---------------------------------------
+   Slider wrapper & track
+--------------------------------------- */
+
+.relative.h-10 {
+  height: 40px;
+}
+
+/* Slider Track */
+.sliderTrack {
+  position: absolute;
+  top: 50%;
+  left: 9px;   /* half of thumb width */
+  right: 9px;
+  height: 6px;
+  background: #eef3f6;
+  border-radius: 6px;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+/* Blue Filled Bar */
+.sliderFilled {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 6px;
+  background:  #1BA8C5;
+  border-radius: 6px;
+  z-index: 2;
+  pointer-events: none;
+
+  /* FULL CORRECT FORMULA */
+  left: calc(var(--left) * 1% + 9px);
+  width: calc(var(--width) * 1%);
+}
+
+
+/* ---------------------------------------
+   Range inputs + thumbs
+--------------------------------------- */
 
 .priceSlider {
   -webkit-appearance: none;
   appearance: none;
   background: transparent;
-  pointer-events: none;
-  height: 20px;
-  position: absolute;
+
   width: 100%;
-  top: -8px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  z-index: 5;
 }
 
+/* Thumb */
 .priceSlider::-webkit-slider-thumb {
   -webkit-appearance: none;
   height: 18px;
   width: 18px;
   background: #ffffff;
-  border: 2px solid #1BA8C5;
+  border: 2px solid  #1BA8C5;
   border-radius: 50%;
   cursor: pointer;
   pointer-events: auto;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
 }
 
 .priceSlider::-moz-range-thumb {
@@ -80,51 +114,54 @@
   border-radius: 50%;
   cursor: pointer;
   pointer-events: auto;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
 }
 
-.sliderTrack {
-  position: absolute;
-  top: 50%;
+/* Keep min thumb above max if overlapping */
+.minSlider::-webkit-slider-thumb { z-index: 40 !important; }
+.maxSlider::-webkit-slider-thumb { z-index: 30 !important; }
+
+.minSlider::-moz-range-thumb { z-index: 40 !important; }
+.maxSlider::-moz-range-thumb { z-index: 30 !important; }
+
+/* ---------------------------------------
+   Bottom ticks
+--------------------------------------- */
+.tickContainer {
+  position: relative;
   width: 100%;
-  height: 4px;
-  background: #d9e3ea;
-  border-radius: 4px;
-  transform: translateY(-50%);
+  height: 20px;
+  margin-top: 8px;
+  pointer-events: none;
 }
 
-.sliderFilled {
+.tick {
   position: absolute;
-  height: 4px;
-  background: #1BA8C5;
-  top: 50%;
-  transform: translateY(-50%);
-  border-radius: 4px;
+  bottom: 0;
+  transform: translateX(-50%);
+  font-size: 12px;
+  color: #94a3b8;
+  white-space: nowrap;
 }
 
-/* --------------------------------------- */
-/*           STICKY BOTTOM BAR             */
-/* --------------------------------------- */
-
+/* ---------------------------------------
+   Sticky bottom buttons
+--------------------------------------- */
 .stickyBarWrapper {
   position: sticky;
   bottom: 0;
   background: white;
-  z-index: 50;
+  z-index: 40;
   padding: 0 14px;
 }
 
-/* --------------------------------------- */
-/*                BUTTONS                  */
-/* --------------------------------------- */
-
 .clearButton {
   padding: 10px 18px;
-  font-size: 16px;
+  font-size: 18px;
   border: 2px solid #1BA8C5;
   color: #1BA8C5;
   background: white;
   border-radius: 6px;
-  transition: 0.2s ease;
 }
 
 .clearButton:hover {
@@ -133,13 +170,12 @@
 
 .recommendButton {
   padding: 10px 18px;
-  font-size: 16px;
-  background: #1BA8C5;
+  font-size: 18px;
+  background:  #1BA8C5;
   color: white;
   border-radius: 6px;
-  transition: 0.2s ease;
 }
 
 .recommendButton:hover {
-  background: #1293ac;
+  background: #1BA8C5;
 }
