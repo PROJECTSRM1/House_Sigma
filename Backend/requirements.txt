@@ -7,7 +7,7 @@ python-dotenv
 typing-extensions
 
 passlib[bcrypt]
-bcrypt
+bcrypt==4.1.2
 
 python-multipart
 requests
@@ -17,6 +17,5 @@ google-auth-oauthlib
 
 aiosmtplib
 
-PyJWT
+PyJWT==2.10.1
 google-generativeai
-jwt
