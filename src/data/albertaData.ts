@@ -22,7 +22,10 @@ export interface Property {
   discount?: string;
 
   agent?: string;
-  loginRequired?: boolean;
+
+  /* Updated */
+  loginRequired?: boolean | "tap-to-view";
+  blurred?: boolean;
 }
 
 /* ======================================================
@@ -241,7 +244,10 @@ export const soldBelowBought: Property[] = [
     discount: "30%",
     soldDate: "2025-09-26",
     agent: "A2238054, RE/MAX House of Real Estate",
-    loginRequired: true
+
+    /* Updated */
+    loginRequired: "tap-to-view",
+    blurred: true
   },
   {
     id: 14,
@@ -257,7 +263,9 @@ export const soldBelowBought: Property[] = [
     discount: "35%",
     soldDate: "2025-10-15",
     agent: "Edmonton Realtor",
-    loginRequired: true
+
+    loginRequired: "tap-to-view",
+    blurred: true
   },
   {
     id: 15,
@@ -273,7 +281,9 @@ export const soldBelowBought: Property[] = [
     discount: "38%",
     soldDate: "7 days",
     agent: "Bonnyville Realtor",
-    loginRequired: true
+
+    loginRequired: "tap-to-view",
+    blurred: true
   }
 ];
 
@@ -294,7 +304,9 @@ export const highReturns: Property[] = [
     status: "For Sale",
     listed: "3 days ago",
     agent: "Investment Realty",
-    loginRequired: true
+
+    loginRequired: "tap-to-view",
+    blurred: true
   },
   {
     id: 17,
@@ -309,7 +321,9 @@ export const highReturns: Property[] = [
     status: "For Sale",
     listed: "1 week ago",
     agent: "High Returns Realty",
-    loginRequired: true
+
+    loginRequired: "tap-to-view",
+    blurred: true
   },
   {
     id: 18,
@@ -324,7 +338,9 @@ export const highReturns: Property[] = [
     status: "For Sale",
     listed: "5 days ago",
     agent: "Investment Pro Realty",
-    loginRequired: true
+
+    loginRequired: "tap-to-view",
+    blurred: true
   }
 ];
 
@@ -347,7 +363,9 @@ export const justSold: Property[] = [
     parking: 2,
     discount: "4%",
     agent: "A2272511, Royal LePage Benchmark",
-    loginRequired: true
+
+    loginRequired: "tap-to-view",
+    blurred: true
   },
   {
     id: 20,
@@ -364,7 +382,9 @@ export const justSold: Property[] = [
     parking: 1,
     discount: "3%",
     agent: "A2272467, MaxWell Polaris",
-    loginRequired: true
+
+    loginRequired: "tap-to-view",
+    blurred: true
   },
   {
     id: 21,
@@ -381,6 +401,8 @@ export const justSold: Property[] = [
     parking: 1,
     discount: "4%",
     agent: "A2272232, RE/MAX Real Estate",
-    loginRequired: true
+
+    loginRequired: "tap-to-view",
+    blurred: true
   }
 ];

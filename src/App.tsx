@@ -21,10 +21,8 @@ import Contact from "./pages/Contact";
 
 import ContactUs from "./pages/ContactUs";
 import BlogLM from "./pages/BlogLM";
-// Join page
-import Join from "./pages/Join";
+import Join from "./pages/Join";   // Signup page
 
-import Login from "./pages/Login";
 import FAQ from "./pages/FAQ/FAQ";
 import Looking from "./pages/FAQ/Looking";
 import ChangeData from "./pages/FAQ/ChangeData";
@@ -32,6 +30,7 @@ import Contact_FAQ from "./pages/FAQ/Contact-us";
 import Features from "./pages/FAQ/Features";
 import Others from "./pages/FAQ/Others";
 import CategoryPage from "./pages/FAQ/Categorys";
+import Login from "./pages/Login";
 
 import LearnMore from "./pages/LearnMore";
 
@@ -42,12 +41,10 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-
       <BrowserRouter>
         <Routes>
           {/* Home */}
           <Route path="/" element={<Index />} />
-          {/*Dashboard Navigation*/}
 
           {/* Provinces */}
           <Route path="/province/on" element={<Index />} />
@@ -55,7 +52,7 @@ const App = () => (
           <Route path="/province/ab" element={<Alberta />} />
           <Route path="/learn-more" element={<LearnMore />} />
           <Route path="/contact-us" element={<ContactUs />} />
-          <Route path="/blog-lm" element={<BlogLM/>}/>
+          <Route path="/blog-lm" element={<BlogLM />} />
 
           {/* Navbar navigation */}
           <Route path="/map-search" element={<MapSearch />} />
@@ -70,16 +67,16 @@ const App = () => (
 
           {/* Auth */}
           <Route path="/join" element={<Join />} />
-          <Route path="/faq" element={<FAQ/>}/>
+
+          {/* FAQ */}
+          <Route path="/faq" element={<FAQ />} />
           <Route path="/faq/:categoryId" element={<CategoryPage />} />
           <Route path="/faq/user-account/:articleSlug" element={<ArticlePage />} />
           <Route path="/faq/looking-for-properties/:articleSlug" element={<Looking />} />
-          <Route path="/faq/change-data/:articleSlug" element={<ChangeData/>} />
-          <Route path="/faq/contact-us/:articleSlug" element={<Contact_FAQ/>} />
-           <Route path="/faq/features/:articleSlug" element={<Features/>} />
-            <Route path="/faq/others/:articleSlug" element={<Others/>} />
-
-
+          <Route path="/faq/change-data/:articleSlug" element={<ChangeData />} />
+          <Route path="/faq/contact-us/:articleSlug" element={<Contact_FAQ />} />
+          <Route path="/faq/features/:articleSlug" element={<Features />} />
+          <Route path="/faq/others/:articleSlug" element={<Others />} />
 
           {/* 404 */}
           <Route path="*" element={<NotFound />} />

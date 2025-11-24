@@ -1,31 +1,50 @@
-
 import React, { useState } from "react";
 import styles from "./chatbot.module.css";
+
+const API_BASE = "http://127.0.0.1:8000";  // your FastAPI backend
 
 export default function ChatBotWindow({ onClose }: any) {
   const [msg, setMsg] = useState("");
   const [messages, setMessages] = useState([
     {
       from: "bot",
-      text: "Hi! 👋 How can I help you?"
+      text: "Hi! 👋 How can I help you?",
     },
   ]);
 
-  const sendMessage = () => {
+  const sendMessage = async () => {
     if (msg.trim() === "") return;
 
-    const newMsgs = [...messages, { from: "user", text: msg }];
-    setMessages(newMsgs);
+    // Add user message immediately
+    const updatedMessages = [...messages, { from: "user", text: msg }];
+    setMessages(updatedMessages);
 
-    // Simulated AI response
-    setTimeout(() => {
+    const userText = msg;
+    setMsg(""); // clear input
+
+    try {
+      // 🔥 REAL BACKEND CALL
+      const response = await fetch(`${API_BASE}/api/chatbot`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: userText }),
+      });
+
+      const data = await response.json();
+
+      // Add bot message
       setMessages([
-        ...newMsgs,
-        { from: "bot", text: "Hii How are You?" }
+        ...updatedMessages,
+        { from: "bot", text: data.response || "No response" },
       ]);
-    }, 600);
+    } catch (error) {
+      console.error("Chatbot error:", error);
 
-    setMsg("");
+      setMessages([
+        ...updatedMessages,
+        { from: "bot", text: "⚠️ Server error. Try again later." },
+      ]);
+    }
   };
 
   return (
@@ -39,11 +58,7 @@ export default function ChatBotWindow({ onClose }: any) {
         {messages.map((m, i) => (
           <div
             key={i}
-            className={
-              m.from === "user"
-                ? styles.userBubble
-                : styles.botBubble
-            }
+            className={m.from === "user" ? styles.userBubble : styles.botBubble}
           >
             {m.text}
           </div>
@@ -54,6 +69,7 @@ export default function ChatBotWindow({ onClose }: any) {
         <input
           value={msg}
           onChange={(e) => setMsg(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && sendMessage()}
           placeholder="Ask something..."
         />
         <button onClick={sendMessage}>Send</button>

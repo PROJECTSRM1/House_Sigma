@@ -4,13 +4,12 @@ html, body {
   box-sizing: border-box;
 }
 
-/* Ensure page content appears below fixed header */
+/* Push content below fixed navbar */
 .market-trends-page,
 .page-wrapper,
 .main-content {
   padding-top: 50px !important;
 }
-
 
 /* ================================================
    FIXED HEADER
@@ -30,6 +29,10 @@ html, body {
   overflow: visible;
 }
 
+.header.menuOpen {
+  height: auto;
+}
+
 .header::after {
   content: "";
   position: absolute;
@@ -42,9 +45,8 @@ html, body {
   z-index: -1;
 }
 
-
 /* ================================================
-   HEADER INNER CONTAINER
+   INNER CONTAINER
 ================================================ */
 .container {
   width: 100%;
@@ -65,7 +67,6 @@ html, body {
   height: 50px;
 }
 
-
 /* ================================================
    LEFT SECTION
 ================================================ */
@@ -75,6 +76,7 @@ html, body {
   gap: 0.5rem;
 }
 
+/* Logo */
 .logoBox {
   padding: 0.35rem;
   border-radius: 0.5rem;
@@ -88,6 +90,7 @@ html, body {
   object-fit: contain;
 }
 
+/* Province dropdown */
 .provinceDropdown {
   display: flex;
   align-items: center;
@@ -96,16 +99,66 @@ html, body {
   font-size: 0.85rem;
   font-weight: 600;
   color: white;
-  background: rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.10);
   border: none;
   border-radius: 6px;
   cursor: pointer;
 }
 .provinceDropdown:hover {
-  background: rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.20);
 }
 
+/* ================================================
+   MOBILE HAMBURGER BUTTON (LEFT SIDE)
+================================================ */
+.menuToggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 34px;
+  margin-left: 4px;
+  background: rgba(255,255,255,0.10);
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
 
+.menuToggle:hover {
+  background: rgba(255,255,255,0.20);
+}
+
+.bar {
+  position: relative;
+  width: 20px;
+  height: 2px;
+  background: white;
+  border-radius: 4px;
+}
+
+.bar::before,
+.bar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 20px;
+  height: 2px;
+  background: white;
+  border-radius: 4px;
+}
+
+.bar::before { top: -6px; }
+.bar::after { top: 6px; }
+
+@media (min-width: 1024px) {
+  .menuToggle {
+    display: none;
+  }
+}
+
+/* ================================================
+   DESKTOP SEARCH BOX
+================================================ */
 .searchBox {
   display: none;
   align-items: center;
@@ -138,39 +191,8 @@ html, body {
   .searchBox { display: flex; }
 }
 
-.compactSearch {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255,255,255,0.06);
-  border-radius: 8px;
-  padding: 6px;
-  min-width: 40px;
-  height: 36px;
-  cursor: pointer;
-}
-
-.mobileSearchBox {
-  display: none;
-  align-items: center;
-  gap: 10px;
-  border-radius: 8px;
-  background: white;
-  padding: 0 12px;
-  width: 100%;
-  height: 40px;
-  border: 1px solid #e6e6e6;
-}
-
-@media (max-width: 1023px) {
-  .compactSearch { display: inline-flex; }
-  .searchBox { display: none !important; }
-  .mobileSearchBox { display: flex; }
-}
-
-
 /* ================================================
-   DESKTOP NAV MENU
+   DESKTOP NAVIGATION
 ================================================ */
 .centerNav {
   display: none;
@@ -179,6 +201,7 @@ html, body {
   flex: 1;
   justify-content: center;
 }
+
 @media (min-width: 1024px) {
   .centerNav { display: flex; }
 }
@@ -190,16 +213,12 @@ html, body {
   text-decoration: none;
   padding: 0.18rem 0.5rem;
   border-radius: 6px;
-  position: relative;
 }
 
 .navLink:hover {
-  background: rgba(255,255,255,0.05);
+  background: rgba(255,255,255,0.10);
 }
 
-/* ================================================
-   ACTIVE NAV LINK (your underline)
-================================================ */
 .activeNavLink {
   color: white;
   font-weight: 600;
@@ -217,9 +236,8 @@ html, body {
   border-radius: 2px;
 }
 
-
 /* ================================================
-   RIGHT SECTION
+   RIGHT SECTION (Login/Username)
 ================================================ */
 .rightSection {
   display: flex;
@@ -227,87 +245,25 @@ html, body {
   gap: 0.5rem;
 }
 
-
-/* ================================================
-   TOOLS BUTTON
-================================================ */
-.toolsButton {
-  display: inline-flex;
-  flex-direction: row;
+.usernameButton {
+  display: flex;
   align-items: center;
   gap: 4px;
-  color: white;
-  font-size: 0.85rem;
-  font-weight: 600;
   background: none;
   border: none;
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 600;
   cursor: pointer;
+  padding: 0;
 }
 
-.toolsButton .arrowDown {
-  font-size: 11px;
-  transform: translateY(1px);
+.usernameButton:hover {
+  opacity: 0.8;
 }
-
-.dropdownContent {
-  background: white !important;
-  border-radius: 10px;
-  border: 1px solid #e5e7eb;
-  min-width: 230px;
-  padding: 6px 0;
-  box-shadow: 0 5px 22px rgba(0,0,0,0.15);
-  z-index: 10001 !important;
-}
-
 
 /* ================================================
-   HAMBURGER MENU
-================================================ */
-.menuToggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 38px;
-  height: 34px;
-  background: rgba(255, 255, 255, 0.10);
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-}
-
-.menuToggle:hover {
-  background: rgba(255, 255, 255, 0.18);
-}
-
-.bar {
-  position: relative;
-  width: 20px;
-  height: 2px;
-  background: white;
-  border-radius: 4px;
-}
-
-.bar::before,
-.bar::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  width: 20px;
-  height: 2px;
-  background: white;
-  border-radius: 4px;
-}
-
-.bar::before { top: -6px; }
-.bar::after { top: 6px; }
-
-@media (min-width: 1024px) {
-  .menuToggle { display: none; }
-}
-
-
-/* ================================================
-   MOBILE MENU
+   MOBILE MENU PANEL
 ================================================ */
 .mobileMenu {
   display: none;
@@ -336,22 +292,54 @@ html, body {
   font-size: 0.95rem;
   font-weight: 600;
   text-decoration: none;
+  text-align: left;
 }
 
 .mobileNavLink:hover {
-  background: rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.10);
 }
 
 @media (min-width: 1024px) {
   .mobileMenu { display: none !important; }
 }
 
-
 /* ================================================
-   RESPONSIVE
+   RESPONSIVE RULES
 ================================================ */
 @media (max-width: 420px) {
   .container { padding: 0 0.75rem; }
   .menuToggle { width: 34px; height: 30px; }
   .provinceDropdown { padding: 0.25rem 0.45rem; }
+}
+.toolsButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+
+  padding: 4px 6px; /* Added */
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 600;
+
+  background: none;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap; /* ⭐ prevents text wrap */
+}
+.watchedButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+
+  padding: 4px 6px; /* Added */
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 600;
+
+  background: none;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap; /* ⭐ prevents text wrap */
 }

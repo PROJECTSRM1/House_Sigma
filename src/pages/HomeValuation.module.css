@@ -290,6 +290,63 @@
   color: #6b7280;
 }
 
+/* ---------------- CONSULT (NEW) ---------------- */
+
+/* container box for the consultation form */
+.consultBox {
+  margin-top: 20px;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e6eef0;
+  padding: 20px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+/* small heading inside the box */
+.consultTitle {
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: #0f4850;
+  font-weight: 600;
+}
+
+/* row to place two inputs side-by-side */
+.consultRow {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+/* inputs inside the consultation box */
+.consultInput {
+  flex: 1;
+  min-width: 220px;
+  height: 40px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 15px;
+}
+
+/* textarea for address */
+.consultArea {
+  width: 100%;
+  min-height: 80px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 15px;
+  resize: vertical;
+}
+
+/* small required line */
+.required {
+  font-size: 13px;
+  color: #6b7280;
+  margin: 8px 0 12px 0;
+}
+
 /* ---------------- RESPONSIVE ---------------- */
 
 @media (max-width: 1024px) {
@@ -328,5 +385,124 @@
   .button {
     font-size: 15px;
     height: 40px;
+  }
+}
+/* ---------------- CONSULTATION FORM (NEW) ---------------- */
+
+.consultBox {
+  background: #f7f7f7;
+  padding: 40px;
+  border-radius: 18px;
+  margin-top: 30px;
+}
+
+.consultInput {
+  width: 100%;
+  height: 42px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+.consultArea {
+  width: 100%;
+  min-height: 90px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.requiredField {
+  font-size: 14px;
+  margin-bottom: 12px;
+  color: #6b7280;
+}
+/* ----- CONSULTATION form — layout matching screenshot 1 ----- */
+
+.consultBox {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #ebebeb;
+  padding: 20px;
+  margin-top: 24px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+}
+
+/* full width name field */
+.consultInputFull {
+  width: 100%;
+  height: 44px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #e2e6e8;
+  font-size: 15px;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+/* row with two columns */
+.consultRowTwo {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+/* half-width inputs */
+.consultInputHalf {
+  flex: 1;
+  min-width: 180px;
+  height: 44px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #e2e6e8;
+  font-size: 15px;
+  color: #333;
+}
+
+/* message box (large textarea) */
+.consultAreaLarge {
+  width: 100%;
+  min-height: 120px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #e2e6e8;
+  font-size: 15px;
+  margin-bottom: 14px;
+  resize: vertical;
+  color: #333;
+}
+
+/* required line */
+.consultRequired {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 14px;
+}
+
+/* big teal button matching your style */
+.consultSubmit {
+  width: 100%;
+  height: 48px;
+  background: linear-gradient(180deg, #18a5a9, #118b8f);
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: none;
+}
+
+/* small responsive tweaks */
+@media (max-width: 768px) {
+  .consultRowTwo {
+    flex-direction: column;
+  }
+  .consultInputHalf {
+    min-width: 100%;
   }
 }

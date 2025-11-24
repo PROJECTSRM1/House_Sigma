@@ -6,6 +6,11 @@ import Footer from "../components/Footer";
 import FloatingChatButton from "../components/floatingWindowChatBot";
 import ChatBot from "../components/chatbot";
 
+import LoginModal from "../pages/Login";
+
+// Autocomplete
+import AddressAutocomplete from "../components/AddressAutocomplete";
+
 interface InputProps {
   label: string;
   suffix?: string;
@@ -23,8 +28,29 @@ export default function HomeValuation() {
   const [bath, setBath] = useState(0);
   const [garage, setGarage] = useState(0);
 
+  const [address, setAddress] = useState("");
+
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [openChat, setOpenChat] = useState(false);
+
+  // ⭐ Show second form after login
+  const [showConsultForm, setShowConsultForm] = useState(false);
+
+  // consultation form state (you can wire to backend later)
+  const [consultName, setConsultName] = useState("");
+  const [consultPhone, setConsultPhone] = useState("");
+  const [consultEmail, setConsultEmail] = useState("");
+  const [consultMessage, setConsultMessage] = useState("");
+
+  const handleConsultSubmit = () => {
+    // Basic validation
+    if (!consultName || !consultPhone || !consultEmail) {
+      alert("Please fill required fields: name, phone and email.");
+      return;
+    }
+    // replace with your API call
+    alert("Consultation submitted — replace this with API call.");
+  };
 
   return (
     <>
@@ -34,7 +60,8 @@ export default function HomeValuation() {
         <h1 className={styles.heading}>Home Details</h1>
         <p className={styles.subheading}>Please enter your property address</p>
 
-        <input className={styles.addressInput} placeholder=" " />
+        {/* Autocomplete */}
+        <AddressAutocomplete value={address} onChange={setAddress} />
 
         <div className={styles.counterRow}>
           <Counter label="Bedroom" value={bed} setValue={setBed} />
@@ -55,20 +82,74 @@ export default function HomeValuation() {
         </div>
 
         <div className={styles.noteBox}>
-          Note that Sigma Estimate is still under beta testing. 
-          There might be inaccuracy or inconsistency in our estimated value.
+          Note that Sigma Estimate is still under beta testing. There might be
+          inaccuracy or inconsistency in our estimated value. Please use this
+          information only as a starting point for property valuation.
         </div>
 
-        <button className={styles.button} onClick={() => setIsLoginOpen(true)}>
-          Log In to Get Estimate
-        </button>
+        <br />
 
+        {/* BEFORE LOGIN */}
+        {!showConsultForm && (
+          <button className={styles.button} onClick={() => setIsLoginOpen(true)}>
+            Log In to Get Estimate
+          </button>
+        )}
+
+        {/* AFTER LOGIN — show Get Estimate button + consultation box (HouseSigma style) */}
+        {showConsultForm && (
+          <>
+            <button className={styles.button}>Get Estimate</button>
+
+            <div className={styles.consultBox}>
+              {/* Name (full width) */}
+              <input
+                className={styles.consultInputFull}
+                placeholder="Your Name *"
+                value={consultName}
+                onChange={(e) => setConsultName(e.target.value)}
+              />
+
+              {/* Phone + Email side-by-side */}
+              <div className={styles.consultRowTwo}>
+                <input
+                  className={styles.consultInputHalf}
+                  placeholder="Your Contact Number *"
+                  value={consultPhone}
+                  onChange={(e) => setConsultPhone(e.target.value)}
+                />
+                <input
+                  className={styles.consultInputHalf}
+                  placeholder="Your Email Address *"
+                  value={consultEmail}
+                  onChange={(e) => setConsultEmail(e.target.value)}
+                />
+              </div>
+
+              {/* Message textarea */}
+              <textarea
+                className={styles.consultAreaLarge}
+                placeholder="Message"
+                value={consultMessage}
+                onChange={(e) => setConsultMessage(e.target.value)}
+              />
+
+              <p className={styles.consultRequired}>* Required field</p>
+
+              <button className={styles.consultSubmit} onClick={handleConsultSubmit}>
+                Get Free Consultation
+              </button>
+            </div>
+          </>
+        )}
+
+        {/* OLD CONTENT */}
         <div className={styles.contactBox}>
           <h2>Contact HouseSigma Agent</h2>
           <br />
           <p>
-            Sorry we don't have a community agent working in this area.
-            Are you a REALTOR® working actively in this community?
+            Sorry we don't have a community agent working in this area. Are you
+            a REALTOR® working actively in this community?
           </p>
         </div>
 
@@ -76,21 +157,34 @@ export default function HomeValuation() {
 
         <div className={styles.disclaimerSection}>
           <p className={styles.disclaimerText}>
-            The information provided herein must only be used by consumers with
-            a bona fide interest in the purchase or sale of real estate.
+            The information provided herein must only be used by consumers that
+            have a bona fide interest in the purchase, sale, or lease of real
+            estate and may not be used for any commercial purpose or any other
+            purpose.
           </p>
         </div>
       </div>
 
       <Footer />
-       {/*  CHATBOT */}
+
       {openChat && <ChatBot onClose={() => setOpenChat(false)} />}
       <FloatingChatButton onOpen={() => setOpenChat(true)} />
+
+      {/* LOGIN MODAL — Now triggers second form */}
+      <LoginModal
+        isOpen={isLoginOpen}
+        onClose={() => setIsLoginOpen(false)}
+        onForgotPassword={() => console.log("Forgot password clicked")}
+        onSuccess={() => {
+          setIsLoginOpen(false);
+          setShowConsultForm(true); // ⭐ Show second form
+        }}
+      />
     </>
   );
 }
 
-/* ---------------- INPUT ---------------- */
+/* ---------------------------------- INPUT ---------------------------------- */
 function Input({ label, suffix }: InputProps) {
   const [value, setValue] = useState("0");
 
@@ -120,12 +214,9 @@ function Input({ label, suffix }: InputProps) {
           } ${styles.showSpinner}`}
         />
 
-        {/* All suffixes now go INSIDE the input */}
         <span
           className={
-            suffix === "per year"
-              ? styles.suffixAfterSpinner
-              : styles.suffixInside
+            suffix === "per year" ? styles.suffixAfterSpinner : styles.suffixInside
           }
         >
           {suffix}
@@ -135,7 +226,7 @@ function Input({ label, suffix }: InputProps) {
   );
 }
 
-/* ---------------- SELECT INPUT ---------------- */
+/* -------------------------------- SELECT INPUT ------------------------------- */
 function SelectInput() {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState("");
@@ -162,9 +253,9 @@ function SelectInput() {
       <label className={styles.label}>Property Type</label>
 
       <div
-        className={`${styles.customSelectBox} 
-          ${open ? styles.openState : ""} 
-          ${selected && !open ? styles.selectedClosed : ""}`}
+        className={`${styles.customSelectBox} ${open ? styles.openState : ""} ${
+          selected && !open ? styles.selectedClosed : ""
+        }`}
         onClick={() => setOpen(!open)}
         style={{ position: "relative" }}
       >
@@ -185,7 +276,7 @@ function SelectInput() {
             className={`${open ? styles.arrowUp : styles.arrowDown} ${
               selected ? styles.hideArrow : ""
             }`}
-          ></span>
+          />
         )}
       </div>
 
@@ -204,7 +295,7 @@ function SelectInput() {
                 className={`${styles.radioCircle} ${
                   selected === item ? styles.radioSelected : ""
                 }`}
-              ></div>
+              />
               {item}
             </div>
           ))}
@@ -214,7 +305,7 @@ function SelectInput() {
   );
 }
 
-/* ---------------- COUNTER ---------------- */
+/* ---------------------------------- COUNTER ---------------------------------- */
 function Counter({ label, value, setValue }: CounterProps) {
   return (
     <div className={styles.counterContainer}>
@@ -230,10 +321,7 @@ function Counter({ label, value, setValue }: CounterProps) {
 
         <div className={styles.counterValue}>{value}</div>
 
-        <button
-          onClick={() => setValue(value + 1)}
-          className={styles.counterButton}
-        >
+        <button onClick={() => setValue(value + 1)} className={styles.counterButton}>
           +
         </button>
       </div>
