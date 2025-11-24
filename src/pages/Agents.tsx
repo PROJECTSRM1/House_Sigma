@@ -428,76 +428,84 @@ export default function AgentsPage(): JSX.Element {
    * This function fetches the original as a Blob -> File and calls the compressor with File.
    */
   async function compressAndCacheUrl(url: string): Promise<void> {
-    if (!url) return;
-    if (compressedUrlCache.has(url)) return;
-    if (compressingUrls.has(url)) return;
-    compressingUrls.add(url);
+  if (!url) return;
+  if (compressedUrlCache.has(url)) return;
+  if (compressingUrls.has(url)) return;
+  compressingUrls.add(url);
 
-    try {
-      // fetch blob of original so we can pass File to helpers that expect File
-      const originalBlob = await fetchBlob(url);
-      const originalFile = originalBlob ? blobToFile(originalBlob, "original.jpg") : undefined;
+  try {
+    // fetch blob of original so we can pass File to helpers that expect File
+    const originalBlob = await fetchBlob(url);
+    const originalFile = originalBlob
+      ? blobToFile(originalBlob, "original.jpg")
+      : undefined;
 
-      const originalSizeKB = originalFile ? await sizeKBOf(originalFile) : await sizeKBOf(url);
+    const originalSizeKB = originalFile
+      ? await sizeKBOf(originalFile)
+      : await sizeKBOf(url);
 
-      // Try calling compressImageFile with File first (many implementations expect File)
-      let compressedOutput: CompressResult | undefined;
+    let compressedOutput: CompressResult | undefined;
 
-      if (originalFile) {
-        try {
-          const maybe = await typedCompressImageFile(originalFile);
-          compressedOutput = maybe;
-        } catch {
-          compressedOutput = undefined;
-        }
+    if (originalFile) {
+      try {
+        const maybe = await typedCompressImageFile(originalFile);
+        compressedOutput = maybe;
+      } catch {
+        compressedOutput = undefined;
       }
-
-      // If we didn't get a compressed output from File-path, try passing URL as string (some helpers accept URL)
-      if (!compressedOutput) {
-        try {
-          const maybe2 = await typedCompressImageFile(url);
-          compressedOutput = maybe2;
-        } catch {
-          compressedOutput = undefined;
-        }
-      }
-
-      if (!compressedOutput) {
-        // compression not available for this url
-        return;
-      }
-
-      // Normalize compressed output to a data URL string
-      let compressedDataUrl: string | undefined;
-      if (typeof compressedOutput === "string") {
-        compressedDataUrl = compressedOutput;
-      } else if (compressedOutput instanceof File || compressedOutput instanceof Blob) {
-        compressedDataUrl = await new Promise<string>((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onload = () => resolve(String(reader.result));
-          reader.onerror = () => reject(new Error("failed-to-read-blob"));
-          reader.readAsDataURL(compressedOutput as Blob);
-        });
-      }
-
-      if (!compressedDataUrl) return;
-
-      const compressedSizeKB = await sizeKBOf(compressedDataUrl);
-
-      // Decide whether to use compressed version: only if smaller or we don't have original size
-      const shouldUseCompressed =
-        (compressedSizeKB !== null && originalSizeKB !== null && compressedSizeKB < originalSizeKB) ||
-        (compressedSizeKB !== null && originalSizeKB === null);
-
-      if (shouldUseCompressed) {
-        compressedUrlCache.set(url, compressedDataUrl);
-        // trigger a rerender in React effects that rely on compressed versions
-        setCompressedVersionCounter((c) => c + 1);
-      }
-    } finally {
-      compressingUrls.delete(url);
     }
+
+    if (!compressedOutput) {
+      try {
+        const maybe2 = await typedCompressImageFile(url);
+        compressedOutput = maybe2;
+      } catch {
+        compressedOutput = undefined;
+      }
+    }
+
+    if (!compressedOutput) return;
+
+    let compressedDataUrl: string | undefined;
+
+    if (typeof compressedOutput === "string") {
+      compressedDataUrl = compressedOutput;
+    } else if (
+      compressedOutput instanceof File ||
+      compressedOutput instanceof Blob
+    ) {
+      compressedDataUrl = await new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(String(reader.result));
+        reader.onerror = () => reject(new Error("failed-to-read-blob"));
+        reader.readAsDataURL(compressedOutput as Blob);
+      });
+    }
+
+    if (!compressedDataUrl) return;
+
+    const compressedSizeKB = await sizeKBOf(compressedDataUrl);
+
+    // ✅ LOGS ADDED HERE
+    console.log("Original Size:", originalSizeKB, "KB", url);
+    console.log("Compressed Size:", compressedSizeKB, "KB", url);
+
+    const shouldUseCompressed =
+      (compressedSizeKB !== null &&
+        originalSizeKB !== null &&
+        compressedSizeKB < originalSizeKB) ||
+      (compressedSizeKB !== null && originalSizeKB === null);
+
+    if (shouldUseCompressed) {
+      compressedUrlCache.set(url, compressedDataUrl);
+      console.log("✅ Using compressed version for:", url);
+      setCompressedVersionCounter((c) => c + 1);
+    }
+  } finally {
+    compressingUrls.delete(url);
   }
+}
+
 
   // Preload and compress filtered agent avatars.
   useEffect(() => {
