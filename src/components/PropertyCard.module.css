@@ -19,9 +19,14 @@
   transform: translateY(-4px);
 }
 
-/* BLUR WHEN LOGIN REQUIRED */
+/* BLUR WHEN TAP-TO-VIEW NOT ACCEPTED */
 .cardBlur {
   filter: blur(5px) brightness(0.90);
+}
+
+/* When revealed → remove blur fully */
+.revealed {
+  filter: none !important;
 }
 
 
@@ -45,7 +50,7 @@
 
 
 /* =====================================================
-   LOGIN REQUIRED OVERLAY
+   TAP / LOGIN OVERLAY
 ===================================================== */
 .restrictedOverlay {
   position: absolute;
@@ -56,41 +61,39 @@
   z-index: 50;
 }
 
-.loginButton {
-  background-color: #28a3b3 !important;
-  color: white !important;
+.loginButton,
+.tapToViewButton {
   padding: 14px 32px;
   border-radius: 12px;
   font-size: 17px;
   font-weight: 700;
+  background-color: #28a3b3 !important;
+  color: white !important;
   z-index: 60;
 }
 
 
 /* =====================================================
-   BADGES (PILLS + RECTANGULAR SALE)
+   BADGES
 ===================================================== */
-
-
 .badge,
 .topLeftBadge,
 .badgeTopLeft {
   padding: 4px 10px;
-  border-radius: 20px; 
+  border-radius: 20px;
   font-size: 14px;
   font-weight: 600;
   color: white;
   line-height: 1;
 }
 
-/* Badge Color Variants */
+/* Badge Colors */
 .badgeExclusive { background-color: #10b981; }
-.badgeNewly { background-color: #3b82f6; }
-.badgeRental { background-color: #0ea5e9; }
-.badgeFeatured { background-color: #f59e0b !important; } /* ORANGE */
-.badgeSchool { background-color: #0284c7; }
-.badgeDefault { background-color: #6b7280; }
-
+.badgeNewly     { background-color: #3b82f6; }
+.badgeRental    { background-color: #0ea5e9; }
+.badgeFeatured  { background-color: #f59e0b !important; }
+.badgeSchool    { background-color: #0284c7; }
+.badgeDefault   { background-color: #6b7280; }
 
 .badgeTopLeft {
   position: absolute;
@@ -99,37 +102,34 @@
   z-index: 22;
 }
 
-
 .topLeftBadge {
   position: absolute;
   top: 10px;
   left: 10px;
-  background-color: #0284c7; /* blue */
+  background-color: #0284c7;
   z-index: 30;
 }
 
+
 /* =====================================================
-   FOR SALE (RECTANGULAR, SLIGHTLY ROUNDED)
+   FOR SALE BADGE
 ===================================================== */
 .bottomLeftBadge {
   position: absolute;
   bottom: 10px;
   left: 10px;
-
-  background-color: hsl(180, 100%, 100%); 
-
+  background-color: #ffffff;
   padding: 6px 14px;
-  border-radius: 7px;     
+  border-radius: 7px;
   font-size: 12px;
   font-weight: 700;
-
   color: #0284c7;
   z-index: 20;
 }
 
 
 /* =====================================================
-   CONTENT AREA
+   DETAILS SECTION
 ===================================================== */
 .cardContent {
   padding: 12px 14px;
@@ -162,7 +162,7 @@
 
 
 /* =====================================================
-   FEATURES (Beds / Baths / Parking)
+   FEATURES SECTION
 ===================================================== */
 .features {
   display: flex;

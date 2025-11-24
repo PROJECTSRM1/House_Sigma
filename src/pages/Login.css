@@ -91,8 +91,6 @@
   background: #fff;
   border: 1px solid #ccc;
   border-radius: 6px;
-  overflow: visible;
-  padding: 0;
   margin-bottom: 18px;
   position: relative;
   transition: border-color 0.2s ease;
@@ -102,7 +100,6 @@
   border-color: #00b8b0;
 }
 
-/* Left selector */
 .country-box {
   width: 75px;
   padding: 12px 10px;
@@ -120,7 +117,6 @@
   opacity: 0.7;
 }
 
-/* Phone input */
 .phone-input {
   flex: 1;
   height: 100%;
@@ -142,8 +138,6 @@
   border: 1px solid #eee;
   padding: 6px 0;
   box-shadow: 0px 6px 25px rgba(0,0,0,0.18);
-  max-height: unset;
-  overflow-y: visible;
   z-index: 999999 !important;
 }
 
@@ -182,7 +176,7 @@
   cursor: pointer;
 }
 
-/* BUTTONS */
+/* ===== BUTTONS ===== */
 .login-btn {
   width: 100%;
   padding: 10px;
@@ -215,8 +209,8 @@
   margin: 18px 0;
 }
 
-/* Google button */
-.google-btn {
+/* ===== SOCIAL LOGIN BUTTONS (Google / Facebook / LinkedIn) ===== */
+.social-btn {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
@@ -227,10 +221,14 @@
   align-items: center;
   gap: 10px;
   cursor: pointer;
+  margin: 10px auto;
+  font-size: 15px;
+  font-weight: 600;
 }
 
-.google-btn img {
+.social-icon {
   width: 22px;
+  height: 22px;
 }
 
 /* Signup text */
@@ -246,12 +244,11 @@
 }
 
 /* ========================================================= */
-/*                 RESPONSIVE SETTINGS (IMPORTANT)           */
+/* RESPONSIVE SETTINGS */
 /* ========================================================= */
 
-/* For Phones ≤ 480px */
+/* Phones ≤ 480px */
 @media (max-width: 480px) {
-
   .login-modal {
     width: 95%;
     padding: 20px 18px;
@@ -281,26 +278,16 @@
     width: 150px;
     top: 50px;
   }
-
-  .country-item {
-    font-size: 12.5px;
-    padding: 7px 10px;
-  }
-
-  .login-btn {
-    font-size: 15px;
-    padding: 9px;
-  }
 }
 
-/* For tablets (480px – 768px) */
+/* Tablets ≤ 768px */
 @media (max-width: 768px) {
   .login-modal {
     width: 85%;
   }
 }
 
-/* For small desktops (768px – 1024px) */
+/* Small desktops ≤ 1024px */
 @media (max-width: 1024px) {
   .login-modal {
     width: 60%;

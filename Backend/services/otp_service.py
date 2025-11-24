@@ -4,6 +4,16 @@ from email.mime.multipart import MIMEMultipart
 from dotenv import load_dotenv
 import os
 
+from models.email_verify_schema import EmailRequest
+from models.user_db import users_db
+
+# ✅ Import password hasher
+from passlib.context import CryptContext
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+def hash_password(password: str):
+    return pwd_context.hash(password)
+
 load_dotenv()
 
 SENDER_EMAIL = os.getenv("MAIL_FROM")
@@ -12,6 +22,9 @@ SMTP_SERVER = os.getenv("MAIL_SERVER")
 SMTP_PORT = int(os.getenv("MAIL_PORT", 587))
 
 
+# ----------------------------------------------------------------
+# SEND OTP EMAIL
+# ----------------------------------------------------------------
 def send_otp_email(receiver_email: str, otp: str):
     if not SENDER_EMAIL or not SENDER_PASSWORD:
         raise ValueError("Email credentials not properly configured in .env")
@@ -40,3 +53,33 @@ def send_otp_email(receiver_email: str, otp: str):
     except Exception as e:
         print("Email send error:", e)
         raise RuntimeError("Failed to send OTP email")
+
+
+# ----------------------------------------------------------------
+# DIRECT SIGNUP SERVICE (Only if not using OTP flow)
+# ----------------------------------------------------------------
+def signup_service(data: EmailRequest):
+
+    # Check if email already exists
+    for u in users_db:
+        if u["email"].lower() == data.email.lower():
+            return {"error": "Email already registered"}
+
+    # ✅ HASH PASSWORD BEFORE SAVING (IMPORTANT)
+    hashed_pwd = hash_password(data.password)
+
+    new_user = {
+        "id": len(users_db) + 1,
+        "name": data.name,
+        "email": data.email.lower(),
+        "password": hashed_pwd,  # ← hashed now
+        "is_verified": True,
+        "is_logged_in": False
+    }
+
+    users_db.append(new_user)
+
+    return {
+        "message": "Signup successful",
+        "email": data.email
+    }
