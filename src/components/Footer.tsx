@@ -92,7 +92,7 @@ const Footer = () => {
 
 
         <div className={styles.copyright}>
-          © COPYRIGHT 2025 BY RM1 CODERS HUB INC. BROKERAGE ALL RIGHTS RESERVED
+          © COPYRIGHT 2025 BY RM1 Coders Hub INC. BROKERAGE ALL RIGHTS RESERVED
         </div>
       </div>
     </footer>
