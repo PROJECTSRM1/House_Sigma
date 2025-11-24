@@ -61,20 +61,20 @@ const Blog = () => {
   // --- Blog data with type applied ---
 
     const blogItems :BlogItem[]= [
-            {
+    {
       image: analyticCharts,
       title: "Investor Demand Report",
-      date:"13-08-2025",
+      date:"08-13-2025",
     },
     {
       image: keysHand,
       title: "Median Price Report",
-      date:"17-08-2025",
+      date:"08-17-2025",
     },
     {
       image: propertyGrowth,
       title: "GTA Median Price Heat Map",
-      date:"12-05-025",
+      date:"05-12-2025",
     },
     {
       image: gtaMarket,

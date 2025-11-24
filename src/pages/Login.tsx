@@ -1,6 +1,6 @@
 declare const google: any;
 import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./Login.css";
 import googleLogo from "@/assets/google.png";
 
@@ -8,12 +8,16 @@ interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;
   onForgotPassword: () => void;
+<<<<<<< HEAD
 
   // For Navbar login update
   onLoginSuccess?: (userData: any) => void;
 
   // For pages like HomeValuation
   onSuccess?: () => void;
+=======
+  onSuccess: () => void;   
+>>>>>>> 37583ae9b916da9d1337a04b65e2c67a5404c19d
 }
 
 const countryList = [
@@ -25,15 +29,21 @@ const countryList = [
   { name: "United Kingdom", code: "+44" },
 ];
 
+<<<<<<< HEAD
 const LoginModal: React.FC<LoginModalProps> = ({
   isOpen,
   onClose,
   onForgotPassword,
   onLoginSuccess,
   onSuccess,
+=======
+const LoginModal: React.FC<LoginModalProps> = ({ 
+  isOpen, 
+  onClose, 
+  onForgotPassword,
+  onSuccess
+>>>>>>> 37583ae9b916da9d1337a04b65e2c67a5404c19d
 }) => {
-  const navigate = useNavigate();
-
   const [activeTab, setActiveTab] = useState<"email" | "mobile">("email");
   const [passwordVisible, setPasswordVisible] = useState(false);
 
@@ -121,6 +131,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
 
       alert("Login successful!");
 
+<<<<<<< HEAD
       if (data.user) {
         onLoginSuccess?.({
           id: data.user.id,
@@ -132,6 +143,11 @@ const LoginModal: React.FC<LoginModalProps> = ({
       onSuccess?.();
       onClose();
       navigate("/");
+=======
+      onClose();      // close login modal
+      onSuccess();    // notify parent that login succeeded
+
+>>>>>>> 37583ae9b916da9d1337a04b65e2c67a5404c19d
     } catch (error) {
       alert("Server error while logging in.");
     }
@@ -157,7 +173,11 @@ const LoginModal: React.FC<LoginModalProps> = ({
             className={activeTab === "mobile" ? "tab active" : "tab"}
             onClick={() => setActiveTab("mobile")}
           >
+<<<<<<< HEAD
             Mobile
+=======
+            Mobile Number
+>>>>>>> 37583ae9b916da9d1337a04b65e2c67a5404c19d
           </button>
         </div>
 
@@ -204,7 +224,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
             <input
               className="phone-input"
               type="text"
-              placeholder="Phone number"
+              placeholder="Mobile number"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
             />

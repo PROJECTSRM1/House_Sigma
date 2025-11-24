@@ -9,7 +9,11 @@ import ChatBot from "../components/chatbot";
 import LoginModal from "../pages/Login";
 
 // Autocomplete
+<<<<<<< HEAD
 import AddressAutocomplete from "../components/AddressAutocomplete";
+=======
+import AddressAutocomplete from "../pages/AddressAutocomplete";
+>>>>>>> 37583ae9b916da9d1337a04b65e2c67a5404c19d
 
 interface InputProps {
   label: string;
@@ -177,7 +181,11 @@ export default function HomeValuation() {
         onForgotPassword={() => console.log("Forgot password clicked")}
         onSuccess={() => {
           setIsLoginOpen(false);
+<<<<<<< HEAD
           setShowConsultForm(true); // ⭐ Show second form
+=======
+          setShowConsultForm(true); 
+>>>>>>> 37583ae9b916da9d1337a04b65e2c67a5404c19d
         }}
       />
     </>

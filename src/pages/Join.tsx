@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "./Join.css";
+<<<<<<< HEAD
 import { useNavigate } from "react-router-dom";
+=======
+import { useNavigate } from "react-router-dom"; 
+>>>>>>> 37583ae9b916da9d1337a04b65e2c67a5404c19d
 import googleLogo from "@/assets/google.png";
 
 const API_BASE = "http://127.0.0.1:8000";
@@ -62,11 +66,11 @@ const Join: React.FC = () => {
 
     if (activeTab === "mobile") {
       if (!phoneNumber.trim()) {
-        setError("Please enter your phone number.");
+        setError("Please enter your Mobile number.");
         return false;
       }
       if (phoneNumber.length < 6) {
-        setError("Enter a valid phone number.");
+        setError("Enter a valid Mobile number.");
         return false;
       }
     }
@@ -184,7 +188,7 @@ const Join: React.FC = () => {
                   setError("");
                 }}
               >
-                Mobile Phone
+                Mobile Number
               </button>
             </div>
 
@@ -236,7 +240,7 @@ const Join: React.FC = () => {
                 <input
                   type="text"
                   className="phone-input-join"
-                  placeholder="Phone number"
+                  placeholder="Mobile number"
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
                 />
