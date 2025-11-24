@@ -133,6 +133,10 @@
   transform: scale(1.2);
 }
 
+.indicators {
+  display: none !important;
+}
+
 @media (min-width: 768px) {
   .title {
     font-size: 3.75rem;
