@@ -34,6 +34,8 @@ import Login from "./pages/Login";
 
 import LearnMore from "./pages/LearnMore";
 
+import { AuthProvider } from "./context/AuthContext";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -42,6 +44,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+      <AuthProvider>
         <Routes>
           {/* Home */}
           <Route path="/" element={<Index />} />
@@ -81,6 +84,7 @@ const App = () => (
           {/* 404 */}
           <Route path="*" element={<NotFound />} />
         </Routes>
+        </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

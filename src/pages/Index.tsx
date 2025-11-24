@@ -28,7 +28,7 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <Hero backgroundImage={ontarioHero} />
+      <Hero />
       <FilterBar />
       <PropertySection title="Exclusive Precon Assignment" properties={exclusivePrecon} />
       <PropertySection title="Newly Listed" properties={newlyListed} />

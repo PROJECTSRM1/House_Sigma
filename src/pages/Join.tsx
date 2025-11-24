@@ -6,6 +6,8 @@ import "./Join.css";
 import { useNavigate } from "react-router-dom"; 
 import googleLogo from "@/assets/google.png";
 
+import { useAuth } from "@/context/AuthContext";
+
 const API_BASE = "http://127.0.0.1:8000";
 
 const countryList = [
@@ -21,6 +23,8 @@ const Join: React.FC = () => {
 
   // Tabs
   const [activeTab, setActiveTab] = useState<"email" | "mobile">("email");
+
+  const { setUser } = useAuth();
 
   // Step 1 fields
   const [fullName, setFullName] = useState("");
@@ -117,36 +121,65 @@ const Join: React.FC = () => {
   // ==========================================================
   // VERIFY OTP (STEP 3 SUBMIT)
   // ==========================================================
-  const verifyOtp = async () => {
-    if (!verificationCode.trim()) {
-      setError("Enter the OTP sent to your email.");
+ const verifyOtp = async () => {
+  if (!verificationCode.trim()) {
+    setError("Enter the OTP sent to your email.");
+    return;
+  }
+
+  try {
+    setLoadingVerify(true);
+
+    const response = await fetch(`${API_BASE}/api/auth/sign/otp`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ otp: verificationCode }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      setError(data.detail || "Invalid OTP");
       return;
     }
 
-    try {
-      setLoadingVerify(true);
+    // ✅ SAVE USER + TOKEN IN LOCAL STORAGE
+    localStorage.setItem(
+      "user",
+      JSON.stringify({
+        id: data.user.id,
+        name: data.user.name,
+        email: data.user.email
+      })
+    );
 
-      const response = await fetch(`${API_BASE}/api/auth/sign/otp`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ otp: verificationCode }),
-      });
+    // ✅ AUTO LOGIN USER (NO PAGE REFRESH)
+      const userData = {
+        id: data.user?.id || Date.now(),
+        name: fullName,
+        email: email
+      };
 
-      const data = await response.json();
 
-      if (response.ok) {
-        alert("Account Created Successfully!");
-        navigate("/"); 
-      } else {
-        setError(data.detail || "Invalid OTP");
-      }
-    } catch (error) {
-      console.error(error);
-      setError("Server error verifying OTP.");
-    } finally {
-      setLoadingVerify(false);
-    }
-  };
+
+    localStorage.setItem("token", data.access_token);
+
+     setUser(userData);
+     window.dispatchEvent(new Event("auth-changed"));
+
+    alert("Account created & logged in!");
+
+    navigate("/");
+    window.location.reload();  // ✅ refresh navbar user state
+
+  } catch (error) {
+    console.error(error);
+    setError("Server error verifying OTP.");
+  } finally {
+    setLoadingVerify(false);
+  }
+};
+
 
   return (
     <>

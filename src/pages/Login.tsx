@@ -3,16 +3,13 @@ import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import "./Login.css";
 import googleLogo from "@/assets/google.png";
+import { useAuth } from "@/context/AuthContext";
 
 interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;
   onForgotPassword: () => void;
-
-  // For Navbar login update
   onLoginSuccess?: (userData: any) => void;
-
-  // For pages like HomeValuation
   onSuccess?: () => void;
 }
 
@@ -32,6 +29,8 @@ const LoginModal: React.FC<LoginModalProps> = ({
   onLoginSuccess,
   onSuccess,
 }) => {
+  const { setUser } = useAuth();   // ✅ Context
+
   const [activeTab, setActiveTab] = useState<"email" | "mobile">("email");
   const [passwordVisible, setPasswordVisible] = useState(false);
 
@@ -47,12 +46,12 @@ const LoginModal: React.FC<LoginModalProps> = ({
   if (!isOpen) return null;
 
   // ============================================================
-  //                        GOOGLE LOGIN
+  // GOOGLE LOGIN
   // ============================================================
   const handleGoogleLogin = () => {
     const client = google.accounts.oauth2.initTokenClient({
       client_id:
-        "419610409681-jk6mku5flon3s9onielvnrckiq7utdek.apps.googleusercontent.com",
+        "492354254466-e56jgfu25vgjegatr1qa4ng9ib2kthmj.apps.googleusercontent.com",
       scope: "email profile",
       callback: async (response: any) => {
         const token = response.access_token;
@@ -71,13 +70,18 @@ const LoginModal: React.FC<LoginModalProps> = ({
             return;
           }
 
+          const userData = {
+            id: data.id || Date.now(),
+            name: data.name,
+            email: data.email,
+          };
+
+          setUser(userData);
+          localStorage.setItem("user", JSON.stringify(userData));
+
           alert("Google login successful!");
 
-          onLoginSuccess?.({
-            full_name: data.name,
-            email: data.email,
-          });
-
+          onLoginSuccess?.(userData);
           onSuccess?.();
           onClose();
           navigate("/");
@@ -91,7 +95,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
   };
 
   // ============================================================
-  //                       NORMAL LOGIN
+  // NORMAL LOGIN
   // ============================================================
   const handleLogin = async () => {
     const username = activeTab === "email" ? email : phone;
@@ -118,15 +122,25 @@ const LoginModal: React.FC<LoginModalProps> = ({
         return;
       }
 
+      const userData = {
+        id: data.user.id,
+        name: data.user.name,
+        email: data.user.email,
+      };
+
+      // ✅ Save globally
+      setUser(userData);
+      localStorage.setItem("user", JSON.stringify(userData));
+
+      window.dispatchEvent(new Event("auth-changed"));
+
       alert("Login successful!");
 
-      if (data.user) {
-        onLoginSuccess?.({
-          id: data.user.id,
-          full_name: data.user.name,
-          email: data.user.email,
-        });
-      }
+      onLoginSuccess?.({
+        id: userData.id,
+        full_name: userData.name,
+        email: userData.email,
+      });
 
       onSuccess?.();
       onClose();
@@ -146,7 +160,6 @@ const LoginModal: React.FC<LoginModalProps> = ({
 
         <h2 className="login-title">Log in</h2>
 
-        {/* Tabs */}
         <div className="tabs">
           <button
             className={activeTab === "email" ? "tab active" : "tab"}
@@ -154,7 +167,6 @@ const LoginModal: React.FC<LoginModalProps> = ({
           >
             Email
           </button>
-
           <button
             className={activeTab === "mobile" ? "tab active" : "tab"}
             onClick={() => setActiveTab("mobile")}
@@ -163,7 +175,6 @@ const LoginModal: React.FC<LoginModalProps> = ({
           </button>
         </div>
 
-        {/* Email */}
         {activeTab === "email" && (
           <div className="input-group">
             <input
@@ -175,7 +186,6 @@ const LoginModal: React.FC<LoginModalProps> = ({
           </div>
         )}
 
-        {/* Mobile */}
         {activeTab === "mobile" && (
           <div className="combined-mobile-box">
             <div
@@ -213,7 +223,6 @@ const LoginModal: React.FC<LoginModalProps> = ({
           </div>
         )}
 
-        {/* Password */}
         <div className="password-wrapper">
           <input
             type={passwordVisible ? "text" : "password"}
@@ -221,7 +230,6 @@ const LoginModal: React.FC<LoginModalProps> = ({
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-
           <span
             className="eye-btn"
             onClick={() => setPasswordVisible(!passwordVisible)}
@@ -230,25 +238,21 @@ const LoginModal: React.FC<LoginModalProps> = ({
           </span>
         </div>
 
-        {/* Login */}
         <button className="login-btn" onClick={handleLogin}>
           Log in
         </button>
 
-        {/* Forgot */}
         <p className="forgot-text" onClick={onForgotPassword}>
           Forgot Password?
         </p>
 
         <div className="divider"></div>
 
-        {/* Google Login */}
         <button className="social-btn" onClick={handleGoogleLogin}>
           <img src={googleLogo} alt="google" className="social-icon" />
           Sign in with Google
         </button>
 
-        {/* Facebook */}
         <button className="social-btn">
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png"
@@ -258,7 +262,6 @@ const LoginModal: React.FC<LoginModalProps> = ({
           Sign in with Facebook
         </button>
 
-        {/* LinkedIn */}
         <button className="social-btn">
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"

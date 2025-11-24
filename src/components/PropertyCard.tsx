@@ -5,6 +5,8 @@ import { PropertyListing } from "@/data/mockData";
 import { Property } from "@/data/albertaData";
 import styles from "./PropertyCard.module.css";
 
+import { useAuth } from "@/context/AuthContext";
+
 interface PropertyCardProps {
   property: Property | PropertyListing;
   isRevealed: boolean;                    // Controlled by parent (terms accepted)
@@ -21,9 +23,8 @@ const PropertyCard = ({ property, isRevealed, onTapToView }: PropertyCardProps) 
   const isRestricted = "loginRequired" in property && property.loginRequired;
 
   // Check if user is logged in
-  const user = localStorage.getItem("user")
-    ? JSON.parse(localStorage.getItem("user")!)
-    : null;
+
+  const { user } = useAuth();
 
   // FINAL BLUR LOGIC:
   // 🔥 Only blur when:
