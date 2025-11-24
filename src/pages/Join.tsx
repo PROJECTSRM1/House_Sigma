@@ -2,11 +2,8 @@ import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "./Join.css";
-<<<<<<< HEAD
-import { useNavigate } from "react-router-dom";
-=======
+
 import { useNavigate } from "react-router-dom"; 
->>>>>>> 37583ae9b916da9d1337a04b65e2c67a5404c19d
 import googleLogo from "@/assets/google.png";
 
 const API_BASE = "http://127.0.0.1:8000";
