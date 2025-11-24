@@ -1,6 +1,6 @@
 declare const google: any;
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./Login.css";
 import googleLogo from "@/assets/google.png";
 
@@ -42,15 +42,17 @@ const LoginModal: React.FC<LoginModalProps> = ({
   const [showCountryList, setShowCountryList] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState(countryList[2]);
 
+  const navigate = useNavigate();
+
   if (!isOpen) return null;
 
   // ============================================================
-  //  GOOGLE LOGIN HANDLER
+  //                        GOOGLE LOGIN
   // ============================================================
   const handleGoogleLogin = () => {
-    /* global google */
     const client = google.accounts.oauth2.initTokenClient({
-      client_id: "419610409681-jk6mku5flon3s9onielvnrckiq7utdek.apps.googleusercontent.com", //  <-- replace this
+      client_id:
+        "419610409681-jk6mku5flon3s9onielvnrckiq7utdek.apps.googleusercontent.com",
       scope: "email profile",
       callback: async (response: any) => {
         const token = response.access_token;
@@ -71,7 +73,6 @@ const LoginModal: React.FC<LoginModalProps> = ({
 
           alert("Google login successful!");
 
-          // Navbar update
           onLoginSuccess?.({
             full_name: data.name,
             email: data.email,
@@ -90,7 +91,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
   };
 
   // ============================================================
-  //  NORMAL EMAIL/MOBILE LOGIN
+  //                       NORMAL LOGIN
   // ============================================================
   const handleLogin = async () => {
     const username = activeTab === "email" ? email : phone;
@@ -131,6 +132,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
       onClose();
       navigate("/");
     } catch (error) {
+      console.error(error);
       alert("Server error while logging in.");
     }
   };
@@ -138,7 +140,9 @@ const LoginModal: React.FC<LoginModalProps> = ({
   return (
     <div className="login-overlay">
       <div className="login-modal">
-        <button className="close-btn" onClick={onClose}>✕</button>
+        <button className="close-btn" onClick={onClose}>
+          ✕
+        </button>
 
         <h2 className="login-title">Log in</h2>
 
@@ -238,7 +242,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
 
         <div className="divider"></div>
 
-        {/* ⭐ Google Login */}
+        {/* Google Login */}
         <button className="social-btn" onClick={handleGoogleLogin}>
           <img src={googleLogo} alt="google" className="social-icon" />
           Sign in with Google
@@ -273,7 +277,3 @@ const LoginModal: React.FC<LoginModalProps> = ({
 };
 
 export default LoginModal;
-
-function navigate(arg0: string) {
-  throw new Error("Function not implemented.");
-}
