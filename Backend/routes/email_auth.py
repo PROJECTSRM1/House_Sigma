@@ -91,7 +91,36 @@ async def request_otp(request: EmailRequest):
 # --------------------------------------------------------
 # 2️⃣ VERIFY OTP → COMPLETE SIGNUP
 # --------------------------------------------------------
-@router.post("/sign/otp", response_model=MessageResponse)
+# @router.post("/sign/otp", response_model=MessageResponse)
+# async def verify_otp_endpoint(request: OTPVerify):
+
+#     email = verify_otp(request.otp)
+
+#     if not email:
+#         raise HTTPException(400, "Invalid or expired OTP")
+
+#     if email not in pending_users:
+#         raise HTTPException(400, "No pending signup found")
+
+#     data = pending_users[email]
+
+#     users_db.append({
+#         "id": len(users_db) + 1,
+#         "name": data["name"],
+#         "email": email,
+#         "password": data["password"],   # HASHED PASSWORD
+#         "is_verified": True,
+#         "is_logged_in": False
+#     })
+
+#     del pending_users[email]
+
+#     return MessageResponse(
+#         message="User registered successfully!",
+#         status="verified"
+#     )
+
+@router.post("/sign/otp")
 async def verify_otp_endpoint(request: OTPVerify):
 
     email = verify_otp(request.otp)
@@ -104,21 +133,36 @@ async def verify_otp_endpoint(request: OTPVerify):
 
     data = pending_users[email]
 
-    users_db.append({
+    user = {
         "id": len(users_db) + 1,
         "name": data["name"],
         "email": email,
-        "password": data["password"],   # HASHED PASSWORD
+        "password": data["password"],
         "is_verified": True,
-        "is_logged_in": False
-    })
+        "is_logged_in": True
+    }
 
+    users_db.append(user)
     del pending_users[email]
 
-    return MessageResponse(
-        message="User registered successfully!",
-        status="verified"
-    )
+    # ✅ CREATE TOKENS AFTER SIGNUP
+    access_token = create_access_token({"id": user["id"], "email": user["email"]})
+    refresh_token = create_refresh_token({"id": user["id"], "email": user["email"]})
+
+    active_sessions[user["email"]] = True
+
+    return {
+        "message": "User registered & logged in",
+        "status": "success",
+        "access_token": access_token,
+        "refresh_token": refresh_token,
+        "token_type": "bearer",
+        "user": {
+            "id": user["id"],
+            "name": user["name"],
+            "email": user["email"]
+        }
+    }
 
 
 # --------------------------------------------------------

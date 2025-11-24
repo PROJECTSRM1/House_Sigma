@@ -65,6 +65,8 @@ html, body {
   justify-content: space-between;
   gap: 1rem;
   height: 50px;
+  flex-wrap: nowrap;
+  min-width: 0;
 }
 
 /* ================================================
@@ -74,6 +76,7 @@ html, body {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  flex-shrink: 0;
 }
 
 /* Logo */
@@ -109,7 +112,7 @@ html, body {
 }
 
 /* ================================================
-   MOBILE HAMBURGER BUTTON (LEFT SIDE)
+   MOBILE HAMBURGER BUTTON (RIGHT SECTION, LEFT OF LOGIN)
 ================================================ */
 .menuToggle {
   display: inline-flex;
@@ -117,7 +120,7 @@ html, body {
   justify-content: center;
   width: 38px;
   height: 34px;
-  margin-left: 4px;
+  margin-right: 4px;   /* space between hamburger and Login/Profile */
   background: rgba(255,255,255,0.10);
   border-radius: 8px;
   border: none;
@@ -168,7 +171,7 @@ html, body {
   padding: 0 14px;
   width: 380px;
   height: 35px;
-  flex: 0 0 auto;
+  flex: 0 1 auto;
   border: 1px solid #e6e6e6;
 }
 
@@ -191,6 +194,17 @@ html, body {
   .searchBox { display: flex; }
 }
 
+/* On slightly smaller desktops, shrink search and gaps a bit */
+@media (min-width: 1024px) and (max-width: 1280px) {
+  .searchBox {
+    width: 300px;
+  }
+
+  .centerNav {
+    gap: 0.75rem;
+  }
+}
+
 /* ================================================
    DESKTOP NAVIGATION
 ================================================ */
@@ -198,8 +212,10 @@ html, body {
   display: none;
   align-items: center;
   gap: 1.2rem;
-  flex: 1;
-  justify-content: center;
+  flex: 1 1 auto;
+  justify-content: flex-start;
+  min-width: 0;
+  flex-wrap: nowrap;
 }
 
 @media (min-width: 1024px) {
@@ -213,6 +229,8 @@ html, body {
   text-decoration: none;
   padding: 0.18rem 0.5rem;
   border-radius: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .navLink:hover {
@@ -223,6 +241,8 @@ html, body {
   color: white;
   font-weight: 600;
   position: relative;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .activeNavLink::after {
@@ -243,6 +263,7 @@ html, body {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  flex-shrink: 0;
 }
 
 .usernameButton {
@@ -256,6 +277,7 @@ html, body {
   font-weight: 600;
   cursor: pointer;
   padding: 0;
+  white-space: nowrap;
 }
 
 .usernameButton:hover {
@@ -311,13 +333,17 @@ html, body {
   .menuToggle { width: 34px; height: 30px; }
   .provinceDropdown { padding: 0.25rem 0.45rem; }
 }
+
+/* ================================================
+   TOOLS & WATCHED BUTTONS
+================================================ */
 .toolsButton {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 4px;
 
-  padding: 4px 6px; /* Added */
+  padding: 4px 6px;
   color: white;
   font-size: 0.95rem;
   font-weight: 600;
@@ -325,15 +351,17 @@ html, body {
   background: none;
   border: none;
   cursor: pointer;
-  white-space: nowrap; /* ⭐ prevents text wrap */
+  white-space: nowrap;
+  flex-shrink: 0;
 }
+
 .watchedButton {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 4px;
 
-  padding: 4px 6px; /* Added */
+  padding: 4px 6px;
   color: white;
   font-size: 0.95rem;
   font-weight: 600;
@@ -341,5 +369,30 @@ html, body {
   background: none;
   border: none;
   cursor: pointer;
-  white-space: nowrap; /* ⭐ prevents text wrap */
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ================================================
+   FIX: Remove black border / outline on dropdown triggers
+================================================ */
+.toolsButton,
+.toolsButton:focus,
+.toolsButton:focus-visible,
+.toolsButton:active,
+.watchedButton,
+.watchedButton:focus,
+.watchedButton:focus-visible,
+.watchedButton:active,
+.usernameButton,
+.usernameButton:focus,
+.usernameButton:focus-visible,
+.usernameButton:active,
+.provinceDropdown,
+.provinceDropdown:focus,
+.provinceDropdown:focus-visible,
+.provinceDropdown:active {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
 }

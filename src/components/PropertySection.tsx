@@ -13,29 +13,53 @@ interface PropertySectionProps {
 }
 
 const PropertySection = ({ title, properties }: PropertySectionProps) => {
-  // Logged-in user
-  const user = localStorage.getItem("user")
-    ? JSON.parse(localStorage.getItem("user")!)
-    : null;
+  const [user, setUser] = useState<any>(null);
 
-  // Key becomes user-specific
+  const [revealedIds, setRevealedIds] = useState<number[]>([]);
+  const [activePropertyId, setActivePropertyId] = useState<number | null>(null);
+
+  // ✅ Load user from localStorage properly
+  const loadUser = () => {
+    const u = localStorage.getItem("user");
+    setUser(u ? JSON.parse(u) : null);
+  };
+
+  useEffect(() => {
+    loadUser();
+  }, []);
+
+  // ✅ Listen for login / logout changes
+  useEffect(() => {
+    const syncAuth = () => {
+      loadUser();
+    };
+
+    window.addEventListener("storage", syncAuth);
+    window.addEventListener("auth-changed", syncAuth);
+
+    return () => {
+      window.removeEventListener("storage", syncAuth);
+      window.removeEventListener("auth-changed", syncAuth);
+    };
+  }, []);
+
+  // ✅ User based storage key
   const storageKey = user
     ? `revealed_properties_${user.email}`
     : "revealed_properties_guest";
 
-  // Stores revealed IDs
-  const [revealedIds, setRevealedIds] = useState<number[]>([]);
-
-  const [activePropertyId, setActivePropertyId] = useState<number | null>(null);
-
-  // Load revealed IDs for the CURRENT user only
+  // ✅ Reload revealed when user changes
   useEffect(() => {
     const saved = localStorage.getItem(storageKey);
-    if (saved) setRevealedIds(JSON.parse(saved));
-    else setRevealedIds([]); // new user → start fresh (all blurred)
-  }, [storageKey]); // Reload when user changes
 
-  // Save for current user
+    if (saved) {
+      setRevealedIds(JSON.parse(saved));
+    } else {
+      setRevealedIds([]); // new user → everything locked
+    }
+  }, [storageKey]);
+
+  // ✅ Save revealed IDs
   const saveRevealed = (updated: number[]) => {
     setRevealedIds(updated);
     localStorage.setItem(storageKey, JSON.stringify(updated));
@@ -76,7 +100,6 @@ const PropertySection = ({ title, properties }: PropertySectionProps) => {
         ))}
       </div>
 
-      {/* TERMS MODAL */}
       <TermsModal
         isOpen={activePropertyId !== null}
         onAccept={handleAccept}

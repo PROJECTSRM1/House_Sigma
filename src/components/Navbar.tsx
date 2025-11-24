@@ -6,6 +6,8 @@ import LoginModal from "../pages/Login";
 import ResetPasswordModal from "../pages/ResetPasswordModal";
 import logo from "@/assets/logo.png";
 
+ import { useAuth } from "@/context/AuthContext";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,10 +26,7 @@ const Navbar: React.FC = () => {
   const [selectedProvince, setSelectedProvince] = useState("ON");
   const headerRef = useRef<HTMLElement | null>(null);
 
-  const [user, setUser] = useState<any>(() => {
-    const saved = localStorage.getItem("user");
-    return saved ? JSON.parse(saved) : null;
-  });
+  const { user, setUser } = useAuth();
 
   useEffect(() => {
     function onStorage(e: StorageEvent) {
@@ -45,6 +44,13 @@ const Navbar: React.FC = () => {
     window.addEventListener("open-login-modal", handler);
     return () => window.removeEventListener("open-login-modal", handler);
   }, []);
+
+  useEffect(() => {
+  const saved = localStorage.getItem("user");
+  if (saved) {
+    setUser(JSON.parse(saved));
+  }
+}, []);
 
   const handleForgotPassword = () => {
     setShowLogin(false);
@@ -76,11 +82,18 @@ const Navbar: React.FC = () => {
   const headerClass = `${styles.header} ${menuOpen ? styles.menuOpen : ""}`;
 
   const handleLogout = () => {
-    localStorage.removeItem("user");
-    setUser(null);
-    setMenuOpen(false);
-    navigate("/");
-  };
+  localStorage.removeItem("user");
+  localStorage.removeItem("token");
+  setUser(null);
+  setMenuOpen(false);
+
+  // ✅ notify app that auth changed
+  window.dispatchEvent(new Event("auth-changed"));
+
+  navigate("/");
+};
+
+
 
   return (
     <>
@@ -222,6 +235,7 @@ const Navbar: React.FC = () => {
 
                   <DropdownMenuContent
                     align="end"
+                    sideOffset={10}
                     className={styles.dropdownContent}
                   >
                     <DropdownMenuItem asChild>
@@ -271,6 +285,7 @@ const Navbar: React.FC = () => {
 
                   <DropdownMenuContent
                     align="end"
+                    sideOffset={15}
                     className={styles.dropdownContent}
                   >
                     <DropdownMenuItem disabled>
