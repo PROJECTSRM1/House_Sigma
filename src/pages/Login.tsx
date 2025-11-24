@@ -11,6 +11,8 @@ interface LoginModalProps {
   onForgotPassword: () => void;
   onLoginSuccess?: (userData: any) => void;
   onSuccess?: () => void;
+
+  redirectTo?: string | null;
 }
 
 const countryList = [
@@ -28,6 +30,8 @@ const LoginModal: React.FC<LoginModalProps> = ({
   onForgotPassword,
   onLoginSuccess,
   onSuccess,
+
+  redirectTo = "/",
 }) => {
   const { setUser } = useAuth();   // ✅ Context
 
@@ -84,7 +88,10 @@ const LoginModal: React.FC<LoginModalProps> = ({
           onLoginSuccess?.(userData);
           onSuccess?.();
           onClose();
-          navigate("/");
+          if (redirectTo) {
+  navigate(redirectTo);
+}
+
         } catch (error) {
           alert("Google login error");
         }
@@ -144,7 +151,10 @@ const LoginModal: React.FC<LoginModalProps> = ({
 
       onSuccess?.();
       onClose();
-      navigate("/");
+      if (redirectTo) {
+  navigate(redirectTo);
+}
+
     } catch (error) {
       console.error(error);
       alert("Server error while logging in.");
