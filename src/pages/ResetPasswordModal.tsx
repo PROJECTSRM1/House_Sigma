@@ -59,33 +59,57 @@ export default function ResetPasswordModal({
     }
   }, [isOpen, initiallyTab]);
 
-  // ----------------- STEP 1 VALIDATION -----------------
+  // ================= STEP 1 – SEND OTP =================
   const handleSendVerification = async () => {
     setError("");
 
     if (tab === "email") {
       if (!email) return setError("Please enter email.");
-      if (!emailRegex.test(email))
+      if (!emailRegex.test(email)) {
         return setError("Please enter a valid email address.");
+      }
     }
 
     if (tab === "phone") {
       if (!phone) return setError("Please enter phone number.");
 
-      // ⭐ MOBILE VALIDATION (EXACT 10 DIGITS)
       const digitsOnly = phone.replace(/\D/g, "");
-      if (digitsOnly.length !== 10)
+      if (digitsOnly.length !== 10) {
         return setError("Phone number must be exactly 10 digits.");
+      }
     }
 
     setSending(true);
-    await new Promise((res) => setTimeout(res, 700));
-    setSending(false);
 
-    setStep(2);
+    try {
+      const res = await fetch(
+        "http://127.0.0.1:8000/api/auth/forgot-password",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: email,
+          }),
+        }
+      );
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.detail || "Failed to send OTP");
+        setSending(false);
+        return;
+      }
+
+      setStep(2);
+    } catch {
+      setError("Server error while sending OTP");
+    }
+
+    setSending(false);
   };
 
-  // ----------------- PASSWORD VALIDATION -----------------
+  // ================= PASSWORD VALIDATION =================
   const isPasswordValid = (pwd: string): boolean => {
     if (pwd.length < 6) return false;
     const hasLetter = /[A-Za-z]/.test(pwd);
@@ -94,21 +118,51 @@ export default function ResetPasswordModal({
     return [hasLetter, hasDigit, hasSpecial].filter(Boolean).length >= 2;
   };
 
+  // ================= STEP 2 – VERIFY OTP & RESET =================
   const handleReset = async () => {
     setError("");
 
     if (!verificationCode) return setError("Please enter verification code.");
-    if (!isPasswordValid(password))
+    if (!isPasswordValid(password)) {
       return setError(
         "Password must be at least 6 characters and include 2 of: letters, digits, special characters."
       );
+    }
 
     setResetting(true);
-    await new Promise((res) => setTimeout(res, 800));
-    setResetting(false);
 
-    onFinished();
-    closeReset();
+    try {
+      const res = await fetch(
+        "http://127.0.0.1:8000/api/auth/forgot-password/verify",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: email,
+            otp: verificationCode,
+            new_password: password,
+          }),
+        }
+      );
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.detail || "Invalid OTP or reset failed");
+        setResetting(false);
+        return;
+      }
+
+      alert("Password reset successful!");
+
+      onFinished();
+      closeReset();
+      onBackToLogin();
+    } catch {
+      setError("Server error while resetting password");
+    }
+
+    setResetting(false);
   };
 
   if (!isOpen) return null;
@@ -120,14 +174,12 @@ export default function ResetPasswordModal({
 
         <h3 className="rp-title">Reset Password by</h3>
 
-        {/* Step Indicator */}
         <div className="rp-steps">
           <div className={`rp-step-circle ${step >= 1 ? "active" : ""}`}>1</div>
           <div className="rp-step-line" />
           <div className={`rp-step-circle ${step >= 2 ? "active" : ""}`}>2</div>
         </div>
 
-        {/* Tabs */}
         <div className="rp-tabs">
           <button
             className={`rp-tab ${tab === "email" ? "active" : ""}`}
@@ -145,7 +197,6 @@ export default function ResetPasswordModal({
         </div>
 
         <div className="rp-content">
-          {/* STEP 1 */}
           {step === 1 && (
             <>
               {tab === "email" ? (
@@ -218,7 +269,6 @@ export default function ResetPasswordModal({
             </>
           )}
 
-          {/* STEP 2 */}
           {step === 2 && (
             <>
               <p className="rp-info">

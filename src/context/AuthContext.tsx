@@ -5,6 +5,7 @@ type User = {
   name?: string;
   full_name?: string;
   email: string;
+  profile_image?: string;
 } | null;
 
 const AuthContext = createContext<{
