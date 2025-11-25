@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "./Join.css";
 
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import googleLogo from "@/assets/google.png";
 import { useAuth } from "@/context/AuthContext";
 const API_BASE = "http://127.0.0.1:8000";
@@ -30,11 +30,13 @@ const Join: React.FC = () => {
   const [password, setPassword] = useState("");
 
   const [error, setError] = useState("");
-
   const [verificationCode, setVerificationCode] = useState("");
 
   const [loadingNext, setLoadingNext] = useState(false);
   const [loadingVerify, setLoadingVerify] = useState(false);
+
+  // ✅ NEW STATE FOR IMAGE
+  const [profileImage, setProfileImage] = useState<File | null>(null);
 
   const validateStep1 = () => {
     if (!fullName.trim()) {
@@ -113,6 +115,7 @@ const Join: React.FC = () => {
     try {
       setLoadingVerify(true);
 
+      // ✅ VERIFY OTP
       const response = await fetch(`${API_BASE}/api/auth/sign/otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -126,11 +129,7 @@ const Join: React.FC = () => {
         return;
       }
 
-      // ---------------------------------------
-      // FIXED: Your backend does NOT return user or token.
-      // So we must login user after successful OTP.
-      // ---------------------------------------
-
+      // ✅ LOGIN USER
       const loginRes = await fetch(`${API_BASE}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -147,18 +146,39 @@ const Join: React.FC = () => {
         return;
       }
 
-      // Save token & user
-      localStorage.setItem("token", loginData.access_token);
-      localStorage.setItem("user", JSON.stringify(loginData.user));
+      let imageUrl = loginData.user.profile_image;
 
-      setUser(loginData.user);
+      // ✅ IMAGE UPLOAD
+      if (profileImage) {
+        const formData = new FormData();
+        formData.append("email", email);
+        formData.append("folder", "users");
+        formData.append("image", profileImage);
+
+        const imgRes = await fetch(`${API_BASE}/api/auth/upload-image`, {
+          method: "POST",
+          body: formData,
+        });
+
+        const imgData = await imgRes.json();
+        imageUrl = imgData.image_url;
+      }
+
+      const finalUser = {
+        ...loginData.user,
+        profile_image: imageUrl,
+      };
+
+      localStorage.setItem("token", loginData.access_token);
+      localStorage.setItem("user", JSON.stringify(finalUser));
+
+      setUser(finalUser);
       window.dispatchEvent(new Event("auth-changed"));
 
       alert("Account created & logged in!");
 
       navigate("/");
       window.location.reload();
-
     } catch (error) {
       console.error(error);
       setError("Server error verifying OTP.");
@@ -270,6 +290,18 @@ const Join: React.FC = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
 
+            {/* ✅ PROFILE IMAGE INPUT */}
+            <input
+              type="file"
+              accept="image/*"
+              className="join-input"
+              onChange={(e) => {
+                if (e.target.files && e.target.files[0]) {
+                  setProfileImage(e.target.files[0]);
+                }
+              }}
+            />
+
             {error && <p className="error-text">{error}</p>}
 
             <button
@@ -285,7 +317,6 @@ const Join: React.FC = () => {
         {/* ==================== STEP 2 ==================== */}
         {step === 2 && (
           <div className="step-box">
-
             <div className="scroll-card">
               <center><h3>HouseSigma Terms of Use</h3></center>
               <p>

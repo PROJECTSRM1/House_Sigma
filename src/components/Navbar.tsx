@@ -6,7 +6,7 @@ import LoginModal from "../pages/Login";
 import ResetPasswordModal from "../pages/ResetPasswordModal";
 import logo from "@/assets/logo.png";
 
- import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/context/AuthContext";
 
 import {
   DropdownMenu,
@@ -28,79 +28,31 @@ const Navbar: React.FC = () => {
 
   const { user, setUser } = useAuth();
 
-  useEffect(() => {
-    function onStorage(e: StorageEvent) {
-      if (e.key === "user") {
-        const newVal = e.newValue ? JSON.parse(e.newValue) : null;
-        setUser(newVal);
-      }
-    }
-    window.addEventListener("storage", onStorage);
-    return () => window.removeEventListener("storage", onStorage);
-  }, []);
+  const defaultAvatar = "http://127.0.0.1:8000/static/users/default.png";
 
+  // Sync user
   useEffect(() => {
-    const handler = () => setShowLogin(true);
-    window.addEventListener("open-login-modal", handler);
-    return () => window.removeEventListener("open-login-modal", handler);
-  }, []);
-
-  useEffect(() => {
-  const saved = localStorage.getItem("user");
-  if (saved) {
-    setUser(JSON.parse(saved));
-  }
-}, []);
-
-  const handleForgotPassword = () => {
-    setShowLogin(false);
-    setShowReset(true);
-  };
-
-  useEffect(() => {
-    function onDocClick(e: MouseEvent) {
-      const target = e.target as Node;
-      if (menuOpen && headerRef.current && !headerRef.current.contains(target)) {
-        setMenuOpen(false);
-      }
-    }
-    document.addEventListener("click", onDocClick);
-    return () => document.removeEventListener("click", onDocClick);
-  }, [menuOpen]);
-
-  useEffect(() => {
-    function onResize() {
-      if (window.innerWidth >= 1024 && menuOpen) {
-        setMenuOpen(false);
-      }
-    }
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, [menuOpen]);
+    const saved = localStorage.getItem("user");
+    if (saved) setUser(JSON.parse(saved));
+  }, [setUser]);
 
   const toggleMenu = () => setMenuOpen((s) => !s);
   const headerClass = `${styles.header} ${menuOpen ? styles.menuOpen : ""}`;
 
   const handleLogout = () => {
-  localStorage.removeItem("user");
-  localStorage.removeItem("token");
-  setUser(null);
-  setMenuOpen(false);
-
-  // ✅ notify app that auth changed
-  window.dispatchEvent(new Event("auth-changed"));
-
-  navigate("/");
-};
-
-
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    setUser(null);
+    setMenuOpen(false);
+    window.dispatchEvent(new Event("auth-changed"));
+    navigate("/");
+  };
 
   return (
     <>
       <header className={headerClass} ref={(el) => (headerRef.current = el)}>
         <div className={styles.container}>
           <div className={styles.navWrapper}>
-
             {/* LEFT SECTION */}
             <div className={styles.leftSection}>
               <NavLink to="/" className={styles.logo}>
@@ -116,31 +68,14 @@ const Navbar: React.FC = () => {
                     {selectedProvince} <ChevronDown className="h-4 w-4" />
                   </button>
                 </DropdownMenuTrigger>
-
-                <DropdownMenuContent
-                  align="start"
-                  sideOffset={8}
-                  className={styles.dropdownContent}
-                >
-                  <DropdownMenuItem asChild>
-                    <NavLink to="/province/on" onClick={() => setSelectedProvince("ON")}>
-                      Ontario (ON)
-                    </NavLink>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <NavLink to="/province/bc" onClick={() => setSelectedProvince("BC")}>
-                      British Columbia (BC)
-                    </NavLink>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <NavLink to="/province/ab" onClick={() => setSelectedProvince("AB")}>
-                      Alberta (AB)
-                    </NavLink>
-                  </DropdownMenuItem>
+                <DropdownMenuContent align="start" sideOffset={8} className={styles.dropdownContent}>
+                  <DropdownMenuItem asChild><NavLink to="/province/on" onClick={() => setSelectedProvince("ON")}>Ontario (ON)</NavLink></DropdownMenuItem>
+                  <DropdownMenuItem asChild><NavLink to="/province/bc" onClick={() => setSelectedProvince("BC")}>British Columbia (BC)</NavLink></DropdownMenuItem>
+                  <DropdownMenuItem asChild><NavLink to="/province/ab" onClick={() => setSelectedProvince("AB")}>Alberta (AB)</NavLink></DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
 
-              {/* MOBILE HAMBURGER BUTTON (LEFT SIDE NOW) */}
+              {/* ✅ HAMBURGER MENU BUTTON */}
               <button
                 className={styles.menuToggle}
                 onClick={toggleMenu}
@@ -160,71 +95,28 @@ const Navbar: React.FC = () => {
               </div>
             </div>
 
-            {/* CENTER NAVIGATION (Desktop only) */}
+            {/* CENTER NAVIGATION */}
             <nav className={styles.centerNav}>
-              <NavLink
-                to="/map-search"
-                className={({ isActive }) =>
-                  isActive ? styles.activeNavLink : styles.navLink
-                }
-              >
-                Map Search
-              </NavLink>
+              <NavLink to="/map-search" className={({ isActive }) => isActive ? styles.activeNavLink : styles.navLink}>Map Search</NavLink>
+              <NavLink to="/market-trends" className={({ isActive }) => isActive ? styles.activeNavLink : styles.navLink}>Market Trends</NavLink>
+              <NavLink to="/home-valuation" className={({ isActive }) => isActive ? styles.activeNavLink : styles.navLink}>Home Valuation</NavLink>
+              <NavLink to="/agents" className={({ isActive }) => isActive ? styles.activeNavLink : styles.navLink}>Agents</NavLink>
 
-              <NavLink
-                to="/market-trends"
-                className={({ isActive }) =>
-                  isActive ? styles.activeNavLink : styles.navLink
-                }
-              >
-                Market Trends
-              </NavLink>
-
-              <NavLink
-                to="/home-valuation"
-                className={({ isActive }) =>
-                  isActive ? styles.activeNavLink : styles.navLink
-                }
-              >
-                Home Valuation
-              </NavLink>
-
-              <NavLink
-                to="/agents"
-                className={({ isActive }) =>
-                  isActive ? styles.activeNavLink : styles.navLink
-                }
-              >
-                Agents
-              </NavLink>
-
-              {/* Tools */}
+              {/* Tools menu */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <button className={styles.toolsButton}>
                     Tools <ChevronDown className="h-4 w-4" />
                   </button>
                 </DropdownMenuTrigger>
-
-                <DropdownMenuContent
-                  align="end"
-                  sideOffset={10}
-                  className={styles.dropdownContent}
-                >
-                  <DropdownMenuItem asChild>
-                    <NavLink to="/blog">Blog</NavLink>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <NavLink to="/recommend-communities">
-                      Recommend Communities
-                    </NavLink>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <NavLink to="/contact">Contact Us</NavLink>
-                  </DropdownMenuItem>
+                <DropdownMenuContent align="end" sideOffset={10} className={styles.dropdownContent}>
+                  <DropdownMenuItem asChild><NavLink to="/blog">Blog</NavLink></DropdownMenuItem>
+                  <DropdownMenuItem asChild><NavLink to="/recommend-communities">Recommend Communities</NavLink></DropdownMenuItem>
+                  <DropdownMenuItem asChild><NavLink to="/contact">Contact Us</NavLink></DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
 
+              {/* Watched menu */}
               {user && (
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
@@ -232,32 +124,13 @@ const Navbar: React.FC = () => {
                       Watched <ChevronDown className="h-4 w-4" />
                     </button>
                   </DropdownMenuTrigger>
-
-                  <DropdownMenuContent
-                    align="end"
-                    sideOffset={10}
-                    className={styles.dropdownContent}
-                  >
-                    <DropdownMenuItem asChild>
-                      <NavLink to="/watched/properties">Properties</NavLink>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem asChild>
-                      <NavLink to="/watched/notes">Notes</NavLink>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem asChild>
-                      <NavLink to="/watched/toured">Toured</NavLink>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem asChild>
-                      <NavLink to="/watched/areas">Areas</NavLink>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem asChild>
-                      <NavLink to="/watched/communities">Communities</NavLink>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem asChild>
-                      <NavLink to="/watched/recently-viewed">
-                        Recently Viewed
-                      </NavLink>
-                    </DropdownMenuItem>
+                  <DropdownMenuContent align="end" sideOffset={10} className={styles.dropdownContent}>
+                    <DropdownMenuItem asChild><NavLink to="/watched/properties">Properties</NavLink></DropdownMenuItem>
+                    <DropdownMenuItem asChild><NavLink to="/watched/notes">Notes</NavLink></DropdownMenuItem>
+                    <DropdownMenuItem asChild><NavLink to="/watched/toured">Toured</NavLink></DropdownMenuItem>
+                    <DropdownMenuItem asChild><NavLink to="/watched/areas">Areas</NavLink></DropdownMenuItem>
+                    <DropdownMenuItem asChild><NavLink to="/watched/communities">Communities</NavLink></DropdownMenuItem>
+                    <DropdownMenuItem asChild><NavLink to="/watched/recently-viewed">Recently Viewed</NavLink></DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               )}
@@ -277,23 +150,45 @@ const Navbar: React.FC = () => {
               ) : (
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <button className={styles.usernameButton}>
-                      {user.full_name || user.name}
-                      <ChevronDown className="h-4 w-4" />
+                    <button style={{ background: "none", border: "none", cursor: "pointer" }}>
+                      <img
+                        src={(user as any).profile_image || defaultAvatar}
+                        alt="Profile"
+                        style={{
+                          width: "36px",
+                          height: "36px",
+                          borderRadius: "50%",
+                          objectFit: "cover",
+                          border: "2px solid white",
+                        }}
+                      />
                     </button>
                   </DropdownMenuTrigger>
 
-                  <DropdownMenuContent
-                    align="end"
-                    sideOffset={15}
-                    className={styles.dropdownContent}
-                  >
-                    <DropdownMenuItem disabled>
-                      {user.full_name || user.email}
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={handleLogout}>
-                      Logout
-                    </DropdownMenuItem>
+                  {/* ✅ PROFILE CARD */}
+                  <DropdownMenuContent align="end" sideOffset={10}>
+                    <div className={styles.profileCard}>
+                      <img
+                        src={(user as any).profile_image || defaultAvatar}
+                        className={styles.profileImageBig}
+                        alt="Profile"
+                      />
+
+                      <div className={styles.profileName}>
+                        {user.full_name || user.name}
+                      </div>
+
+                      <div className={styles.profileEmail}>
+                        {user.email}
+                      </div>
+
+                      <button
+                        onClick={handleLogout}
+                        className={styles.logoutBtnCard}
+                      >
+                        Logout
+                      </button>
+                    </div>
                   </DropdownMenuContent>
                 </DropdownMenu>
               )}
@@ -301,112 +196,35 @@ const Navbar: React.FC = () => {
           </div>
         </div>
 
-        {/* MOBILE MENU */}
+        {/* ✅ MOBILE MENU */}
         <div className={styles.mobileMenu}>
           {menuOpen && (
             <div className={styles.mobileNav}>
-              <NavLink
-                to="/map-search"
-                className={styles.mobileNavLink}
-                onClick={() => setMenuOpen(false)}
-              >
-                Map Search
-              </NavLink>
-
-              <NavLink
-                to="/market-trends"
-                className={styles.mobileNavLink}
-                onClick={() => setMenuOpen(false)}
-              >
-                Market Trends
-              </NavLink>
-
-              <NavLink
-                to="/home-valuation"
-                className={styles.mobileNavLink}
-                onClick={() => setMenuOpen(false)}
-              >
-                Home Valuation
-              </NavLink>
-
-              <NavLink
-                to="/agents"
-                className={styles.mobileNavLink}
-                onClick={() => setMenuOpen(false)}
-              >
-                Agents
-              </NavLink>
-
-              <div
-                style={{
-                  height: 1,
-                  background: "rgba(255,255,255,0.1)",
-                  margin: "8px 0",
-                }}
-              />
-
-              <NavLink
-                to="/blog"
-                className={styles.mobileNavLink}
-                onClick={() => setMenuOpen(false)}
-              >
-                Blog
-              </NavLink>
-
-              <NavLink
-                to="/recommend-communities"
-                className={styles.mobileNavLink}
-                onClick={() => setMenuOpen(false)}
-              >
-                Recommend Communities
-              </NavLink>
-
-              <NavLink
-                to="/contact"
-                className={styles.mobileNavLink}
-                onClick={() => setMenuOpen(false)}
-              >
-                Contact Us
-              </NavLink>
+              {["map-search","market-trends","home-valuation","agents"].map((path) => (
+                <NavLink key={path} to={`/${path}`} className={styles.mobileNavLink} onClick={() => setMenuOpen(false)}>
+                  {path.replace("-", " ")}
+                </NavLink>
+              ))}
 
               {user && (
-                <>
-                  <div style={{ height: 8 }} />
-                  <div
-                    style={{
-                      padding: "0.25rem 0.5rem",
-                      color: "white",
-                      fontWeight: 600,
-                    }}
-                  >
-                    {user.full_name || user.email}
-                  </div>
-                  <button className={styles.mobileNavLink} onClick={handleLogout}>
-                    Logout
-                  </button>
-                </>
+                <button className={styles.mobileNavLink} onClick={handleLogout}>Logout</button>
               )}
 
               {!user && (
-                <button
-                  className={styles.mobileNavLink}
-                  onClick={() => {
-                    setShowLogin(true);
-                    setMenuOpen(false);
-                  }}
-                >
-                  Log in
-                </button>
+                <button className={styles.mobileNavLink} onClick={() => {
+                  setShowLogin(true);
+                  setMenuOpen(false);
+                }}>Log in</button>
               )}
             </div>
           )}
         </div>
       </header>
 
+      {/* MODALS */}
       <LoginModal
         isOpen={showLogin}
         onClose={() => setShowLogin(false)}
-        onForgotPassword={handleForgotPassword}
         onLoginSuccess={(userData) => {
           setUser(userData);
           localStorage.setItem("user", JSON.stringify(userData));
