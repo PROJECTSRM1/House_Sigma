@@ -3,7 +3,7 @@ from google.oauth2 import id_token
 from google.auth.transport import requests
 from fastapi import HTTPException
 
-GOOGLE_CLIENT_ID = "419610409681-u3s5mk5pp24gpn9rmp1krvbq0emmbijh.apps.googleusercontent.com"
+GOOGLE_CLIENT_ID = "492354254466-e56jgfu25vgjegatr1qa4ng9ib2kthmj.apps.googleusercontent.com"
 
 def verify_google_token(token: str):
     try:

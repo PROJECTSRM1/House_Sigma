@@ -30,7 +30,6 @@ export default function HomeValuation() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [openChat, setOpenChat] = useState(false);
 
-  const [showConsultForm, setShowConsultForm] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const [consultName, setConsultName] = useState("");
@@ -38,20 +37,17 @@ export default function HomeValuation() {
   const [consultEmail, setConsultEmail] = useState("");
   const [consultMessage, setConsultMessage] = useState("");
 
-  // ✅ Detect login
+  //  Detect login
   useEffect(() => {
     const user = localStorage.getItem("user");
     setIsLoggedIn(!!user);
   }, []);
 
-  // ✅ Update when login/logout occurs
+  //  Update when login/logout occurs
   useEffect(() => {
     const onAuthChanged = () => {
       const user = localStorage.getItem("user");
       setIsLoggedIn(!!user);
-      if (!user) {
-        setShowConsultForm(false);
-      }
     };
     window.addEventListener("auth-changed", onAuthChanged);
     return () => window.removeEventListener("auth-changed", onAuthChanged);
@@ -59,10 +55,6 @@ export default function HomeValuation() {
 
   const handleLoginClick = () => {
     setIsLoginOpen(true);
-  };
-
-  const handleGetEstimate = () => {
-    setShowConsultForm(true);
   };
 
   const handleConsultSubmit = () => {
@@ -107,21 +99,21 @@ export default function HomeValuation() {
 
         <br />
 
-        {/* ✅ Login or Get Estimate */}
+        {/*  Login or Estimate Button */}
         {!isLoggedIn && (
           <button className={styles.button} onClick={handleLoginClick}>
             Log In to Get Estimate
           </button>
         )}
 
-        {isLoggedIn && !showConsultForm && (
-          <button className={styles.button} onClick={handleGetEstimate}>
+        {isLoggedIn && (
+          <button className={styles.button}>
             Get Estimate
           </button>
         )}
 
-        {/* ✅ Show Consultation Form */}
-        {isLoggedIn && showConsultForm && (
+        {/*  Consultation Form now auto visible after login */}
+        {isLoggedIn && (
           <div className={styles.consultBox}>
             <input
               className={styles.consultInputFull}
@@ -172,16 +164,15 @@ export default function HomeValuation() {
       {openChat && <ChatBot onClose={() => setOpenChat(false)} />}
       <FloatingChatButton onOpen={() => setOpenChat(true)} />
 
-      {/* ✅ Login Modal */}
+      {/*  Login Modal */}
       <LoginModal
         isOpen={isLoginOpen}
         onClose={() => setIsLoginOpen(false)}
-        onForgotPassword={() => console.log("Forgot password")}
         redirectTo={null}
         onSuccess={() => {
           setIsLoginOpen(false);
           setIsLoggedIn(true);
-          window.dispatchEvent(new Event("auth-changed")); // ✅ sync globally
+          window.dispatchEvent(new Event("auth-changed"));
         }}
       />
     </>
@@ -270,9 +261,11 @@ function SelectInput() {
             ×
           </span>
         ) : (
-          <span className={`${open ? styles.arrowUp : styles.arrowDown} ${
-            selected ? styles.hideArrow : ""
-          }`} />
+          <span
+            className={`${open ? styles.arrowUp : styles.arrowDown} ${
+              selected ? styles.hideArrow : ""
+            }`}
+          />
         )}
       </div>
 
@@ -308,9 +301,19 @@ function Counter({ label, value, setValue }: CounterProps) {
       <label className={styles.label}>{label}</label>
 
       <div className={styles.counterBox}>
-        <button onClick={() => setValue(Math.max(0, value - 1))} className={styles.counterButton}>–</button>
+        <button
+          onClick={() => setValue(Math.max(0, value - 1))}
+          className={styles.counterButton}
+        >
+          –
+        </button>
         <div className={styles.counterValue}>{value}</div>
-        <button onClick={() => setValue(value + 1)} className={styles.counterButton}>+</button>
+        <button
+          onClick={() => setValue(value + 1)}
+          className={styles.counterButton}
+        >
+          +
+        </button>
       </div>
     </div>
   );
