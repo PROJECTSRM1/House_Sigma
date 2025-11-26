@@ -48,51 +48,48 @@ const LoginModal: React.FC<LoginModalProps> = ({
 
   // ===================== GOOGLE LOGIN =====================
   const handleGoogleLogin = () => {
-    const client = google.accounts.oauth2.initTokenClient({
-      client_id:
-        "492354254466-e56jgfu25vgjegatr1qa4ng9ib2kthmj.apps.googleusercontent.com",
-      scope: "email profile",
-      callback: async (response: any) => {
-        const token = response.access_token;
+  const client = google.accounts.id.initialize({
+    client_id: "492354254466-e56jgfu25vgjegatr1qa4ng9ib2kthmj.apps.googleusercontent.com",
+    callback: async (response: any) => {
+      console.log(" Google JWT:", response.credential);
 
-        try {
-          const res = await fetch("http://127.0.0.1:8000/api/auth/google", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ token }),
-          });
+      const token = response.credential;
 
-          const data = await res.json();
+      try {
+        const res = await fetch("http://127.0.0.1:8000/api/auth/google", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ token }),
+        });
 
-          if (!res.ok) {
-            alert("Google login failed");
-            return;
-          }
+        const data = await res.json();
 
-          const userData = {
-            id: data.user.id,
-            name: data.user.name,
-            email: data.user.email,
-            profile_image: data.user.profile_image,   // ✅ VERY IMPORTANT
-          };
-
-          setUser(userData);
-          localStorage.setItem("user", JSON.stringify(userData));
-          alert("Google login successful!");
-
-          onLoginSuccess?.(userData);
-          onSuccess?.();
-          onClose();
-
-          if (redirectTo) navigate(redirectTo);
-        } catch {
-          alert("Google login error");
+        if (!res.ok) {
+          alert("Google login failed");
+          return;
         }
-      },
-    });
 
-    client.requestAccessToken();
-  };
+        const userData = {
+          name: data.name,
+          email: data.email,
+        };
+
+        setUser(userData);
+        localStorage.setItem("user", JSON.stringify(userData));
+
+        alert("Google login successful!");
+        onLoginSuccess?.(userData);
+        onSuccess?.();
+        onClose();
+      } catch {
+        alert("Google login error");
+      }
+    },
+  });
+
+  google.accounts.id.prompt();
+};
+
 
   // ===================== NORMAL LOGIN =====================
   const handleLogin = async () => {
