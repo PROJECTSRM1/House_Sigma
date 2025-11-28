@@ -1,25 +1,18 @@
+
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from dotenv import load_dotenv
 import os
 
-from models.email_verify_schema import EmailRequest
-from models.user_db import users_db
-
-# ✅ Import password hasher
-from passlib.context import CryptContext
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
-def hash_password(password: str):
-    return pwd_context.hash(password)
-
+# Load .env variables
 load_dotenv()
 
 SENDER_EMAIL = os.getenv("MAIL_FROM")
 SENDER_PASSWORD = os.getenv("MAIL_PASSWORD")
 SMTP_SERVER = os.getenv("MAIL_SERVER")
 SMTP_PORT = int(os.getenv("MAIL_PORT", 587))
+
 
 def send_otp_email(receiver_email: str, otp: str):
     if not SENDER_EMAIL or not SENDER_PASSWORD:
@@ -47,29 +40,44 @@ def send_otp_email(receiver_email: str, otp: str):
             server.login(SENDER_EMAIL, SENDER_PASSWORD)
             server.sendmail(SENDER_EMAIL, receiver_email, message.as_string())
     except Exception as e:
-        print("Email send error:", e)
+        print("⚠️ Email send error:", e)
         raise RuntimeError("Failed to send OTP email")
 
-def signup_service(data: EmailRequest):
 
-    for u in users_db:
-        if u["email"].lower() == data.email.lower():
-            return {"error": "Email already registered"}
 
-    hashed_pwd = hash_password(data.password)
 
-    new_user = {
-        "id": len(users_db) + 1,
-        "name": data.name,
-        "email": data.email.lower(),
-        "password": hashed_pwd,  
-        "is_verified": True,
-        "is_logged_in": False
-    }
 
-    users_db.append(new_user)
+# import resend
+# import os
 
-    return {
-        "message": "Signup successful",
-        "email": data.email
-    }
+# # Load API key
+# RESEND_API_KEY = os.getenv("RESEND_API_KEY")
+
+# # Configure resend
+# resend.api_key = RESEND_API_KEY
+
+
+# def send_otp_email(receiver_email: str, otp: str):
+#     if not RESEND_API_KEY:
+#         raise ValueError("RESEND_API_KEY is not configured in Render environment variables")
+
+#     try:
+#         response = resend.Emails.send({
+#             "from": "Rajashekar <onboarding@resend.dev>",
+#             "to": [receiver_email],
+#             "subject": "Your OTP Verification Code",
+#             "html": f"""
+#                 <html>
+#                 <body>
+#                     <h2>Your OTP Code: <b>{otp}</b></h2>
+#                     <p>This OTP is valid for 2 minutes.</p>
+#                 </body>
+#                 </html>
+#             """
+#         })
+
+#         print("📩 OTP email sent:", response)
+
+#     except Exception as e:
+#         print("⚠️ Email send failed:", e)
+#         raise RuntimeError("Failed to send OTP email")

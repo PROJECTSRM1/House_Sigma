@@ -2,73 +2,92 @@ from fastapi import APIRouter, HTTPException
 import requests
 import os
 from dotenv import load_dotenv
+from sqlalchemy.orm import Session
+from fastapi import Depends
 
-load_dotenv()  # Load .env file
+from core.database import get_db
+from models.user_model import UserRegistration
+from utils.jwt_handler import create_access_token, create_refresh_token
+from datetime import datetime
 
-router = APIRouter(prefix="/api/auth", tags=["LinkedIn Auth"])
+load_dotenv()
 
-# Load from .env
+router = APIRouter(prefix="/api/auth/linkedin", tags=["LinkedIn Auth"])
+
 LINKEDIN_CLIENT_ID = os.getenv("LINKEDIN_CLIENT_ID")
 LINKEDIN_CLIENT_SECRET = os.getenv("LINKEDIN_CLIENT_SECRET")
-REDIRECT_URI = os.getenv("LINKEDIN_REDIRECT_URI")
+LINKEDIN_REDIRECT_URI = os.getenv("LINKEDIN_REDIRECT_URI")
 
-# 1️⃣ Redirect user to LinkedIn login
-@router.get("/linkedin/login")
+@router.get("/login")
 def linkedin_login():
-    if not LINKEDIN_CLIENT_ID:
-        raise HTTPException(500, "LinkedIn CLIENT_ID missing in .env")
-
-    linkedin_auth_url = (
+    auth_url = (
         "https://www.linkedin.com/oauth/v2/authorization"
-        f"?response_type=code&client_id={LINKEDIN_CLIENT_ID}"
-        f"&redirect_uri={REDIRECT_URI}"
-        "&scope=r_liteprofile%20r_emailaddress"
+        f"?response_type=code"
+        f"&client_id={LINKEDIN_CLIENT_ID}"
+        f"&redirect_uri={LINKEDIN_REDIRECT_URI}"
+        f"&scope=r_liteprofile%20r_emailaddress"
     )
-    return {"auth_url": linkedin_auth_url}
 
+    return {"auth_url": auth_url}
 
-# 2️⃣ LinkedIn → return CODE → we exchange to get access token
-@router.get("/linkedin/callback")
-def linkedin_callback(code: str):
+@router.get("/callback")
+def linkedin_callback(code: str, db: Session = Depends(get_db)):
 
-    token_url = "https://www.linkedin.com/oauth/v2/accessToken"
+    token_res = requests.post(
+        "https://www.linkedin.com/oauth/v2/accessToken",
+        data={
+            "grant_type": "authorization_code",
+            "code": code,
+            "redirect_uri": LINKEDIN_REDIRECT_URI,
+            "client_id": LINKEDIN_CLIENT_ID,
+            "client_secret": LINKEDIN_CLIENT_SECRET,
+        },
+    ).json()
 
-    data = {
-        "grant_type": "authorization_code",
-        "code": code,
-        "redirect_uri": REDIRECT_URI,
-        "client_id": LINKEDIN_CLIENT_ID,
-        "client_secret": LINKEDIN_CLIENT_SECRET,
-    }
+    if "access_token" not in token_res:
+        raise HTTPException(400, "Failed to get access token")
 
-    token_res = requests.post(token_url, data=data)
-    token_json = token_res.json()
-
-    if "access_token" not in token_json:
-        raise HTTPException(400, "Invalid token exchange response")
-
-    access_token = token_json["access_token"]
-
+    access_token = token_res["access_token"]
     headers = {"Authorization": f"Bearer {access_token}"}
 
-    profile_res = requests.get("https://api.linkedin.com/v2/me", headers=headers)
-    email_res = requests.get(
+    profile = requests.get("https://api.linkedin.com/v2/me", headers=headers).json()
+
+    email_data = requests.get(
         "https://api.linkedin.com/v2/emailAddress?q=members&projection=(elements*(handle~))",
-        headers=headers
-    )
+        headers=headers,
+    ).json()
 
-    profile = profile_res.json()
-    email_data = email_res.json()
+    email = email_data["elements"][0]["handle~"]["emailAddress"]
+    first = profile.get("localizedFirstName", "")
+    last = profile.get("localizedLastName", "")
+    full_name = f"{first} {last}".strip()
 
-    try:
-        email = email_data["elements"][0]["handle~"]["emailAddress"]
-    except:
-        email = None
+    user = db.query(UserRegistration).filter(UserRegistration.email == email).first()
+
+    if not user:
+        user = UserRegistration(
+            full_name=full_name,
+            email=email,
+            password=None,    
+            role_id=1,
+            created_by=None,
+            created_date=datetime.utcnow(),
+            is_active=True
+        )
+        db.add(user)
+        db.commit()
+        db.refresh(user)
+
+    access_jwt = create_access_token({"id": user.id, "email": user.email})
+    refresh_jwt = create_refresh_token({"id": user.id, "email": user.email})
 
     return {
-        "status": "success",
-        "linkedin_id": profile.get("id"),
-        "first_name": profile.get("localizedFirstName"),
-        "last_name": profile.get("localizedLastName"),
-        "email": email
+        "message": "LinkedIn login successful!",
+        "access_token": access_jwt,
+        "refresh_token": refresh_jwt,
+        "user": {
+            "id": user.id,
+            "name": user.full_name,
+            "email": user.email
+        }
     }

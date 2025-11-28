@@ -1,7 +1,8 @@
 from fastapi import APIRouter, HTTPException, Depends, UploadFile, File, Form
 import os
-
-# MODELS
+from datetime import datetime
+from passlib.context import CryptContext
+from sqlalchemy.orm import Session
 from models.email_verify_schema import (
     EmailRequest,
     ForgotPasswordOTPVerify,
@@ -10,30 +11,15 @@ from models.email_verify_schema import (
     MessageResponse,
     LoginRequest
 )
-from models.pending_users import pending_users
-from models.user_db import users_db
-from models.session_store import active_sessions
-
-# OTP SERVICES
+# from models.session_store import active_sessions
+from models.user_model import UserRegistration
+from core.database import get_db
 from controllers.otp_store import generate_otp, save_otp, verify_otp
 from services.otp_service import send_otp_email
+from utils.validations import validate_email_format, validate_password
+from utils.jwt_handler import create_access_token, create_refresh_token, verify_token
 
-# VALIDATIONS
-from utils.validations import (
-    validate_email_format,
-    check_email_exists,
-    validate_password
-)
 
-# JWT TOKENS
-from utils.jwt_handler import (
-    create_access_token,
-    create_refresh_token,
-    verify_token
-)
-
-# PASSWORD HASHING
-from passlib.context import CryptContext
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 def hash_password(password: str):
@@ -61,60 +47,59 @@ def get_profile_image(email: str):
 
 
 @router.post("/sign", response_model=MessageResponse)
-async def request_otp(request: EmailRequest):
+async def request_otp(request: EmailRequest, db: Session = Depends(get_db)):
 
     name = request.name.strip()
     email = request.email.lower().strip()
     password = request.password.strip()
 
     validate_email_format(email)
-    check_email_exists(email)     
     validate_password(password)
+
+    existing = db.query(UserRegistration).filter(UserRegistration.email == email).first()
+    if existing:
+        raise HTTPException(400, "Email already registered")
 
     hashed_pwd = hash_password(password)
 
-    pending_users[email] = {
-        "name": name,
-        "password": hashed_pwd
-    }
+    temp_user = UserRegistration(
+        full_name=name,
+        email=email,
+        password=hashed_pwd,
+        role_id=1,
+        is_active=False,
+        created_by=None,
+        created_date=datetime.utcnow()
+    )
 
-    try:
-        otp = generate_otp()
-        save_otp(email, otp)
-        send_otp_email(email, otp)
+    db.add(temp_user)
+    db.commit()
 
-        return MessageResponse(
-            message="OTP sent successfully!",
-            status="pending_verification"
-        )
+    otp = generate_otp()
+    save_otp(email, otp)
+    send_otp_email(email, otp)
 
-    except Exception as e:
-        raise HTTPException(500, f"Email sending failed: {str(e)}")
-
+    return MessageResponse(
+        message="OTP sent successfully!",
+        status="pending_verification"
+    )
 
 @router.post("/sign/otp", response_model=MessageResponse)
-async def verify_otp_endpoint(request: OTPVerify):
+async def verify_otp_endpoint(request: OTPVerify, db: Session = Depends(get_db)):
 
     email = verify_otp(request.otp)
-
     if not email:
         raise HTTPException(400, "Invalid or expired OTP")
 
-    if email not in pending_users:
-        raise HTTPException(400, "No pending signup found")
+    user = db.query(UserRegistration).filter(
+        UserRegistration.email == email
+    ).first()
 
-    data = pending_users[email]
+    if not user:
+        raise HTTPException(400, "Signup not found")
 
-    users_db.append({
-        "id": len(users_db) + 1,
-        "name": data["name"],
-        "email": email,
-        "password": data["password"],
-        "is_verified": True,
-        "is_logged_in": False
-    })
-
-    del pending_users[email]
+    user.is_active = True
+    db.commit()
 
     return MessageResponse(
         message="User registered successfully!",
@@ -123,30 +108,29 @@ async def verify_otp_endpoint(request: OTPVerify):
 
 
 @router.post("/login")
-async def login_user(request: LoginRequest):
+async def login_user(request: LoginRequest, db: Session = Depends(get_db)):
 
     username = request.username_or_email.strip().lower()
     password = request.password.strip()
 
-    user = next(
-        (u for u in users_db
-         if u["email"].lower() == username
-         or u["name"].lower() == username),
-        None
-    )
+    # Search user by email or name
+    user = db.query(UserRegistration).filter(
+        (UserRegistration.email == username) |
+        (UserRegistration.full_name == username)
+    ).first()
 
-    if user is None:
+    if not user:
         raise HTTPException(400, "User not found")
 
-    if not verify_password(password, user["password"]):
+    if not user.is_active:
+        raise HTTPException(400, "Your account is not verified yet")
+
+    if not verify_password(password, user.password):
         raise HTTPException(400, "Invalid password")
 
-    access_token = create_access_token({"id": user["id"], "email": user["email"]})
-    refresh_token = create_refresh_token({"id": user["id"], "email": user["email"]})
-
-    active_sessions[user["email"]] = True
-
-    profile_image_url = get_profile_image(user["email"])
+    # JWT tokens
+    access_token = create_access_token({"id": user.id, "email": user.email})
+    refresh_token = create_refresh_token({"id": user.id, "email": user.email})
 
     return {
         "message": "Login successful",
@@ -155,12 +139,12 @@ async def login_user(request: LoginRequest):
         "refresh_token": refresh_token,
         "token_type": "bearer",
         "user": {
-            "id": user["id"],
-            "name": user["name"],
-            "email": user["email"],
-            "profile_image": profile_image_url
+            "id": user.id,
+            "name": user.full_name,
+            "email": user.email
         }
     }
+
 
 
 @router.post("/upload-image")
@@ -169,135 +153,147 @@ async def upload_image(
     folder: str = Form(...),
     image: UploadFile = File(...)
 ):
-
     folder = folder.strip()
 
     if folder not in ALLOWED_FOLDERS:
-        raise HTTPException(400, f"Invalid folder. Choose from: {ALLOWED_FOLDERS}")
+        raise HTTPException(400, f"Invalid folder. Allowed: {ALLOWED_FOLDERS}")
 
     upload_path = os.path.join(BASE_DIR, folder)
     os.makedirs(upload_path, exist_ok=True)
 
     safe_email = email.replace("@", "_").replace(".", "_").lower()
     filename = f"{safe_email}.jpg"
-    file_path = os.path.join(upload_path, filename)
 
-    if not image.filename.lower().endswith((".jpg", ".jpeg", ".png", ".webp")):
-        raise HTTPException(400, "Only JPG/PNG/WEBP allowed")
+    file_path = os.path.join(upload_path, filename)
 
     with open(file_path, "wb") as f:
         f.write(await image.read())
 
-    image_url = f"http://localhost:8000/static/{folder}/{filename}"
-
     return {
         "status": "success",
-        "message": f"Image uploaded successfully to {folder}",
-        "image_url": image_url
+        "message": "Image uploaded",
+        "image_url": f"http://localhost:8000/static/{folder}/{filename}"
     }
 
-
 @router.post("/forgot-password", response_model=MessageResponse)
-async def forgot_password(request: ForgotPasswordRequest):
+async def forgot_password(request: ForgotPasswordRequest, db: Session = Depends(get_db)):
+
     email = request.email.lower().strip()
 
-    user = next((u for u in users_db if u["email"] == email), None)
+    user = db.query(UserRegistration).filter(UserRegistration.email == email).first()
     if not user:
         raise HTTPException(400, "Email not registered")
 
-    try:
-        otp = generate_otp()
-        save_otp(email, otp)
-        send_otp_email(email, otp)
+    otp = generate_otp()
+    save_otp(email, otp)
+    send_otp_email(email, otp)
 
-        return MessageResponse(
-            message="OTP sent to your email for password reset",
-            status="otp_sent"
-        )
-
-    except Exception as e:
-        raise HTTPException(500, f"Error sending OTP: {str(e)}")
+    return MessageResponse(
+        message="Password reset OTP sent",
+        status="otp_sent"
+    )
 
 
 @router.post("/forgot-password/verify", response_model=MessageResponse)
-async def forgot_password_verify(request: ForgotPasswordOTPVerify):
+async def forgot_password_verify(request: ForgotPasswordOTPVerify, db: Session = Depends(get_db)):
 
     email = request.email.lower().strip()
-    otp = request.otp.strip()
-    new_password = request.new_password.strip()
 
-    verified_email = verify_otp(otp)
-    if verified_email != email:
-        raise HTTPException(400, "Invalid or expired OTP")
+    verified = verify_otp(request.otp)
+    if verified != email:
+        raise HTTPException(400, "Invalid OTP")
 
-    user = next((u for u in users_db if u["email"] == email), None)
+    user = db.query(UserRegistration).filter(UserRegistration.email == email).first()
     if not user:
         raise HTTPException(400, "User not found")
 
-    if verify_password(new_password, user["password"]):
-        raise HTTPException(
-            status_code=400,
-            detail="New password cannot be same as old password."
-        )
+    if verify_password(request.new_password, user.password):
+        raise HTTPException(400, "New password cannot be same as old password")
 
-    validate_password(new_password)
-
-    user["password"] = hash_password(new_password)
+    user.password = hash_password(request.new_password)
+    db.commit()
 
     return MessageResponse(
-        message="Password reset successful. You can now login.",
+        message="Password reset successful",
         status="password_reset"
     )
 
-
 @router.post("/logout")
-async def logout_user(username_or_email: str):
+async def logout_user(username_or_email: str, db: Session = Depends(get_db)):
 
-    username_or_email = username_or_email.strip().lower()
+    username_or_email = username_or_email.lower().strip()
 
-    user = next(
-        (u for u in users_db
-         if u["email"].lower() == username_or_email
-         or u["name"].lower() == username_or_email),
-        None
-    )
+    user = db.query(UserRegistration).filter(
+        (UserRegistration.email == username_or_email) |
+        (UserRegistration.full_name == username_or_email)
+    ).first()
 
     if not user:
-        raise HTTPException(400, "User not found")
+        raise HTTPException(404, "User not found")
 
-    if active_sessions.get(user["email"]) != True:
-        raise HTTPException(400, "You are not logged in")
+    user.modified_date = datetime.utcnow()
+    db.commit()
 
-    del active_sessions[user["email"]]
+    return {"message": "Logout successful", "status": "logged_out"}
 
-    return {"message": "Logout successful!", "status": "logged_out"}
+
+
+@router.get("/users")
+async def get_all_users(db: Session = Depends(get_db)):
+    users = db.query(UserRegistration).all()
+
+    return {
+        "total": len(users),
+        "users": [
+            {
+                "id": u.id,
+                "name": u.full_name,
+                "email": u.email,
+                "is_active": u.is_active,
+                "created_date": u.created_date
+            }
+            for u in users
+        ]
+    }
+
+
+@router.get("/users/{user_id}")
+async def get_user_by_id(user_id: int, db: Session = Depends(get_db)):
+    user = db.query(UserRegistration).filter(UserRegistration.id == user_id).first()
+
+    if not user:
+        raise HTTPException(404, "User not found")
+
+    return {
+        "id": user.id,
+        "name": user.full_name,
+        "email": user.email,
+        "mobile": user.mobile,
+        "city_id": user.city_id,
+        "role_id": user.role_id,
+        "is_active": user.is_active,
+        "created_date": user.created_date,
+        "modified_date": user.modified_date
+    }
+
 
 
 @router.delete("/delete-user")
-async def delete_user(username_or_email: str):
+async def delete_user(username_or_email: str, db: Session = Depends(get_db)):
+    username_or_email = username_or_email.lower().strip()
 
-    username_or_email = username_or_email.strip().lower()
+    user = db.query(UserRegistration).filter(
+        (UserRegistration.email == username_or_email) |
+        (UserRegistration.full_name == username_or_email)
+    ).first()
 
-    index = next(
-        (i for i, u in enumerate(users_db)
-         if u["email"].lower() == username_or_email
-         or u["name"].lower() == username_or_email),
-        None
-    )
+    if not user:
+        raise HTTPException(404, "User not found")
 
-    if index is None:
-        raise HTTPException(400, "User not found")
-
-    user = users_db[index]
-
-    if user["email"] in active_sessions:
-        del active_sessions[user["email"]]
-
-    del users_db[index]
+    db.delete(user)
+    db.commit()
 
     return {"message": "User deleted successfully", "status": "user_deleted"}
-
-
 
 @router.get("/me")
 def get_current_user(user=Depends(verify_token)):

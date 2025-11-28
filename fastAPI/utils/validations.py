@@ -1,13 +1,15 @@
 import re
-from fastapi import HTTPException, status
-from models.user_db import users_db
-from models.pending_users import pending_users
+from fastapi import HTTPException, status, Depends
+from sqlalchemy.orm import Session
+
+from core.database import get_db
+from models.user_model import UserRegistration
 
 GMAIL_REGEX = r"^[A-Za-z0-9._%+-]+@gmail\.com$"
 
 
 def validate_email_format(email: str):
-    """Check if email is a valid Gmail address."""
+    """Validate Gmail format only."""
     if not re.match(GMAIL_REGEX, email):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -15,27 +17,17 @@ def validate_email_format(email: str):
         )
 
 
-def check_email_exists(email: str):
-    """Check if email already registered or pending OTP."""
-    for user in users_db:
-        if user["email"].lower() == email.lower():
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail="Email already registered. Please login instead."
-            )
+def check_email_exists(email: str, db: Session):
+    """Check if email already exists in PostgreSQL."""
+    existing = db.query(UserRegistration).filter(
+        UserRegistration.email == email.lower()
+    ).first()
 
-    if email.lower() in (e.lower() for e in pending_users.keys()):
+    if existing:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="OTP already sent to this email. Please verify the OTP."
+            detail="Email already registered. Please login instead."
         )
-
-
-
-# def check_name_exists(name: str):
-#     """Name validation removed — names can repeat now."""
-#     return
-
 
 def validate_password(password: str):
 
@@ -70,23 +62,3 @@ def validate_password(password: str):
         )
 
 
-PHONE_REGEX = r"^[6-9]\d{9}$"
-
-
-def validate_phone_format(phone: str):
-    """Validate 10-digit Indian phone number starting with 6/7/8/9."""
-    if not re.match(PHONE_REGEX, phone):
-        raise HTTPException(
-            status_code=400,
-            detail="Invalid phone number. Must be 10 digits and start with 6, 7, or 9."
-        )
-
-
-def check_phone_exists(phone: str):
-    """Check if phone number already exists in registered users."""
-    for user in users_db:
-        if user.get("phone") == phone:
-            raise HTTPException(
-                status_code=400,
-                detail="Phone number already registered."
-            )
