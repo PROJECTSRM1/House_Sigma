@@ -396,3 +396,51 @@ export const justSold: Property[] = [
     blurred: true
   }
 ];
+  /* ======================================================
+   8. Best For Rental Investment
+====================================================== */
+export const bestForRentalInvestment: Property[] = [
+  {
+    id: 22,
+    image: "/src/assets/Britishcolumbia_files/BC22.jpg",
+    price: "$449,900",
+    address: "2204 Renton Park NW",
+    location: "Calgary - Renton",
+    type: "Condo",
+    bedrooms: 2,
+    bathrooms: 2,
+    parking: 1,
+    status: "For Sale",
+    listed: "4 days ago",
+    agent: "RentalCorp Realty"
+  },
+  {
+    id: 23,
+    image: "/src/assets/Britishcolumbia_files/BC23.jpg",
+    price: "$389,000",
+    address: "18 Capital Yield Lane",
+    location: "Edmonton - Capital View",
+    type: "Townhouse",
+    bedrooms: 3,
+    bathrooms: 3,
+    parking: 1,
+    status: "For Sale",
+    listed: "2 days ago",
+    agent: "YieldMax Realty"
+  },
+  {
+    id: 24,
+    image: "/src/assets/Britishcolumbia_files/BC.jpg",
+    price: "$510,500",
+    address: "347 Investment Ridge SW",
+    location: "Calgary - Ridgeview",
+    type: "Duplex",
+    bedrooms: 4,
+    bathrooms: 3,
+    parking: 2,
+    status: "For Sale",
+    listed: "1 hour ago",
+    agent: "PrimeRent Investors Inc"
+  }
+];
+

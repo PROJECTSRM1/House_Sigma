@@ -9,6 +9,7 @@ import britishHero from "@/assets/Britishcolumbia_files/BC.jpg";
 
 import {
   newlyAdded,
+  bestForRentalInvestment,
   bestForSchools,
   featuredListings,
   highGrowth,
@@ -56,7 +57,7 @@ const toListing = (p: BCProperty): MockPropertyListing => ({
 } as MockPropertyListing);
 
 const newlyAddedListings = newlyAdded.map(toListing);
-const rentalInvestmentListings = newlyAdded.map(toListing);
+const rentalInvestmentListings = bestForRentalInvestment.map(toListing);
 const bestForSchoolsListings = bestForSchools.map(toListing);
 const featuredListingsConverted = featuredListings.map(toListing);
 const highGrowthListings = highGrowth.map(toListing);
@@ -67,7 +68,12 @@ const justSoldListings = (justSold ?? []).map(toListing);
 const BritishColumbia: React.FC = () => {
   return (
     <div className="min-h-screen">
-     <Hero backgroundImage={britishHero} />
+          <div
+  
+  style={{ backgroundImage: `url(${britishHero})` }}
+>
+  <Hero />
+</div>
      <Navbar />
        <FilterBar />
        
