@@ -22,7 +22,12 @@ const Alberta = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
-       <Hero backgroundImage={albertaHero} />
+       <div
+  style={{ backgroundImage: `url(${albertaHero})` }}
+>
+  <Hero />
+</div>
+
       <FilterBar />
       
       <PropertySection title="Newly Added to HouseSigma" properties={newlyAdded} />
