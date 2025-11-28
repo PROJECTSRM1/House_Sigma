@@ -132,18 +132,22 @@ async def login_user(request: LoginRequest, db: Session = Depends(get_db)):
     access_token = create_access_token({"id": user.id, "email": user.email})
     refresh_token = create_refresh_token({"id": user.id, "email": user.email})
 
+    profile_image_url = get_profile_image(user.email)
+
     return {
-        "message": "Login successful",
-        "status": "success",
-        "access_token": access_token,
-        "refresh_token": refresh_token,
-        "token_type": "bearer",
-        "user": {
-            "id": user.id,
-            "name": user.full_name,
-            "email": user.email
-        }
+    "message": "Login successful",
+    "status": "success",
+    "access_token": access_token,
+    "refresh_token": refresh_token,
+    "token_type": "bearer",
+    "user": {
+        "id": user.id,
+        "name": user.full_name,
+        "email": user.email,
+        "profile_image": profile_image_url
     }
+}
+
 
 
 

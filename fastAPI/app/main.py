@@ -1,5 +1,7 @@
 from fastapi import FastAPI  
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+import os
 
 from routes.email_auth import router as email_router
 from routes.google_auth import router as google_router
@@ -10,6 +12,13 @@ from routes.facebook import router as facebook_router
 
 
 app = FastAPI(title="Python FastAPI MVC Backend")
+
+# ✅ Mount static folder
+app.mount(
+    "/static",
+    StaticFiles(directory=os.path.join(os.path.dirname(__file__), "static")),
+    name="static"
+)
 
 app.add_middleware(
     CORSMiddleware,
