@@ -26,6 +26,16 @@ const Navbar: React.FC = () => {
   const [selectedProvince, setSelectedProvince] = useState("ON");
   const headerRef = useRef<HTMLElement | null>(null);
 
+  useEffect(() => {
+    const openLoginHandler = () => setShowLogin(true);
+
+    window.addEventListener("open-login-modal", openLoginHandler);
+
+    return () => {
+      window.removeEventListener("open-login-modal", openLoginHandler);
+    };
+  }, []);
+
   const { user, setUser } = useAuth();
 
   const defaultAvatar = "http://127.0.0.1:8000/static/users/default.png";
