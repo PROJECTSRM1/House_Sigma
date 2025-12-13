@@ -1,37 +1,398 @@
-.noBorder {
-  border: none !important;
-  outline: none !important;
-  
+/* Page Wrapper */
+.pageWrapper {
+  min-height: 100vh;
+  background-color: #f9fafb;
+  padding-top: 2rem;
+  padding-bottom: 3rem;
 }
 
-/* Footer */
-.footer {
-  background-color: hsl(var(--navy-dark));
-  color: white;
-  padding: 1.5rem;
-  margin-top: 3rem;
-}
-
-.footer-content {
-  max-width: 80rem;
+.container {
+  width: 92%;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 1rem;
 }
 
-.footer-links {
+@media (min-width: 768px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+}
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  padding: 2rem 0;
+}
+
+.heroTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #111827;
+  /* margin-bottom: 0.75rem; */
+}
+
+@media (min-width: 768px) {
+  .heroTitle {
+    font-size: 3rem;
+  }
+}
+
+.heroUnderline {
+  width: 100px;
+  height: 4px;
+  /* background: linear-gradient(90deg, #0f93ff 0%, #0f93ff 100%); */
+  background: linear-gradient(90deg, 0%#0f93ff, #0f93ff 100%);
+  margin: 0 auto 1rem;
+  border-radius: 2px;
+}
+
+.heroSubtitle {
+  font-size: 1.125rem;
+  color: #6b7280;
+  font-weight: 400;
+}
+
+@media (min-width: 768px) {
+  .heroSubtitle {
+    font-size: 1.25rem;
+  }
+}
+
+/* Search Card */
+.searchCard {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e5e7eb;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.searchWrapper {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 2rem;
-  font-size: 0.875rem;
+  gap: 0.75rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 0.5rem 1rem;
+  background: white;
+  transition: all 0.2s;
 }
 
-.footer-link {
+.searchWrapper:focus-within {
+  border-color: #0f93ff;
+  box-shadow: 0 0 0 3px rgba(255, 122, 0, 0.1);
+}
+
+.searchIcon {
+  font-size: 1.5rem;
+  color: #9ca3af;
+}
+
+.searchInput {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  color: #111827;
+  background: transparent;
+  padding: 0.5rem;
+}
+
+.searchInput::placeholder {
+  color: #9ca3af;
+}
+
+.searchButton {
+  padding: 0.625rem 1.5rem;
+  /* background: linear-gradient(135deg, #0f93ff 0%, #0f93ff 100%); */
+  background: linear-gradient(135deg, #0f93ff 0%, #0f93ff 100%);
   color: white;
-  text-decoration: none;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.searchButton:hover {
+  /* background: linear-gradient(135deg, #0f93ff 0%, #d54d00 100%); */
+  background: linear-gradient(135deg, #0f93ff 0%, #0f93ff 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 122, 0, 0.3);
+}
+
+/* Info Card */
+.infoCard {
+  background: #fef3c7;
+  border: 1px solid #0f93ff;
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.infoText {
+  font-size: 0.9375rem;
+  color: #78350f;
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .infoText {
+    font-size: 1rem;
+  }
+}
+
+.link {
+  color: #0f93ff;
+  font-weight: 600;
+  text-decoration: underline;
   transition: color 0.2s;
 }
 
-.footer-link:hover {
-  color: rgba(255, 255, 255, 0.8);
+.link:hover {
+  color: #0f93ff;
+}
+
+/* Quick Help Section */
+.quickHelpSection {
+  margin-bottom: 2.5rem;
+}
+
+.quickHelpTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 1rem;
+}
+
+.chipGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+}
+
+.chip {
+  padding: 0.5rem 1rem;
+  background: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 24px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.chip:hover {
+  background: #fff7ed;
+  border-color: #0f93ff;
+  color: #0f93ff;
+  transform: translateY(-2px);
+}
+
+/* Contact Options Grid */
+.contactOptionsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .contactOptionsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.contactOptionCard {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e5e7eb;
+  padding: 1.75rem;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.contactOptionCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+  border-color: #0f93ff;
+}
+
+.iconCircle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin: 0 auto 1rem;
+}
+
+.cardTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.5rem;
+}
+
+.cardText {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-bottom: 1.25rem;
+}
+
+.primaryButton {
+  width: 100%;
+  padding: 0.625rem 1.25rem;
+  /* background: linear-gradient(135deg, #0f93ff 0%, #0f93ff 100%); */
+  background: linear-gradient(135deg, #0f93ff 0%, #1194ff 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.primaryButton:hover {
+  /* background: linear-gradient(135deg, #0f93ff 0%, #d54d00 100%); */
+   background: linear-gradient(135deg, #0f93ff 0%, #0f93ff 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 122, 0, 0.3);
+}
+
+/* Sections Grid */
+.sectionsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .sectionsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Card */
+.card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e5e7eb;
+  padding: 1.75rem;
+  transition: all 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.cardIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.cardHeading {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.cardDescription {
+  font-size: 0.9375rem;
+  color: #6b7280;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+/* Contact Item */
+.contactItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.contactLabel {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.contactLink {
+  color: #0f93ff;
+  font-size: 0.9375rem;
+  text-decoration: underline;
+  transition: color 0.2s;
+  font-weight: 500;
+}
+
+.contactLink:hover {
+  color: #0f93ff;
+}
+
+.emailButton {
+  display: inline-block;
+  padding: 0.625rem 1.25rem;
+  background: white;
+  border: 2px solid #0f93ff;
+  color: #0f93ff;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.emailButton:hover {
+  background: #fff7ed;
+  transform: translateY(-1px);
+}
+
+.outlineButton {
+  display: inline-block;
+  padding: 0.625rem 1.5rem;
+  background: white;
+  border: 2px solid #0f93ff;
+  color: #0f93ff;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  transition: all 0.2s;
+  margin-top: 0.5rem;
+}
+
+.outlineButton:hover {
+  background: #fff7ed;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(255, 122, 0, 0.2);
 }

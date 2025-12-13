@@ -92,7 +92,6 @@ const Navbar: React.FC = () => {
       <header className={headerClass} ref={headerRef}>
         <div className={styles.navContainer}>
           <div className={styles.navWrapper}>
-
             {/* LEFT SECTION */}
             <div className={styles.leftSection}>
               <NavLink to="/" className={styles.logoBox}>

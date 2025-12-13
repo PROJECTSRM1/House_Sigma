@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "./Join.css";
 
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import googleLogo from "@/assets/google.png";
 import { useAuth } from "@/context/AuthContext";
+
 const API_BASE = "http://127.0.0.1:8000";
 
 const countryList = [
@@ -30,11 +31,38 @@ const Join: React.FC = () => {
   const [password, setPassword] = useState("");
 
   const [error, setError] = useState("");
-
   const [verificationCode, setVerificationCode] = useState("");
 
   const [loadingNext, setLoadingNext] = useState(false);
   const [loadingVerify, setLoadingVerify] = useState(false);
+
+  // Profile image
+  const [profileImage, setProfileImage] = useState<File | null>(null);
+
+  // TIMER STATE
+  const [timer, setTimer] = useState(120); // 2 minutes
+  const [otpExpired, setOtpExpired] = useState(false);
+
+  // Start timer when step = 3
+  useEffect(() => {
+    if (step === 3) {
+      setTimer(120);
+      setOtpExpired(false);
+
+      const interval = setInterval(() => {
+        setTimer((prev) => {
+          if (prev <= 1) {
+            clearInterval(interval);
+            setOtpExpired(true);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+
+      return () => clearInterval(interval);
+    }
+  }, [step]);
 
   const validateStep1 = () => {
     if (!fullName.trim()) {
@@ -91,13 +119,11 @@ const Join: React.FC = () => {
       const data = await response.json();
 
       if (response.ok) {
-        console.log("OTP sent:", data);
         setStep(2);
       } else {
         setError(data.detail || "Failed to send OTP");
       }
     } catch (error) {
-      console.error(error);
       setError("Server error while sending OTP.");
     } finally {
       setLoadingNext(false);
@@ -126,11 +152,7 @@ const Join: React.FC = () => {
         return;
       }
 
-      // ---------------------------------------
-      // FIXED: Your backend does NOT return user or token.
-      // So we must login user after successful OTP.
-      // ---------------------------------------
-
+      // LOGIN AFTER OTP SUCCESS
       const loginRes = await fetch(`${API_BASE}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -147,20 +169,40 @@ const Join: React.FC = () => {
         return;
       }
 
-      // Save token & user
-      localStorage.setItem("token", loginData.access_token);
-      localStorage.setItem("user", JSON.stringify(loginData.user));
+      let imageUrl = loginData.user.profile_image;
 
-      setUser(loginData.user);
+      // UPLOAD PROFILE IMAGE
+      if (profileImage) {
+        const formData = new FormData();
+        formData.append("email", email);
+        formData.append("folder", "users");
+        formData.append("image", profileImage);
+
+        const imgRes = await fetch(`${API_BASE}/api/auth/upload-image`, {
+          method: "POST",
+          body: formData,
+        });
+
+        const imgData = await imgRes.json();
+        imageUrl = imgData.image_url;
+      }
+
+      const finalUser = {
+        ...loginData.user,
+        profile_image: imageUrl,
+      };
+
+      localStorage.setItem("token", loginData.access_token);
+      localStorage.setItem("user", JSON.stringify(finalUser));
+
+      setUser(finalUser);
       window.dispatchEvent(new Event("auth-changed"));
 
       alert("Account created & logged in!");
-
       navigate("/");
       window.location.reload();
 
     } catch (error) {
-      console.error(error);
       setError("Server error verifying OTP.");
     } finally {
       setLoadingVerify(false);
@@ -182,7 +224,7 @@ const Join: React.FC = () => {
           <div className={step >= 3 ? "circle active" : "circle"}>3</div>
         </div>
 
-        {/* ==================== STEP 1 ==================== */}
+        {/* STEP 1 */}
         {step === 1 && (
           <div className="step-box">
             <div className="tabs">
@@ -270,6 +312,18 @@ const Join: React.FC = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
 
+            {/* PROFILE IMAGE */}
+            <input
+              type="file"
+              accept="image/*"
+              className="join-input"
+              onChange={(e) => {
+                if (e.target.files && e.target.files[0]) {
+                  setProfileImage(e.target.files[0]);
+                }
+              }}
+            />
+
             {error && <p className="error-text">{error}</p>}
 
             <button
@@ -282,21 +336,81 @@ const Join: React.FC = () => {
           </div>
         )}
 
-        {/* ==================== STEP 2 ==================== */}
+        {/* STEP 2 */}
         {step === 2 && (
           <div className="step-box">
-
             <div className="scroll-card">
               <center><h3>HouseSigma Terms of Use</h3></center>
               <p>
-                By using this website, you are agreeing to comply and be bound by the following terms...
+                By using this website, you are agreeing to comply and be bound by the following terms of service and use.
+                Please review the following terms in their entirety and ensure their comprehension before using and
+                viewing this website.
+                <br /><br />
+
+                Acknowledge and understand that the Terms of Use do not create an agency relationship and do not impose
+                a financial obligation on the Registrant or create any representation agreement between the Registrant
+                and the Participant.
+                <br /><br />
+
+                Acknowledges that you are entering into a lawful broker-consumer relationship with the HouseSigma Inc.
+                Brokerage.
+                <br /><br />
+
+                Acknowledges that after the Terms of Use agreement is opened for viewing, a “mouse click” is sufficient
+                to acknowledge agreement to those terms.
+                <br /><br />
+
+                Understand that HouseSigma assumes no responsibility for the accuracy of any information shown on the
+                HouseSigma website and mobile app.
+                <br /><br />
+
+                Understand that all data obtained from the VOW (Virtual Office Website) is intended only for your
+                personal, non-commercial use.
+                <br /><br />
+
+                Do have a bona fide interest in the purchase, sale, or lease of real estate of the type being offered
+                through the VOW.
+                <br /><br />
+
+                Agree not to copy, redistribute, retransmit, or otherwise use any of the data or Listing Information
+                provided, except in connection with the Consumer’s consideration of the purchase, sale, or lease of an
+                individual property.
+                <br /><br />
+
+                Acknowledge the Board/Association ownership of and the validity of the copyright in the MLS® database.
+                <br /><br />
+
+                If at any time, an agreement is entered between HouseSigma Inc. and Consumer imposing a financial
+                obligation on the Consumer or creating representation of the Consumer by HouseSigma Inc., it must be
+                established separately from the Terms of Use and may not be accepted solely by mouse click.
+                <br /><br />
+
+                <strong>Copyright</strong><br />
+                The content on this website is protected by copyright laws and is intended solely for private,
+                non-commercial use. Any reproduction, distribution, or use beyond personal purposes is prohibited.
               </p>
             </div>
 
             <div className="scroll-card">
               <center><h3>Canadian Real Estate Association Terms of Use</h3></center>
               <p>
-                You are agreeing to comply and be bound by the following terms...
+                You are agreeing to comply and be bound by the following terms of service and use.
+                <br /><br />
+
+                The information provided on this site is based in whole or in part on information provided by members of
+                The Canadian Real Estate Association, who are responsible for its accuracy. CREA assumes no responsibility
+                for its accuracy.
+                <br /><br />
+
+                CREA owns the REALTOR® and MLS® trademarks. These marks identify real estate professionals who are
+                members of CREA and who must follow CREA's rules, By-Laws, and REALTOR® Code.
+                <br /><br />
+
+                The information may only be used by consumers with a bona fide interest in real estate transactions and
+                cannot be used for commercial purposes.
+                <br /><br />
+
+                RAHB and OREB make no representations regarding the accuracy or suitability of the listing information.
               </p>
             </div>
 
@@ -312,7 +426,7 @@ const Join: React.FC = () => {
           </div>
         )}
 
-        {/* ==================== STEP 3 (OTP) ==================== */}
+        {/* STEP 3 - OTP */}
         {step === 3 && (
           <div className="step-box-small">
             <p className="verification-text">
@@ -321,12 +435,28 @@ const Join: React.FC = () => {
               <span className="verification-email">{email}</span>
             </p>
 
+            {/* TIMER */}
+            <p className="timer-text">
+              {otpExpired ? (
+                <span style={{ color: "red" }}>OTP expired</span>
+              ) : (
+                <>
+                  OTP valid for:{" "}
+                  <b>
+                    {Math.floor(timer / 60)}:
+                    {String(timer % 60).padStart(2, "0")}
+                  </b>
+                </>
+              )}
+            </p>
+
             <input
               type="text"
               placeholder="Verification Code"
               className="join-input"
               value={verificationCode}
               onChange={(e) => setVerificationCode(e.target.value)}
+              disabled={otpExpired}
             />
 
             {error && <p className="error-text">{error}</p>}
@@ -334,7 +464,7 @@ const Join: React.FC = () => {
             <button
               className="next-btn"
               onClick={verifyOtp}
-              disabled={loadingVerify}
+              disabled={loadingVerify || otpExpired}
             >
               {loadingVerify ? "Loading..." : "Confirm"}
             </button>

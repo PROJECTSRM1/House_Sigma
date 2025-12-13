@@ -23,7 +23,7 @@ export type Agent = {
   province: string;
   area: string;
   languages: string[];
-  avatar?: string;
+  avatar?: string; // local image URL
 };
 
 const PROVINCES = ["Ontario", "British Columbia", "Alberta"] as const;
@@ -35,7 +35,6 @@ const SVG_PLACEHOLDER =
 /**
  * Global caches (module-level).
  */
-const loadedUrlCache = new Set<string>();
 const compressedUrlCache = new Map<string, string>();
 const compressingUrls = new Set<string>();
 
@@ -48,48 +47,171 @@ const typedCompressImageFile = compressImageFile as unknown as (input: File | st
 const typedCompressImageFiles = compressImageFiles as unknown as (input: string[]) => Promise<unknown>;
 const typedGetFileSizeKB = getFileSizeKB as unknown as (f: File) => Promise<number>;
 
-/* -------------------- AgentCard -------------------- */
-function AgentCard({ agent }: { agent: Agent }): JSX.Element {
-  // The "final" url is either the compressed version (if available) or original avatar.
-  const finalUrl = agent.avatar ? (compressedUrlCache.get(agent.avatar) || agent.avatar) : undefined;
+/**
+ * Convert a Blob -> File (useful because helpers may expect File)
+ */
+function blobToFile(blob: Blob, filename = "image"): File {
+  try {
+    return new File([blob], filename, { type: blob.type || "image/jpeg" });
+  } catch {
+    // Some older environments may not allow `File` constructor; fallback to Blob cast
+    return blob as unknown as File;
+  }
+}
 
-  const [loaded, setLoaded] = useState<boolean>(() => {
-    return !!(finalUrl && loadedUrlCache.has(finalUrl));
-  });
-  const [errored, setErrored] = useState(false);
+/**
+ * Fetch a URL and return a Blob (or null).
+ */
+async function fetchBlob(url: string): Promise<Blob | null> {
+  try {
+    const resp = await fetch(url, { method: "GET", cache: "force-cache" });
+    if (!resp.ok) return null;
+    return await resp.blob();
+  } catch {
+    return null;
+  }
+}
 
-  useEffect(() => {
-    const url = finalUrl;
-    if (!url) return;
+/**
+ * Get size in KB for a Blob/File/dataURL string.
+ * Prefer calling the provided helper if it expects File; otherwise fallback.
+ */
+async function sizeKBOf(input: string | Blob | File): Promise<number | null> {
+  // If input is a data URL string, estimate from base64
+  if (typeof input === "string") {
+    if (input.startsWith("data:")) {
+      const base64 = input.split(",")[1] || "";
+      const approxBytes = Math.ceil((base64.length * 3) / 4);
+      return Math.round(approxBytes / 1024);
+    } else {
+      // it's a remote URL string - try fetch blob and measure
+      const b = await fetchBlob(input);
+      if (!b) return null;
+      return Math.round((b.size || 0) / 1024);
+    }
+  }
 
-    if (loadedUrlCache.has(url)) {
-      setLoaded(true);
-      return;
+  // For Blob/File: try the helper (if available) by passing a File
+  try {
+    const fileLike = input instanceof File ? input : blobToFile(input as Blob, "avatar");
+    const maybe = await typedGetFileSizeKB(fileLike);
+    if (typeof maybe === "number") return Math.round(maybe);
+  } catch {
+    // fallback to blob.size
+  }
+
+  try {
+    const size = (input as Blob).size || 0;
+    return Math.round(size / 1024);
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Compress a single URL and, if beneficial, store compressed data URL in cache.
+ * This function fetches the original as a Blob -> File and calls the compressor with File.
+ */
+async function compressAndCacheUrl(url: string, bump: () => void): Promise<void> {
+  if (!url) return;
+  if (compressedUrlCache.has(url)) return;
+  if (compressingUrls.has(url)) return;
+  compressingUrls.add(url);
+
+  try {
+    // fetch blob of original so we can pass File to helpers that expect File
+    const originalBlob = await fetchBlob(url);
+    const originalFile = originalBlob
+      ? blobToFile(originalBlob, "original.jpg")
+      : undefined;
+
+    const originalSizeKB = originalFile
+      ? await sizeKBOf(originalFile)
+      : await sizeKBOf(url);
+
+    let compressedOutput: CompressResult | undefined;
+
+    if (originalFile) {
+      try {
+        const maybe = await typedCompressImageFile(originalFile);
+        compressedOutput = maybe;
+      } catch {
+        compressedOutput = undefined;
+      }
     }
 
-    let isMounted = true;
-    const img = new Image();
+    if (!compressedOutput) {
+      try {
+        const maybe2 = await typedCompressImageFile(url);
+        compressedOutput = maybe2;
+      } catch {
+        compressedOutput = undefined;
+      }
+    }
 
-    const onLoad = () => {
-      if (!isMounted) return;
-      loadedUrlCache.add(url);
-      setLoaded(true);
-    };
-    const onError = () => {
-      if (!isMounted) return;
-      setErrored(true);
-    };
+    if (!compressedOutput) return;
 
-    img.onload = onLoad;
-    img.onerror = onError;
-    img.src = url;
+    let compressedDataUrl: string | undefined;
 
-    return () => {
-      isMounted = false;
-      img.onload = null;
-      img.onerror = null;
-    };
-  }, [finalUrl]);
+    if (typeof compressedOutput === "string") {
+      compressedDataUrl = compressedOutput;
+    } else if (
+      compressedOutput instanceof File ||
+      compressedOutput instanceof Blob
+    ) {
+      compressedDataUrl = await new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(String(reader.result));
+        reader.onerror = () => reject(new Error("failed-to-read-blob"));
+        reader.readAsDataURL(compressedOutput as Blob);
+      });
+    }
+
+    if (!compressedDataUrl) return;
+
+    const compressedSizeKB = await sizeKBOf(compressedDataUrl);
+
+    console.log("Original Size:", originalSizeKB, "KB", url);
+    console.log("Compressed Size:", compressedSizeKB, "KB", url);
+
+    const shouldUseCompressed =
+      compressedSizeKB !== null &&
+      originalSizeKB !== null &&
+      compressedSizeKB < originalSizeKB;
+
+    if (shouldUseCompressed) {
+      compressedUrlCache.set(url, compressedDataUrl);
+      console.log("✅ Using compressed version for:", url);
+      bump();
+    }
+  } finally {
+    compressingUrls.delete(url);
+  }
+}
+
+/* -------------------- AgentCard -------------------- */
+function AgentCard({ agent }: { agent: Agent }): JSX.Element {
+  // get current best URL: compressed if available, otherwise original avatar, otherwise placeholder
+  const baseUrl = agent.avatar;
+  const cachedCompressed = baseUrl ? compressedUrlCache.get(baseUrl) : undefined;
+
+  const [src, setSrc] = useState<string>(() => {
+    if (cachedCompressed) return cachedCompressed;
+    if (baseUrl) return baseUrl;
+    return SVG_PLACEHOLDER;
+  });
+
+  const [errored, setErrored] = useState(false);
+
+  // When compression cache updates (via bump state in parent), this component will re-render
+  // and `cachedCompressed` will become available -> we update `src` accordingly.
+  useEffect(() => {
+    if (cachedCompressed && !errored) {
+      setSrc(cachedCompressed);
+    } else if (baseUrl && !errored) {
+      setSrc(baseUrl);
+    }
+  }, [cachedCompressed, baseUrl, errored]);
 
   const handleImgError = useCallback(
     (e: React.SyntheticEvent<HTMLImageElement>) => {
@@ -99,17 +221,16 @@ function AgentCard({ agent }: { agent: Agent }): JSX.Element {
       const imgEl = e.currentTarget;
       imgEl.onerror = null;
       imgEl.src = SVG_PLACEHOLDER;
+      setSrc(SVG_PLACEHOLDER);
     },
     [errored]
   );
-
-  const displaySrc = loaded && finalUrl && !errored ? finalUrl : SVG_PLACEHOLDER;
 
   return (
     <article className={styles.agentCard}>
       <div className={styles.avatarWrap}>
         <img
-          src={displaySrc}
+          src={src}
           alt={agent.name}
           className={styles.avatar}
           loading="eager"
@@ -119,9 +240,6 @@ function AgentCard({ agent }: { agent: Agent }): JSX.Element {
           onError={handleImgError}
           style={{
             objectFit: "cover",
-            transition: "opacity 200ms ease, transform 200ms ease",
-            opacity: displaySrc === SVG_PLACEHOLDER ? 0.7 : 1,
-            transform: "none",
           }}
         />
       </div>
@@ -333,7 +451,7 @@ export default function AgentsPage(): JSX.Element {
   const [selectedLanguage, setSelectedLanguage] = useState<string>("");
   const [openChat, setOpenChat] = useState(false);
 
-  // This state is incremented whenever we add compressed items so that effects re-run properly.
+  // This state is incremented whenever we add compressed items so that AgentCards re-render.
   const [, setCompressedVersionCounter] = useState(0);
 
   const provinceAgents = useMemo(
@@ -362,152 +480,7 @@ export default function AgentsPage(): JSX.Element {
     });
   }, [provinceAgents, selectedArea, selectedLanguage]);
 
-  /**
-   * Convert a Blob -> File (useful because helpers may expect File)
-   */
-  function blobToFile(blob: Blob, filename = "image"): File {
-    try {
-      return new File([blob], filename, { type: blob.type || "image/jpeg" });
-    } catch {
-      // Some older environments may not allow `File` constructor; fallback to Blob cast
-      return blob as unknown as File;
-    }
-  }
-
-  /**
-   * Fetch a URL and return a Blob (or null).
-   */
-  async function fetchBlob(url: string): Promise<Blob | null> {
-    try {
-      const resp = await fetch(url, { method: "GET", cache: "force-cache" });
-      if (!resp.ok) return null;
-      return await resp.blob();
-    } catch {
-      return null;
-    }
-  }
-
-  /**
-   * Get size in KB for a Blob/File/dataURL string.
-   * Prefer calling the provided helper if it expects File; otherwise fallback.
-   */
-  async function sizeKBOf(input: string | Blob | File): Promise<number | null> {
-    // If input is a data URL string, estimate from base64
-    if (typeof input === "string") {
-      if (input.startsWith("data:")) {
-        const base64 = input.split(",")[1] || "";
-        const approxBytes = Math.ceil((base64.length * 3) / 4);
-        return Math.round(approxBytes / 1024);
-      } else {
-        // it's a remote URL string - try fetch blob and measure
-        const b = await fetchBlob(input);
-        if (!b) return null;
-        return Math.round((b.size || 0) / 1024);
-      }
-    }
-
-    // For Blob/File: try the helper (if available) by passing a File
-    try {
-      const fileLike = input instanceof File ? input : blobToFile(input as Blob, "avatar");
-      const maybe = await typedGetFileSizeKB(fileLike);
-      if (typeof maybe === "number") return Math.round(maybe);
-    } catch {
-      // fallback to blob.size
-    }
-
-    try {
-      const size = (input as Blob).size || 0;
-      return Math.round(size / 1024);
-    } catch {
-      return null;
-    }
-  }
-
-  /**
-   * Compress a single URL and, if beneficial, store compressed data URL in cache.
-   * This function fetches the original as a Blob -> File and calls the compressor with File.
-   */
-  async function compressAndCacheUrl(url: string): Promise<void> {
-  if (!url) return;
-  if (compressedUrlCache.has(url)) return;
-  if (compressingUrls.has(url)) return;
-  compressingUrls.add(url);
-
-  try {
-    // fetch blob of original so we can pass File to helpers that expect File
-    const originalBlob = await fetchBlob(url);
-    const originalFile = originalBlob
-      ? blobToFile(originalBlob, "original.jpg")
-      : undefined;
-
-    const originalSizeKB = originalFile
-      ? await sizeKBOf(originalFile)
-      : await sizeKBOf(url);
-
-    let compressedOutput: CompressResult | undefined;
-
-    if (originalFile) {
-      try {
-        const maybe = await typedCompressImageFile(originalFile);
-        compressedOutput = maybe;
-      } catch {
-        compressedOutput = undefined;
-      }
-    }
-
-    if (!compressedOutput) {
-      try {
-        const maybe2 = await typedCompressImageFile(url);
-        compressedOutput = maybe2;
-      } catch {
-        compressedOutput = undefined;
-      }
-    }
-
-    if (!compressedOutput) return;
-
-    let compressedDataUrl: string | undefined;
-
-    if (typeof compressedOutput === "string") {
-      compressedDataUrl = compressedOutput;
-    } else if (
-      compressedOutput instanceof File ||
-      compressedOutput instanceof Blob
-    ) {
-      compressedDataUrl = await new Promise<string>((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(String(reader.result));
-        reader.onerror = () => reject(new Error("failed-to-read-blob"));
-        reader.readAsDataURL(compressedOutput as Blob);
-      });
-    }
-
-    if (!compressedDataUrl) return;
-
-    const compressedSizeKB = await sizeKBOf(compressedDataUrl);
-
-    // ✅ LOGS ADDED HERE
-    console.log("Original Size:", originalSizeKB, "KB", url);
-    console.log("Compressed Size:", compressedSizeKB, "KB", url);
-
-    const shouldUseCompressed =
-      (compressedSizeKB !== null &&
-        originalSizeKB !== null &&
-        compressedSizeKB < originalSizeKB) ||
-      (compressedSizeKB !== null && originalSizeKB === null);
-
-    if (shouldUseCompressed) {
-      compressedUrlCache.set(url, compressedDataUrl);
-      console.log("✅ Using compressed version for:", url);
-      setCompressedVersionCounter((c) => c + 1);
-    }
-  } finally {
-    compressingUrls.delete(url);
-  }
-}
-
-
-  // Preload and compress filtered agent avatars.
+  // Pre-compress filtered agent avatars in background.
   useEffect(() => {
     let cancelled = false;
     const urls = Array.from(
@@ -515,6 +488,12 @@ export default function AgentsPage(): JSX.Element {
     );
 
     (async () => {
+      const bump = () => {
+        if (!cancelled) {
+          setCompressedVersionCounter((c) => c + 1);
+        }
+      };
+
       // Attempt bulk compress first if helper exists
       const toCompress = urls.filter((u) => u && !compressedUrlCache.has(u));
       if (toCompress.length > 0) {
@@ -548,7 +527,7 @@ export default function AgentsPage(): JSX.Element {
                 compressedUrlCache.set(originalFromEntry, compressedFromEntry);
               }
             }
-            if (!cancelled) setCompressedVersionCounter((c) => c + 1);
+            bump();
           }
         } catch {
           // ignore bulk helper failure and fallback to individual compression
@@ -561,43 +540,18 @@ export default function AgentsPage(): JSX.Element {
           try {
             if (!u) return;
             if (!compressedUrlCache.has(u)) {
-              await compressAndCacheUrl(u);
+              await compressAndCacheUrl(u, bump);
             }
           } catch {
             // swallow errors per-image to be resilient
           }
         })
       );
-
-      if (cancelled) return;
-
-      // Preload final images (compressed or original)
-      const imgs: HTMLImageElement[] = [];
-      urls.forEach((orig) => {
-        if (!orig) return;
-        const final = compressedUrlCache.get(orig) || orig;
-        if (!loadedUrlCache.has(final)) {
-          const img = new Image();
-          img.src = final;
-          img.onload = () => loadedUrlCache.add(final);
-          img.onerror = () => {};
-          imgs.push(img);
-        }
-      });
-
-      // cleanup
-      return () => {
-        imgs.forEach((im) => {
-          im.onload = null;
-          im.onerror = null;
-        });
-      };
     })();
 
     return () => {
       cancelled = true;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filtered]);
 
   return (

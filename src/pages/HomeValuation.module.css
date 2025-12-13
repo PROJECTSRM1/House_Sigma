@@ -1,508 +1,433 @@
-/* ---------------- BASE LAYOUT ---------------- */
+.pageWrapper {
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #f8fafb 0%, #ffffff 100%);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
 
-.wrapper {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 56px 24px;
-  font-family: Poppins, sans-serif;
+.hero {
+  /* background: linear-gradient(135deg, #1e9aa5 0%, #147a82 100%); */
+  background: linear-gradient(135deg, rgb(235, 235, 235) 0%, rgb(235, 235, 235)  100%);
+  padding: 80px 24px 60px;
   position: relative;
-  overflow: visible !important;
+  overflow: hidden;
 }
 
-.heading {
-  font-size: 23px;
-  font-weight: 450;
-  margin-bottom: 40px;
-  padding-top: 25px !important;
+.heroContent {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
-.subheading {
+.heroIcon {
+  display: inline-flex;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  margin-bottom: 24px;
+}
+
+.heroTitle {
+  font-size: 42px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.heroSubtitle {
   font-size: 18px;
-  margin-bottom: 12px;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.container {
+  max-width: 1000px;
+  margin: -40px auto 0;
+  padding: 0 24px 80px;
+  position: relative;
+  z-index: 2;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 32px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.cardTitle {
+  font-size: 22px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
 }
 
 .addressInput {
   width: 100%;
-  border: 1px solid #d1d5db;
-  height: 39px;
-  padding: 12px;
-  border-radius: 8px;
-  margin-bottom: 48px;
+  height: 52px;
+  padding: 0 20px;
+  font-size: 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  outline: none;
+  transition: all 0.2s;
+  box-sizing: border-box;
 }
 
-.row,
-.counterRow {
-  display: flex;
-  gap: 24px;
-  margin-bottom: 40px;
-  flex-wrap: wrap;
+.countersGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
 }
 
-.inputContainer {
-  flex: 1;
-  min-width: 250px;
+.counterWrapper {
   display: flex;
   flex-direction: column;
-}
-
-.inputContainerWide {
-  flex: 2;
-  min-width: 300px;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  border-radius: 8px;
-}
-
-.label {
-  margin-bottom: 1px;
-  font-size: 18px;
-  font-weight: 500;
-}
-
-/* ------------ INPUT BOX --------------- */
-
-.inputBoxWrapper {
-  position: relative;
-  width: 100%;
-}
-
-.inputBoxInner {
-  width: 100%;
-  height: 38px;
-  padding: 10px 12px;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  font-size: 16px;
-}
-
-/* Fixed padding to avoid overlap */
-.inputShort {
-  padding-right: 45px; /* sqft, feet */
-}
-
-.inputLong {
-  padding-right: 75px; /* per year */
-}
-
-/* ---------- SUFFIX (sqft, feet) ----------- */
-
-.suffixInside {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 16px;
-  color: #9ca3af;
-  pointer-events: none;
-}
-
-/* -------- per year (INSIDE INPUT) -------- */
-
-.suffixAfterSpinner {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 16px;
-  color: #9ca3af;
-  pointer-events: none;
-}
-
-/* Show spinner */
-.showSpinner::-webkit-inner-spin-button,
-.showSpinner::-webkit-outer-spin-button {
-  opacity: 1 !important;
-}
-
-/* ---------------- SELECT BOX ---------------- */
-
-.customSelectBox {
-  width: 100%;
-  height: 38px;
-  border-radius: 8px;
-  border: 1px solid #d1d5db;
-  padding: 10px 10px;
-  background: white;
-  cursor: pointer;
-  font-size: 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.selectedClosed {
-  background: white !important;
-  border-color: #d1d5db !important;
-  color: black !important;
-}
-
-.openState {
-  background: #1e9aa5 !important;
-  border-color: #1e9aa5 !important;
-  color: white !important;
-}
-
-.dropdownMenu {
-  position: absolute;
-  top: calc(100% + 6px);
-  width: 250px;
-  left: 0;
-  background: white;
-  border-radius: 14px;
-  box-shadow: 0px 10px 35px rgba(0, 0, 0, 0.18);
-  padding: 2px;
-  z-index: 3000;
-}
-
-.dropdownItem {
-  display: flex;
-  align-items: center;
   gap: 8px;
-  padding: 8px;
-  border-radius: 8px;
-  font-size: 17px;
-  cursor: pointer;
 }
 
-.dropdownItem:hover {
-  background: #eef5f6;
-}
-
-.radioCircle {
-  width: 12px;
-  height: 12px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 70%;
-}
-
-.radioSelected {
-  background: #1e9aa5;
-  border-color: #1e9aa5;
-}
-
-.clearSelection {
-  position: absolute;
-  right: 18px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 18px;
-  font-weight: bold;
-  color: #1e9aa5;
-  cursor: pointer;
-  z-index: 10;
-}
-
-.arrowDown,
-.arrowUp {
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-}
-
-.arrowDown {
-  border-top: 7px solid #555;
-}
-
-.arrowUp {
-  border-bottom: 7px solid #555;
-}
-
-.hideArrow {
-  display: none !important;
-}
-
-/* ------------- COUNTER ---------------- */
-
-.counterContainer {
-  flex: 1;
-  min-width: 200px;
+.counterLabel {
+  font-size: 14px;
+  font-weight: 500;
+  color: #6b7280;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.counterIcon {
+  color: #1e9aa5;
+  display: flex;
 }
 
 .counterBox {
   display: flex;
-  border: 1px solid #d1d5db;
-  height: 38px;
-  border-radius: 8px;
+  align-items: center;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
   overflow: hidden;
+  height: 48px;
 }
 
-.counterButton {
-  width: 60px;
-  background: #f3f4f6;
-  font-size: 22px;
+.counterBtn {
+  flex: 0 0 48px;
+  height: 100%;
   border: none;
+  background: #f9fafb;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1e9aa5;
+  transition: background 0.2s;
+}
+.counterBtn:hover {
+  background: #e5e7eb;
 }
 
 .counterValue {
   flex: 1;
   display: flex;
-  justify-content: center;
   align-items: center;
-  font-size: 20px;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.inputsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inputLabel {
+  font-size: 14px;
+  font-weight: 500;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+}
+
+.inputIcon {
+  color: #1e9aa5;
+  display: flex;
+  margin-right: 6px;
+}
+
+.inputContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  width: 100%;
+  height: 48px;
+  padding: 0 80px 0 16px;
+  font-size: 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  outline: none;
+  transition: all 0.2s;
+  box-sizing: border-box;
+}
+
+.inputSuffix {
+  position: absolute;
+  right: 16px;
+  font-size: 14px;
+  color: #9ca3af;
+  pointer-events: none;
+}
+
+.selectWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  margin-top: 8px;
+}
+
+.selectBox {
+  height: 48px;
+  padding: 0 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  background: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.2s;
+}
+.selectBoxOpen {
+  border-color: #1e9aa5;
+  box-shadow: 0 0 0 3px rgba(30, 154, 165, 0.1);
+}
+
+.selectTextPlaceholder {
+  color: #9ca3af;
+  font-size: 16px;
+}
+.selectTextSelected {
+  color: #1f2937;
+  font-size: 16px;
   font-weight: 500;
 }
 
-/* ---------------- NOTE ---------------- */
-
-.noteBox {
-  background: #e9f6f7;
-  color: #28a3b3;
-  padding: 17px;
-  border-radius: 10px;
+.clearIcon {
+  color: #1e9aa5;
+  cursor: pointer;
 }
 
-/* ---------------- BUTTON ---------------- */
-
-.button {
-  width: 100%;
-  height: 43px;
-  background: #1e9aa5;
-  color: white;
-  border-radius: 12px;
-  font-size: 16px;
-  margin-top: 24px;
-}
-
-/* ---------------- CONTACT ---------------- */
-
-.contactBox {
-  background: #f3f3f3;
-  padding: 40px;
-  border-radius: 20px;
-  margin-top: 64px;
-}
-
-/* Disclaimer */
-.disclaimerSection {
-  margin-top: 40px;
-  margin-bottom: 60px;
-  display: flex;
-  justify-content: center;
-}
-
-.disclaimerText {
-  max-width: 1200px;
-  text-align: left;
-  font-size: 16px;
-  line-height: 1.7;
+.chevronIcon {
   color: #6b7280;
+  transition: transform 0.2s;
 }
 
-/* ---------------- CONSULT (NEW) ---------------- */
-
-/* container box for the consultation form */
-.consultBox {
-  margin-top: 20px;
+.dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
   background: #ffffff;
+  border: 2px solid #e5e7eb;
   border-radius: 12px;
-  border: 1px solid #e6eef0;
-  padding: 20px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  padding: 8px;
+  z-index: 1000;
 }
 
-/* small heading inside the box */
-.consultTitle {
-  font-size: 18px;
-  margin-bottom: 12px;
-  color: #0f4850;
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  color: #1f2937;
+  transition: background 0.15s;
+}
+.dropdownItem:hover {
+  background: #f0f9fa;
+}
+
+.radio {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #d1d5db;
+  transition: all 0.2s;
+}
+.radioSelected {
+  background: #1e9aa5;
+  border-color: #1e9aa5;
+  box-shadow: inset 0 0 0 3px white;
+}
+
+.betaNotice {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #e0f2f4 0%, #cceef1 100%);
+  border-radius: 12px;
+  margin-bottom: 24px;
+}
+
+.betaBadge {
+  padding: 4px 12px;
+  background: #1e9aa5;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 6px;
+  letter-spacing: 0.5px;
+}
+
+.betaText {
+  font-size: 14px;
+  color: #0f5157;
+  margin: 0;
+}
+
+.primaryButton {
+  width: 100%;
+  height: 56px;
+  /* background: linear-gradient(135deg, rgb(235, 235, 235) 0%, rgb(235, 235, 235) 100%); */
+  background: #0f93ff;
+  color: #ffffff;
+  border: none;
+  border-radius: 14px;
+  font-size: 17px;
   font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(30, 154, 165, 0.3);
+  transition: all 0.3s;
+  margin-bottom: 24px;
 }
 
-/* row to place two inputs side-by-side */
+.primaryButton:hover {
+  transform: translateY(-1px);
+}
+
+.consultCard {
+  background: linear-gradient(135deg, #f8fafb 0%, #ffffff 100%);
+  border-radius: 20px;
+  padding: 32px;
+  margin-bottom: 24px;
+  border: 2px solid #e5e7eb;
+}
+
+.consultTitle {
+  font-size: 22px;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 8px;
+}
+
+.consultSubtitle {
+  font-size: 15px;
+  color: #6b7280;
+  margin-bottom: 24px;
+}
+
+.consultForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.consultInput {
+  height: 48px;
+  padding: 0 16px;
+  font-size: 15px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  outline: none;
+  transition: all 0.2s;
+  box-sizing: border-box;
+}
+
 .consultRow {
   display: flex;
-  gap: 12px;
-  margin-bottom: 12px;
-  flex-wrap: wrap;
+  gap: 16px;
 }
 
-/* inputs inside the consultation box */
-.consultInput {
-  flex: 1;
-  min-width: 220px;
-  height: 40px;
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: 1px solid #d1d5db;
+.consultTextarea {
+  min-height: 120px;
+  padding: 14px 16px;
   font-size: 15px;
-}
-
-/* textarea for address */
-.consultArea {
-  width: 100%;
-  min-height: 80px;
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: 1px solid #d1d5db;
-  font-size: 15px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  outline: none;
   resize: vertical;
+  font-family: inherit;
+  transition: all 0.2s;
+  box-sizing: border-box;
 }
 
-/* small required line */
-.required {
+.requiredNote {
   font-size: 13px;
   color: #6b7280;
-  margin: 8px 0 12px 0;
+  margin: -8px 0 0 0;
 }
 
-/* ---------------- RESPONSIVE ---------------- */
-
-@media (max-width: 1024px) {
-  .wrapper {
-    padding: 40px 20px;
-  }
-  .row,
-  .counterRow {
-    gap: 16px;
-  }
-}
-
-@media (max-width: 768px) {
-  .row,
-  .counterRow {
-    flex-direction: column;
-  }
-  .customSelectBox {
-    width: 100%;
-  }
-}
-
-@media (max-width: 480px) {
-  .heading {
-    font-size: 20px;
-  }
-  .subheading {
-    font-size: 16px;
-  }
-  .label {
-    font-size: 16px;
-  }
-  .counterButton {
-    width: 50px;
-  }
-  .button {
-    font-size: 15px;
-    height: 40px;
-  }
-}
-/* ---------------- CONSULTATION FORM (NEW) ---------------- */
-
-.consultBox {
-  background: #f7f7f7;
-  padding: 40px;
-  border-radius: 18px;
-  margin-top: 30px;
-}
-
-.consultInput {
-  width: 100%;
-  height: 42px;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  padding: 10px 12px;
-  font-size: 16px;
-  margin-bottom: 16px;
-}
-
-.consultArea {
-  width: 100%;
-  min-height: 90px;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  padding: 10px 12px;
-  font-size: 16px;
-  margin-bottom: 12px;
-}
-
-.requiredField {
-  font-size: 14px;
-  margin-bottom: 12px;
-  color: #6b7280;
-}
-/* ----- CONSULTATION form — layout matching screenshot 1 ----- */
-
-.consultBox {
-  background: #ffffff;
-  border-radius: 12px;
-  border: 1px solid #ebebeb;
-  padding: 20px;
-  margin-top: 24px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.04);
-}
-
-/* full width name field */
-.consultInputFull {
-  width: 100%;
-  height: 44px;
-  padding: 10px 14px;
-  border-radius: 8px;
-  border: 1px solid #e2e6e8;
-  font-size: 15px;
-  margin-bottom: 16px;
-  color: #333;
-}
-
-/* row with two columns */
-.consultRowTwo {
-  display: flex;
-  gap: 14px;
-  margin-bottom: 16px;
-  flex-wrap: wrap;
-}
-
-/* half-width inputs */
-.consultInputHalf {
-  flex: 1;
-  min-width: 180px;
-  height: 44px;
-  padding: 10px 14px;
-  border-radius: 8px;
-  border: 1px solid #e2e6e8;
-  font-size: 15px;
-  color: #333;
-}
-
-/* message box (large textarea) */
-.consultAreaLarge {
-  width: 100%;
-  min-height: 120px;
-  padding: 12px 14px;
-  border-radius: 8px;
-  border: 1px solid #e2e6e8;
-  font-size: 15px;
-  margin-bottom: 14px;
-  resize: vertical;
-  color: #333;
-}
-
-/* required line */
-.consultRequired {
-  font-size: 14px;
-  color: #6b7280;
-  margin-bottom: 14px;
-}
-
-/* big teal button matching your style */
-.consultSubmit {
-  width: 100%;
-  height: 48px;
-  background: linear-gradient(180deg, #18a5a9, #118b8f);
-  color: white;
-  font-size: 16px;
+.consultButton {
+  height: 50px;
+  background: linear-gradient(135deg, #1e9aa5 0%, #147a82 100%);
+  color: #ffffff;
   border: none;
   border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
-  box-shadow: none;
+  transition: all 0.3s;
+}
+.consultButton:hover {
+  transform: translateY(-1px);
 }
 
-/* small responsive tweaks */
-@media (max-width: 768px) {
-  .consultRowTwo {
-    flex-direction: column;
-  }
-  .consultInputHalf {
-    min-width: 100%;
-  }
+.agentCard {
+  background: #f9fafb;
+  border-radius: 16px;
+  padding: 32px;
+  text-align: center;
+  border: 2px dashed #e5e7eb;
+}
+
+.agentTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 8px;
+}
+
+.agentText {
+  font-size: 15px;
+  color: #6b7280;
+  margin: 0;
 }

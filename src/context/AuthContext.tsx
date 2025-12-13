@@ -1,10 +1,11 @@
 import { createContext, useContext, useState, useEffect } from "react";
 
 type User = {
-  id: number;
+  id?: number;
   name?: string;
   full_name?: string;
   email: string;
+  profile_image?: string;
 } | null;
 
 const AuthContext = createContext<{
