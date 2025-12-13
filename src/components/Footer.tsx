@@ -1,103 +1,84 @@
-import { Home, Facebook, Twitter, Linkedin, Smartphone } from 'lucide-react';
-import styles from './Footer.module.css';
-import appStoreImg from "../assets/apple-appstore.png";
-import googlePlayImg from "../assets/google-play.png";
-import logo from "../assets/logo.png";
+import { Facebook, Twitter, Linkedin, Mail, MapPin } from "lucide-react";
+import styles from "./Footer.module.css";
 
+import appStoreImg from "/assets/apple-appstore.png";
+import googlePlayImg from "/assets/google-play.png";
+import HOME from "/assets/HOME.png"
 const Footer = () => {
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
-        <div className={styles.content}>
-          {/* Brand Column */}
-          <div className={styles.brandColumn}>
-  <div className={styles.logo}>
-    <img src={logo} alt="HouseSigma Logo" className={styles.brandLogo} />
-   <span className={styles.brandName}>HouseSigma</span>
-  </div>
-            <p className={styles.brandDescription}>
-             HouseSigma is a leading technology platform that utilizes artificial intelligence technology to estimate Canadian home values in real time.
-            </p>
-            <div className={styles.socialIcons}>
-              <button className={styles.socialIcon}>
-                <Facebook className="h-5 w-5" />
-              </button>
-              <button className={styles.socialIcon}>
-                <Twitter className="h-5 w-5" />
-              </button>
-              <button className={styles.socialIcon}>
-                <Linkedin className="h-5 w-5" />
-              </button>
+
+        {/* ===================== BRAND SECTION ===================== */}
+        <div className={styles.topSection}>
+
+          <div className={styles.brandBox}>
+            <img src={HOME} alt="Logo" className={styles.brandLogo} />
+
+            <div>
+              <h2 className={styles.brandName}>HomeNest</h2>
+              <p className={styles.brandTagline}>
+                Your trusted partner for smart, data-driven real estate decisions.
+              </p>
             </div>
           </div>
 
+          <div className={styles.socialRow}>
+            <a href="#" className={styles.socialButton}><Facebook /></a>
+            <a href="#" className={styles.socialButton}><Twitter /></a>
+            <a href="#" className={styles.socialButton}><Linkedin /></a>
+            <a href="#" className={styles.socialButton}><Mail /></a>
+          </div>
+        </div>
 
-          {/* Sitemap Column */}
+        {/* ===================== LINK GRID ===================== */}
+        <div className={styles.linkGrid}>
+
           <div className={styles.linkColumn}>
-            <h3>Sitemaps</h3>
-            <div className={styles.linkList}>
-              <a href="#" className={styles.link}>Ontario Sitemap</a>
-              <a href="#" className={styles.link}>Alberta Sitemap</a>
-              <a href="#" className={styles.link}>BC Sitemap</a>
-            </div>
+            <h3 className={styles.columnTitle}>Explore</h3>
+            <a className={styles.link}>Ontario Listings</a>
+            <a className={styles.link}>BC Listings</a>
+            <a className={styles.link}>Alberta Listings</a>
+            <a className={styles.link}>Sold Properties</a>
           </div>
 
-
-          {/* Company Column */}
           <div className={styles.linkColumn}>
-            <h3>Company</h3>
-            <div className={styles.linkList}>
-              <a href="#" className={styles.link}>About Us</a>
-              <a href="#" className={styles.link}>Recently Sold Listings</a>
-              <a href="#" className={styles.link}>Market Trends</a>
-              <a href="#" className={styles.link}>Careers</a>
-            </div>
+            <h3 className={styles.columnTitle}>Company</h3>
+            <a className={styles.link}>About Us</a>
+            <a className={styles.link}>Market Insights</a>
+            <a className={styles.link}>Careers</a>
+            <a className={styles.link}>Contact</a>
           </div>
 
-
-          {/* Support Column */}
           <div className={styles.linkColumn}>
-            <h3>Support</h3>
-            <div className={styles.linkList}>
-              <a href="#" className={styles.link}>FAQs</a>
-              <a href="#" className={styles.link}>Feedback</a>
-              <a href="#" className={styles.link}>Privacy & Security</a>
-              <a href="#" className={styles.link}>Terms & Conditions</a>
-            </div>
+            <h3 className={styles.columnTitle}>Support</h3>
+            <a className={styles.link}>Help Center</a>
+            <a className={styles.link}>Privacy Policy</a>
+            <a className={styles.link}>Terms of Use</a>
+            <a className={styles.link}>Report an Issue</a>
           </div>
 
+          <div className={styles.linkColumn}>
+            <h3 className={styles.columnTitle}>Mobile App</h3>
 
-          {/* Language & Apps Column */}
-          <div className={styles.languageColumn}>
-            <div className={styles.languageToggle}>
-              <button className={styles.langButton}>English</button>
-              <button className={styles.langButton}>中文</button>
-            </div>
+            <img src={appStoreImg} className={styles.storeBadge} alt="App Store" />
+            <img src={googlePlayImg} className={styles.storeBadge} alt="Google Play" />
 
-
-           <div className={styles.appButtons}>
-             <img
-                src={appStoreImg}
-                alt="Download on the App Store"
-                className={styles.storeImg}
-              />
-              <img
-                src={googlePlayImg}
-                alt="Get it on Google Play"
-                className={styles.storeImg}
-              />
+            <div className={styles.addressBox}>
+              <MapPin size={16} />
+              <span>Toronto, Ontario – Canada</span>
             </div>
           </div>
         </div>
 
-
-        <div className={styles.copyright}>
-          © COPYRIGHT 2025 BY RM1 Coders Hub INC. BROKERAGE ALL RIGHTS RESERVED
+        {/* ===================== COPYRIGHT ===================== */}
+        <div className={styles.bottomBar}>
+          © {new Date().getFullYear()} HomeNest • All Rights Reserved.
         </div>
+
       </div>
     </footer>
   );
 };
-
 
 export default Footer;

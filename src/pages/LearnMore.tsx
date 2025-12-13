@@ -1,9 +1,9 @@
 import { Home } from "lucide-react";
 import "./LearnMore.css";
 
-import scam1 from "../assets/scam.png";
-import scam2 from "../assets/scam2.png";
-import scam3 from "../assets/scam3.png";
+import scam1 from "/assets/scam.png";
+import scam2 from "/assets/scam2.png";
+import scam3 from "/assets/scam3.png";
 import ScamNav from '@/pages/ScamNav';
 
 

@@ -6,7 +6,7 @@ import StatsChart from "@/components/StatsChart";
 import Footer from "@/components/Footer";
 import CityLinks from "@/components/CityLinks";
 import AlbertaDisclaimer from "@/components/AlbertaDisclaimer";
-import albertaHero from "@/assets/alberta_Files/alberta.jpg";
+import albertaHero from "/assets/alberta_Files/alberta.jpg";
 
 import {
   newlyAdded,
@@ -20,27 +20,82 @@ import {
 
 const Alberta = () => {
   return (
-    <div className="min-h-screen">
-      <Navbar />
-       <div
-  style={{ backgroundImage: `url(${albertaHero})` }}
->
-  <Hero />
-</div>
+    <div className="min-h-screen bg-bg text-text">
+      {/* NAVIGATION */}
+      <div className="sticky top-0 z-50 shadow-soft">
+        <Navbar />
+      </div>
 
-      <FilterBar />
-      
-      <PropertySection title="Newly Added to HouseSigma" properties={newlyAdded} />
-      <PropertySection title="Best For Schools" properties={bestForSchools} />
-      <PropertySection title="Featured Listings" properties={featuredListings} />
-      <PropertySection title="High Growth" properties={highGrowth} />
-      <PropertySection title="Sold Below Bought" properties={soldBelowBought} />
-      <PropertySection title="High Returns" properties={highReturns} />
-      <PropertySection title="Just Sold" properties={justSold} />
+      {/* HERO SECTION */}
+      <Hero 
+      />
 
-      <StatsChart />
-      <CityLinks />
-      <AlbertaDisclaimer />
+      {/* FILTER BAR */}
+      <div className="max-w-7xl mx-auto px-4 mb-10">
+        <FilterBar />
+      </div>
+
+      {/* PROPERTY SECTIONS */}
+      <div className="max-w-7xl mx-auto px-4 space-y-16">
+        <PropertySection 
+          title="Newly Added Properties" 
+          badge="Fresh Listings" 
+          properties={newlyAdded} 
+        />
+
+        <PropertySection 
+          title="Best For Schools"
+          badge="Top Rated Areas"
+          properties={bestForSchools} 
+        />
+
+        <PropertySection 
+          title="Featured Listings"
+          badge="Handpicked"
+          properties={featuredListings} 
+        />
+
+        <PropertySection 
+          title="High Growth Areas"
+          badge="Strong Appreciation"
+          properties={highGrowth} 
+        />
+
+        <PropertySection 
+          title="Sold Below Bought"
+          badge="Better Deals"
+          properties={soldBelowBought} 
+        />
+
+        <PropertySection 
+          title="High Returns"
+          badge="Investor Picks"
+          properties={highReturns} 
+        />
+
+        <PropertySection 
+          title="Recently Sold"
+          badge="Just Closed"
+          properties={justSold} 
+        />
+      </div>
+
+      {/* MARKET CHART */}
+      <div className="max-w-7xl mx-auto px-4 mt-20">
+        <StatsChart />
+      </div>
+
+      {/* CITY LINKS */}
+      <div className="mt-20">
+        <CityLinks />
+      </div>
+
+      {/* DISCLAIMER */}
+      <div className="max-w-6xl mx-auto px-4 mt-10">
+        <AlbertaDisclaimer />
+      </div>
+
+      {/* FOOTER */}
       <Footer />
     </div>
   );

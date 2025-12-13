@@ -1,154 +1,180 @@
-/* MAIN FOOTER WRAPPER */
+/* ================================
+   MAIN FOOTER WRAPPER
+================================ */
 .footer {
-  background-color: #26a5b5;
+  background: #0d1b2a; /* deep modern blue/black */
   color: #ffffff;
-  padding: 1rem 0 0.8rem 0; /* reduced for tight look */
+  padding: 3rem 0 1.2rem;
   font-family: "Inter", sans-serif;
 }
 
-/* CONTAINER */
+/* ================================
+   CONTAINER
+================================ */
 .container {
   max-width: 1300px;
   margin: 0 auto;
-  padding: 0 1.2rem;
+  padding: 0 1.5rem;
 }
 
-/* GRID CONTENT */
-.content {
-  display: grid;
-  grid-template-columns: 300px 1fr 1fr 1fr 220px; /* wider brand column */
-  column-gap: 3rem; /* decreased spacing */
-  margin-bottom: 1rem;
-  align-items: flex-start;
+/* ================================
+   TOP BRAND + SOCIAL SECTION
+================================ */
+.topSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.8rem;
+  flex-wrap: wrap;
 }
 
-/* BRAND COLUMN */
-.brandColumn {
-  max-width: 300px;   /* increased width for longer description */
-  margin-top: -12px;  /* lifts HouseSigma up */
-}
-
-.logo {
+/* BRAND AREA */
+.brandBox {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.8rem;
-}
-
-.brandLogo {
-  width: 36px;
-  height: 36px;
-}
-
-.brandName {
-  font-size: 2rem;
-  font-weight: 700;
-}
-
-.brandDescription {
-  font-size: 0.95rem;
-  line-height: 1.45;
-  opacity: 0.92;
-  margin-bottom: 0.6rem; /* tighter spacing */
-}
-
-/* SOCIAL ICONS */
-.socialIcons {
-  display: flex;
-  gap: 0.6rem;
-}
-
-.socialIcon {
-  padding: 0.5rem;
-  border-radius: 8px;
-  background-color: #ffffff22;
-  border: none;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-/* COLUMN TITLES */
-.linkColumn h3 {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 0.7rem; /* reduced */
-}
-
-/* LINKS */
-.linkList {
-  display: flex;
-  flex-direction: column;
-  gap: 0.45rem; /* tighter */
-}
-
-.link {
-  font-size: 0.9rem;
-  opacity: 0.85;
-  color: white;
-  text-decoration: none;
-}
-
-/* LANGUAGE & APP COLUMN */
-.languageColumn {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
   gap: 1rem;
 }
 
-.languageToggle {
-  display: flex;
-  gap: 0.5rem;
+.brandLogo {
+  width: 100px;
+  height: 100px;
+  filter: brightness(200%);
 }
 
-.langButton {
-  padding: 0.4rem 1rem;
-  border-radius: 6px;
-  background-color: #ffffff22;
-  border: none;
-  font-size: 0.85rem;
-  color: white;
+.brandName {
+  font-size: 1.9rem;
+  font-weight: 700;
+}
+
+.brandTagline {
+  opacity: 0.75;
+  font-size: 0.95rem;
+  margin-top: 0.2rem;
+}
+
+/* SOCIAL ICONS */
+.socialRow {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.socialButton {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.25s ease;
   cursor: pointer;
 }
 
-.appButtons {
+.socialButton:hover {
+  background: rgba(255, 255, 255, 0.22);
+  transform: translateY(-3px);
+}
+
+/* ================================
+   LINK GRID SECTION
+================================ */
+.linkGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2.5rem;
+  margin-bottom: 2.2rem;
+}
+
+.linkColumn {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  gap: 0.7rem;
 }
 
-.storeImg {
-  width: 170px;
-  border-radius: 8px;
-  cursor: pointer;
+.columnTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #ffffff;
 }
 
-.appVersion {
-  font-size: 0.75rem;
-  opacity: 0.9;
-  margin-top: -0.2rem;
+.link {
+  font-size: 0.92rem;
+  margin-bottom: 0.55rem;
+  opacity: 0.8;
+  text-decoration: none;
+  color: #ffffff;
+  transition: 0.25s ease;
 }
 
-/* COPYRIGHT BAR */
-.copyright {
-  border-top: 1px solid #ffffff55;
-  padding-top: 0.7rem;
+.link:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+/* ================================
+   APP STORE & ADDRESS SECTION
+================================ */
+.storeBadge {
+  width: 165px;
+  margin-bottom: 0.8rem;
+  border-radius: 10px;
+  transition: 0.25s ease;
+}
+
+.storeBadge:hover {
+  transform: scale(1.05);
+}
+
+.addressBox {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  opacity: 0.7;
+  font-size: 0.9rem;
+  margin-top: 0.6rem;
+}
+
+/* ================================
+   COPYRIGHT BAR
+================================ */
+.bottomBar {
   text-align: center;
-  font-size: 0.75rem;
-  opacity: 0.85;
+  padding-top: 1.2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  font-size: 0.8rem;
+  opacity: 0.8;
 }
 
-/* RESPONSIVE */
+/* ================================
+   RESPONSIVE DESIGN
+================================ */
 @media (max-width: 1024px) {
-  .content {
-    grid-template-columns: 1fr 1fr 1fr;
-    row-gap: 1.8rem;
+  .linkGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .topSection {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  .brandBox {
+    justify-content: center;
+  }
+
+  .socialRow {
+    justify-content: center;
   }
 }
 
-@media (max-width: 768px) {
-  .content {
+@media (max-width: 650px) {
+  .linkGrid {
     grid-template-columns: 1fr;
+  }
+
+  .storeBadge {
+    width: 150px;
   }
 }

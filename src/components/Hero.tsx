@@ -3,11 +3,11 @@ import { Button } from './ui/button';
 import { useState, useEffect } from 'react';
 import styles from './Hero.module.css';
 import { useNavigate } from 'react-router-dom';
-import heroSlide1 from '@/assets/hero-slide-1.jpeg';
-import heroSlide2 from '@/assets/hero-slide-2.jpeg';
-import heroSlide3 from '@/assets/hero-slide-3.jpeg';
-import heroSlide4 from '@/assets/hero-slide-4.jpeg';
-import heroSlide5 from '@/assets/hero-slide-5.jpeg';
+import heroSlide1 from '/assets/hero-slide-1.jpeg';
+import heroSlide2 from '/assets/hero-slide-2.jpeg';
+import heroSlide3 from '/assets/hero-slide-3.jpeg';
+import heroSlide4 from '/assets/hero-slide-4.jpeg';
+import heroSlide5 from '/assets/hero-slide-5.jpeg';
 
 const Hero = () => {
   const navigate = useNavigate();

@@ -5,7 +5,7 @@ import FilterBar from '@/components/FilterBar';
 import PropertySection from '@/components/PropertySection';
 import StatsChart from './bcStatsChart';
 import Footer from '@/components/Footer';
-import britishHero from "@/assets/Britishcolumbia_files/BC.jpg";
+import britishHero from "/assets/Britishcolumbia_files/BC.jpg";
 
 import {
   newlyAdded,
@@ -68,12 +68,7 @@ const justSoldListings = (justSold ?? []).map(toListing);
 const BritishColumbia: React.FC = () => {
   return (
     <div className="min-h-screen">
-          <div
-  
-  style={{ backgroundImage: `url(${britishHero})` }}
->
-  <Hero />
-</div>
+     <Hero  />
      <Navbar />
        <FilterBar />
        

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Home, Search } from "lucide-react";
-import logo from "@/assets/logo.png";
+import logo from "/assets/logo.png";
 
 import styles from "./ScamNav.module.css";
 
