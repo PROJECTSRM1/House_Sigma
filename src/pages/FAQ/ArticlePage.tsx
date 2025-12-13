@@ -4,8 +4,8 @@ import SearchBar from "./search";
 import "./Sidebar.css";
 import Sidebar from "./Sidebar";
 import "./ArticlePage.css";
-import img1 from "../../assets/image-2.png";
-import img2 from "../../assets/image.png";
+import img1 from "/assets/image-2.png";
+import img2 from "/assets/image.png";
 import ScamNav from "@/pages/ScamNav";
 
 import { faqData } from "../FAQ/FAQ";

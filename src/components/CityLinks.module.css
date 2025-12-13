@@ -1,88 +1,151 @@
+/* ===========================================
+   SECTION
+=========================================== */
 .section {
   background-color: hsl(var(--card));
-  padding: 0;
-  margin: 0;
+  padding: 2rem 0;
 }
 
+/* ===========================================
+   CONTAINER
+=========================================== */
 .container {
   max-width: 1300px;
   margin: 0 auto;
   padding: 0 1rem;
 }
 
+/* ===========================================
+   BLOCK TITLE
+=========================================== */
 .block {
   margin-bottom: 3rem;
 }
 
 .blockTitle {
   font-size: 1.5rem;
-  font-weight: bold;
-  color: hsl(var(--foreground));
-  margin-bottom: 1.5rem;
-}
-
-/* Grid */
-.grid {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(1, minmax(0, 1fr));
-}
-
-/* Columns */
-.column {
-  background: none !important;
-  padding: 0 !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;    /* ✅ FIX: LEFT align content */
-  justify-content: flex-start;
-  text-align: left;
-  width: 100%;                /* ✅ Ensures full width */
-}
-
-/* Column Title */
-.columnTitle {
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-weight: 700;
   color: hsl(var(--foreground));
   margin-bottom: 1.25rem;
-  text-align: left;
-  width: 100%;                 /* ✅ Match width with links */
 }
 
-/* City List */
-.cityList {
+/* ===========================================
+   DROPDOWN WRAPPER
+=========================================== */
+.dropdownWrapper {
   display: flex;
   flex-direction: column;
-  gap: 0.1rem;
-  align-items: flex-start;
-  width: 100%;                 /* ✅ Keep left alignment consistent */
+  gap: 1rem;
 }
 
-/* Links */
+/* ===========================================
+   DROPDOWN CARD
+=========================================== */
+.dropdownCard {
+  background: hsl(var(--card));
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+  overflow: hidden;
+  transition: 0.3s ease;
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.dropdownCard:hover {
+  transform: translateY(-2px);
+}
+
+/* ===========================================
+   DROPDOWN HEADER
+=========================================== */
+.dropdownHeader {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  background: transparent;
+  border: none;
+  text-align: left;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.dropdownHeader:hover {
+  background: rgba(0,0,0,0.04);
+}
+
+/* Chevron Animation */
+.chevron {
+  transition: transform 0.3s ease;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+/* ===========================================
+   CITY LIST (Expanded Content)
+=========================================== */
+.cityList {
+  padding: 0.75rem 1.25rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  background: hsl(var(--card));
+  animation: fadeIn 0.25s ease;
+}
+
+/* City Link */
 .cityLink {
   font-size: 16px;
-  font-weight: 400;
   line-height: 24px;
   color: #666;
   text-decoration: none;
-  transition: opacity 0.2s ease;
-  text-align: left;
-  width: 100%;                 /* ✅ Prevent block centering */
+  padding: 4px 0;
+
+  width: 100%;
+  display: block;
+
+  transition: 0.25s ease;
 }
 
 .cityLink:hover {
-  opacity: 0.7;
-  text-decoration: none;
-  color: #333333;
+  color: #222;
+  padding-left: 5px;
 }
 
-/* Responsive */
-@media (min-width: 768px) {
-  .grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===========================================
+   RESPONSIVE
+=========================================== */
+@media (max-width: 600px) {
+  .dropdownCard {
+    border-radius: 10px;
+  }
+
+  .dropdownHeader {
+    font-size: 1rem;
+    padding: 0.9rem 1rem;
+  }
+
+  .cityLink {
+    font-size: 15px;
   }
 }

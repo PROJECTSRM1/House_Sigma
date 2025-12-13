@@ -1,18 +1,20 @@
+/* ================================================
+   GLOBAL RESET
+================================================ */
 html, body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Push content below fixed navbar */
 .market-trends-page,
 .page-wrapper,
 .main-content {
-  padding-top: 50px !important;
+  padding-top: 60px !important;
 }
 
 /* ================================================
-   FIXED HEADER
+   PREMIUM GLASS NAVBAR
 ================================================ */
 .header {
   position: fixed;
@@ -20,42 +22,32 @@ html, body {
   left: 0;
   width: 100%;
   height: 50px;
-  background-color: #28a3b3;
-  color: #fff;
+
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+
   display: flex;
   align-items: center;
-  z-index: 2000;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-  overflow: visible;
+  z-index: 3000;
+  transition: height 0.25s ease;
 }
 
 .header.menuOpen {
   height: auto;
 }
 
-.header::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: #28a3b3;
-  pointer-events: none;
-  z-index: -1;
-}
-
 /* ================================================
    INNER CONTAINER
 ================================================ */
-.container {
+.navContainer {
   width: 100%;
-  max-width: 1440px;
+  max-width: 1500px;
   margin: 0 auto;
-  padding: 0 1rem;
-  display: flex;
-  align-items: center;
-  height: 50px;
+  padding: 0 1.3rem;
 }
 
 .navWrapper {
@@ -63,10 +55,8 @@ html, body {
   width: 100%;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  height: 50px;
-  flex-wrap: nowrap;
-  min-width: 0;
+  gap: 1.2rem;
+  height: 70px;
 }
 
 /* ================================================
@@ -75,68 +65,83 @@ html, body {
 .leftSection {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  flex-shrink: 0;
-}
-
-/* Logo */
-.logoBox {
-  padding: 0.35rem;
-  border-radius: 0.5rem;
-  display: flex;
-  align-items: center;
-}
-
-.logoImage {
-  width: 30px;
-  height: 30px;
-  object-fit: contain;
-}
-
-/* Province dropdown */
-.provinceDropdown {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  padding: 0.3rem 0.6rem;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: white;
-  background: rgba(255,255,255,0.10);
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-.provinceDropdown:hover {
-  background: rgba(255,255,255,0.20);
+  gap: 0.75rem;
 }
 
 /* ================================================
-   MOBILE HAMBURGER BUTTON (RIGHT SECTION, LEFT OF LOGIN)
+   LOGO — Transparent Background + Black Color
+================================================ */
+.logoImage {
+  width: 75px;
+  height: 75px;
+  object-fit: contain;
+
+  /* Remove any white/gray background */
+  background: transparent !important;
+
+
+}
+
+.logoImage:hover {
+  transform: scale(1.05);
+}
+
+/* ================================================
+   Province Selector
+================================================ */
+.provinceDropdown {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0.45rem 0.75rem;
+
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(6px);
+  border-radius: 10px;
+  border: 1px solid rgba(0,0,0,0.05);
+
+  color: #1a1a1a;
+  font-size: 0.9rem;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.provinceDropdown:hover {
+  background: rgba(255,255,255,0.85);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* ================================================
+   HAMBURGER BUTTON
 ================================================ */
 .menuToggle {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 34px;
-  margin-right: 4px;   /* space between hamburger and Login/Profile */
-  background: rgba(255,255,255,0.10);
-  border-radius: 8px;
-  border: none;
+
+  width: 40px;
+  height: 38px;
+
+  background: rgba(0,0,0,0.05);
+  border-radius: 10px;
   cursor: pointer;
+  border: none;
+
+  transition: all 0.2s ease;
 }
 
 .menuToggle:hover {
-  background: rgba(255,255,255,0.20);
+  background: rgba(0,0,0,0.12);
 }
 
 .bar {
   position: relative;
-  width: 20px;
-  height: 2px;
-  background: white;
-  border-radius: 4px;
+  width: 22px;
+  height: 2.5px;
+  background: #222;
+  border-radius: 10px;
 }
 
 .bar::before,
@@ -144,35 +149,35 @@ html, body {
   content: "";
   position: absolute;
   left: 0;
-  width: 20px;
-  height: 2px;
-  background: white;
-  border-radius: 4px;
+  width: 22px;
+  height: 2.5px;
+  background: #222;
+  border-radius: 10px;
 }
 
-.bar::before { top: -6px; }
-.bar::after { top: 6px; }
+.bar::before { top: -7px; }
+.bar::after { top: 7px; }
 
 @media (min-width: 1024px) {
-  .menuToggle {
-    display: none;
-  }
+  .menuToggle { display: none; }
 }
 
 /* ================================================
-   DESKTOP SEARCH BOX
+   SEARCH BOX
 ================================================ */
 .searchBox {
   display: none;
   align-items: center;
   gap: 10px;
-  border-radius: 8px;
+
   background: white;
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+
   padding: 0 14px;
   width: 380px;
-  height: 35px;
-  flex: 0 1 auto;
-  border: 1px solid #e6e6e6;
+  height: 40px;
+  border-radius: 12px;
 }
 
 .searchIcon {
@@ -182,40 +187,29 @@ html, body {
 }
 
 .searchInput {
-  flex: 1;
   border: none;
   outline: none;
   font-size: 15px;
   color: #333;
-  background: transparent;
+  flex: 1;
+  background: none;
 }
 
 @media (min-width: 1024px) {
   .searchBox { display: flex; }
 }
 
-/* On slightly smaller desktops, shrink search and gaps a bit */
-@media (min-width: 1024px) and (max-width: 1280px) {
-  .searchBox {
-    width: 300px;
-  }
-
-  .centerNav {
-    gap: 0.75rem;
-  }
+@media (max-width: 1280px) {
+  .searchBox { width: 300px; }
 }
 
 /* ================================================
-   DESKTOP NAVIGATION
+   CENTER NAVIGATION
 ================================================ */
 .centerNav {
   display: none;
   align-items: center;
-  gap: 1.2rem;
-  flex: 1 1 auto;
-  justify-content: flex-start;
-  min-width: 0;
-  flex-wrap: nowrap;
+  gap: 1.5rem;
 }
 
 @media (min-width: 1024px) {
@@ -223,176 +217,154 @@ html, body {
 }
 
 .navLink {
-  color: white;
-  font-size: 0.95rem;
+  color: #333;
+  font-size: 1rem;
   font-weight: 600;
   text-decoration: none;
-  padding: 0.18rem 0.5rem;
+
+  padding: 0.25rem 0.6rem;
   border-radius: 6px;
-  white-space: nowrap;
-  flex-shrink: 0;
+
+  transition: all 0.2s ease;
 }
 
 .navLink:hover {
-  background: rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.06);
 }
 
 .activeNavLink {
-  color: white;
-  font-weight: 600;
   position: relative;
-  white-space: nowrap;
-  flex-shrink: 0;
+  color: #1F7A8C;
+  font-weight: 700;
 }
 
 .activeNavLink::after {
   content: "";
   position: absolute;
+  bottom: -6px;
   left: 0;
-  right: 0;
-  bottom: -8px;
+  width: 100%;
   height: 3px;
-  background: white;
-  border-radius: 2px;
+  border-radius: 3px;
+
+  background: linear-gradient(90deg, #1F7A8C, #21A1B3);
 }
 
 /* ================================================
-   RIGHT SECTION (Login/Username)
+   DROPDOWN TRIGGERS (TOOLS/WATCHED)
+================================================ */
+.navDropdown {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  background: none;
+  border: none;
+  color: #333;
+
+  padding: 0.25rem 0.6rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.navDropdown:hover {
+  background: rgba(0,0,0,0.06);
+}
+
+/* ================================================
+   RIGHT SECTION
 ================================================ */
 .rightSection {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  flex-shrink: 0;
+  gap: 0.75rem;
 }
 
-.usernameButton {
+.loginBtn {
+  border-radius: 10px !important;
+  backdrop-filter: blur(8px);
+}
+
+.profileButton {
   display: flex;
   align-items: center;
   gap: 4px;
-  background: none;
-  border: none;
-  color: white;
+
+  background: rgba(255,255,255,0.6);
+  border: 1px solid rgba(0,0,0,0.05);
+
+  padding: 0.4rem 0.75rem;
   font-size: 0.95rem;
+  color: #333;
   font-weight: 600;
+  border-radius: 10px;
+
   cursor: pointer;
-  padding: 0;
-  white-space: nowrap;
+  transition: all 0.2s ease;
 }
 
-.usernameButton:hover {
-  opacity: 0.8;
+.profileButton:hover {
+  background: rgba(255,255,255,0.85);
 }
 
 /* ================================================
-   MOBILE MENU PANEL
+   MOBILE MENU
 ================================================ */
 .mobileMenu {
   display: none;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
 }
 
 .header.menuOpen .mobileMenu {
   display: block;
-  position: absolute;
-  top: 100%;
-  left: 0; right: 0;
-  background: #28a3b3;
-  padding: 1rem;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-  z-index: 9999;
-}
 
-.mobileNav {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+  width: 100%;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(10px);
+
+  padding: 1rem;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
 }
 
 .mobileNavLink {
-  color: white;
-  padding: 0.6rem 0.75rem;
-  font-size: 0.95rem;
+  padding: 0.75rem 0.9rem;
+  font-size: 1rem;
   font-weight: 600;
+  color: #1F7A8C;
   text-decoration: none;
-  text-align: left;
+
+  border-radius: 8px;
+  display: block;
+
+  transition: background 0.2s ease;
 }
 
 .mobileNavLink:hover {
-  background: rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.08);
 }
 
-@media (min-width: 1024px) {
-  .mobileMenu { display: none !important; }
+.mobileSeparator {
+  height: 1px;
+  background: rgba(0,0,0,0.1);
+  margin: 8px 0;
 }
 
-/* ================================================
-   RESPONSIVE RULES
-================================================ */
-@media (max-width: 420px) {
-  .container { padding: 0 0.75rem; }
-  .menuToggle { width: 34px; height: 30px; }
-  .provinceDropdown { padding: 0.25rem 0.45rem; }
-}
-
-/* ================================================
-   TOOLS & WATCHED BUTTONS
-================================================ */
-.toolsButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-
-  padding: 4px 6px;
-  color: white;
+.mobileUser {
+  margin: 8px 2px;
   font-size: 0.95rem;
   font-weight: 600;
-
-  background: none;
-  border: none;
-  cursor: pointer;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.watchedButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-
-  padding: 4px 6px;
-  color: white;
-  font-size: 0.95rem;
-  font-weight: 600;
-
-  background: none;
-  border: none;
-  cursor: pointer;
-  white-space: nowrap;
-  flex-shrink: 0;
+  color: #333;
 }
 
 /* ================================================
-   FIX: Remove black border / outline on dropdown triggers
+   RESPONSIVE
 ================================================ */
-.toolsButton,
-.toolsButton:focus,
-.toolsButton:focus-visible,
-.toolsButton:active,
-.watchedButton,
-.watchedButton:focus,
-.watchedButton:focus-visible,
-.watchedButton:active,
-.usernameButton,
-.usernameButton:focus,
-.usernameButton:focus-visible,
-.usernameButton:active,
-.provinceDropdown,
-.provinceDropdown:focus,
-.provinceDropdown:focus-visible,
-.provinceDropdown:active {
-  outline: none !important;
-  border: none !important;
-  box-shadow: none !important;
+@media (max-width: 480px) {
+  .navContainer { padding: 0 0.85rem; }
+  .provinceDropdown { padding: 0.3rem 0.5rem; }
+  .menuToggle { width: 36px; height: 32px; }
 }

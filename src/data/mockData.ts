@@ -26,7 +26,7 @@ export interface Agent {
 export const exclusivePrecon: PropertyListing[] = [
   {
     id: '1',
-    image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80',
+    image: '/assets/ontario_files/oc1.jpg',
     badge: 'Exclusive Assignment',
     badgeColor: 'green',
     status: 'For Sale',
@@ -40,7 +40,7 @@ export const exclusivePrecon: PropertyListing[] = [
   },
   {
     id: '2',
-    image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80',
+    image: '/assets/ontario_files/oc2.jpg',
     badge: 'Exclusive Assignment',
     badgeColor: 'green',
     status: 'For Sale',
@@ -54,7 +54,7 @@ export const exclusivePrecon: PropertyListing[] = [
   },
   {
     id: '3',
-    image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80',
+    image: '/assets/ontario_files/oc3.jpg',
     badge: 'Exclusive Assignment',
     badgeColor: 'green',
     status: 'For Sale',
@@ -71,7 +71,7 @@ export const exclusivePrecon: PropertyListing[] = [
 export const newlyListed: PropertyListing[] = [
   {
     id: '4',
-    image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&q=80',
+    image: '/assets/ontario_files/oc4.jpg',
     status: 'For Sale',
     price: 459000,
     date: '34 minutes ago',
@@ -84,7 +84,7 @@ export const newlyListed: PropertyListing[] = [
   },
   {
     id: '5',
-    image: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80',
+    image: '/assets/ontario_files/oc5.jpg',
     status: 'For Sale',
     price: 652900,
     date: '34 minutes ago',
@@ -97,7 +97,7 @@ export const newlyListed: PropertyListing[] = [
   },
   {
     id: '6',
-    image: 'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=800&q=80',
+    image: '/assets/ontario_files/oc6.jpg',
     status: 'For Sale',
     price: 399900,
     date: '34 minutes ago',
@@ -113,7 +113,7 @@ export const newlyListed: PropertyListing[] = [
 export const rentalInvestment: PropertyListing[] = [
   {
     id: '7',
-    image: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80',
+    image: '/assets/ontario_files/oc7.jpg',
     badge: 'Rental Yield: 5.3%',
     badgeColor: 'teal',
     status: 'For Sale',
@@ -128,7 +128,7 @@ export const rentalInvestment: PropertyListing[] = [
   },
   {
     id: '8',
-    image: 'https://images.unsplash.com/photo-1576941089067-2de3c901e126?w=800&q=80',
+    image: '/assets/ontario_files/oc8.jpg',
     badge: 'Rental Yield: 5.0%',
     badgeColor: 'teal',
     status: 'For Sale',
@@ -143,7 +143,7 @@ export const rentalInvestment: PropertyListing[] = [
   },
   {
     id: '9',
-    image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80',
+    image: '/assets/ontario_files/oc9.jpg',
     badge: 'Rental Yield: 4.8%',
     badgeColor: 'teal',
     status: 'For Sale',
@@ -161,7 +161,7 @@ export const rentalInvestment: PropertyListing[] = [
 export const bestForSchools: PropertyListing[] = [
   {
     id: '10',
-    image: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&q=80',
+    image: '/assets/ontario_files/oc10.jpg',
     badge: 'School Score: 10/10',
     badgeColor: 'blue',
     status: 'For Sale',
@@ -176,7 +176,7 @@ export const bestForSchools: PropertyListing[] = [
   },
   {
     id: '11',
-    image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80',
+    image: '/assets/ontario_files/oc11.jpg',
     badge: 'School Score: 10/10',
     badgeColor: 'blue',
     status: 'For Sale',
@@ -192,7 +192,7 @@ export const bestForSchools: PropertyListing[] = [
   },
   {
     id: '12',
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80',
+    image: '/assets/ontario_files/oc12.jpg',
     badge: 'School Score: 10/10',
     badgeColor: 'blue',
     status: 'For Sale',
@@ -210,7 +210,7 @@ export const bestForSchools: PropertyListing[] = [
 export const featuredListings: PropertyListing[] = [
   {
     id: '13',
-    image: 'https://cache05.housesigma.com/file/pix-treb/N12568830/0af27_1_1200.webp?6c65a1f7',
+    image: '/assets/ontario_files/oc13.jpg',
     badge: 'Featured',
     badgeColor: 'orange',
     status: 'For Sale',
@@ -225,7 +225,7 @@ export const featuredListings: PropertyListing[] = [
   },
   {
     id: '14',
-    image: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80',
+    image: '/assets/ontario_files/oc14.jpg',
     badge: 'Featured',
     badgeColor: 'orange',
     status: 'For Sale',
@@ -241,7 +241,7 @@ export const featuredListings: PropertyListing[] = [
   },
   {
     id: '15',
-    image: 'https://cache16.housesigma.com/file/pix-treb/N12549086/13458_1_1200.webp?ad7ec36d',
+    image: '/assets/ontario_files/oc15.jpg',
     badge: 'Featured',
     badgeColor: 'orange',
     status: 'For Sale',
@@ -259,7 +259,7 @@ export const featuredListings: PropertyListing[] = [
 export const highGrowth: PropertyListing[] = [
   {
     id: '16',
-    image: 'https://cache09.housesigma.com/file/pix-treb/N12551336/f43c4_1_1200.webp?fae22b16',
+    image: '/assets/ontario_files/oc16.jpg',
     badge: 'Growth Score: 9/10',
     badgeColor: 'blue',
     status: 'For Sale',
@@ -274,7 +274,7 @@ export const highGrowth: PropertyListing[] = [
   },
   {
     id: '17',
-    image: 'https://cache-e12.housesigma.com/file/pix-treb/N12567266/0c5c3_1_1200.webp?0fd8a527',
+    image: '/assets/ontario_files/oc17.jpg',
     badge: 'Growth Score: 9/10',
     badgeColor: 'blue',
     status: 'For Sale',
@@ -289,7 +289,7 @@ export const highGrowth: PropertyListing[] = [
   },
   {
     id: '18',
-    image: 'https://cache-e18.housesigma.com/file/pix-itso/161462977/0a798_1_1200.webp?57942e88',
+    image: '/assets/ontario_files/oc18.jpg',
     badge: 'Growth Score: 9/10',
     badgeColor: 'blue',
     status: 'For Sale',
@@ -307,7 +307,7 @@ export const highGrowth: PropertyListing[] = [
 export const soldBelow: PropertyListing[] = [
   {
     id: '19',
-    image: 'https://cache09.housesigma.com/file/pix-treb/W12353547/06c55_1_1200.webp?b2c256a7',
+    image: '/assets/ontario_files/oc19.jpg',
     badgeColor: 'blue',
     status: 'Sold',
     price: 1898000,
@@ -322,7 +322,7 @@ export const soldBelow: PropertyListing[] = [
   },
   {
     id: '20',
-    image: 'https://cache-e12.housesigma.com/file/pix-treb/C12430158/e5895_1_1200.webp?8e9f53ef',
+    image: '/assets/ontario_files/oc20.jpg',
     badgeColor: 'blue',
     status: 'Sold',
     price: 728000,
@@ -337,7 +337,7 @@ export const soldBelow: PropertyListing[] = [
   },
   {
     id: '21',
-    image: 'https://cache-e15.housesigma.com/file/pix-treb/X12309876/6519d_1_1200.webp?742683e5',
+    image: '/assets/ontario_files/oc21.jpg',
     badgeColor: 'blue',
     status: 'Sold',
     price: 1490000,

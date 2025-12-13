@@ -34,7 +34,7 @@ export interface Property {
 export const newlyAdded: Property[] = [
   {
     id: 1,
-    image: "/src/assets/alberta_Files/alberta1.jpg",
+    image: "/assets/alberta_Files/alberta1.jpg",
     price: "$63,900",
     address: "108 - 11040 129 Street NW",
     location: "Edmonton - Westminster",
@@ -47,7 +47,7 @@ export const newlyAdded: Property[] = [
   },
   {
     id: 2,
-    image: "/src/assets/alberta_Files/alberta2.jpg",
+    image: "/assets/alberta_Files/alberta2.jpg",
     price: "$250,000",
     address: "475 DUNLUCE Road NW",
     location: "Edmonton - Dunluce",
@@ -60,7 +60,7 @@ export const newlyAdded: Property[] = [
   },
   {
     id: 3,
-    image: "/src/assets/alberta_Files/alberta3.jpg",
+    image: "/assets/alberta_Files/alberta3.jpg",
     price: "$352,900",
     address: "10132 105 Street",
     location: "Lac la Biche - Lac La Biche",
@@ -80,7 +80,7 @@ export const newlyAdded: Property[] = [
 export const bestForSchools: Property[] = [
   {
     id: 4,
-    image: "/src/assets/alberta_Files/alberta4.jpg",
+    image: "/assets/alberta_Files/alberta4.jpg",
     price: "$366,000",
     address: "1003 - 3500 Varsity Drive NW",
     location: "Calgary - Varsity Row/Townhouse",
@@ -95,7 +95,7 @@ export const bestForSchools: Property[] = [
   },
   {
     id: 5,
-    image: "/src/assets/alberta_Files/alberta5.jpg",
+    image: "/assets/alberta_Files/alberta5.jpg",
     price: "$284,900",
     address: "1802 - 3500 Varsity Drive NW",
     location: "Calgary - Varsity Row/Townhouse",
@@ -110,7 +110,7 @@ export const bestForSchools: Property[] = [
   },
   {
     id: 6,
-    image: "/src/assets/alberta_Files/alberta6.jpg",
+    image: "/assets/alberta_Files/alberta6.jpg",
     price: "$359,900",
     address: "113 - 3950 46 Avenue NW",
     location: "Calgary - Varsity",
@@ -130,7 +130,7 @@ export const bestForSchools: Property[] = [
 export const featuredListings: Property[] = [
   {
     id: 7,
-    image: "/src/assets/alberta_Files/alberta7.jpg",
+    image: "/assets/alberta_Files/alberta7.jpg",
     price: "$539,900",
     address: "1921 119A Street SW",
     location: "Edmonton - Rutherford",
@@ -145,7 +145,7 @@ export const featuredListings: Property[] = [
   },
   {
     id: 8,
-    image: "/src/assets/alberta_Files/alberta8.jpg",
+    image: "/assets/alberta_Files/alberta8.jpg",
     price: "$499,000",
     address: "2095 Maple Road NW",
     location: "Edmonton - Meadows Area",
@@ -160,7 +160,7 @@ export const featuredListings: Property[] = [
   },
   {
     id: 9,
-    image: "/src/assets/alberta_Files/alberta9.jpg",
+    image: "/assets/alberta_Files/alberta9.jpg",
     price: "$299,900",
     address: "5344 38A Avenue NW",
     location: "Edmonton - Greenview",
@@ -181,7 +181,7 @@ export const featuredListings: Property[] = [
 export const highGrowth: Property[] = [
   {
     id: 10,
-    image: "/src/assets/alberta_Files/alberta10.jpg",
+    image: "/assets/alberta_Files/alberta10.jpg",
     price: "$790,000",
     address: "1527 22 Street NW",
     location: "Calgary - Hounsfield Heights",
@@ -196,7 +196,7 @@ export const highGrowth: Property[] = [
   },
   {
     id: 11,
-    image: "/src/assets/alberta_Files/alberta11.jpg",
+    image: "/assets/alberta_Files/alberta.jpg",
     price: "$1,195,000",
     address: "1731 12 Avenue NW",
     location: "Calgary - Hounsfield Heights",
@@ -211,7 +211,7 @@ export const highGrowth: Property[] = [
   },
   {
     id: 12,
-    image: "/src/assets/alberta_Files/alberta12.jpg",
+    image: "/assets/alberta_Files/alberta12.jpg",
     price: "$354,998",
     address: "100 - 3705 141 Street SW",
     location: "Edmonton",
@@ -232,7 +232,7 @@ export const highGrowth: Property[] = [
 export const soldBelowBought: Property[] = [
   {
     id: 13,
-    image: "/src/assets/alberta_Files/alberta13.jpg",
+    image: "/assets/alberta_Files/alberta13.jpg",
     price: "$317,000",
     address: "2301 - 310 Mckenzie Towne Gate SE",
     location: "Calgary",
@@ -251,7 +251,7 @@ export const soldBelowBought: Property[] = [
   },
   {
     id: 14,
-    image: "/src/assets/alberta_Files/alberta14.jpg",
+    image: "/assets/alberta_Files/alberta14.jpg",
     price: "$90,100",
     address: "303 - 10335 117 Street NW",
     location: "Edmonton - Oliver",
@@ -269,7 +269,7 @@ export const soldBelowBought: Property[] = [
   },
   {
     id: 15,
-    image: "/src/assets/alberta_Files/alberta15.jpg",
+    image: "/assets/alberta_Files/alberta15.jpg",
     price: "$175,000",
     address: "4513 42 Street",
     location: "Bonnyville Town",
@@ -293,7 +293,7 @@ export const soldBelowBought: Property[] = [
 export const highReturns: Property[] = [
   {
     id: 16,
-    image: "/src/assets/alberta_Files/alberta16.jpg",
+    image: "/assets/alberta_Files/alberta16.jpg",
     price: "$425,000",
     address: "123 Investment Drive",
     location: "Edmonton - Downtown",
@@ -310,7 +310,7 @@ export const highReturns: Property[] = [
   },
   {
     id: 17,
-    image: "/src/assets/alberta_Files/alberta17.jpg",
+    image: "/assets/alberta_Files/alberta17.jpg",
     price: "$380,000",
     address: "456 Rental Avenue",
     location: "Calgary - Beltline",
@@ -327,7 +327,7 @@ export const highReturns: Property[] = [
   },
   {
     id: 18,
-    image: "/src/assets/alberta_Files/alberta18.jpg",
+    image: "/assets/alberta_Files/alberta18.jpg",
     price: "$550,000",
     address: "789 Profit Street",
     location: "Edmonton - Whyte Ave",
@@ -350,7 +350,7 @@ export const highReturns: Property[] = [
 export const justSold: Property[] = [
   {
     id: 19,
-    image: "/src/assets/alberta_Files/alberta19.jpg",
+    image: "/assets/alberta_Files/alberta19.jpg",
     price: "$685,000",
     soldFor: "$660,000",
     status: "Sold",
@@ -369,7 +369,7 @@ export const justSold: Property[] = [
   },
   {
     id: 20,
-    image: "/src/assets/alberta_Files/alberta20.jpg",
+    image: "/assets/alberta_Files/alberta20.jpg",
     price: "$520,000",
     soldFor: "$505,000",
     status: "Sold",
@@ -388,7 +388,7 @@ export const justSold: Property[] = [
   },
   {
     id: 21,
-    image: "/src/assets/alberta_Files/alberta21.jpg",
+    image: "/assets/alberta_Files/alberta21.jpg",
     price: "$399,900",
     soldFor: "$385,000",
     status: "Sold",
