@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingChatButton from "../components/floatingWindowChatBot";
 import ChatBot from "../components/chatbot";
-
+import styles from "./RecommendedCommunities.module.css";
 
 const TICK_VALUES = [0, 500000, 1000000, 1500000, 2000000, 2500000, 3000000, 3500000, 4000000, 4500000, 5000000];
 
@@ -46,13 +46,6 @@ const formatAdaptive = (value: number) => {
   return String(value);
 };
 
-const formatPriceShort = (value: number) => {
-  if (value >= 5000000) return "Max";
-  if (value === 0) return "$0";
-  if (value >= 1000000) return `$${(value / 1000000).toFixed(1).replace(".0", "")}M`;
-  return `$${Math.round(value / 1000)}K`;
-};
-
 export default function RecommendedCommunities() {
   const [selectedInvestment, setSelectedInvestment] = useState<string[]>([]);
   const [selectedProperty, setSelectedProperty] = useState<string[]>([]);
@@ -69,6 +62,7 @@ export default function RecommendedCommunities() {
 
   const [priceError, setPriceError] = useState<string>("");
   const [openChat, setOpenChat] = useState<boolean>(false);
+  const [citySearch, setCitySearch] = useState<string>("");
 
   const onMinFocus = () => {
     setMinFocused(true);
@@ -183,7 +177,7 @@ export default function RecommendedCommunities() {
   const rightPercent = (safeMax / 5000000) * 100;
   const widthPercent = rightPercent - leftPercent;
 
-  const displayRange = `${formatAdaptive(priceMin)} – ${formatAdaptive(priceMax)}`;
+  const displayRange = `$${formatAdaptive(priceMin)} – $${formatAdaptive(priceMax)}`;
 
   const clearAll = () => {
     setSelectedInvestment([]);
@@ -194,298 +188,300 @@ export default function RecommendedCommunities() {
     setPriceMinInput("0");
     setPriceMaxInput("5M");
     setPriceError("");
+    setCitySearch("");
   };
 
-  function formatPrice(priceMax: number) {
-    throw new Error("Function not implemented.");
-  }
+  // Active filters count
+  const activeFiltersCount = 
+    (priceMin > 0 || priceMax < 5000000 ? 1 : 0) +
+    selectedInvestment.length +
+    selectedProperty.length +
+    selectedCities.length;
+
+  // Filter cities based on search
+  const filterCities = (cityList: string[]) => {
+    if (!citySearch.trim()) return cityList;
+    return cityList.filter(city => 
+      city.toLowerCase().includes(citySearch.toLowerCase())
+    );
+  };
 
   return (
     <>
       <Navbar />
 
-      <div className="pt-6 px-4 md:px-6 max-w-[1000px] mx-auto">
+      <div className={styles.pageWrapper}>
+        <div className={styles.container}>
+          <h1 className={styles.mainTitle}>Community Recommendations</h1>
 
-        <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-8 mt-11">
-          Community Recommendations
-        </h1>
+          {/* FILTER SUMMARY */}
+          {activeFiltersCount > 0 && (
+            <div className={styles.filterSummary}>
+              <span className={styles.filterCount}>
+                {activeFiltersCount} Active Filter{activeFiltersCount !== 1 ? 's' : ''}
+              </span>
+              <div className={styles.filterTags}>
+                {(priceMin > 0 || priceMax < 5000000) && (
+                  <span className={styles.filterTag}>Price: {displayRange}</span>
+                )}
+                {selectedInvestment.map(inv => (
+                  <span key={inv} className={styles.filterTag}>{inv}</span>
+                ))}
+                {selectedProperty.map(prop => (
+                  <span key={prop} className={styles.filterTag}>{prop}</span>
+                ))}
+                {selectedCities.slice(0, 3).map(city => (
+                  <span key={city} className={styles.filterTag}>{city}</span>
+                ))}
+                {selectedCities.length > 3 && (
+                  <span className={styles.filterTag}>+{selectedCities.length - 3} more</span>
+                )}
+              </div>
+            </div>
+          )}
 
-        {/* PRICE RANGE */}
-        <div className="mb-6 pb-6 border-b border-border">
-          <h2 className="text-lg md:text-xl font-semibold text-foreground mb-4">
-            Price Range
-          </h2>
+          {/* PRICE RANGE CARD */}
+          <div className={styles.card}>
+            <h2 className={styles.sectionTitle}>💰 Price Range</h2>
 
-          <div className="flex gap-4 mb-5">
-            <div className="flex flex-col">
-              <label className="text-sm text-muted-foreground mb-1">Min Price</label>
-              <input
-                className="w-40 px-3 py-2 text-sm border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-ring transition-all"
-                value={minFocused ? priceMinInput : formatAdaptive(priceMin)}
-                onFocus={onMinFocus}
-                onBlur={onMinBlur}
-                onChange={(e) => onMinInputChange(e.target.value)}
-                inputMode="numeric"
-              />
+            <div className={styles.priceInputs}>
+              <div className={styles.inputGroup}>
+                <label className={styles.inputLabel}>Min Price</label>
+                <input
+                  className={styles.priceInput}
+                  value={minFocused ? priceMinInput : formatAdaptive(priceMin)}
+                  onFocus={onMinFocus}
+                  onBlur={onMinBlur}
+                  onChange={(e) => onMinInputChange(e.target.value)}
+                  inputMode="numeric"
+                />
+              </div>
+
+              <div className={styles.inputGroup}>
+                <label className={styles.inputLabel}>Max Price</label>
+                <input
+                  className={styles.priceInput}
+                  value={maxFocused ? priceMaxInput : formatAdaptive(priceMax)}
+                  onFocus={onMaxFocus}
+                  onBlur={onMaxBlur}
+                  onChange={(e) => onMaxInputChange(e.target.value)}
+                  inputMode="numeric"
+                />
+              </div>
             </div>
 
-            <div className="flex flex-col">
-              <label className="text-sm text-muted-foreground mb-1">Max Price</label>
-              <input
-                className="w-40 px-3 py-2 text-sm border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-ring transition-all"
-                value={maxFocused ? priceMaxInput : formatAdaptive(priceMax)}
-                onFocus={onMaxFocus}
-                onBlur={onMaxBlur}
-                onChange={(e) => onMaxInputChange(e.target.value)}
-                inputMode="numeric"
-              />
+            {priceError && <p className={styles.errorText}>{priceError}</p>}
+            
+            <p className={styles.displayRange}>{displayRange}</p>
+
+            {/* SLIDER */}
+            <div className={styles.sliderWrapper}>
+              <div className={styles.sliderContainer}>
+                <div className={styles.sliderTrack} />
+                <div
+                  className={styles.sliderFilled}
+                  style={{
+                    left: `${leftPercent}%`,
+                    width: `${widthPercent}%`,
+                  }}
+                />
+
+                <input
+                  type="range"
+                  min={0}
+                  max={5000000}
+                  step={1}
+                  value={priceMin}
+                  onChange={(e) => onMinSlider(Number(e.target.value))}
+                  className={styles.rangeInput}
+                />
+
+                <input
+                  type="range"
+                  min={0}
+                  max={5000000}
+                  step={1}
+                  value={priceMax}
+                  onChange={(e) => onMaxSlider(Number(e.target.value))}
+                  className={styles.rangeInput}
+                />
+              </div>
+
+              <div className={styles.ticksContainer}>
+                {TICK_VALUES.map((v, i) => (
+                  <div
+                    key={i}
+                    className={styles.tickLabel}
+                    style={{ left: `${(v / 5000000) * 100}%` }}
+                  >
+                    {PRICE_MARKS[i]}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
-          {priceError && <p className="text-sm text-destructive mb-2">{priceError}</p>}
-          
-          <p className="text-base font-medium text-foreground mb-4">{displayRange}</p>
-
-          {/* SLIDER */}
-          <div className="relative w-full">
-            <div className="relative h-10 mb-4">
-              {/* Track */}
-              <div className="absolute top-1/2 left-2 right-2 h-1.5 bg-slate-200 rounded-full -translate-y-1/2 z-[1]" />
-
-              {/* Filled */}
-              <div
-className="absolute top-1/2 h-1.5 bg-[#1BA8C5] rounded-full -translate-y-1/2 z-[2] pointer-events-none"
-                style={{
-                  left: `${leftPercent}%`,
-width: `${widthPercent}%`,
-
+          {/* INVESTMENT REQUIREMENT CARD */}
+          <div className={styles.card}>
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>📈 Investment Requirement</h2>
+              <button
+                className={styles.selectAllButton}
+                onClick={() => {
+                  const all = investmentOptions.every((opt) => selectedInvestment.includes(opt));
+                  setSelectedInvestment(all ? [] : [...investmentOptions]);
                 }}
-              />
-
-              {/* Min Slider */}
-              <input
-                type="range"
-                min={0}
-                max={5000000}
-                step={1}
-                value={priceMin}
-                onChange={(e) => onMinSlider(Number(e.target.value))}
-className="
-  absolute w-full h-full appearance-none bg-transparent pointer-events-none z-[5]
-  [&::-webkit-slider-thumb]:appearance-none 
-  [&::-webkit-slider-thumb]:h-4 
-  [&::-webkit-slider-thumb]:w-4 
-  [&::-webkit-slider-thumb]:rounded-full 
-  [&::-webkit-slider-thumb]:bg-white 
-  [&::-webkit-slider-thumb]:border-2 
-  [&::-webkit-slider-thumb]:border-[#1BA8C5] 
-  [&::-webkit-slider-thumb]:cursor-pointer 
-  [&::-webkit-slider-thumb]:pointer-events-auto 
-  [&::-webkit-slider-thumb]:shadow-md
-
-  [&::-moz-range-thumb]:h-4 
-  [&::-moz-range-thumb]:w-4 
-  [&::-moz-range-thumb]:rounded-full 
-  [&::-moz-range-thumb]:bg-white 
-  [&::-moz-range-thumb]:border-2 
-  [&::-moz-range-thumb]:border-[#1BA8C5] 
-  [&::-moz-range-thumb]:cursor-pointer 
-  [&::-moz-range-thumb]:pointer-events-auto 
-  [&::-moz-range-thumb]:shadow-md
-"
-
-              />
-
-              {/* Max Slider */}
-              <input
-                type="range"
-                min={0}
-                max={5000000}
-                step={1}
-                value={priceMax}
-                onChange={(e) => onMaxSlider(Number(e.target.value))}
-                className="absolute w-full h-full appearance-none bg-transparent pointer-events-none z-[4] [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-background [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-primary [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:shadow-md [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-background [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-primary [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:shadow-md"
-              />
+              >
+                {investmentOptions.every((opt) => selectedInvestment.includes(opt))
+                  ? "Unselect all"
+                  : "Select all"}
+              </button>
             </div>
 
-            <div className="relative w-full h-5">
-              {TICK_VALUES.map((v, i) => (
-                <div
-                  key={i}
-                  className="absolute bottom-0 text-xs text-slate-400 whitespace-nowrap -translate-x-1/2"
-                  style={{ left: `${(v / 5000000) * 100}%` }}
+            <div className={styles.optionsGrid}>
+              {investmentOptions.map((opt) => (
+                <button
+                  key={opt}
+                  className={`${styles.optionButton} ${
+                    selectedInvestment.includes(opt) ? styles.optionButtonSelected : ""
+                  }`}
+                  onClick={() =>
+                    selectedInvestment.includes(opt)
+                      ? setSelectedInvestment((prev) => prev.filter((i) => i !== opt))
+                      : setSelectedInvestment((prev) => [...prev, opt])
+                  }
                 >
-                  {PRICE_MARKS[i]}
-                </div>
+                  {opt}
+                </button>
               ))}
             </div>
           </div>
-        </div>
 
-        {/* INVESTMENT REQUIREMENT */}
-        <div className="mb-6 pb-6 border-b border-border">
-          <div className="flex justify-between items-center mb-3">
-            <h2 className="text-lg md:text-xl font-semibold text-foreground">
-              Investment Requirement
-            </h2>
-            <button
-              className="text-sm md:text-base text-[#1BA8C5] hover:underline"
-
-              onClick={() => {
-                const all = investmentOptions.every((opt) => selectedInvestment.includes(opt));
-                setSelectedInvestment(all ? [] : [...investmentOptions]);
-              }}
-            >
-              {investmentOptions.every((opt) => selectedInvestment.includes(opt))
-                ? "Unselect all"
-                : "Select all"}
-            </button>
-          </div>
-
-          <div className="flex flex-wrap gap-2">
-            {investmentOptions.map((opt) => (
-              <Button
-                key={opt}
-                variant={selectedInvestment.includes(opt) ? "default" : "outline"}
-                onClick={() =>
-                  selectedInvestment.includes(opt)
-                    ? setSelectedInvestment((prev) => prev.filter((i) => i !== opt))
-                    : setSelectedInvestment((prev) => [...prev, opt])
-                }
+          {/* PROPERTY TYPE CARD */}
+          <div className={styles.card}>
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>🏠 Property Type</h2>
+              <button
+                className={styles.selectAllButton}
+                onClick={() => {
+                  const all = propertyTypes.every((opt) => selectedProperty.includes(opt));
+                  setSelectedProperty(all ? [] : [...propertyTypes]);
+                }}
               >
-                {opt}
-              </Button>
-            ))}
+                {propertyTypes.every((t) => selectedProperty.includes(t))
+                  ? "Unselect all"
+                  : "Select all"}
+              </button>
+            </div>
+
+            <div className={styles.optionsGrid}>
+              {propertyTypes.map((opt) => (
+                <button
+                  key={opt}
+                  className={`${styles.optionButton} ${
+                    selectedProperty.includes(opt) ? styles.optionButtonSelected : ""
+                  }`}
+                  onClick={() =>
+                    selectedProperty.includes(opt)
+                      ? setSelectedProperty((prev) => prev.filter((i) => i !== opt))
+                      : setSelectedProperty((prev) => [...prev, opt])
+                  }
+                >
+                  {opt}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
 
-        {/* PROPERTY TYPE */}
-        <div className="mb-6 pb-6 border-b border-border">
-          <div className="flex justify-between items-center mb-3">
-            <h2 className="text-lg md:text-xl font-semibold text-foreground">
-              Property Type
-            </h2>
-            <button
-             className="text-sm md:text-base text-[#1BA8C5] hover:underline"
-
-              onClick={() => {
-                const all = propertyTypes.every((opt) => selectedProperty.includes(opt));
-                setSelectedProperty(all ? [] : [...propertyTypes]);
-              }}
-            >
-              {propertyTypes.every((t) => selectedProperty.includes(t))
-                ? "Unselect all"
-                : "Select all"}
-            </button>
-          </div>
-
-          <div className="flex flex-wrap gap-2">
-            {propertyTypes.map((opt) => (
-              <Button
-                key={opt}
-                variant={selectedProperty.includes(opt) ? "default" : "outline"}
-                onClick={() =>
-                  selectedProperty.includes(opt)
-                    ? setSelectedProperty((prev) => prev.filter((i) => i !== opt))
-                    : setSelectedProperty((prev) => [...prev, opt])
-                }
-              >
-                {opt}
-              </Button>
-            ))}
-          </div>
-        </div>
-
-        {/* CITY */}
-        <div className="mb-6">
-          <h2 className="text-lg md:text-xl font-semibold text-foreground mb-4">
-            City
-          </h2>
-
-          {Object.keys(cities).map((group, idx) => {
-            const allSelected = cities[group].every((c) => selectedCities.includes(c));
-
-            return (
-              <div
-                key={group}
-                className={idx !== Object.keys(cities).length - 1 ? "mb-5 pb-5 border-b border-border" : "pb-2"}
-              >
-                <div className="flex justify-between items-center mb-3">
-                  <h3 className="text-base md:text-lg font-semibold text-foreground">
-                    {group}
-                  </h3>
-                  <button
-                    className="text-sm md:text-base text-primary hover:underline"
-                    onClick={() => {
-                      if (allSelected) {
-                        setSelectedCities((prev) => prev.filter((c) => !cities[group].includes(c)));
-                      } else {
-                        setSelectedCities((prev) => [...new Set([...prev, ...cities[group]])]);
-                      }
-                    }}
-                  >
-                    {allSelected ? "Unselect all" : "Select all"}
-                  </button>
-                </div>
-
-                <div className="flex flex-wrap gap-2">
-                  {cities[group].map((city) => (
-                    <Button
-                      key={city}
-                      variant={selectedCities.includes(city) ? "default" : "outline"}
-                      onClick={() =>
-                        selectedCities.includes(city)
-                          ? setSelectedCities((prev) => prev.filter((c) => c !== city))
-                          : setSelectedCities((prev) => [...prev, city])
-                      }
-                    >
-                      {city}
-                    </Button>
-                  ))}
-                </div>
+          {/* CITY CARD */}
+          <div className={styles.card}>
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>🏙️ City</h2>
+              <div className={styles.citySearchWrapper}>
+                <input
+                  type="text"
+                  placeholder="🔍 Search city..."
+                  value={citySearch}
+                  onChange={(e) => setCitySearch(e.target.value)}
+                  className={styles.citySearchInput}
+                />
               </div>
-            );
-          })}
+            </div>
 
-          <div className="mt-4 max-w-[1000px] mx-auto">
-            <div className="w-full border-t border-gray-300 mb-3"></div>
+            <div className={styles.cityGroups}>
+              {Object.keys(cities).map((group) => {
+                const filteredCities = filterCities(cities[group]);
+                if (filteredCities.length === 0) return null;
 
-            <p className="text-[18px] md:text-[18px] text-gray-500 leading-relaxed">
-              * Good School, Value Appreciation, Rental Yield and Land
-              Size are estimated values based on HouseSigma's internal
-              algorithm.
-            </p>
+                const allSelected = filteredCities.every((c) => selectedCities.includes(c));
 
-    <div className="w-full border-t border-gray-300 mb-3"></div>
+                return (
+                  <div key={group} className={styles.cityGroup}>
+                    <div className={styles.cityGroupHeader}>
+                      <h3 className={styles.groupTitle}>
+                        {group} <span className={styles.cityCount}>({filteredCities.length})</span>
+                      </h3>
+                      <button
+                        className={styles.selectAllButton}
+                        onClick={() => {
+                          if (allSelected) {
+                            setSelectedCities((prev) => prev.filter((c) => !filteredCities.includes(c)));
+                          } else {
+                            setSelectedCities((prev) => [...new Set([...prev, ...filteredCities])]);
+                          }
+                        }}
+                      >
+                        {allSelected ? "Unselect all" : "Select all"}
+                      </button>
+                    </div>
+
+                    <div className={styles.optionsGrid}>
+                      {filteredCities.map((city) => (
+                        <button
+                          key={city}
+                          className={`${styles.optionButton} ${
+                            selectedCities.includes(city) ? styles.optionButtonSelected : ""
+                          }`}
+                          onClick={() =>
+                            selectedCities.includes(city)
+                              ? setSelectedCities((prev) => prev.filter((c) => c !== city))
+                              : setSelectedCities((prev) => [...prev, city])
+                          }
+                        >
+                          {city}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className={styles.disclaimer}>
+              <p className={styles.disclaimerText}>
+                * Good School, Value Appreciation, Rental Yield and Land Size are estimated values
+                based on HouseSigma's internal algorithm.
+              </p>
+            </div>
           </div>
         </div>
       </div>
 
       {/* STICKY BOTTOM BAR */}
-      {/* STICKY BOTTOM BAR */}
-<div className="sticky bottom-0 bg-white z-40 py-4 px-4">
+      <div className={styles.stickyBottom}>
+        <div className={styles.stickyContent}>
+          <button onClick={clearAll} className={styles.clearButton}>
+            Clear All
+          </button>
 
-<div className="max-w-[1000px] mx-auto flex flex-col sm:flex-row justify-end gap-2 pb-0">
-
-
-    <button
-  onClick={clearAll}
-  className="px-4 py-2 text-lg border-2 border-[#1BA8C5] text-[#1BA8C5] rounded-lg hover:bg-[#1BA8C5]/10"
->
-  Clear All
-</button>
-
-<button
-  onClick={() => alert(`Recommendations Started!`)}
-  className="px-4 py-2 text-lg bg-[#1BA8C5] text-white rounded-lg hover:bg-[#1BA8C5]/90"
->
-  Start Recommendation
-</button>
-
-  </div>
-</div>
-
-
+          <button
+            onClick={() => alert(`Starting recommendations with ${activeFiltersCount} filters...`)}
+            className={styles.startButton}
+          >
+            Start Recommendation
+          </button>
+        </div>
+      </div>
 
       <Footer />
       {openChat && <ChatBot onClose={() => setOpenChat(false)} />}

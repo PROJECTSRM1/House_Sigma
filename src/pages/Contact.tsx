@@ -1,14 +1,13 @@
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
-import styles from "./Contact.module.css";
-
 import FloatingChatButton from "../components/floatingWindowChatBot";
 import ChatBot from "../components/chatbot";
+import styles from "./Contact.module.css";
 
 export default function Contact() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [openChat, setOpenChat] = useState(false);
 
   const handleSearch = () => {
     if (searchQuery.trim()) {
@@ -16,188 +15,197 @@ export default function Contact() {
     }
   };
 
-  const [openChat, setOpenChat] = useState(false);
-
   return (
     <>
       <Navbar />
 
-      <div className={`min-h-screen bg-white pt-4 ${styles.contactPage}`}>
-        <div className="w-full flex justify-center">
-          <div className="w-[92%] max-w-[850px] px-4 md:px-6 py-6">
+      <div className={styles.pageWrapper}>
+        <div className={styles.container}>
+          {/* HERO SECTION */}
+          <div className={styles.hero}>
+            <h1 className={styles.heroTitle}>Contact Us</h1>
+            <div className={styles.heroUnderline} />
+            <p className={styles.heroSubtitle}>How can we help you today?</p>
+          </div>
 
-            {/* PAGE TITLE (Responsive) */}
-            <h1 className="text-[30px] md:text-[40px] font-bold text-[#111133] mt-4 mb-2 text-center md:text-left">
-              Contact Us
-            </h1>
-
-            {/* UNDERLINE */}
-            <div className="w-[90px] h-[3px] bg-[#111133] mx-auto  mt-2 mb-6" />
-
-            {/* HEADER TEXT */}
-            <h2 className="text-[20px] md:text-[28px] font-semibold text-[#111133] mb-3 leading-[1.4] text-center md:text-left">
-              Enter your question here to search our knowledge base:
-            </h2>
-
-            {/* SEARCH BAR (Responsive) */}
-            <div className="flex w-full mb-4 border border-[#cccccc] rounded-md overflow-hidden">
+          {/* SEARCH BAR */}
+          <div className={styles.searchCard}>
+            <div className={styles.searchWrapper}>
+              <div className={styles.searchIcon}>🔍</div>
               <input
                 type="text"
-                placeholder="Search Knowledge Base"
+                placeholder="Search Knowledge Base..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-                className={`
-                  flex-1 px-4 py-2 text-[16px] md:text-[20px] bg-white text-[#333]
-                  placeholder:text-[14px] md:placeholder:text-[18px]
-                  outline-none
-                  ${styles.noBorder}
-                `}
+                className={styles.searchInput}
               />
-
-              <button
-                onClick={handleSearch}
-                className={`
-                  px-4 md:px-6 text-[16px] md:text-[20px] font-semibold bg-white text-[#222]
-                  hover:bg-[#f0f0f0] transition whitespace-nowrap
-                  ${styles.noBorder}
-                `}
-              >
-                SEARCH
+              <button onClick={handleSearch} className={styles.searchButton}>
+                Search
               </button>
             </div>
+          </div>
 
-            {/* INFO TEXT */}
-            <p className="text-[15px] md:text-[17px] text-[#111133] leading-[1.6] mb-5">
+          {/* INFO CARD */}
+          <div className={styles.infoCard}>
+            <p className={styles.infoText}>
               Before submitting a customer service request, please check our{" "}
               <a
                 href="https://housesigma.com/blog-en/faq"
                 target="_blank"
-                className="text-[#4477aa] underline hover:text-[#111133]"
+                className={styles.link}
               >
-                Knowledge Base [link]
+                Knowledge Base
               </a>{" "}
-              section. 90% of the inquiries we received has an answer.
+              section. 90% of the inquiries we received have an answer.
             </p>
+          </div>
 
-            <div className="w-[90px] h-[3px] bg-[#111133] mx-auto  mt-2 mb-6" />
+          {/* QUICK HELP CHIPS */}
+          <div className={styles.quickHelpSection}>
+            <h3 className={styles.quickHelpTitle}>Quick Help Topics</h3>
+            <div className={styles.chipGrid}>
+              <button className={styles.chip}>💳 Payment</button>
+              <button className={styles.chip}>👁️ Booking a Viewing</button>
+              <button className={styles.chip}>💰 Pricing</button>
+              <button className={styles.chip}>🏠 Listing Issues</button>
+              <button className={styles.chip}>❓ How to Use Platform</button>
+            </div>
+          </div>
 
-            {/* BUY / SELL / LEASE SECTION */}
-            <p className="text-[15px] md:text-[17px] text-[#111133] leading-[1.6] mb-1">
-              To inquire about Buy/Sell/Lease a property or book a viewing, please use{" "}
+          {/* CONTACT OPTIONS */}
+          <div className={styles.contactOptionsGrid}>
+            {/* CALL US */}
+            <div className={styles.contactOptionCard}>
+              <div className={styles.iconCircle}>☎️</div>
+              <h3 className={styles.cardTitle}>Call Us</h3>
+              <p className={styles.cardText}>Speak with our support team</p>
+              <button className={styles.primaryButton}>Get Phone Number</button>
+            </div>
+
+            {/* EMAIL SUPPORT */}
+            <div className={styles.contactOptionCard}>
+              <div className={styles.iconCircle}>✉️</div>
+              <h3 className={styles.cardTitle}>Email Support</h3>
+              <p className={styles.cardText}>Send us your questions</p>
+              <button className={styles.primaryButton}>Send Email</button>
+            </div>
+
+            {/* LIVE CHAT */}
+            <div className={styles.contactOptionCard}>
+              <div className={styles.iconCircle}>💬</div>
+              <h3 className={styles.cardTitle}>Live Chat</h3>
+              <p className={styles.cardText}>Chat with us in real-time</p>
+              <button className={styles.primaryButton}>Start Chat</button>
+            </div>
+          </div>
+
+          {/* MAIN SECTIONS */}
+          <div className={styles.sectionsGrid}>
+            {/* REAL ESTATE AGENT */}
+            <div className={styles.card}>
+              <div className={styles.cardHeader}>
+                <div className={styles.cardIcon}>🏡</div>
+                <h2 className={styles.cardHeading}>Buy / Sell / Lease Property</h2>
+              </div>
+              <p className={styles.cardDescription}>
+                To inquire about buying, selling, or leasing a property, or to book a viewing:
+              </p>
               <a
                 href="https://housesigma.com/web/en/market"
                 target="_blank"
-                className="text-[#4477aa] underline hover:text-[#111133]"
+                className={styles.outlineButton}
               >
-                Contact HouseSigma Agent
+                Contact HouseSigma Agent →
               </a>
-            </p>
-
-            <p className="text-[15px] md:text-[17px] text-[#111133] leading-[1.6] mb-4">
-              form on listing/market page.{" "}
-              <a
-                href="https://housesigma.com/web/en/market"
-                target="_blank"
-                className="text-[#4477aa] underline hover:text-[#111133]"
-              >
-                https://housesigma.com/web/en/market
-              </a>
-            </p>
-
-            <div className="w-[90px] h-[3px] bg-[#111133] mx-auto  mt-2 mb-6" />
+            </div>
 
             {/* TECHNICAL SUPPORT */}
-            <p className="font-bold text-[15px] md:text-[17px] text-[#111133] mb-1">
-              Contact technical support:
-            </p>
-
-            <a
-              href="https://housesigma.com/blog-en/faq/other/contact-technical-support/"
-              target="_blank"
-              className="text-[#4477aa] underline hover:text-[#111133] text-[14px] md:text-[15px]"
-            >
-              https://housesigma.com/blog-en/faq/other/contact-technical-support/
-            </a>
-
-            <div className="my-4" />
+            <div className={styles.card}>
+              <div className={styles.cardHeader}>
+                <div className={styles.cardIcon}>🛠️</div>
+                <h2 className={styles.cardHeading}>Technical Support</h2>
+              </div>
+              <p className={styles.cardDescription}>
+                Need help with technical issues or platform features?
+              </p>
+              <div className={styles.contactItem}>
+                <span className={styles.contactLabel}>Support Portal:</span>
+                <a
+                  href="https://housesigma.com/blog-en/faq/other/contact-technical-support/"
+                  target="_blank"
+                  className={styles.contactLink}
+                >
+                  Open Support Ticket
+                </a>
+              </div>
+            </div>
 
             {/* COMPLAINTS */}
-            <p className="font-bold text-[15px] md:text-[17px] text-[#111133] mb-1">
-              Complain about brokerage services:
-            </p>
-            <a
-              href="https://housesigma.com/blog-en/faq/other/complain-about-brokerage-services/"
-              target="_blank"
-              className="text-[#4477aa] underline hover:text-[#111133] text-[14px] md:text-[15px]"
-            >
-              https://housesigma.com/blog-en/faq/other/complain-about-brokerage-services/
-            </a>
+            <div className={styles.card}>
+              <div className={styles.cardHeader}>
+                <div className={styles.cardIcon}>📄</div>
+                <h2 className={styles.cardHeading}>Brokerage Complaints</h2>
+              </div>
+              <p className={styles.cardDescription}>
+                Have concerns about brokerage services?
+              </p>
+              <div className={styles.contactItem}>
+                <span className={styles.contactLabel}>Complaints Portal:</span>
+                <a
+                  href="https://housesigma.com/blog-en/faq/other/complain-about-brokerage-services/"
+                  target="_blank"
+                  className={styles.contactLink}
+                >
+                  File a Complaint
+                </a>
+              </div>
+            </div>
 
-            <div className="my-4" />
+            {/* DEAL & CONVEYANCING */}
+            <div className={styles.card}>
+              <div className={styles.cardHeader}>
+                <div className={styles.cardIcon}>🏦</div>
+                <h2 className={styles.cardHeading}>Deal & Conveyancing</h2>
+              </div>
+              <p className={styles.cardDescription}>
+                For deal and conveyancing related matters:
+              </p>
+              <div className={styles.contactItem}>
+                <span className={styles.contactLabel}>Email:</span>
+                <a
+                  href="mailto:deals@housesigma.com"
+                  className={styles.emailButton}
+                >
+                  📩 deals@housesigma.com
+                </a>
+              </div>
+            </div>
 
-            {/* DEAL MATTERS */}
-            <p className="font-bold text-[15px] md:text-[17px] text-[#111133] mb-1">
-              For deal and conveyancing related matters:
-            </p>
-
-            <p className="text-[15px] md:text-[17px] text-[#111133] leading-[1.6]">
-              Please contact{" "}
-              <a
-                href="mailto:deals@housesigma.com"
-                className="text-[#4477aa] underline hover:text-[#111133]"
-              >
-                deals@housesigma.com
-              </a>
-            </p>
-
-            <div className="my-4" />
-
-            {/* MEDIA */}
-            <p className="font-bold text-[15px] md:text-[17px] text-[#111133] mb-1">
-              For media inquiries:
-            </p>
-
-            <p className="text-[15px] md:text-[17px] text-[#111133] leading-[1.6]">
-              Please contact{" "}
-              <a
-                href="mailto:press@housesigma.com"
-                className="text-[#4477aa] underline hover:text-[#111133]"
-              >
-                press@housesigma.com
-              </a>
-            </p>
-
-            <div className="w-[90px] h-[3px] bg-[#111133] mx-auto  mt-2 mb-6" />
-            {/* BUY/SELL/LEASE again */}
-            <p className="text-[15px] md:text-[17px] text-[#111133] leading-[1.6] mb-1">
-              To inquire about Buy/Sell/Lease a property or book a viewing, please use{" "}
-              <a
-                href="https://housesigma.com/web/en/market"
-                target="_blank"
-                className="text-[#4477aa] underline hover:text-[#111133]"
-              >
-                Contact HouseSigma Agent
-              </a>
-            </p>
-
-            <p className="text-[15px] md:text-[17px] text-[#111133] leading-[1.6] mb-10">
-              form on listing/market page.{" "}
-              <a
-                href="https://housesigma.com/web/en/market"
-                target="_blank"
-                className="text-[#4477aa] underline hover:text-[#111133]"
-              >
-                https://housesigma.com/web/en/market
-              </a>
-            </p>
-
+            {/* MEDIA INQUIRIES */}
+            <div className={styles.card}>
+              <div className={styles.cardHeader}>
+                <div className={styles.cardIcon}>📣</div>
+                <h2 className={styles.cardHeading}>Media Inquiries</h2>
+              </div>
+              <p className={styles.cardDescription}>
+                Press and media related questions:
+              </p>
+              <div className={styles.contactItem}>
+                <span className={styles.contactLabel}>Email:</span>
+                <a
+                  href="mailto:press@housesigma.com"
+                  className={styles.emailButton}
+                >
+                  📩 press@housesigma.com
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
       <Footer />
-
       {openChat && <ChatBot onClose={() => setOpenChat(false)} />}
       <FloatingChatButton onOpen={() => setOpenChat(true)} />
     </>

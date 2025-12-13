@@ -1,181 +1,477 @@
-/* ---------------------------------------
-   Inputs & labels
---------------------------------------- */
-.priceInputRow {
-  margin-top: 16px;
-  margin-bottom: 18px;
+/* Page Wrapper */
+.pageWrapper {
+  min-height: 100vh;
+  background-color: #f9fafb;
+  padding: 2rem 0 5rem;
+}
+
+.container {
+  padding: 0 1rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+}
+
+/* Typography */
+.mainTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
+}
+
+@media (min-width: 768px) {
+  .mainTitle {
+    font-size: 2.5rem;
+  }
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 1rem;
   display: flex;
-  gap: 18px;
   align-items: center;
+  gap: 0.5rem;
 }
 
-.priceInput {
-  width: 170px;
-  padding: 8px 10px;
-  font-size: 15px;
-  border: 1px solid #cbd5e1;
-  border-radius: 6px;
-  background: #ffffff;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+@media (min-width: 768px) {
+  .sectionTitle {
+    font-size: 1.5rem;
+  }
 }
 
-.priceInput:focus {
-  border-color:  #1BA8C5;
-  box-shadow: 0 0 0 3px rgba(27, 168, 197, 0.08);
+.groupTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.inputLabel {
-  font-size: 13px;
-  color: #64748b;
-  margin-bottom: 4px;
+@media (min-width: 768px) {
+  .groupTitle {
+    font-size: 1.125rem;
+  }
 }
 
-.priceSelectedText {
-  margin-bottom: 14px;
+.cityCount {
+  font-size: 0.875rem;
+  color: #9ca3af;
   font-weight: 500;
 }
 
-/* ---------------------------------------
-   Slider wrapper & track
---------------------------------------- */
-
-.relative.h-10 {
-  height: 40px;
+/* Filter Summary */
+.filterSummary {
+  background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+  border: 2px solid #0f93ff;
+  border-radius: 16px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 12px rgba(255, 122, 0, 0.1);
 }
 
-/* Slider Track */
+.filterCount {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #0f93ff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.filterTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.filterTag {
+  padding: 0.375rem 0.75rem;
+  background: white;
+  border: 1px solid #0f93ff;
+  border-radius: 20px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #0f93ff;
+}
+
+/* Card */
+.card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e5e7eb;
+  padding: 1.75rem;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s;
+}
+
+.card:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+/* Price Inputs */
+.priceInputs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 140px;
+}
+
+.inputLabel {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.priceInput {
+  width: 50%;
+  padding: 0.75rem;
+  font-size: 0.9375rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  background-color: white;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+
+.priceInput:focus {
+  outline: none;
+  border-color: #0f93ff;
+  box-shadow: 0 0 0 3px rgba(255, 122, 0, 0.1);
+}
+
+.errorText {
+  font-size: 0.875rem;
+  color: #0f93ff;
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+}
+
+.displayRange {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 1.5rem;
+}
+
+/* Slider */
+.sliderWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.sliderContainer {
+  position: relative;
+  height: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
 .sliderTrack {
   position: absolute;
   top: 50%;
-  left: 9px;   /* half of thumb width */
-  right: 9px;
+  left: 0.5rem;
+  right: 0.5rem;
   height: 6px;
-  background: #eef3f6;
-  border-radius: 6px;
+  background-color: #e5e7eb;
+  border-radius: 3px;
   transform: translateY(-50%);
   z-index: 1;
 }
 
-/* Blue Filled Bar */
 .sliderFilled {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
   height: 6px;
-  background:  #1BA8C5;
-  border-radius: 6px;
+  background: linear-gradient(90deg, #0f93ff 0%, #0f93ff 100%);
+  border-radius: 3px;
+  transform: translateY(-50%);
   z-index: 2;
   pointer-events: none;
-
-  /* FULL CORRECT FORMULA */
-  left: calc(var(--left) * 1% + 9px);
-  width: calc(var(--width) * 1%);
+  box-shadow: 0 2px 4px rgba(255, 122, 0, 0.3);
 }
 
-
-/* ---------------------------------------
-   Range inputs + thumbs
---------------------------------------- */
-
-.priceSlider {
-  -webkit-appearance: none;
+.rangeInput {
+  position: absolute;
+  width: 100%;
+  height: 100%;
   appearance: none;
   background: transparent;
-
-  width: 100%;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-
-  height: 100%;
-  padding: 0;
-  margin: 0;
+  pointer-events: none;
   z-index: 5;
 }
 
-/* Thumb */
-.priceSlider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  height: 18px;
-  width: 18px;
-  background: #ffffff;
-  border: 2px solid  #1BA8C5;
+.rangeInput::-webkit-slider-thumb {
+  appearance: none;
+  height: 22px;
+  width: 22px;
   border-radius: 50%;
+  background-color: white;
+  border: 3px solid #0f93ff;
   cursor: pointer;
   pointer-events: auto;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s;
 }
 
-.priceSlider::-moz-range-thumb {
-  height: 18px;
-  width: 18px;
-  background: #ffffff;
-  border: 2px solid #1BA8C5;
+.rangeInput::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 4px 12px rgba(255, 122, 0, 0.4);
+}
+
+.rangeInput::-moz-range-thumb {
+  height: 22px;
+  width: 22px;
   border-radius: 50%;
+  background-color: white;
+  border: 3px solid #0f93ff;
   cursor: pointer;
   pointer-events: auto;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s;
 }
 
-/* Keep min thumb above max if overlapping */
-.minSlider::-webkit-slider-thumb { z-index: 40 !important; }
-.maxSlider::-webkit-slider-thumb { z-index: 30 !important; }
+.rangeInput::-moz-range-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 4px 12px rgba(255, 122, 0, 0.4);
+}
 
-.minSlider::-moz-range-thumb { z-index: 40 !important; }
-.maxSlider::-moz-range-thumb { z-index: 30 !important; }
-
-/* ---------------------------------------
-   Bottom ticks
---------------------------------------- */
-.tickContainer {
+.ticksContainer {
   position: relative;
   width: 100%;
-  height: 20px;
-  margin-top: 8px;
-  pointer-events: none;
+  height: 1.5rem;
+  padding: 0 0.5rem;
 }
 
-.tick {
+.tickLabel {
   position: absolute;
   bottom: 0;
-  transform: translateX(-50%);
-  font-size: 12px;
-  color: #94a3b8;
+  font-size: 0.75rem;
+  color: #9ca3af;
   white-space: nowrap;
+  transform: translateX(-50%);
+  font-weight: 500;
 }
 
-/* ---------------------------------------
-   Sticky bottom buttons
---------------------------------------- */
-.stickyBarWrapper {
+/* Buttons */
+.selectAllButton {
+  font-size: 0.875rem;
+  color: #0f93ff;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  transition: all 0.2s;
+  font-weight: 600;
+  border-radius: 6px;
+}
+
+.selectAllButton:hover {
+  background-color: #fff7ed;
+  color: #0f93ff;
+}
+
+@media (min-width: 768px) {
+  .selectAllButton {
+    font-size: 0.9375rem;
+  }
+}
+
+.optionsGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+}
+
+.optionButton {
+  padding: 0.625rem 1.25rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  border-radius: 12px;
+  border: 2px solid #e5e7eb;
+  background-color: white;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.optionButton:hover {
+  border-color: #0f93ff;
+  background-color: #fff7ed;
+  transform: scale(1.03);
+}
+
+.optionButtonSelected {
+  background: #fff7ed;
+  color: #0f93ff;
+  border-color: #0f93ff;
+  font-weight: 600;
+}
+
+.optionButtonSelected:hover {
+  background: #ffedd5;
+  border-color: #0f93ff;
+}
+
+/* City Search */
+.citySearchWrapper {
+  flex: 1;
+  max-width: 300px;
+}
+
+.citySearchInput {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+}
+
+.citySearchInput:focus {
+  outline: none;
+  border-color: #0f93ff;
+  box-shadow: 0 0 0 3px rgba(255, 122, 0, 0.1);
+}
+
+.citySearchInput::placeholder {
+  color: #9ca3af;
+}
+
+/* City Groups */
+.cityGroups {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.cityGroup {
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.cityGroup:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.cityGroupHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Disclaimer */
+.disclaimer {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.disclaimerText {
+  font-size: 0.875rem;
+  color: #6b7280;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+@media (min-width: 768px) {
+  .disclaimerText {
+    font-size: 0.9375rem;
+  }
+}
+
+/* Sticky Bottom Bar */
+.stickyBottom {
   position: sticky;
   bottom: 0;
-  background: white;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.95), white);
   z-index: 40;
-  padding: 0 14px;
+  padding: 1.25rem;
+  box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid #e5e7eb;
+}
+
+.stickyContent {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .stickyContent {
+    flex-direction: row;
+  }
 }
 
 .clearButton {
-  padding: 10px 18px;
-  font-size: 18px;
-  border: 2px solid #1BA8C5;
-  color: #1BA8C5;
-  background: white;
-  border-radius: 6px;
+  padding: 0.875rem 1.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: 2px solid #0f93ff;
+  color: #0f93ff;
+  background-color: white;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
 .clearButton:hover {
-  background: #e8f7fa;
+  background-color: #fff7ed;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 122, 0, 0.2);
 }
 
-.recommendButton {
-  padding: 10px 18px;
-  font-size: 18px;
-  background:  #1BA8C5;
+.startButton {
+  padding: 0.875rem 1.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #0f93ff 0%, #0f93ff 100%);
   color: white;
-  border-radius: 6px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(255, 122, 0, 0.3);
 }
 
-.recommendButton:hover {
-  background: #1BA8C5;
+.startButton:hover {
+  background: linear-gradient(135deg, #0f93ff 0%, #0f93ff 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 122, 0, 0.4);
 }
