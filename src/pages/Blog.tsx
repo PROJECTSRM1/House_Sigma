@@ -73,7 +73,7 @@ const Blog = () => {
     {
       image: agentTalk,
       title:
-        "From clicks to footsteps: New HouseSigma tool gauges buyer competition",
+        "From clicks to footsteps: New HomeNest tool gauges buyer competition",
       date: "09-24-2025",
     },
     {
@@ -254,7 +254,7 @@ const Blog = () => {
     <div className="pt-[4.5rem] p-6 md:p-10 max-w-[1000px] mx-auto">
       <h2 className={styles.headingPrimary}>Blog</h2>
 
-      <h3 className={styles.subHeading}>HouseSigma Analytics</h3>
+      <h3 className={styles.subHeading}>HomeNest Analytics</h3>
 
       {/* 2 cards per row */}
       <div className={styles.gridLayout}>
@@ -268,7 +268,7 @@ const Blog = () => {
         ))}
       </div>
 
-      <h3 className={styles.subHeading}>HouseSigma Real Estate Blog</h3>
+      <h3 className={styles.subHeading}>HomeNest Real Estate Blog</h3>
 
       {/* 2 cards per row */}
       <div className={styles.gridLayout}>

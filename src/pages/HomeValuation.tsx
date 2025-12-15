@@ -209,6 +209,7 @@ export default function HomeValuation() {
           </p>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
@@ -324,7 +325,6 @@ function Counter({ label, value, setValue, icon }: CounterProps) {
           <Plus size={18} />
         </button>
       </div>
-    
     </div>
   );
 }

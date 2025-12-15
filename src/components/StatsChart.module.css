@@ -2,13 +2,13 @@
   background-color: hsl(var(--card));
   border-radius: 0.5rem;
   padding: 2rem;
-  margin: 0 auto 1rem auto;   /* centers the box */
-  max-width: 1300px;          /* ⬅ your required width */
-  width: 100%;                /* responsive */
+  margin: 0 auto 1rem auto;   
+  max-width: 1300px;        
+  width: 100%;                
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
-/* Smaller title like HouseSigma */
+
 .title {
   font-size: 1.3rem;
   font-weight: 600;

@@ -87,7 +87,7 @@ export default function ContactUs() {
                 target="_blank"
                 className="text-[#4477aa] underline hover:text-[#111133]"
               >
-                Contact HouseSigma Agent
+                Contact HomeNest Agent
               </a>
             </p>
 
@@ -98,7 +98,7 @@ export default function ContactUs() {
                 target="_blank"
                 className="text-[#4477aa] underline hover:text-[#111133]"
               >
-                https://housesigma.com/web/en/market
+                https://homenest.com/web/en/market
               </a>
             </p>
 
@@ -114,7 +114,7 @@ export default function ContactUs() {
               target="_blank"
               className="text-[#4477aa] underline hover:text-[#111133] text-[14px] md:text-[15px]"
             >
-              https://housesigma.com/blog-en/faq/other/contact-technical-support/
+              https://homenest.com/blog-en/faq/other/contact-technical-support/
             </a>
 
             <div className="my-4" />
@@ -128,7 +128,7 @@ export default function ContactUs() {
               target="_blank"
               className="text-[#4477aa] underline hover:text-[#111133] text-[14px] md:text-[15px]"
             >
-              https://housesigma.com/blog-en/faq/other/complain-about-brokerage-services/
+              https://homenest.com/blog-en/faq/other/complain-about-brokerage-services/
             </a>
 
             <div className="my-4" />
@@ -144,7 +144,7 @@ export default function ContactUs() {
                 href="mailto:deals@housesigma.com"
                 className="text-[#4477aa] underline hover:text-[#111133]"
               >
-                deals@housesigma.com
+                deals@homenest.com
               </a>
             </p>
 
@@ -161,7 +161,7 @@ export default function ContactUs() {
                 href="mailto:press@housesigma.com"
                 className="text-[#4477aa] underline hover:text-[#111133]"
               >
-                press@housesigma.com
+                press@homenest.com
               </a>
             </p>
 
@@ -174,7 +174,7 @@ export default function ContactUs() {
                 target="_blank"
                 className="text-[#4477aa] underline hover:text-[#111133]"
               >
-                Contact HouseSigma Agent
+                Contact HomeNest Agent
               </a>
             </p>
 
@@ -185,7 +185,7 @@ export default function ContactUs() {
                 target="_blank"
                 className="text-[#4477aa] underline hover:text-[#111133]"
               >
-                https://housesigma.com/web/en/market
+                https://homenest.com/web/en/market
               </a>
             </p>
 
@@ -196,7 +196,7 @@ export default function ContactUs() {
       <footer className="footer">
         <div className="footer-content">
           <div className="footer-links">
-            <a className="footer-link">HouseSigma Inc. Brokerage</a>
+            <a className="footer-link">HomeNest Inc. Brokerage</a>
             <a className="footer-link">Legal</a>
             <a className="footer-link">Privacy & Security</a>
             <a className="footer-link">Terms & Conditions</a>

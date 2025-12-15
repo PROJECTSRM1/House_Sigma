@@ -23,6 +23,9 @@ const countryList = [
   { name: "United Kingdom", code: "+44" },
 ];
 
+// ✅ API BASE URL FROM .env
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const LoginModal: React.FC<LoginModalProps> = ({
   isOpen,
   onClose,
@@ -48,48 +51,47 @@ const LoginModal: React.FC<LoginModalProps> = ({
 
   // ===================== GOOGLE LOGIN =====================
   const handleGoogleLogin = () => {
-  const client = google.accounts.id.initialize({
-    client_id: "492354254466-e56jgfu25vgjegatr1qa4ng9ib2kthmj.apps.googleusercontent.com",
-    callback: async (response: any) => {
-      console.log(" Google JWT:", response.credential);
+    google.accounts.id.initialize({
+      client_id:
+        "492354254466-e56jgfu25vgjegatr1qa4ng9ib2kthmj.apps.googleusercontent.com",
+      callback: async (response: any) => {
+        const token = response.credential;
 
-      const token = response.credential;
+        try {
+          const res = await fetch(`${API_BASE_URL}/api/auth/google`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ token }),
+          });
 
-      try {
-        const res = await fetch("http://127.0.0.1:8000/api/auth/google", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ token }),
-        });
+          const data = await res.json();
 
-        const data = await res.json();
+          if (!res.ok) {
+            alert("Google login failed");
+            return;
+          }
 
-        if (!res.ok) {
-          alert("Google login failed");
-          return;
+          const userData = {
+            name: data.name,
+            email: data.email,
+          };
+
+          setUser(userData);
+          localStorage.setItem("user", JSON.stringify(userData));
+          window.dispatchEvent(new Event("auth-changed"));
+
+          alert("Google login successful!");
+          onLoginSuccess?.(userData);
+          onSuccess?.();
+          onClose();
+        } catch {
+          alert("Google login error");
         }
+      },
+    });
 
-        const userData = {
-          name: data.name,
-          email: data.email,
-        };
-
-        setUser(userData);
-        localStorage.setItem("user", JSON.stringify(userData));
-
-        alert("Google login successful!");
-        onLoginSuccess?.(userData);
-        onSuccess?.();
-        onClose();
-      } catch {
-        alert("Google login error");
-      }
-    },
-  });
-
-  google.accounts.id.prompt();
-};
-
+    google.accounts.id.prompt();
+  };
 
   // ===================== NORMAL LOGIN =====================
   const handleLogin = async () => {
@@ -101,7 +103,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
     }
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/auth/login", {
+      const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -142,13 +144,10 @@ const LoginModal: React.FC<LoginModalProps> = ({
 
   return (
     <>
-      {/* ✅ LOGIN MODAL visible only when reset is NOT open */}
       {isOpen && !showReset && (
         <div className="login-overlay">
           <div className="login-modal">
-            <button className="close-btn" onClick={onClose}>
-              ✕
-            </button>
+            <button className="close-btn" onClick={onClose}>✕</button>
 
             <h2 className="login-title">Log in</h2>
 
@@ -168,51 +167,21 @@ const LoginModal: React.FC<LoginModalProps> = ({
             </div>
 
             {activeTab === "email" && (
-              <div className="input-group">
-                <input
-                  type="email"
-                  placeholder="Enter email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
+              <input
+                type="email"
+                placeholder="Enter email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             )}
 
             {activeTab === "mobile" && (
-              <div className="combined-mobile-box">
-                <div
-                  className="country-box"
-                  onClick={() => setShowCountryList(!showCountryList)}
-                >
-                  {selectedCountry.code}
-                  <span className="arrow">▲</span>
-                </div>
-
-                {showCountryList && (
-                  <div className="country-dropdown">
-                    {countryList.map((c) => (
-                      <div
-                        key={c.name}
-                        className="country-item"
-                        onClick={() => {
-                          setSelectedCountry(c);
-                          setShowCountryList(false);
-                        }}
-                      >
-                        {c.name}
-                      </div>
-                    ))}
-                  </div>
-                )}
-
-                <input
-                  className="phone-input"
-                  type="text"
-                  placeholder="Mobile number"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                />
-              </div>
+              <input
+                type="text"
+                placeholder="Mobile number"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
             )}
 
             <div className="password-wrapper">
@@ -234,13 +203,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
               Log in
             </button>
 
-            {/* ✅ THIS NOW HIDES LOGIN + SHOWS RESET */}
-            <p
-              className="forgot-text"
-              onClick={() => {
-                setShowReset(true);
-              }}
-            >
+            <p className="forgot-text" onClick={() => setShowReset(true)}>
               Forgot Password?
             </p>
 
@@ -251,24 +214,6 @@ const LoginModal: React.FC<LoginModalProps> = ({
               Sign in with Google
             </button>
 
-            <button className="social-btn">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png"
-                alt="facebook"
-                className="social-icon"
-              />
-              Sign in with Facebook
-            </button>
-
-            <button className="social-btn">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"
-                alt="linkedin"
-                className="social-icon"
-              />
-              Sign in with LinkedIn
-            </button>
-
             <p className="signup-text">
               New user? <NavLink to="/join">Sign-up here</NavLink>
             </p>
@@ -276,7 +221,6 @@ const LoginModal: React.FC<LoginModalProps> = ({
         </div>
       )}
 
-      {/* ✅ RESET MODAL */}
       <ResetPasswordModal
         isOpen={showReset}
         closeReset={() => setShowReset(false)}

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Home, Search } from "lucide-react";
 import logo from "/assets/logo.png";
-
+import HOME from "/assets/HOME.png";
 import styles from "./ScamNav.module.css";
 
 const ScamNav: React.FC = () => {
@@ -43,7 +43,7 @@ const ScamNav: React.FC = () => {
             <div className={styles.leftSection}>
               <NavLink to="/" className={styles.logo}>
                 <div className={styles.logoBox}>
-                  <img src={logo} alt="Logo" className={styles.logoImage} />
+                  <img src={HOME} alt="Logo" className={styles.logoImage} />
                 </div>
               </NavLink>
 
@@ -53,7 +53,7 @@ const ScamNav: React.FC = () => {
                   isActive ? styles.activeNavLink : styles.navLink
                 }
               >
-                HouseSigma
+                HomeNest
               </NavLink>
 
               {/* DESKTOP NAV */}

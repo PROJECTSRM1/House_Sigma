@@ -106,7 +106,7 @@ const ArticlePage = () => {
         return (
           <>
             <p>
-              The form below is for HouseSigma user technical support only. We{" "}
+              The form below is for HomeNest user technical support only. We{" "}
               <strong>can not</strong> provide buy/sell/lease advice through the
               following form.
             </p>
@@ -115,7 +115,7 @@ const ArticlePage = () => {
 
             <ul>
               <li>
-                Method 1: Login to HouseSigma App, use app → account → profile → delete
+                Method 1: Login to HomeNest App, use app → account → profile → delete
               </li>
               <li>
                 Method 2: Use the following form, a technical support person will assist you.
@@ -239,7 +239,7 @@ const ArticlePage = () => {
       <footer className="footer">
         <div className="footer-content">
           <div className="footer-links">
-            <a className="footer-link">HouseSigma Inc. Brokerage</a>
+            <a className="footer-link">HomeNest Inc. Brokerage</a>
             <a className="footer-link">Legal</a>
             <a className="footer-link">Privacy & Security</a>
             <a className="footer-link">Terms & Conditions</a>

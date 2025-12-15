@@ -103,7 +103,7 @@ const ChangeData = () => {
             className="breadcrumb-link"
             onClick={() => navigate("/faq/change-data")}
           >
-            Change Data on HouseSigma
+            Change Data on HomeNest
           </span>
 
           <span> › </span>
@@ -156,7 +156,7 @@ const ChangeData = () => {
     <footer className="footer">
         <div className="footer-content">
           <div className="footer-links">
-            <a className="footer-link">HouseSigma Inc. Brokerage</a>
+            <a className="footer-link">HomeNest Inc. Brokerage</a>
             <a className="footer-link">Legal</a>
             <a className="footer-link">Privacy & Security</a>
             <a className="footer-link">Terms & Conditions</a>
