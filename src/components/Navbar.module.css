@@ -16,6 +16,11 @@ html, body {
 /* ================================================
    PREMIUM GLASS NAVBAR
 ================================================ */
+
+
+
+
+
 .header {
   position: fixed;
   top: 0;
@@ -234,7 +239,7 @@ html, body {
 
 .activeNavLink {
   position: relative;
-  color: #1F7A8C;
+  color: #0f93ff#0f93ff;
   font-weight: 700;
 }
 
@@ -247,7 +252,7 @@ html, body {
   height: 3px;
   border-radius: 3px;
 
-  background: linear-gradient(90deg, #1F7A8C, #21A1B3);
+  background: linear-gradient(90deg, #0f93ff, #0f93ff);
 }
 
 /* ================================================
@@ -286,6 +291,7 @@ html, body {
 .loginBtn {
   border-radius: 10px !important;
   backdrop-filter: blur(8px);
+  background-color: #0f93ff;
 }
 
 .profileButton {
@@ -334,7 +340,7 @@ html, body {
   padding: 0.75rem 0.9rem;
   font-size: 1rem;
   font-weight: 600;
-  color: #1F7A8C;
+  color: #0f93ff;
   text-decoration: none;
 
   border-radius: 8px;
@@ -368,3 +374,7 @@ html, body {
   .provinceDropdown { padding: 0.3rem 0.5rem; }
   .menuToggle { width: 36px; height: 32px; }
 }
+
+
+
+

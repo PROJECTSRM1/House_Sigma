@@ -191,14 +191,12 @@ export default function RecommendedCommunities() {
     setCitySearch("");
   };
 
-  // Active filters count
   const activeFiltersCount = 
     (priceMin > 0 || priceMax < 5000000 ? 1 : 0) +
     selectedInvestment.length +
     selectedProperty.length +
     selectedCities.length;
 
-  // Filter cities based on search
   const filterCities = (cityList: string[]) => {
     if (!citySearch.trim()) return cityList;
     return cityList.filter(city => 
@@ -210,276 +208,401 @@ export default function RecommendedCommunities() {
     <>
       <Navbar />
 
-      <div className={styles.pageWrapper}>
-        <div className={styles.container}>
-          <h1 className={styles.mainTitle}>Community Recommendations</h1>
+      <div className={styles.pageContainer}>
+        {/* Hero Section */}
+        <div className={styles.heroSection}>
+          <div className={styles.heroContent}>
+            <div className={styles.heroBadge}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+              </svg>
+              <span>Community Finder</span>
+            </div>
+            <h1 className={styles.heroTitle}>Find Your Perfect Community</h1>
+            <p className={styles.heroSubtitle}>
+              Discover the best neighborhoods that match your lifestyle and investment goals
+            </p>
+          </div>
+        </div>
 
-          {/* FILTER SUMMARY */}
+        <div className={styles.contentWrapper}>
+          {/* Active Filters Summary */}
           {activeFiltersCount > 0 && (
-            <div className={styles.filterSummary}>
-              <span className={styles.filterCount}>
-                {activeFiltersCount} Active Filter{activeFiltersCount !== 1 ? 's' : ''}
-              </span>
-              <div className={styles.filterTags}>
+            <div className={styles.filterSummaryCard}>
+              <div className={styles.summaryHeader}>
+                <div className={styles.summaryBadge}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+                  </svg>
+                  <span>{activeFiltersCount} Active Filter{activeFiltersCount !== 1 ? 's' : ''}</span>
+                </div>
+                <button onClick={clearAll} className={styles.clearAllLink}>
+                  Clear all
+                </button>
+              </div>
+              <div className={styles.filterTagsContainer}>
                 {(priceMin > 0 || priceMax < 5000000) && (
-                  <span className={styles.filterTag}>Price: {displayRange}</span>
+                  <span className={styles.filterTag}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <line x1="12" y1="1" x2="12" y2="23"/>
+                      <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                    </svg>
+                    {displayRange}
+                  </span>
                 )}
                 {selectedInvestment.map(inv => (
-                  <span key={inv} className={styles.filterTag}>{inv}</span>
+                  <span key={inv} className={styles.filterTag}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                    </svg>
+                    {inv}
+                  </span>
                 ))}
                 {selectedProperty.map(prop => (
-                  <span key={prop} className={styles.filterTag}>{prop}</span>
+                  <span key={prop} className={styles.filterTag}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    </svg>
+                    {prop}
+                  </span>
                 ))}
                 {selectedCities.slice(0, 3).map(city => (
-                  <span key={city} className={styles.filterTag}>{city}</span>
+                  <span key={city} className={styles.filterTag}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                      <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                    {city}
+                  </span>
                 ))}
                 {selectedCities.length > 3 && (
-                  <span className={styles.filterTag}>+{selectedCities.length - 3} more</span>
+                  <span className={styles.filterTagMore}>+{selectedCities.length - 3} more cities</span>
                 )}
               </div>
             </div>
           )}
 
-          {/* PRICE RANGE CARD */}
-          <div className={styles.card}>
-            <h2 className={styles.sectionTitle}>💰 Price Range</h2>
-
-            <div className={styles.priceInputs}>
-              <div className={styles.inputGroup}>
-                <label className={styles.inputLabel}>Min Price</label>
-                <input
-                  className={styles.priceInput}
-                  value={minFocused ? priceMinInput : formatAdaptive(priceMin)}
-                  onFocus={onMinFocus}
-                  onBlur={onMinBlur}
-                  onChange={(e) => onMinInputChange(e.target.value)}
-                  inputMode="numeric"
-                />
-              </div>
-
-              <div className={styles.inputGroup}>
-                <label className={styles.inputLabel}>Max Price</label>
-                <input
-                  className={styles.priceInput}
-                  value={maxFocused ? priceMaxInput : formatAdaptive(priceMax)}
-                  onFocus={onMaxFocus}
-                  onBlur={onMaxBlur}
-                  onChange={(e) => onMaxInputChange(e.target.value)}
-                  inputMode="numeric"
-                />
-              </div>
-            </div>
-
-            {priceError && <p className={styles.errorText}>{priceError}</p>}
-            
-            <p className={styles.displayRange}>{displayRange}</p>
-
-            {/* SLIDER */}
-            <div className={styles.sliderWrapper}>
-              <div className={styles.sliderContainer}>
-                <div className={styles.sliderTrack} />
-                <div
-                  className={styles.sliderFilled}
-                  style={{
-                    left: `${leftPercent}%`,
-                    width: `${widthPercent}%`,
-                  }}
-                />
-
-                <input
-                  type="range"
-                  min={0}
-                  max={5000000}
-                  step={1}
-                  value={priceMin}
-                  onChange={(e) => onMinSlider(Number(e.target.value))}
-                  className={styles.rangeInput}
-                />
-
-                <input
-                  type="range"
-                  min={0}
-                  max={5000000}
-                  step={1}
-                  value={priceMax}
-                  onChange={(e) => onMaxSlider(Number(e.target.value))}
-                  className={styles.rangeInput}
-                />
-              </div>
-
-              <div className={styles.ticksContainer}>
-                {TICK_VALUES.map((v, i) => (
-                  <div
-                    key={i}
-                    className={styles.tickLabel}
-                    style={{ left: `${(v / 5000000) * 100}%` }}
-                  >
-                    {PRICE_MARKS[i]}
+          {/* Main Grid Layout */}
+          <div className={styles.mainGrid}>
+            {/* Left Column - Filters */}
+            <div className={styles.filtersColumn}>
+              {/* Price Range Card */}
+              <div className={styles.filterCard}>
+                <div className={styles.cardHeader}>
+                  <div className={styles.cardTitle}>
+                    <svg className={styles.cardIcon} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <line x1="12" y1="1" x2="12" y2="23"/>
+                      <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                    </svg>
+                    <h3>Price Range</h3>
                   </div>
-                ))}
-              </div>
-            </div>
-          </div>
+                </div>
 
-          {/* INVESTMENT REQUIREMENT CARD */}
-          <div className={styles.card}>
-            <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>📈 Investment Requirement</h2>
-              <button
-                className={styles.selectAllButton}
-                onClick={() => {
-                  const all = investmentOptions.every((opt) => selectedInvestment.includes(opt));
-                  setSelectedInvestment(all ? [] : [...investmentOptions]);
-                }}
-              >
-                {investmentOptions.every((opt) => selectedInvestment.includes(opt))
-                  ? "Unselect all"
-                  : "Select all"}
-              </button>
-            </div>
+                <div className={styles.priceInputsRow}>
+                  <div className={styles.priceInputWrapper}>
+                    <label className={styles.priceLabel}>Min Price</label>
+                    <div className={styles.priceInputBox}>
+                      <span className={styles.priceCurrency}>$</span>
+                      <input
+                        className={styles.priceInput}
+                        value={minFocused ? priceMinInput : formatAdaptive(priceMin)}
+                        onFocus={onMinFocus}
+                        onBlur={onMinBlur}
+                        onChange={(e) => onMinInputChange(e.target.value)}
+                        inputMode="numeric"
+                      />
+                    </div>
+                  </div>
 
-            <div className={styles.optionsGrid}>
-              {investmentOptions.map((opt) => (
-                <button
-                  key={opt}
-                  className={`${styles.optionButton} ${
-                    selectedInvestment.includes(opt) ? styles.optionButtonSelected : ""
-                  }`}
-                  onClick={() =>
-                    selectedInvestment.includes(opt)
-                      ? setSelectedInvestment((prev) => prev.filter((i) => i !== opt))
-                      : setSelectedInvestment((prev) => [...prev, opt])
-                  }
-                >
-                  {opt}
-                </button>
-              ))}
-            </div>
-          </div>
+                  <div className={styles.priceInputWrapper}>
+                    <label className={styles.priceLabel}>Max Price</label>
+                    <div className={styles.priceInputBox}>
+                      <span className={styles.priceCurrency}>$</span>
+                      <input
+                        className={styles.priceInput}
+                        value={maxFocused ? priceMaxInput : formatAdaptive(priceMax)}
+                        onFocus={onMaxFocus}
+                        onBlur={onMaxBlur}
+                        onChange={(e) => onMaxInputChange(e.target.value)}
+                        inputMode="numeric"
+                      />
+                    </div>
+                  </div>
+                </div>
 
-          {/* PROPERTY TYPE CARD */}
-          <div className={styles.card}>
-            <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>🏠 Property Type</h2>
-              <button
-                className={styles.selectAllButton}
-                onClick={() => {
-                  const all = propertyTypes.every((opt) => selectedProperty.includes(opt));
-                  setSelectedProperty(all ? [] : [...propertyTypes]);
-                }}
-              >
-                {propertyTypes.every((t) => selectedProperty.includes(t))
-                  ? "Unselect all"
-                  : "Select all"}
-              </button>
-            </div>
+                {priceError && <p className={styles.errorMessage}>{priceError}</p>}
 
-            <div className={styles.optionsGrid}>
-              {propertyTypes.map((opt) => (
-                <button
-                  key={opt}
-                  className={`${styles.optionButton} ${
-                    selectedProperty.includes(opt) ? styles.optionButtonSelected : ""
-                  }`}
-                  onClick={() =>
-                    selectedProperty.includes(opt)
-                      ? setSelectedProperty((prev) => prev.filter((i) => i !== opt))
-                      : setSelectedProperty((prev) => [...prev, opt])
-                  }
-                >
-                  {opt}
-                </button>
-              ))}
-            </div>
-          </div>
+                <div className={styles.rangeDisplay}>{displayRange}</div>
 
-          {/* CITY CARD */}
-          <div className={styles.card}>
-            <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>🏙️ City</h2>
-              <div className={styles.citySearchWrapper}>
-                <input
-                  type="text"
-                  placeholder="🔍 Search city..."
-                  value={citySearch}
-                  onChange={(e) => setCitySearch(e.target.value)}
-                  className={styles.citySearchInput}
-                />
-              </div>
-            </div>
+                {/* Slider */}
+                <div className={styles.sliderSection}>
+                  <div className={styles.sliderBox}>
+                    <div className={styles.sliderTrack} />
+                    <div
+                      className={styles.sliderRange}
+                      style={{
+                        left: `${leftPercent}%`,
+                        width: `${widthPercent}%`,
+                      }}
+                    />
 
-            <div className={styles.cityGroups}>
-              {Object.keys(cities).map((group) => {
-                const filteredCities = filterCities(cities[group]);
-                if (filteredCities.length === 0) return null;
+                    <input
+                      type="range"
+                      min={0}
+                      max={5000000}
+                      step={1}
+                      value={priceMin}
+                      onChange={(e) => onMinSlider(Number(e.target.value))}
+                      className={styles.sliderInput}
+                    />
 
-                const allSelected = filteredCities.every((c) => selectedCities.includes(c));
+                    <input
+                      type="range"
+                      min={0}
+                      max={5000000}
+                      step={1}
+                      value={priceMax}
+                      onChange={(e) => onMaxSlider(Number(e.target.value))}
+                      className={styles.sliderInput}
+                    />
+                  </div>
 
-                return (
-                  <div key={group} className={styles.cityGroup}>
-                    <div className={styles.cityGroupHeader}>
-                      <h3 className={styles.groupTitle}>
-                        {group} <span className={styles.cityCount}>({filteredCities.length})</span>
-                      </h3>
-                      <button
-                        className={styles.selectAllButton}
-                        onClick={() => {
-                          if (allSelected) {
-                            setSelectedCities((prev) => prev.filter((c) => !filteredCities.includes(c)));
-                          } else {
-                            setSelectedCities((prev) => [...new Set([...prev, ...filteredCities])]);
-                          }
-                        }}
+                  <div className={styles.sliderMarks}>
+                    {TICK_VALUES.map((v, i) => (
+                      <div
+                        key={i}
+                        className={styles.sliderMark}
+                        style={{ left: `${(v / 5000000) * 100}%` }}
                       >
-                        {allSelected ? "Unselect all" : "Select all"}
-                      </button>
-                    </div>
-
-                    <div className={styles.optionsGrid}>
-                      {filteredCities.map((city) => (
-                        <button
-                          key={city}
-                          className={`${styles.optionButton} ${
-                            selectedCities.includes(city) ? styles.optionButtonSelected : ""
-                          }`}
-                          onClick={() =>
-                            selectedCities.includes(city)
-                              ? setSelectedCities((prev) => prev.filter((c) => c !== city))
-                              : setSelectedCities((prev) => [...prev, city])
-                          }
-                        >
-                          {city}
-                        </button>
-                      ))}
-                    </div>
+                        {PRICE_MARKS[i]}
+                      </div>
+                    ))}
                   </div>
-                );
-              })}
+                </div>
+              </div>
+
+              {/* Investment Requirement Card */}
+              <div className={styles.filterCard}>
+                <div className={styles.cardHeader}>
+                  <div className={styles.cardTitle}>
+                    <svg className={styles.cardIcon} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                    </svg>
+                    <h3>Investment Requirement</h3>
+                  </div>
+                  <button
+                    className={styles.selectAllBtn}
+                    onClick={() => {
+                      const all = investmentOptions.every((opt) => selectedInvestment.includes(opt));
+                      setSelectedInvestment(all ? [] : [...investmentOptions]);
+                    }}
+                  >
+                    {investmentOptions.every((opt) => selectedInvestment.includes(opt))
+                      ? "Unselect all"
+                      : "Select all"}
+                  </button>
+                </div>
+
+                <div className={styles.optionsGrid}>
+                  {investmentOptions.map((opt) => (
+                    <button
+                      key={opt}
+                      className={`${styles.optionChip} ${
+                        selectedInvestment.includes(opt) ? styles.optionChipActive : ""
+                      }`}
+                      onClick={() =>
+                        selectedInvestment.includes(opt)
+                          ? setSelectedInvestment((prev) => prev.filter((i) => i !== opt))
+                          : setSelectedInvestment((prev) => [...prev, opt])
+                      }
+                    >
+                      {selectedInvestment.includes(opt) && (
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                          <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                      )}
+                      <span>{opt}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Property Type Card */}
+              <div className={styles.filterCard}>
+                <div className={styles.cardHeader}>
+                  <div className={styles.cardTitle}>
+                    <svg className={styles.cardIcon} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                      <polyline points="9 22 9 12 15 12 15 22"/>
+                    </svg>
+                    <h3>Property Type</h3>
+                  </div>
+                  <button
+                    className={styles.selectAllBtn}
+                    onClick={() => {
+                      const all = propertyTypes.every((opt) => selectedProperty.includes(opt));
+                      setSelectedProperty(all ? [] : [...propertyTypes]);
+                    }}
+                  >
+                    {propertyTypes.every((t) => selectedProperty.includes(t))
+                      ? "Unselect all"
+                      : "Select all"}
+                  </button>
+                </div>
+
+                <div className={styles.optionsGrid}>
+                  {propertyTypes.map((opt) => (
+                    <button
+                      key={opt}
+                      className={`${styles.optionChip} ${
+                        selectedProperty.includes(opt) ? styles.optionChipActive : ""
+                      }`}
+                      onClick={() =>
+                        selectedProperty.includes(opt)
+                          ? setSelectedProperty((prev) => prev.filter((i) => i !== opt))
+                          : setSelectedProperty((prev) => [...prev, opt])
+                      }
+                    >
+                      {selectedProperty.includes(opt) && (
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                          <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                      )}
+                      <span>{opt}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
 
-            <div className={styles.disclaimer}>
-              <p className={styles.disclaimerText}>
-                * Good School, Value Appreciation, Rental Yield and Land Size are estimated values
-                based on HouseSigma's internal algorithm.
-              </p>
+            {/* Right Column - Cities */}
+            <div className={styles.citiesColumn}>
+              <div className={styles.filterCard}>
+                <div className={styles.cardHeader}>
+                  <div className={styles.cardTitle}>
+                    <svg className={styles.cardIcon} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                      <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                    <h3>Select Cities</h3>
+                  </div>
+                </div>
+
+                <div className={styles.citySearchBox}>
+                  <svg className={styles.searchIcon} width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="m21 21-4.35-4.35"/>
+                  </svg>
+                  <input
+                    type="text"
+                    placeholder="Search cities..."
+                    value={citySearch}
+                    onChange={(e) => setCitySearch(e.target.value)}
+                    className={styles.citySearchInput}
+                  />
+                </div>
+
+                <div className={styles.cityGroupsContainer}>
+                  {Object.keys(cities).map((group) => {
+                    const filteredCities = filterCities(cities[group]);
+                    if (filteredCities.length === 0) return null;
+
+                    const allSelected = filteredCities.every((c) => selectedCities.includes(c));
+
+                    return (
+                      <div key={group} className={styles.cityGroupCard}>
+                        <div className={styles.cityGroupHeader}>
+                          <h4 className={styles.cityGroupTitle}>
+                            {group}
+                            <span className={styles.cityCount}>({filteredCities.length})</span>
+                          </h4>
+                          <button
+                            className={styles.selectAllBtn}
+                            onClick={() => {
+                              if (allSelected) {
+                                setSelectedCities((prev) => prev.filter((c) => !filteredCities.includes(c)));
+                              } else {
+                                setSelectedCities((prev) => [...new Set([...prev, ...filteredCities])]);
+                              }
+                            }}
+                          >
+                            {allSelected ? "Unselect" : "Select all"}
+                          </button>
+                        </div>
+
+                        <div className={styles.cityChipsGrid}>
+                          {filteredCities.map((city) => (
+                            <button
+                              key={city}
+                              className={`${styles.cityChip} ${
+                                selectedCities.includes(city) ? styles.cityChipActive : ""
+                              }`}
+                              onClick={() =>
+                                selectedCities.includes(city)
+                                  ? setSelectedCities((prev) => prev.filter((c) => c !== city))
+                                  : setSelectedCities((prev) => [...prev, city])
+                              }
+                            >
+                              {selectedCities.includes(city) && (
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                                  <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                              )}
+                              <span>{city}</span>
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                <div className={styles.disclaimerBox}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="16" x2="12" y2="12"/>
+                    <line x1="12" y1="8" x2="12.01" y2="8"/>
+                  </svg>
+                  <p className={styles.disclaimerText}>
+                    Good School, Value Appreciation, Rental Yield and Land Size are estimated values
+                    based on HouseSigma's internal algorithm.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* STICKY BOTTOM BAR */}
-      <div className={styles.stickyBottom}>
-        <div className={styles.stickyContent}>
-          <button onClick={clearAll} className={styles.clearButton}>
-            Clear All
-          </button>
+      {/* Sticky Bottom Action Bar */}
+      <div className={styles.actionBar}>
+        <div className={styles.actionBarContent}>
+          <div className={styles.actionBarLeft}>
+            <span className={styles.filterCountBadge}>
+              {activeFiltersCount} {activeFiltersCount === 1 ? 'Filter' : 'Filters'}
+            </span>
+          </div>
+          <div className={styles.actionBarRight}>
+            <button onClick={clearAll} className={styles.clearButton}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+              Clear All
+            </button>
 
-          <button
-            onClick={() => alert(`Starting recommendations with ${activeFiltersCount} filters...`)}
-            className={styles.startButton}
-          >
-            Start Recommendation
-          </button>
+            <button
+              onClick={() => alert(`Finding communities with ${activeFiltersCount} filters...`)}
+              className={styles.findButton}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="m21 21-4.35-4.35"/>
+              </svg>
+              Find Communities
+            </button>
+          </div>
         </div>
       </div>
 
