@@ -7,20 +7,26 @@
   left: 0;
   width: 100%;
   height: 60px;
-  background-color: #28a3b3;
-  color: #fff;
+
+  background: #e5e7eb; /* light gray */
+  color: #1d1b1b;      /* black text */
+
   display: flex;
   align-items: center;
   z-index: 2000;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
 }
 
+/* ===========================
+   CONTAINER
+=========================== */
 .container {
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
   padding: 0 1.2rem;
   height: 60px;
+
   display: flex;
   align-items: center;
 }
@@ -48,8 +54,9 @@
   object-fit: contain;
 }
 
+/* LOGO / BRAND TEXT */
 .navLink {
-  color: white;
+  color: #1d1b1b;   /* black */
   font-size: 1.55rem;
   font-weight: 700;
   text-decoration: none;
@@ -76,6 +83,7 @@
 .centerNav .navLink {
   font-size: 1rem;
   font-weight: 600;
+  color: #1d1b1b;
 }
 
 
@@ -88,7 +96,8 @@
   justify-content: center;
   width: 38px;
   height: 34px;
-  background: rgba(255,255,255,0.1);
+
+  background: rgba(0, 0, 0, 0.08);
   border-radius: 8px;
   border: none;
   cursor: pointer;
@@ -97,18 +106,20 @@
 .bar {
   width: 20px;
   height: 2px;
-  background: white;
+  background: #1d1b1b; /* black */
   position: relative;
 }
+
 .bar::before,
 .bar::after {
   content: "";
   width: 20px;
   height: 2px;
-  background: white;
+  background: #1d1b1b; /* black */
   position: absolute;
   left: 0;
 }
+
 .bar::before { top: -6px; }
 .bar::after { top: 6px; }
 
@@ -133,7 +144,8 @@
   left: 0;
   right: 0;
   padding: 1rem;
-  background: #28a3b3;
+
+  background: #e5e7eb; /* same gray as header */
   animation: fadeDown 0.25s ease;
 }
 
@@ -149,7 +161,7 @@
 }
 
 .mobileNavLink {
-  color: white;
+  color: #1d1b1b; /* black */
   font-size: 1.1rem;
   font-weight: 600;
   padding: 0.7rem 0.9rem;
@@ -157,5 +169,5 @@
 }
 
 .mobileNavLink:hover {
-  background: rgba(255,255,255,0.12);
+  background: rgba(0, 0, 0, 0.08);
 }

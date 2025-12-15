@@ -341,6 +341,7 @@ export default function HomeValuation() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

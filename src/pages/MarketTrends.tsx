@@ -791,7 +791,7 @@ const ContactForm = () => {
 
   return (
     <div className="contact-form">
-      <h2 className="contact-form-title">Contact HouseSigma Agent</h2>
+      <h2 className="contact-form-title">Contact HomeNest Agent</h2>
 
       <form className="contact-form-content" onSubmit={(e) => e.preventDefault()}>
         <input type="text" placeholder="Your Name *" className="contact-form-input" />
@@ -802,7 +802,7 @@ const ContactForm = () => {
         <textarea placeholder="Message" rows={4} className="contact-form-textarea" />
         <p className="contact-form-required">* Required field</p>
         <p className="contact-form-privacy">
-          By submitting this form, I understand HouseSigma will share my information with registered real estate professionals.
+          By submitting this form, I understand HomeNest will share my information with registered real estate professionals.
         </p>
         <button type="button" onClick={handleClick} className="contact-form-submit-button">
           Contact Agent

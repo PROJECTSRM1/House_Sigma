@@ -85,7 +85,7 @@ const Blog = () => {
     {
       image: agentTalk,
       title:
-        "From clicks to footsteps: New HouseSigma tool gauges buyer competition",
+        "From clicks to footsteps: New HomeNest tool gauges buyer competition",
       date: "09-24-2025",
     },
     {
@@ -327,7 +327,7 @@ const Blog = () => {
       <footer className="footer">
         <div className="footer-content">
           <div className="footer-links">
-            <a className="footer-link">HouseSigma Inc. Brokerage</a>
+            <a className="footer-link">HomeNest Inc. Brokerage</a>
             <a className="footer-link">Legal</a>
             <a className="footer-link">Privacy & Security</a>
             <a className="footer-link">Terms & Conditions</a>

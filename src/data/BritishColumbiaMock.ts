@@ -28,9 +28,7 @@ export interface Property {
   blurred?: boolean;
 }
 
-/* ======================================================
-   1. Newly Added to HouseSigma
-====================================================== */
+
 export const newlyAdded: Property[] = [
   {
     id: 1,
@@ -141,7 +139,7 @@ export const featuredListings: Property[] = [
     status: "For Sale",
     badge: "Featured",
     listed: "26 days",
-    agent: "Jay S Sandhu, HouseSigma Inc"
+    agent: "Jay S Sandhu, HomeNest Inc"
   },
   {
     id: 8,
@@ -156,7 +154,7 @@ export const featuredListings: Property[] = [
     status: "For Sale",
     badge: "Featured",
     listed: "26 days",
-    agent: "Jay S Sandhu, HouseSigma Inc"
+    agent: "Jay S Sandhu, HomeNest Inc"
   },
   {
     id: 9,
@@ -171,7 +169,7 @@ export const featuredListings: Property[] = [
     status: "For Sale",
     badge: "Featured",
     listed: "09-05-2025",
-    agent: "Jay S Sandhu, HouseSigma Inc"
+    agent: "Jay S Sandhu, HomeNest Inc"
   }
 ];
 
@@ -402,7 +400,7 @@ export const justSold: Property[] = [
 export const bestForRentalInvestment: Property[] = [
   {
     id: 22,
-    image: "/src/assets/Britishcolumbia_files/BC22.jpg",
+    image: "/assets/Britishcolumbia_files/BC22.jpg",
     price: "$449,900",
     address: "2204 Renton Park NW",
     location: "Calgary - Renton",
@@ -416,7 +414,7 @@ export const bestForRentalInvestment: Property[] = [
   },
   {
     id: 23,
-    image: "/src/assets/Britishcolumbia_files/BC23.jpg",
+    image: "/assets/Britishcolumbia_files/BC23.jpg",
     price: "$389,000",
     address: "18 Capital Yield Lane",
     location: "Edmonton - Capital View",
@@ -430,7 +428,7 @@ export const bestForRentalInvestment: Property[] = [
   },
   {
     id: 24,
-    image: "/src/assets/Britishcolumbia_files/BC.jpg",
+    image: "/assets/Britishcolumbia_files/BC.jpg",
     price: "$510,500",
     address: "347 Investment Ridge SW",
     location: "Calgary - Ridgeview",
