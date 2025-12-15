@@ -14,6 +14,8 @@ interface ResetPasswordModalProps {
   onFinished?: () => void;
 }
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 export default function ResetPasswordModal({
   isOpen = false,
   closeReset = () => {},
@@ -33,17 +35,19 @@ export default function ResetPasswordModal({
     { name: "United Kingdom", code: "+44" },
   ];
 
-  const [showCountryList, setShowCountryList] = useState<boolean>(false);
-  const [selectedCountry, setSelectedCountry] = useState<CountryOption>(countryOptions[0]);
+  const [showCountryList, setShowCountryList] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState<CountryOption>(
+    countryOptions[0]
+  );
 
-  const [email, setEmail] = useState<string>("");
-  const [phone, setPhone] = useState<string>("");
-  const [verificationCode, setVerificationCode] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [verificationCode, setVerificationCode] = useState("");
+  const [password, setPassword] = useState("");
 
-  const [sending, setSending] = useState<boolean>(false);
-  const [resetting, setResetting] = useState<boolean>(false);
-  const [error, setError] = useState<string>("");
+  const [sending, setSending] = useState(false);
+  const [resetting, setResetting] = useState(false);
+  const [error, setError] = useState("");
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -72,7 +76,6 @@ export default function ResetPasswordModal({
 
     if (tab === "phone") {
       if (!phone) return setError("Please enter phone number.");
-
       const digitsOnly = phone.replace(/\D/g, "");
       if (digitsOnly.length !== 10) {
         return setError("Phone number must be exactly 10 digits.");
@@ -83,7 +86,7 @@ export default function ResetPasswordModal({
 
     try {
       const res = await fetch(
-        "http://127.0.0.1:8000/api/auth/forgot-password",
+        `${API_BASE_URL}/api/auth/forgot-password`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -122,7 +125,9 @@ export default function ResetPasswordModal({
   const handleReset = async () => {
     setError("");
 
-    if (!verificationCode) return setError("Please enter verification code.");
+    if (!verificationCode)
+      return setError("Please enter verification code.");
+
     if (!isPasswordValid(password)) {
       return setError(
         "Password must be at least 6 characters and include 2 of: letters, digits, special characters."
@@ -133,7 +138,7 @@ export default function ResetPasswordModal({
 
     try {
       const res = await fetch(
-        "http://127.0.0.1:8000/api/auth/forgot-password/verify",
+        `${API_BASE_URL}/api/auth/forgot-password/verify`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -187,7 +192,6 @@ export default function ResetPasswordModal({
           >
             Email
           </button>
-
           <button
             className={`rp-tab ${tab === "phone" ? "active" : ""}`}
             onClick={() => setTab("phone")}
@@ -208,40 +212,13 @@ export default function ResetPasswordModal({
                   onChange={(e) => setEmail(e.target.value)}
                 />
               ) : (
-                <div className="rp-mobile-box">
-                  <div
-                    className="rp-country-box"
-                    onClick={() => setShowCountryList((v) => !v)}
-                  >
-                    {selectedCountry.code}
-                    <span className="rp-arrow">▼</span>
-                  </div>
-
-                  {showCountryList && (
-                    <div className="rp-country-dropdown">
-                      {countryOptions.map((c) => (
-                        <div
-                          key={c.name}
-                          className="rp-country-item"
-                          onClick={() => {
-                            setSelectedCountry(c);
-                            setShowCountryList(false);
-                          }}
-                        >
-                          {c.name}
-                        </div>
-                      ))}
-                    </div>
-                  )}
-
-                  <input
-                    className="rp-input-phone"
-                    type="text"
-                    placeholder="Phone number"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                  />
-                </div>
+                <input
+                  className="rp-input"
+                  type="text"
+                  placeholder="Phone number"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                />
               )}
 
               {error && <div className="rp-error">{error}</div>}
@@ -253,29 +230,11 @@ export default function ResetPasswordModal({
               >
                 {sending ? "Sending..." : "Next"}
               </button>
-
-              <p className="rp-already">
-                Already registered?{" "}
-                <span
-                  className="rp-login-link"
-                  onClick={() => {
-                    closeReset();
-                    onBackToLogin();
-                  }}
-                >
-                  Log in
-                </span>
-              </p>
             </>
           )}
 
           {step === 2 && (
             <>
-              <p className="rp-info">
-                A verification code has been sent to{" "}
-                {tab === "email" ? "email" : "mobile phone"}.
-              </p>
-
               <input
                 className="rp-input"
                 type="text"
@@ -292,12 +251,6 @@ export default function ResetPasswordModal({
                 onChange={(e) => setPassword(e.target.value)}
               />
 
-              <div className="rp-password-hint">
-                Passwords must be at least 6 characters.
-                <br />
-                Must include 2 of: Alphabet / Number / Special character.
-              </div>
-
               {error && <div className="rp-error">{error}</div>}
 
               <button
@@ -307,19 +260,6 @@ export default function ResetPasswordModal({
               >
                 {resetting ? "Resetting…" : "Reset"}
               </button>
-
-              <p className="rp-already">
-                Already registered?{" "}
-                <span
-                  className="rp-login-link"
-                  onClick={() => {
-                    closeReset();
-                    onBackToLogin();
-                  }}
-                >
-                  Log in
-                </span>
-              </p>
             </>
           )}
         </div>

@@ -39,15 +39,15 @@ const LearnMore = () => {
           <div className="article-body">
 
             <p className="article-paragraph">
-              We've all been targeted with one fraudulent scheme or another at some point in our adult lives. Now, there is a very realistic-looking scam that falsely claims to be legitimate paid work reviewing home listings, and is illegally branded with HouseSigma's logo and colour palette.
+              We've all been targeted with one fraudulent scheme or another at some point in our adult lives. Now, there is a very realistic-looking scam that falsely claims to be legitimate paid work reviewing home listings, and is illegally branded with HomeNest's logo and colour palette.
             </p>
 
             <p className="article-paragraph">
-              Consumers across Canada are warned to avoid this prolific, highly convincing scam that HouseSigma has been made aware of by concerned consumers, some of whom have been targeted. The scammers approach victims through various platforms, such as adding WhatsApp and Telegram users to the scam's chat groups, posting jobs on LinkedIn and Indeed to advertise the fake opportunity, cold calling and texting victims, and more.
+              Consumers across Canada are warned to avoid this prolific, highly convincing scam that HomeNest has been made aware of by concerned consumers, some of whom have been targeted. The scammers approach victims through various platforms, such as adding WhatsApp and Telegram users to the scam's chat groups, posting jobs on LinkedIn and Indeed to advertise the fake opportunity, cold calling and texting victims, and more.
             </p>
 
             <p className="article-paragraph">
-              Each path takes the unsuspecting consumer to a scam website that illegally uses HouseSigma's logo and branding, and claims to offer payment to "analyze and promote the most profitable properties" on a freelance basis. They may also use other similar methods that are designed to make victims send them funds.
+              Each path takes the unsuspecting consumer to a scam website that illegally uses HomeNest's logo and branding, and claims to offer payment to "analyze and promote the most profitable properties" on a freelance basis. They may also use other similar methods that are designed to make victims send them funds.
             </p>
 
             {/* scam2 */}
@@ -62,7 +62,7 @@ const LearnMore = () => {
             {/* scam3 */}
             <div className="content-image-wrapper">
               <p className="image-caption">
-                Image: Screenshot of the scam website home page, falsely branded as HouseSigma
+                Image: Screenshot of the scam website home page, falsely branded as HomeNest
               </p>
             </div>
 
@@ -79,15 +79,15 @@ const LearnMore = () => {
             </h2>
 
             <p className="article-paragraph">
-              HouseSigma has learned of at least one user who believed the scam and has unfortunately lost thousands of dollars that they cannot recover, along with another who has lost hundreds.
+              HomeNest has learned of at least one user who believed the scam and has unfortunately lost thousands of dollars that they cannot recover, along with another who has lost hundreds.
             </p>
 
             <p className="article-paragraph">
-              The scam also uses HouseSigma's branding on letterhead to send official-looking, watermarked legal "breach of contract" notices, claiming the victim did not file their work within a certain period and demanding huge fines be paid.
+              The scam also uses HomeNest's branding on letterhead to send official-looking, watermarked legal "breach of contract" notices, claiming the victim did not file their work within a certain period and demanding huge fines be paid.
             </p>
 
             <p className="article-paragraph">
-              HouseSigma has received a copy of such a letter from a scam victim who reached out to us. Much of the letter's text is extremely badly written and challenging to understand. What is clear is that the copy HouseSigma received demands $87,140 USDT (Tether, a form of cryptocurrency) in payment, claiming that the fine will be refunded if the full amount is paid, and threatening legal action if it is not (see screenshot below).
+              HomeNest has received a copy of such a letter from a scam victim who reached out to us. Much of the letter's text is extremely badly written and challenging to understand. What is clear is that the copy HomeNest received demands $87,140 USDT (Tether, a form of cryptocurrency) in payment, claiming that the fine will be refunded if the full amount is paid, and threatening legal action if it is not (see screenshot below).
             </p>
 
             {/* scam3 again (letter screenshot) */}
@@ -98,36 +98,36 @@ const LearnMore = () => {
                 className="content-image with-border"
               />
               <p className="image-caption">
-                Image: Screenshot of a letter sent to a victim of the scam, falsely claiming to be from HouseSigma
+                Image: Screenshot of a letter sent to a victim of the scam, falsely claiming to be from HomeNest
               </p>
             </div>
 
             <p className="article-paragraph">
-              The letter is signed "John Steen, Project Director, HouseSigma" and marked with a convincing-looking stamp. No such employee or role exists at HouseSigma, Inc.
+              The letter is signed "John Steen, Project Director, HomeNest" and marked with a convincing-looking stamp. No such employee or role exists at HomeNest, Inc.
             </p>
 
             <h2 className="article-heading">Authorities have been advised</h2>
 
             <p className="article-paragraph">
-              The HouseSigma team can confirm that this fraudulent scheme has no link of any kind to HouseSigma, Inc. or any of its associates, and that the company has no control over the scammers' illegal activity.
+              The HomeNest team can confirm that this fraudulent scheme has no link of any kind to HomeNest, Inc. or any of its associates, and that the company has no control over the scammers' illegal activity.
             </p>
 
             <p className="article-paragraph">
-              HouseSigma further wishes to clarify that it never makes job offers via WhatsApp or Telegram, nor does it pay users for clicking on listings or "reviewing" them.
+              HomeNest further wishes to clarify that it never makes job offers via WhatsApp or Telegram, nor does it pay users for clicking on listings or "reviewing" them.
             </p>
 
             <p className="article-paragraph">
-              Michael Carney, HouseSigma's Director of Business Development, said, "We at HouseSigma are appalled that scammers are hijacking the HouseSigma brand to shake down prospective job seekers. We're extremely concerned that people are losing money and we want to sound the alarm to help prevent this from happening to anyone else."
+              Michael Carney, HomeNest's Director of Business Development, said, "We at HomeNest are appalled that scammers are hijacking the HomeNest brand to shake down prospective job seekers. We're extremely concerned that people are losing money and we want to sound the alarm to help prevent this from happening to anyone else."
             </p>
 
             <p className="article-paragraph">
-              HouseSigma has now notified the appropriate law enforcement agencies about the scam.
+              HomeNest has now notified the appropriate law enforcement agencies about the scam.
             </p>
 
             <p className="article-paragraph">
-              Any users who are concerned about possible scams branded as HouseSigma, or have questions about the legitimacy of roles advertised under HouseSigma's name, may reach out to us at{" "}
-              <a href="mailto:scam-alerts@housesigma.com" className="article-link">
-                scam-alerts@housesigma.com
+              Any users who are concerned about possible scams branded as HomeNest, or have questions about the legitimacy of roles advertised under HomeNest's name, may reach out to us at{" "}
+              <a href="mailto:scam-alerts@HomeNest.com" className="article-link">
+                scam-alerts@HomeNest.com
               </a>
             </p>
 
@@ -140,10 +140,10 @@ const LearnMore = () => {
             {/* Navigation Links */}
             <div className="nav-links-container">
               <a className="nav-link-block">
-                « EXPLORE EDMONTON WITH HOUSESIGMA: NOW FEATURING SOLD DATA FROM EDMONTON REAL ESTATE BOARD
+                « EXPLORE EDMONTON WITH HomeNest: NOW FEATURING SOLD DATA FROM EDMONTON REAL ESTATE BOARD
               </a>
               <a className="nav-link-block">
-                FROM CLICKS TO FOOTSTEPS: NEW HOUSESIGMA TOOL GAUGES BUYER COMPETITION ON LISTINGS »
+                FROM CLICKS TO FOOTSTEPS: NEW HomeNest TOOL GAUGES BUYER COMPETITION ON LISTINGS »
               </a>
             </div>
 
@@ -155,7 +155,7 @@ const LearnMore = () => {
       <footer className="footer">
         <div className="footer-content">
           <div className="footer-links">
-            <a className="footer-link">HouseSigma Inc. Brokerage</a>
+            <a className="footer-link">HomeNest Inc. Brokerage</a>
             <a className="footer-link">Legal</a>
             <a className="footer-link">Privacy & Security</a>
             <a className="footer-link">Terms & Conditions</a>

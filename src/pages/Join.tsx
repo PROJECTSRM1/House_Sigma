@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import googleLogo from "@/assets/google.png";
 import { useAuth } from "@/context/AuthContext";
 
-const API_BASE = "http://127.0.0.1:8000";
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 const countryList = [
   { name: "India", code: "+91" },
@@ -340,7 +340,7 @@ const Join: React.FC = () => {
         {step === 2 && (
           <div className="step-box">
             <div className="scroll-card">
-              <center><h3>HouseSigma Terms of Use</h3></center>
+              <center><h3>HomeNest Terms of Use</h3></center>
               <p>
                 By using this website, you are agreeing to comply and be bound by the following terms of service and use.
                 Please review the following terms in their entirety and ensure their comprehension before using and
@@ -352,7 +352,7 @@ const Join: React.FC = () => {
                 and the Participant.
                 <br /><br />
 
-                Acknowledges that you are entering into a lawful broker-consumer relationship with the HouseSigma Inc.
+                Acknowledges that you are entering into a lawful broker-consumer relationship with the HomeNest Inc.
                 Brokerage.
                 <br /><br />
 
@@ -360,8 +360,8 @@ const Join: React.FC = () => {
                 to acknowledge agreement to those terms.
                 <br /><br />
 
-                Understand that HouseSigma assumes no responsibility for the accuracy of any information shown on the
-                HouseSigma website and mobile app.
+                Understand that HomeNest assumes no responsibility for the accuracy of any information shown on the
+                HomeNest website and mobile app.
                 <br /><br />
 
                 Understand that all data obtained from the VOW (Virtual Office Website) is intended only for your
@@ -380,8 +380,8 @@ const Join: React.FC = () => {
                 Acknowledge the Board/Association ownership of and the validity of the copyright in the MLS® database.
                 <br /><br />
 
-                If at any time, an agreement is entered between HouseSigma Inc. and Consumer imposing a financial
-                obligation on the Consumer or creating representation of the Consumer by HouseSigma Inc., it must be
+                If at any time, an agreement is entered between HomeNest Inc. and Consumer imposing a financial
+                obligation on the Consumer or creating representation of the Consumer by HomeNest Inc., it must be
                 established separately from the Terms of Use and may not be accepted solely by mouse click.
                 <br /><br />
 

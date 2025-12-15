@@ -38,7 +38,7 @@ const Others = () => {
       case "device-support-compatibility":
         return (
           <>
-            <p>HouseSigma supports most modern devices, including:</p>
+            <p>HomeNest supports most modern devices, including:</p>
             <ul>
               <li>iOS 13 or later</li>
               <li>Android 8.0 or later</li>
@@ -55,7 +55,7 @@ const Others = () => {
         return (
           <>
             <p>
-              Join our official HouseSigma Discord community to connect with
+              Join our official HomeNest Discord community to connect with
               other users, ask questions, and receive updates.
             </p>
             <p>Available channels include:</p>
@@ -166,7 +166,7 @@ const Others = () => {
       <footer className="footer">
         <div className="footer-content">
           <div className="footer-links">
-            <a className="footer-link">HouseSigma Inc. Brokerage</a>
+            <a className="footer-link">HomeNest Inc. Brokerage</a>
             <a className="footer-link">Legal</a>
             <a className="footer-link">Privacy & Security</a>
             <a className="footer-link">Terms & Conditions</a>

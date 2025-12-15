@@ -116,7 +116,7 @@ export default function Contact() {
                 target="_blank"
                 className={styles.outlineButton}
               >
-                Contact HouseSigma Agent →
+                Contact HomeNest Agent →
               </a>
             </div>
 
@@ -177,7 +177,7 @@ export default function Contact() {
                   href="mailto:deals@housesigma.com"
                   className={styles.emailButton}
                 >
-                  📩 deals@housesigma.com
+                  📩 deals@homenest.com
                 </a>
               </div>
             </div>
@@ -197,7 +197,7 @@ export default function Contact() {
                   href="mailto:press@housesigma.com"
                   className={styles.emailButton}
                 >
-                  📩 press@housesigma.com
+                  📩 press@homenest.com
                 </a>
               </div>
             </div>

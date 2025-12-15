@@ -3,17 +3,17 @@
   margin-bottom: 2rem;
   width: 100%;
   margin-top: 2rem;
-  padding: 0; /* ensures no unwanted spacing */
+  padding: 0; 
 }
 
-/* TOP ROW = header left + buttons right */
+
 .topRow {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 0 2rem; /* small padding like HouseSigma */
-  max-width: 100%;   /* removes fixed width feeling */
+  padding: 0 2rem; 
+  max-width: 100%;   
 }
 
 
@@ -22,7 +22,7 @@
   font-size: 1.25rem;
   font-weight: 600;
   color: hsl(var(--foreground));
-  margin: 0; /* Remove old margin-left */
+  margin: 0; 
 }
 
 /* Buttons container aligned right */

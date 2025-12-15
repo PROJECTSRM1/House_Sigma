@@ -68,13 +68,13 @@ export const faqData: FAQCategoryData[] = [
   },
   {
     id: "change-data",
-    title: "Change Data on HouseSigma",
+    title: "Change Data on HomeNest",
     count: 4,
     articles: [
       { id: "1", question: "Why are some estimated values not correct?", slug: slugify("Why are some estimated values not correct?") },
       { id: "2", question: "How to correct my listing data?", slug: slugify("How to correct my listing data?") },
       { id: "3", question: "How to fix wrong listing location on map?", slug: slugify("How to fix wrong listing location on map?") },
-      { id: "4", question: "How to get my listing featured on HouseSigma?", slug: slugify("How to get my listing featured on HouseSigma?") },
+      { id: "4", question: "How to get my listing featured on HomeNest?", slug: slugify("How to get my listing featured on HomeNest?") },
     ],
   },
   {
@@ -85,7 +85,7 @@ export const faqData: FAQCategoryData[] = [
       { id: "1", question: "Contact Technical Support", slug: slugify("Contact Technical Support") },
       { id: "2", question: "Complain About Brokerage Services", slug: slugify("Complain About Brokerage Services") },
       { id: "3", question: "Technical Support Steps", slug: slugify("Technical Support Steps") },
-      { id: "4", question: "How to post my property listing on HouseSigma", slug: slugify("How to post my property listing on HouseSigma") },
+      { id: "4", question: "How to post my property listing on HomeNest", slug: slugify("How to post my property listing on HomeNest") },
       { id: "5", question: "Feedback and Feature Requests", slug: slugify("Feedback and Feature Requests") },
     ],
   },
@@ -109,7 +109,7 @@ export const faqData: FAQCategoryData[] = [
     articles: [
       { id: "1", question: "Website menu blocks half of screen", slug: slugify("Website menu blocks half of screen") },
       { id: "2", question: "Device support/compatibility", slug: slugify("Device support/compatibility") },
-      { id: "3", question: "HouseSigma Discord Community", slug: slugify("HouseSigma Discord Community") },
+      { id: "3", question: "HomeNest Discord Community", slug: slugify("HomeNest Discord Community") },
       { id: "4", question: "Re-validate password", slug: slugify("Re-validate password") },
     ],
   },
@@ -204,7 +204,7 @@ const FAQ = () => {
       <footer className="footer">
         <div className="footer-content">
           <div className="footer-links">
-            <a className="footer-link">HouseSigma Inc. Brokerage</a>
+            <a className="footer-link">HomeNest Inc. Brokerage</a>
             <a className="footer-link">Legal</a>
             <a className="footer-link">Privacy & Security</a>
             <a className="footer-link">Terms & Conditions</a>

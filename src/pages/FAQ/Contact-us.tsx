@@ -73,7 +73,7 @@ const ContactUs = () => {
         return (
           <>
             <p>
-              To post your property listing on HouseSigma, you must be a
+              To post your property listing on HomeNest, you must be a
               licensed real estate agent with access to your regional MLS board.
             </p>
             <p>
@@ -183,7 +183,7 @@ const ContactUs = () => {
       <footer className="footer">
         <div className="footer-content">
           <div className="footer-links">
-            <a className="footer-link">HouseSigma Inc. Brokerage</a>
+            <a className="footer-link">HomeNest Inc. Brokerage</a>
             <a className="footer-link">Legal</a>
             <a className="footer-link">Privacy & Security</a>
             <a className="footer-link">Terms & Conditions</a>

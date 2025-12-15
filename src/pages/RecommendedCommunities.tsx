@@ -460,7 +460,7 @@ export default function RecommendedCommunities() {
             <div className={styles.disclaimer}>
               <p className={styles.disclaimerText}>
                 * Good School, Value Appreciation, Rental Yield and Land Size are estimated values
-                based on HouseSigma's internal algorithm.
+                based on HomeNest's internal algorithm.
               </p>
             </div>
           </div>
