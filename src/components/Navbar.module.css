@@ -239,7 +239,7 @@ html, body {
 
 .activeNavLink {
   position: relative;
-  color: #0f93ff#0f93ff;
+  color: #031320#031320;
   font-weight: 700;
 }
 
@@ -252,7 +252,7 @@ html, body {
   height: 3px;
   border-radius: 3px;
 
-  background: linear-gradient(90deg, #0f93ff, #0f93ff);
+  background: linear-gradient(90deg, #031320, #031320);
 }
 
 /* ================================================
