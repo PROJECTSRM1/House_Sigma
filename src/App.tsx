@@ -35,6 +35,7 @@ import Login from "./pages/Login";
 import LearnMore from "./pages/LearnMore";
 
 import { AuthProvider } from "./context/AuthContext";
+import PropertyDetail from "./pages/PropertyDetail";
 
 const queryClient = new QueryClient();
 
@@ -62,6 +63,9 @@ const App = () => (
           <Route path="/market-trends" element={<MarketTrends />} />
           <Route path="/home-valuation" element={<HomeValuation />} />
           <Route path="/agents" element={<Agents />} />
+
+          <Route path="/property/:id" element={<PropertyDetail />} />
+
 
           {/* Tools Dropdown */}
           <Route path="/blog" element={<Blog />} />
