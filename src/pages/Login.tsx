@@ -268,24 +268,6 @@ const LoginModal: React.FC<LoginModalProps> = ({
           Sign in with Google
         </button>
 
-        <button className="social-btn">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png"
-            alt="facebook"
-            className="social-icon"
-          />
-          Sign in with Facebook
-        </button>
-
-        <button className="social-btn">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"
-            alt="linkedin"
-            className="social-icon"
-          />
-          Sign in with LinkedIn
-        </button>
-
         <p className="signup-text">
           New user? <NavLink to="/join">Sign-up here</NavLink>
         </p>
