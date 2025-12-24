@@ -5,6 +5,8 @@ import React, { useMemo, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "./MarketTrends.css";
+import { useTranslation } from "react-i18next";
+
 
 // Icons
 import { TrendingDown, TrendingUp } from "lucide-react";
@@ -320,6 +322,8 @@ const MarketFilters = ({
   property,
   setProperty,
 }) => {
+  const { t } = useTranslation();
+
   const [openDropdown, setOpenDropdown] = useState(null);
 
   const locations = [
@@ -374,19 +378,20 @@ const MarketFilters = ({
             className={`tab-btn ${selectedYears === 5 ? "active" : ""}`}
             onClick={() => setSelectedYears(5)}
           >
-            5 Years
+           <button>{t("fiveYears")}</button>
           </button>
           <button
             className={`tab-btn ${selectedYears === 10 ? "active" : ""}`}
             onClick={() => setSelectedYears(10)}
           >
-            10 Years
+           <button>{t("tenYears")}</button>
+
           </button>
           <button
             className={`tab-btn ${selectedYears === 15 ? "active" : ""}`}
             onClick={() => setSelectedYears(15)}
           >
-            15 Years
+               <button>{t("fifteenYears")}</button>
           </button>
         </div>
 
@@ -512,6 +517,8 @@ const MarketStats = ({
   change10y,
   statsTitle,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="market-stats">
       <h1 className="market-stats-title">{statsTitle}</h1>
@@ -520,7 +527,8 @@ const MarketStats = ({
         <div className="stat-card">
           <div className="stat-header">
             <p className="stat-date">{latestMonth ?? "—"}</p>
-            <p className="stat-label">Median Price</p>
+          <p className="stat-label">{t("medianPrice")}</p>
+
           </div>
           <p className="stat-value">{formatCurrency(latestMedian)}</p>
         </div>
@@ -528,7 +536,7 @@ const MarketStats = ({
         <div className="stat-card">
           <div className="stat-header">
             <p className="stat-date">{latestMonth ?? "—"}</p>
-            <p className="stat-label">New Listings</p>
+            <p className="stat-label">{t("newListings")}</p>
           </div>
           <p className="stat-value">
             {latestNewListings != null ? latestNewListings.toLocaleString() : "-"}
@@ -537,7 +545,7 @@ const MarketStats = ({
 
         <div className="stat-card stat-changes">
           <div className="stat-change">
-            <span className="change-label">1 Year Value Change</span>
+            <span>{t("oneYearValueChange")}</span>
             <span
               className={`change-value ${
                 change1y != null && change1y < 0 ? "down" : "up"
@@ -553,7 +561,7 @@ const MarketStats = ({
           </div>
 
           <div className="stat-change">
-            <span className="change-label">5 Years Value Change</span>
+            <span>{t("fiveYearValueChange")}</span>
             <span
               className={`change-value ${
                 change5y != null && change5y < 0 ? "down" : "up"
@@ -569,7 +577,7 @@ const MarketStats = ({
           </div>
 
           <div className="stat-change">
-            <span className="change-label">10 Years Value Change</span>
+            <span>{t("tenYearValueChange")}</span>
             <span
               className={`change-value ${
                 change10y != null && change10y < 0 ? "down" : "up"
@@ -595,15 +603,15 @@ const MarketStats = ({
    ========================== */
 
 const MarketCharts = ({ datasets, chartHeight }) => {
+   const { t } = useTranslation();
+
   return (
     <div className="market-charts">
       {/* 1 — Median Price & Days on Market */}
       <div className="chart-section">
         <div className="chart-header">
-          <h2 className="chart-title">Median Sold Price & Average Days On Market</h2>
-          <p className="chart-subtitle">
-            Property Days on Market does not reset when the property is delisted and quickly re-listed.
-          </p>
+          <h2>{t("medianSoldPriceChart")}</h2>
+         <p>{t("daysOnMarketNote")}</p>
         </div>
 
         <ResponsiveContainer height={chartHeight}>
@@ -784,6 +792,8 @@ const MarketCharts = ({ datasets, chartHeight }) => {
    ========================== */
 
 const ContactForm = () => {
+   const { t } = useTranslation();
+
   const handleClick = (event) => {
     event.preventDefault();
     console.log("Contact agent clicked");
@@ -791,10 +801,9 @@ const ContactForm = () => {
 
   return (
     <div className="contact-form">
-      <h2 className="contact-form-title">Contact HomeNest Agent</h2>
-
+         <h2>{t("contactAgent")}</h2>
       <form className="contact-form-content" onSubmit={(e) => e.preventDefault()}>
-        <input type="text" placeholder="Your Name *" className="contact-form-input" />
+          <input placeholder={t("yourName")} />
         <div className="contact-form-input-group">
           <input type="tel" placeholder="Your Contact Number *" className="contact-form-input" />
           <input type="email" placeholder="Your Email Address *" className="contact-form-input" />
@@ -804,9 +813,7 @@ const ContactForm = () => {
         <p className="contact-form-privacy">
           By submitting this form, I understand HomeNest will share my information with registered real estate professionals.
         </p>
-        <button type="button" onClick={handleClick} className="contact-form-submit-button">
-          Contact Agent
-        </button>
+          <button>{t("contactAgentButton")}</button>
       </form>
     </div>
   );
@@ -818,7 +825,9 @@ const ContactForm = () => {
 
 const chartHeight = 400;
 
-const MarketTrends = () => {
+const MarketTrends = () => {const { t } = useTranslation();
+
+
   const [selectedYears, setSelectedYears] = useState(10);
   const [location, setLocation] = useState("GTA – All");
   const [community, setCommunity] = useState("Bayview Hill");

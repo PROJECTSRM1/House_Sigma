@@ -3,12 +3,15 @@ import { Bed, Bath, Car } from "lucide-react";
 import { PropertyListing } from "@/data/mockData";
 import { Property } from "@/data/albertaData";
 import styles from "./PropertyCard.module.css";
+import { useTranslation } from "react-i18next";
 
 interface PropertyCardProps {
   property: Property | PropertyListing;
 }
 
 const PropertyCard = ({ property }: PropertyCardProps) => {
+  const { t } = useTranslation(); // ✅ ADDED
+
   const beds = "beds" in property ? property.beds : property.bedrooms;
   const baths = "baths" in property ? property.baths : property.bathrooms;
   const parking = property.parking ?? 0;
@@ -43,16 +46,15 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
     <div className={styles.card}>
       {/* IMAGE SECTION */}
       <div className={styles.imageContainer}>
-        
         {"schoolScore" in property && property.schoolScore && (
           <span className={styles.topLeftBadge}>
-            School Score: {property.schoolScore}
+            {t("schoolScore")}: {property.schoolScore}
           </span>
         )}
 
         {"growthScore" in property && property.growthScore && (
           <span className={styles.topLeftBadge}>
-            Growth Score: {property.growthScore}
+            {t("growthScore")}: {property.growthScore}
           </span>
         )}
 
@@ -63,7 +65,9 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
         )}
 
         {property.status === "For Sale" && (
-          <span className={styles.bottomLeftBadge}>For Sale</span>
+          <span className={styles.bottomLeftBadge}>
+            {t("forSale")}
+          </span>
         )}
 
         <img
@@ -76,7 +80,7 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
       {/* CONTENT SECTION */}
       <div className={styles.cardContent}>
         <div className={styles.price}>
-          Listed:{" "}
+          {t("listed")}:{" "}
           {typeof property.price === "number"
             ? `$${property.price.toLocaleString()}`
             : property.price}

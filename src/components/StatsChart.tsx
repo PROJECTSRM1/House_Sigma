@@ -11,6 +11,7 @@ import {
 
 import { Link } from "react-router-dom";
 import styles from "./StatsChart.module.css";
+import { useTranslation } from "react-i18next";
 
 const data = [
   { month: "Jan", medianPrice: 580000, totalSold: 450 },
@@ -28,15 +29,23 @@ const data = [
 ];
 
 const StatsChart = () => {
+  const { t } = useTranslation(); // ✅ added
+
   return (
     <div className={styles.chartSection}>
       {/* Heading */}
-      <h2 className={styles.title}>Calgary Statistics *(All property types)</h2>
+      <h2 className={styles.title}>
+        {t("cityStatistics")}
+      </h2>
 
-      {/* Legend ABOVE chart - CENTERED */}
+      {/* Legend */}
       <div className={styles.topLegend}>
-        <span className={styles.legendItemBlue}>● Median Price</span>
-        <span className={styles.legendItemOrange}>■ Total Sold</span>
+        <span className={styles.legendItemBlue}>
+          ● {t("medianPrice")}
+        </span>
+        <span className={styles.legendItemOrange}>
+          ■ {t("totalSold")}
+        </span>
       </div>
 
       <ResponsiveContainer width="100%" height={380}>
@@ -50,7 +59,6 @@ const StatsChart = () => {
           <Tooltip />
 
           <Bar dataKey="totalSold" yAxisId="right" fill="#f59e0b" />
-
           <Line
             dataKey="medianPrice"
             yAxisId="left"
@@ -61,16 +69,15 @@ const StatsChart = () => {
         </ComposedChart>
       </ResponsiveContainer>
 
-      {/* Larger Source Text */}
       <p className={styles.source}>
-        * Source: Based on analysis of information from past listings from
-        respective real estate boards.
+        {t("statsSource")}
       </p>
 
-      {/* Right aligned button - Navigate to Market Trends */}
       <div className={styles.buttonRow}>
         <Link to="/market-trends">
-          <button className={styles.statsButton}>View More Stats</button>
+          <button className={styles.statsButton}>
+            {t("viewMoreStats")}
+          </button>
         </Link>
       </div>
     </div>
