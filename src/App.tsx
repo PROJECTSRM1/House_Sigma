@@ -12,7 +12,10 @@ import NotFound from "./pages/NotFound";
 
 import MapSearch from "./pages/MapSearch";
 import MarketTrends from "./pages/MarketTrends";
+import MarketStatistics from "./pages/MarketStatistics";
 import Agents from "./pages/Agents";
+import AgentProfile from "./pages/AgentProfile";
+
 import HomeValuation from "./pages/HomeValuation";
 
 import Blog from "./pages/Blog";
@@ -35,6 +38,7 @@ import Login from "./pages/Login";
 import LearnMore from "./pages/LearnMore";
 
 import { AuthProvider } from "./context/AuthContext";
+import PropertyDetail from "./pages/PropertyDetail";
 
 const queryClient = new QueryClient();
 
@@ -57,11 +61,21 @@ const App = () => (
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/blog-lm" element={<BlogLM />} />
 
+
+
           {/* Navbar navigation */}
           <Route path="/map-search" element={<MapSearch />} />
           <Route path="/market-trends" element={<MarketTrends />} />
+          <Route path="/market-statistics" element={<MarketStatistics />} />
           <Route path="/home-valuation" element={<HomeValuation />} />
           <Route path="/agents" element={<Agents />} />
+
+          <Route path="/agents/:agentId" element={<AgentProfile />} />
+
+           <Route path="/property/:id" element={<PropertyDetail />} />
+         
+
+
 
           {/* Tools Dropdown */}
           <Route path="/blog" element={<Blog />} />

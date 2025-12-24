@@ -10,12 +10,9 @@ import albertaHero from "/assets/alberta_Files/alberta.jpg";
 
 import {
   newlyAdded,
-  bestForSchools,
+  rentalInvestment,
   featuredListings,
-  highGrowth,
   soldBelowBought,
-  highReturns,
-  justSold  
 } from "@/data/albertaData";
 
 const Alberta = () => {
@@ -44,9 +41,9 @@ const Alberta = () => {
         />
 
         <PropertySection 
-          title="Best For Schools"
+          title="Best For Rental Investment"
           badge="Top Rated Areas"
-          properties={bestForSchools} 
+          properties={rentalInvestment} 
         />
 
         <PropertySection 
@@ -55,29 +52,14 @@ const Alberta = () => {
           properties={featuredListings} 
         />
 
-        <PropertySection 
-          title="High Growth Areas"
-          badge="Strong Appreciation"
-          properties={highGrowth} 
-        />
 
         <PropertySection 
-          title="Sold Below Bought"
+          title="Sold"
           badge="Better Deals"
           properties={soldBelowBought} 
         />
 
-        <PropertySection 
-          title="High Returns"
-          badge="Investor Picks"
-          properties={highReturns} 
-        />
 
-        <PropertySection 
-          title="Recently Sold"
-          badge="Just Closed"
-          properties={justSold} 
-        />
       </div>
 
       {/* MARKET CHART */}
