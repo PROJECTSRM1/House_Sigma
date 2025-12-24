@@ -1,5 +1,6 @@
 import React from "react";
 import { MapPin } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import styles from "./PropertyCard.module.css";
 import { Property } from "@/data/albertaData";
 import { PropertyListing } from "@/data/mockData";
@@ -11,18 +12,17 @@ interface PropertyCardProps {
 }
 
 const PropertyCard = ({ property }: PropertyCardProps) => {
+  const navigate = useNavigate();
+
   const price =
     typeof property.price === "number"
       ? `$${property.price.toLocaleString()}`
       : property.price;
 
   const getStatusLabel = () => {
-    // 1️⃣ SOLD
     if (property.status === "Sold") return "Sold";
 
-    // 2️⃣ FOR SCHOOLS (Alberta + BC + Ontario)
-    if ("schoolScore" in property && property.schoolScore)
-      return "For Schools";
+    if ("schoolScore" in property && property.schoolScore) return "For Schools";
 
     if (
       "badge" in property &&
@@ -30,32 +30,27 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
     )
       return "For Schools";
 
-    // 3️⃣ HIGH GROWTH
     if ("growthScore" in property && property.growthScore)
       return "High Growth";
 
-    // 4️⃣ FOR RENTAL (explicit only)
     if (
       "badge" in property &&
       property.badge?.toLowerCase().includes("rental")
     )
       return "For Rental";
 
-    // 5️⃣ FEATURED
     if (
       "badge" in property &&
       property.badge?.toLowerCase().includes("featured")
     )
       return "Featured";
 
-    // 6️⃣ EXCLUSIVE
     if (
       "badge" in property &&
       property.badge?.toLowerCase().includes("exclusive")
     )
       return "Exclusive";
 
-    // 7️⃣ DEFAULT
     return "Newly Listed";
   };
 
@@ -80,8 +75,12 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
     }
   };
 
+  const handleCardClick = () => {
+    navigate(`/property/${property.id}`);
+  };
+
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onClick={handleCardClick}>
       {/* IMAGE */}
       <div className={styles.imageContainer}>
         <img
