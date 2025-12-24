@@ -1,9 +1,13 @@
 // src/pages/Agents.tsx
 import React, { useEffect, useMemo, useRef, useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+
+
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import agentsData from "../data/agents";
 import styles from "./Agent.module.css";
+
 
 // Image compressor helpers (their types are unknown to us here)
 import {
@@ -24,10 +28,11 @@ export type Agent = {
   area: string;
   languages: string[];
   avatar?: string; // local image URL
-  phone: string;
 };
 
 const PROVINCES = ["Ontario", "British Columbia", "Alberta"] as const;
+
+
 
 /* Simple inline SVG placeholder (blank box) */
 const SVG_PLACEHOLDER =
@@ -191,7 +196,15 @@ async function compressAndCacheUrl(url: string, bump: () => void): Promise<void>
 }
 
 /* -------------------- AgentCard -------------------- */
-function AgentCard({ agent }: { agent: Agent }): JSX.Element {
+function AgentCard({
+  agent,
+  onClick,
+}: {
+  agent: Agent;
+  onClick?: () => void;
+}): JSX.Element {
+
+  // get current best URL: compressed if available, otherwise original avatar, otherwise placeholder
   const baseUrl = agent.avatar;
   const cachedCompressed = baseUrl ? compressedUrlCache.get(baseUrl) : undefined;
 
@@ -203,6 +216,8 @@ function AgentCard({ agent }: { agent: Agent }): JSX.Element {
 
   const [errored, setErrored] = useState(false);
 
+  // When compression cache updates (via bump state in parent), this component will re-render
+  // and `cachedCompressed` will become available -> we update `src` accordingly.
   useEffect(() => {
     if (cachedCompressed && !errored) {
       setSrc(cachedCompressed);
@@ -215,14 +230,18 @@ function AgentCard({ agent }: { agent: Agent }): JSX.Element {
     (e: React.SyntheticEvent<HTMLImageElement>) => {
       if (errored) return;
       setErrored(true);
-      e.currentTarget.src = SVG_PLACEHOLDER;
+
+      const imgEl = e.currentTarget;
+      imgEl.onerror = null;
+      imgEl.src = SVG_PLACEHOLDER;
       setSrc(SVG_PLACEHOLDER);
     },
     [errored]
   );
 
   return (
-    <article className={styles.agentCard}>
+    <article className={styles.agentCard} onClick={onClick} style={{ cursor: "pointer" }}>
+
       <div className={styles.avatarWrap}>
         <img
           src={src}
@@ -233,23 +252,19 @@ function AgentCard({ agent }: { agent: Agent }): JSX.Element {
           width={160}
           height={160}
           onError={handleImgError}
+          style={{
+            objectFit: "cover",
+          }}
         />
       </div>
 
       <div className={styles.cardBody}>
         <h3 className={styles.agentName}>{agent.name}</h3>
-
         <p className={styles.agentRole}>{agent.role}</p>
-
-        {/* 📞 Phone Number BELOW role */}
-        <p className={styles.agentPhone}>
-          <a href={`tel:${agent.phone}`}>{agent.phone}</a>
-        </p>
       </div>
     </article>
   );
 }
-
 /* -------------------- end AgentCard -------------------- */
 
 /* -------------------- CustomSelect and Filters -------------------- */
@@ -445,6 +460,8 @@ function Filters(props: {
 /* -------------------- AgentsPage (main) -------------------- */
 
 export default function AgentsPage(): JSX.Element {
+  const navigate = useNavigate();
+
   const [activeProvince, setActiveProvince] = useState<string>(PROVINCES[0]);
   const [selectedArea, setSelectedArea] = useState<string>("");
   const [selectedLanguage, setSelectedLanguage] = useState<string>("");
@@ -575,7 +592,12 @@ export default function AgentsPage(): JSX.Element {
 
         <section className={styles.agentsGrid}>
           {filtered.map((agent) => (
-            <AgentCard key={agent.id} agent={agent} />
+            <AgentCard
+           key={agent.id}
+           agent={agent}
+           onClick={() => navigate(`/agents/${agent.id}`)}
+/>
+
           ))}
 
           {filtered.length === 0 && (

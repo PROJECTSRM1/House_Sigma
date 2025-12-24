@@ -13,6 +13,8 @@ import NotFound from "./pages/NotFound";
 import MapSearch from "./pages/MapSearch";
 import MarketTrends from "./pages/MarketTrends";
 import Agents from "./pages/Agents";
+import AgentProfile from "./pages/AgentProfile";
+
 import HomeValuation from "./pages/HomeValuation";
 
 import Blog from "./pages/Blog";
@@ -62,6 +64,9 @@ const App = () => (
           <Route path="/market-trends" element={<MarketTrends />} />
           <Route path="/home-valuation" element={<HomeValuation />} />
           <Route path="/agents" element={<Agents />} />
+
+          <Route path="/agents/:agentId" element={<AgentProfile />} />
+
 
           {/* Tools Dropdown */}
           <Route path="/blog" element={<Blog />} />
