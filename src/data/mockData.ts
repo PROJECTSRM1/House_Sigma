@@ -23,54 +23,9 @@ export interface Agent {
   image: string;
 }
 
-export const exclusivePrecon: PropertyListing[] = [
-  {
-    id: '1',
-    image: '/assets/ontario_files/oc1.jpg',
-    badge: 'Exclusive Assignment',
-    badgeColor: 'green',
-    status: 'For Sale',
-    price: 933500,
-    date: '01-30-2024',
-    address: '1 Promenade Circle, Markham - Thornhill',
-    type: 'Condo Apt',
-    beds: '2+1',
-    baths: 2,
-    parking: 1,
-  },
-  {
-    id: '2',
-    image: '/assets/ontario_files/oc2.jpg',
-    badge: 'Exclusive Assignment',
-    badgeColor: 'green',
-    status: 'For Sale',
-    price: 1118000,
-    date: '09-18-2025',
-    address: '292 Dundas St W, Toronto, Toronto - Junction',
-    type: 'Condo Apt',
-    beds: 3,
-    baths: 2,
-    parking: 1,
-  },
-  {
-    id: '3',
-    image: '/assets/ontario_files/oc3.jpg',
-    badge: 'Exclusive Assignment',
-    badgeColor: 'green',
-    status: 'For Sale',
-    price: 499999,
-    date: '10-31-2023',
-    address: '286 Main St, Toronto - East End-Danforth',
-    type: 'Condo Apt',
-    beds: 1,
-    baths: 1,
-    parking: 0,
-  },
-];
-
 export const newlyListed: PropertyListing[] = [
   {
-    id: '4',
+    id: '1',
     image: '/assets/ontario_files/oc4.jpg',
     status: 'For Sale',
     price: 459000,
@@ -83,7 +38,7 @@ export const newlyListed: PropertyListing[] = [
     loginRequired: true
   },
   {
-    id: '5',
+    id: '2',
     image: '/assets/ontario_files/oc5.jpg',
     status: 'For Sale',
     price: 652900,
@@ -96,7 +51,7 @@ export const newlyListed: PropertyListing[] = [
     loginRequired: true
   },
   {
-    id: '6',
+    id: '3',
     image: '/assets/ontario_files/oc6.jpg',
     status: 'For Sale',
     price: 399900,
@@ -112,7 +67,7 @@ export const newlyListed: PropertyListing[] = [
 
 export const rentalInvestment: PropertyListing[] = [
   {
-    id: '7',
+    id: '4',
     image: '/assets/ontario_files/oc7.jpg',
     badge: 'Rental Yield: 5.3%',
     badgeColor: 'teal',
@@ -127,7 +82,7 @@ export const rentalInvestment: PropertyListing[] = [
     agent: 'W12540402, ROYAL LEPAGE PLATINUM REALTY',
   },
   {
-    id: '8',
+    id: '5',
     image: '/assets/ontario_files/oc8.jpg',
     badge: 'Rental Yield: 5.0%',
     badgeColor: 'teal',
@@ -142,7 +97,7 @@ export const rentalInvestment: PropertyListing[] = [
     agent: 'E12521392, RE/MAX REALTY ENTERPRISES INC.',
   },
   {
-    id: '9',
+    id: '6',
     image: '/assets/ontario_files/oc9.jpg',
     badge: 'Rental Yield: 4.8%',
     badgeColor: 'teal',
@@ -158,58 +113,9 @@ export const rentalInvestment: PropertyListing[] = [
   },
 ];
 
-export const bestForSchools: PropertyListing[] = [
-  {
-    id: '10',
-    image: '/assets/ontario_files/oc10.jpg',
-    badge: 'School Score: 10/10',
-    badgeColor: 'blue',
-    status: 'For Sale',
-    price: 1898000,
-    date: '3 days ago',
-    address: '26 Brantwood Court, Markham - Unionville',
-    type: 'Detached',
-    beds: '4+2',
-    baths: 4,
-    parking: 2,
-    agent: 'N12531354, RE/MAX REALTRON REALTY INC.',
-  },
-  {
-    id: '11',
-    image: '/assets/ontario_files/oc11.jpg',
-    badge: 'School Score: 10/10',
-    badgeColor: 'blue',
-    status: 'For Sale',
-    price: 728000,
-    date: '4 days ago',
-    address: '536 - 33 Cox Boulevard, Markham - Union',
-    type: 'Condo Apartment',
-    beds: 2,
-    baths: 2,
-    parking: 1,
-    agent: 'N12526384, RE/MAX ALL-STARS REALTY INC.',
-    loginRequired: true
-  },
-  {
-    id: '12',
-    image: '/assets/ontario_files/oc12.jpg',
-    badge: 'School Score: 10/10',
-    badgeColor: 'blue',
-    status: 'For Sale',
-    price: 1490000,
-    date: '6 days ago',
-    address: '48 John Button Boulevard, Markham - Butt',
-    type: 'Detached',
-    beds: '4+1',
-    baths: 4,
-    parking: 2,
-    agent: 'N12522550, RE/MAX ELITE REAL ESTATE',
-  },
-];
-
 export const featuredListings: PropertyListing[] = [
   {
-    id: '13',
+    id: '7',
     image: '/assets/ontario_files/oc13.jpg',
     badge: 'Featured',
     badgeColor: 'orange',
@@ -224,7 +130,7 @@ export const featuredListings: PropertyListing[] = [
     agent: 'N12531354, RE/MAX REALTRON REALTY INC.',
   },
   {
-    id: '14',
+    id: '8',
     image: '/assets/ontario_files/oc14.jpg',
     badge: 'Featured',
     badgeColor: 'orange',
@@ -240,7 +146,7 @@ export const featuredListings: PropertyListing[] = [
     loginRequired: true
   },
   {
-    id: '15',
+    id: '9',
     image: '/assets/ontario_files/oc15.jpg',
     badge: 'Featured',
     badgeColor: 'orange',
@@ -256,57 +162,10 @@ export const featuredListings: PropertyListing[] = [
   },
 ];
 
-export const highGrowth: PropertyListing[] = [
-  {
-    id: '16',
-    image: '/assets/ontario_files/oc16.jpg',
-    badge: 'Growth Score: 9/10',
-    badgeColor: 'blue',
-    status: 'For Sale',
-    price: 1898000,
-    date: '3 days ago',
-    address: '26 Brantwood Court, Markham - Unionville',
-    type: 'Detached',
-    beds: 3,
-    baths: 2,
-    parking: 2,
-    agent: 'N12531354, RE/MAX REALTRON REALTY INC.',
-  },
-  {
-    id: '17',
-    image: '/assets/ontario_files/oc17.jpg',
-    badge: 'Growth Score: 9/10',
-    badgeColor: 'blue',
-    status: 'For Sale',
-    price: 728000,
-    date: '4 days ago',
-    address: '536 - 33 Cox Boulevard, Markham - Union',
-    type: 'Condo Apartment',
-    beds: 3,
-    baths: 3,
-    parking: 1,
-    agent: 'N12526384, RE/MAX ALL-STARS REALTY INC.',
-  },
-  {
-    id: '18',
-    image: '/assets/ontario_files/oc18.jpg',
-    badge: 'Growth Score: 9/10',
-    badgeColor: 'blue',
-    status: 'For Sale',
-    price: 1490000,
-    date: '6 days ago',
-    address: '48 John Button Boulevard, Markham - Butt',
-    type: 'Detached',
-    beds: 3,
-    baths: 3,
-    parking: 2,
-    agent: 'N12522550, RE/MAX ELITE REAL ESTATE',
-  },
-];
 
 export const soldBelow: PropertyListing[] = [
   {
-    id: '19',
+    id: '10',
     image: '/assets/ontario_files/oc19.jpg',
     badgeColor: 'blue',
     status: 'Sold',
@@ -321,7 +180,7 @@ export const soldBelow: PropertyListing[] = [
     loginRequired: true
   },
   {
-    id: '20',
+    id: '11',
     image: '/assets/ontario_files/oc20.jpg',
     badgeColor: 'blue',
     status: 'Sold',
@@ -336,7 +195,7 @@ export const soldBelow: PropertyListing[] = [
     loginRequired: true
   },
   {
-    id: '21',
+    id: '12',
     image: '/assets/ontario_files/oc21.jpg',
     badgeColor: 'blue',
     status: 'Sold',

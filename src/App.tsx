@@ -37,6 +37,7 @@ import Login from "./pages/Login";
 import LearnMore from "./pages/LearnMore";
 
 import { AuthProvider } from "./context/AuthContext";
+import PropertyDetail from "./pages/PropertyDetail";
 
 const queryClient = new QueryClient();
 
