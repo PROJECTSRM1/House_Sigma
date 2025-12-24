@@ -10,11 +10,7 @@ import britishHero from "/assets/Britishcolumbia_files/BC.jpg";
 import {
   newlyAdded,
   bestForRentalInvestment,
-  bestForSchools,
   featuredListings,
-  highGrowth,
-  soldBelowBought,
-  highReturns,
   justSold
 } from '@/data/BritishColumbiaMock';
 
@@ -58,7 +54,6 @@ const toListing = (p: BCProperty): MockPropertyListing => ({
 
 const newlyAddedListings = newlyAdded.map(toListing);
 const rentalInvestmentListings = bestForRentalInvestment.map(toListing);
-const bestForSchoolsListings = bestForSchools.map(toListing);
 const justSoldListings = (justSold ?? []).map(toListing);
 
 const BritishColumbia: React.FC = () => {
@@ -72,10 +67,11 @@ const BritishColumbia: React.FC = () => {
       
 
         <PropertySection title="Newly Listed" properties={newlyAddedListings} />
-        <PropertySection title="Best For Rental Investment" properties={rentalInvestmentListings} />
-        <PropertySection title="Best For Schools" properties={bestForSchoolsListings} />
+      
+        <PropertySection title="Featured Listings" properties={featuredListings} />
 
         <PropertySection title="Just Sold" properties={justSoldListings} />
+        <PropertySection title="Best For Rental Investment" properties={rentalInvestmentListings} />
 
         {/* Stats chart */}
         <StatsChart />

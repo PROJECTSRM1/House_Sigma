@@ -10,12 +10,9 @@ import albertaHero from "/assets/alberta_Files/alberta.jpg";
 
 import {
   newlyAdded,
-  bestForSchools,
+  rentalInvestment,
   featuredListings,
-  highGrowth,
   soldBelowBought,
-  highReturns,
-  justSold  
 } from "@/data/albertaData";
 
 const Alberta = () => {
@@ -44,9 +41,9 @@ const Alberta = () => {
         />
 
         <PropertySection 
-          title="Best For Schools"
+          title="Best For Rental Investment"
           badge="Top Rated Areas"
-          properties={bestForSchools} 
+          properties={rentalInvestment} 
         />
 
         <PropertySection 

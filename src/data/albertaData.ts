@@ -31,7 +31,7 @@ export interface Property {
 
 export const newlyAdded: Property[] = [
   {
-    id: 1,
+    id: 25,
     image: "/assets/alberta_Files/alberta1.jpg",
     price: "$63,900",
     address: "108 - 11040 129 Street NW",
@@ -44,7 +44,7 @@ export const newlyAdded: Property[] = [
     agent: "Steve Balay, Royal Lepage Arteam Realty"
   },
   {
-    id: 2,
+    id: 26,
     image: "/assets/alberta_Files/alberta2.jpg",
     price: "$250,000",
     address: "475 DUNLUCE Road NW",
@@ -57,7 +57,7 @@ export const newlyAdded: Property[] = [
     agent: "Chris K Karampelas, MaxWell Polaris"
   },
   {
-    id: 3,
+    id: 27,
     image: "/assets/alberta_Files/alberta3.jpg",
     price: "$352,900",
     address: "10132 105 Street",
@@ -73,11 +73,11 @@ export const newlyAdded: Property[] = [
 ];
 
 /* ======================================================
-   2. Best For Schools
+   2. Best For Rental Investment
 ====================================================== */
-export const bestForSchools: Property[] = [
+export const rentalInvestment: Property[] = [
   {
-    id: 4,
+    id: 28,
     image: "/assets/alberta_Files/alberta4.jpg",
     price: "$366,000",
     address: "1003 - 3500 Varsity Drive NW",
@@ -87,12 +87,12 @@ export const bestForSchools: Property[] = [
     bathrooms: 1,
     parking: 0,
     status: "For Sale",
-    schoolScore: "10/10",
     listed: "1 day ago",
-    agent: "A2271397, RE/MAX iRealty Innovations"
+    agent: "A2271397, RE/MAX iRealty Innovations",
+    badge: "rental"  
   },
   {
-    id: 5,
+    id: 29,
     image: "/assets/alberta_Files/alberta5.jpg",
     price: "$284,900",
     address: "1802 - 3500 Varsity Drive NW",
@@ -102,12 +102,12 @@ export const bestForSchools: Property[] = [
     bathrooms: 1,
     parking: 0,
     status: "For Sale",
-    schoolScore: "10/10",
     listed: "2 days ago",
-    agent: "A2270989, Royal LePage Solutions"
+    agent: "A2270989, Royal LePage Solutions",
+    badge: "rental"
   },
   {
-    id: 6,
+    id: 30,
     image: "/assets/alberta_Files/alberta6.jpg",
     price: "$359,900",
     address: "113 - 3950 46 Avenue NW",
@@ -116,9 +116,9 @@ export const bestForSchools: Property[] = [
     bedrooms: 2,
     bathrooms: 2,
     status: "For Sale",
-    schoolScore: "10/10",
     listed: "2 days ago",
-    agent: "A2271133, RE/MAX REAL ESTATE - LETHBRIDGE"
+    agent: "A2271133, RE/MAX REAL ESTATE - LETHBRIDGE",
+    badge: "rental"
   }
 ];
 
@@ -127,7 +127,7 @@ export const bestForSchools: Property[] = [
 ====================================================== */
 export const featuredListings: Property[] = [
   {
-    id: 7,
+    id: 31,
     image: "/assets/alberta_Files/alberta7.jpg",
     price: "$539,900",
     address: "1921 119A Street SW",
@@ -142,7 +142,7 @@ export const featuredListings: Property[] = [
     agent: "Jay S Sandhu, HomeNest Inc"
   },
   {
-    id: 8,
+    id: 32,
     image: "/assets/alberta_Files/alberta8.jpg",
     price: "$499,000",
     address: "2095 Maple Road NW",
@@ -157,7 +157,7 @@ export const featuredListings: Property[] = [
     agent: "Jay S Sandhu, HomeNest Inc"
   },
   {
-    id: 9,
+    id: 33,
     image: "/assets/alberta_Files/alberta9.jpg",
     price: "$299,900",
     address: "5344 38A Avenue NW",
@@ -173,63 +173,13 @@ export const featuredListings: Property[] = [
   }
 ];
 
-/* ======================================================
-   4. High Growth
-====================================================== */
-export const highGrowth: Property[] = [
-  {
-    id: 10,
-    image: "/assets/alberta_Files/alberta10.jpg",
-    price: "$790,000",
-    address: "1527 22 Street NW",
-    location: "Calgary - Hounsfield Heights",
-    type: "Detached",
-    bedrooms: 3,
-    bathrooms: 2,
-    parking: 1,
-    status: "For Sale",
-    growthScore: "10/10",
-    listed: "1 day ago",
-    agent: "A2267800, PropZap Realty"
-  },
-  {
-    id: 11,
-    image: "/assets/alberta_Files/alberta.jpg",
-    price: "$1,195,000",
-    address: "1731 12 Avenue NW",
-    location: "Calgary - Hounsfield Heights",
-    type: "Detached",
-    bedrooms: 3,
-    bathrooms: 3,
-    parking: 1,
-    status: "For Sale",
-    growthScore: "10/10",
-    listed: "1 day ago",
-    agent: "A2269461, RE/MAX Realty Professionals"
-  },
-  {
-    id: 12,
-    image: "/assets/alberta_Files/alberta12.jpg",
-    price: "$354,998",
-    address: "100 - 3705 141 Street SW",
-    location: "Edmonton",
-    type: "Condo Townhouse",
-    bedrooms: 3,
-    bathrooms: 2,
-    parking: 1,
-    status: "For Sale",
-    growthScore: "10/10",
-    listed: "2 days",
-    agent: "Wally Karout, Royal Lepage Arteam Realty"
-  }
-];
 
 /* ======================================================
    5. Sold Below Bought
 ====================================================== */
 export const soldBelowBought: Property[] = [
   {
-    id: 13,
+    id: 34,
     image: "/assets/alberta_Files/alberta13.jpg",
     price: "$317,000",
     address: "2301 - 310 Mckenzie Towne Gate SE",
@@ -248,7 +198,7 @@ export const soldBelowBought: Property[] = [
     blurred: true
   },
   {
-    id: 14,
+    id: 35,
     image: "/assets/alberta_Files/alberta14.jpg",
     price: "$90,100",
     address: "303 - 10335 117 Street NW",
@@ -266,7 +216,7 @@ export const soldBelowBought: Property[] = [
     blurred: true
   },
   {
-    id: 15,
+    id: 36,
     image: "/assets/alberta_Files/alberta15.jpg",
     price: "$175,000",
     address: "4513 42 Street",
@@ -285,122 +235,3 @@ export const soldBelowBought: Property[] = [
   }
 ];
 
-/* ======================================================
-   6. High Returns
-====================================================== */
-export const highReturns: Property[] = [
-  {
-    id: 16,
-    image: "/assets/alberta_Files/alberta16.jpg",
-    price: "$425,000",
-    address: "123 Investment Drive",
-    location: "Edmonton - Downtown",
-    type: "Condo",
-    bedrooms: 2,
-    bathrooms: 2,
-    parking: 1,
-    status: "For Sale",
-    listed: "3 days ago",
-    agent: "Investment Realty",
-
-    loginRequired: "tap-to-view",
-    blurred: true
-  },
-  {
-    id: 17,
-    image: "/assets/alberta_Files/alberta17.jpg",
-    price: "$380,000",
-    address: "456 Rental Avenue",
-    location: "Calgary - Beltline",
-    type: "Apartment",
-    bedrooms: 1,
-    bathrooms: 1,
-    parking: 1,
-    status: "For Sale",
-    listed: "1 week ago",
-    agent: "High Returns Realty",
-
-    loginRequired: "tap-to-view",
-    blurred: true
-  },
-  {
-    id: 18,
-    image: "/assets/alberta_Files/alberta18.jpg",
-    price: "$550,000",
-    address: "789 Profit Street",
-    location: "Edmonton - Whyte Ave",
-    type: "Duplex",
-    bedrooms: 4,
-    bathrooms: 3,
-    parking: 2,
-    status: "For Sale",
-    listed: "5 days ago",
-    agent: "Investment Pro Realty",
-
-    loginRequired: "tap-to-view",
-    blurred: true
-  }
-];
-
-/* ======================================================
-   7. Just Sold
-====================================================== */
-export const justSold: Property[] = [
-  {
-    id: 19,
-    image: "/assets/alberta_Files/alberta19.jpg",
-    price: "$685,000",
-    soldFor: "$660,000",
-    status: "Sold",
-    soldDate: "2 days ago",
-    address: "45 Kingsway Crescent SW",
-    location: "Calgary - Kingsland",
-    type: "Detached",
-    bedrooms: 4,
-    bathrooms: 3,
-    parking: 2,
-    discount: "4%",
-    agent: "A2272511, Royal LePage Benchmark",
-
-    loginRequired: "tap-to-view",
-    blurred: true
-  },
-  {
-    id: 20,
-    image: "/assets/alberta_Files/alberta20.jpg",
-    price: "$520,000",
-    soldFor: "$505,000",
-    status: "Sold",
-    soldDate: "3 days ago",
-    address: "210 Aspen Glen Drive",
-    location: "Edmonton - Aspen Gardens",
-    type: "Duplex",
-    bedrooms: 3,
-    bathrooms: 3,
-    parking: 1,
-    discount: "3%",
-    agent: "A2272467, MaxWell Polaris",
-
-    loginRequired: "tap-to-view",
-    blurred: true
-  },
-  {
-    id: 21,
-    image: "/assets/alberta_Files/alberta21.jpg",
-    price: "$399,900",
-    soldFor: "$385,000",
-    status: "Sold",
-    soldDate: "5 days ago",
-    address: "78 Harvest Hills Road NE",
-    location: "Calgary - Harvest Hills",
-    type: "Townhouse",
-    bedrooms: 3,
-    bathrooms: 2,
-    parking: 1,
-    discount: "4%",
-    agent: "A2272232, RE/MAX Real Estate",
-
-    loginRequired: "tap-to-view",
-    blurred: true
-  }
-];
