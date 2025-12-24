@@ -24,6 +24,7 @@ export type Agent = {
   area: string;
   languages: string[];
   avatar?: string; // local image URL
+  phone: string;
 };
 
 const PROVINCES = ["Ontario", "British Columbia", "Alberta"] as const;
@@ -191,7 +192,6 @@ async function compressAndCacheUrl(url: string, bump: () => void): Promise<void>
 
 /* -------------------- AgentCard -------------------- */
 function AgentCard({ agent }: { agent: Agent }): JSX.Element {
-  // get current best URL: compressed if available, otherwise original avatar, otherwise placeholder
   const baseUrl = agent.avatar;
   const cachedCompressed = baseUrl ? compressedUrlCache.get(baseUrl) : undefined;
 
@@ -203,8 +203,6 @@ function AgentCard({ agent }: { agent: Agent }): JSX.Element {
 
   const [errored, setErrored] = useState(false);
 
-  // When compression cache updates (via bump state in parent), this component will re-render
-  // and `cachedCompressed` will become available -> we update `src` accordingly.
   useEffect(() => {
     if (cachedCompressed && !errored) {
       setSrc(cachedCompressed);
@@ -217,10 +215,7 @@ function AgentCard({ agent }: { agent: Agent }): JSX.Element {
     (e: React.SyntheticEvent<HTMLImageElement>) => {
       if (errored) return;
       setErrored(true);
-
-      const imgEl = e.currentTarget;
-      imgEl.onerror = null;
-      imgEl.src = SVG_PLACEHOLDER;
+      e.currentTarget.src = SVG_PLACEHOLDER;
       setSrc(SVG_PLACEHOLDER);
     },
     [errored]
@@ -238,19 +233,23 @@ function AgentCard({ agent }: { agent: Agent }): JSX.Element {
           width={160}
           height={160}
           onError={handleImgError}
-          style={{
-            objectFit: "cover",
-          }}
         />
       </div>
 
       <div className={styles.cardBody}>
         <h3 className={styles.agentName}>{agent.name}</h3>
+
         <p className={styles.agentRole}>{agent.role}</p>
+
+        {/* 📞 Phone Number BELOW role */}
+        <p className={styles.agentPhone}>
+          <a href={`tel:${agent.phone}`}>{agent.phone}</a>
+        </p>
       </div>
     </article>
   );
 }
+
 /* -------------------- end AgentCard -------------------- */
 
 /* -------------------- CustomSelect and Filters -------------------- */

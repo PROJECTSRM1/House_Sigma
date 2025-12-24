@@ -30,13 +30,10 @@ const Index = () => {
       <Navbar />
       <Hero />
       <FilterBar />
-      <PropertySection title="Exclusive Precon Assignment" properties={exclusivePrecon} />
       <PropertySection title="Newly Listed" properties={newlyListed} />
       <PropertySection title="Best For Rental Investment" properties={rentalInvestment} />
       <PropertySection title="Best For Schools" properties={bestForSchools} />
-      <PropertySection title="Featured Listings" properties={featuredListings} />
-      <PropertySection title="High Growth" properties={highGrowth} />
-      <PropertySection title="Sold Below Bought" properties={soldBelow} />
+      <PropertySection title="Sold" properties={soldBelow} />
       <StatsChart />
       <AgentSection />
       <CityLinks />
