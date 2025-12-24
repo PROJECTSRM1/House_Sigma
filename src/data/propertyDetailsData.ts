@@ -4,8 +4,8 @@ export const propertyData = [
   // =======================
   {
     id: "1",
-    title: "5 Homestead Avenue",
-    city: "Dundas",
+    title: "117 morell street",
+    city: "Brantford",
     area: "Waterdown",
     community: "West Flamborough",
     province: "ON",
