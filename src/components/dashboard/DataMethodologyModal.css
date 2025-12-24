@@ -1,0 +1,162 @@
+/* ===============================
+   TRIGGER BUTTON (WHITE THEME)
+================================ */
+
+.methodology-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+
+  background: #111827;        /* BLACK BUTTON */
+  color: #ffffff;             /* WHITE TEXT */
+
+  border: 1px solid #1f2937;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+
+.methodology-trigger:hover {
+  background: #f9fafb;
+  border-color: #16a34a;
+  color: #111827;
+}
+
+/* ===============================
+   MODAL CONTAINER (WHITE)
+================================ */
+
+.methodology-dialog {
+  max-width: 720px;
+  max-height: 80vh;
+  overflow-y: auto;
+
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+}
+
+/* ===============================
+   TITLE
+================================ */
+
+.methodology-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* ===============================
+   BODY
+================================ */
+
+.methodology-body {
+  padding-top: 8px;
+}
+
+.methodology-intro {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 24px;
+}
+
+/* ===============================
+   CARDS
+================================ */
+
+.methodology-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.methodology-card {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 16px;
+  transition: border-color 0.2s ease;
+}
+
+.methodology-card:hover {
+  border-color: #16a34a;
+}
+
+.methodology-card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background: #16a34a;
+  border-radius: 50%;
+}
+
+/* ===============================
+   TEXT
+================================ */
+
+.methodology-description {
+  font-size: 13px;
+  color: #4b5563;
+  margin-bottom: 12px;
+}
+
+.methodology-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.detail-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 12px;
+  color: #374151;
+}
+
+.detail-row svg {
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  flex-shrink: 0;
+  color: #6b7280;
+}
+
+.detail-row.muted {
+  color: #9ca3af;
+}
+
+/* ===============================
+   NOTE BOX
+================================ */
+
+.methodology-note {
+  margin-top: 24px;
+  padding: 14px;
+
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 12px;
+}
+
+.methodology-note p {
+  font-size: 12px;
+  color: #166534;
+  line-height: 1.5;
+}

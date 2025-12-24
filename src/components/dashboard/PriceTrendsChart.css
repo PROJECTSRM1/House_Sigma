@@ -1,0 +1,105 @@
+.price-chart {
+  background: rgba(255, 255, 255, 0.75); /* makes card transparent */
+  backdrop-filter: blur(8px);            /* glass effect */
+  -webkit-backdrop-filter: blur(8px);
+
+  border: 1px solid rgba(229, 231, 235, 0.8);
+  border-radius: 16px;
+  padding: 24px;
+  animation: fadeUp 0.85s ease forwards;
+}
+
+
+/* Header */
+.price-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.price-header h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.price-header p {
+  margin-top: 4px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* Summary */
+.price-summary {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.price-value {
+  text-align: right;
+}
+
+.price-value span {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #6b7280;
+}
+
+.price-value strong {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* Change badge */
+.price-change {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.price-change.positive {
+  background: #ecfdf5;
+  color: #16a34a;
+}
+
+.price-change.negative {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+/* Chart */
+.chart-wrapper.large {
+  height: 350px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .chart-wrapper.large {
+    height: 300px;
+  }
+
+  .price-value {
+    text-align: left;
+  }
+}
+
+/* Animation */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

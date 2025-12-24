@@ -1,0 +1,146 @@
+.filterbar {
+  background: #111827;
+  border: 1px solid #1f2937;
+  border-radius: 16px;
+  padding: 16px;
+  animation: fadeIn 0.4s ease forwards;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  position: relative;
+  overflow: visible;
+}
+
+/* Header */
+.filterbar-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #9ca3af;
+}
+
+.filterbar-header svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Controls */
+.filterbar-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  flex: 1;
+}
+
+/* Group */
+.filter-group {
+  position: relative;
+}
+
+/* Button */
+.filter-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 160px;
+  padding: 8px 12px;
+  background: #0b1220;
+  border: 1px solid #1f2937;
+  border-radius: 10px;
+  font-size: 13px;
+  color: #e5e7eb;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.filter-button:hover {
+  border-color: rgba(34, 197, 94, 0.4);
+}
+
+.filter-button svg {
+  width: 14px;
+  height: 14px;
+  color: #9ca3af;
+}
+
+.filter-button svg:last-child {
+  margin-left: auto;
+}
+
+/* Dropdown */
+.filter-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  width: 100%;
+  background: #0b1220;
+  border: 1px solid #1f2937;
+  border-radius: 10px;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition: all 0.2s ease;
+  z-index: 9999;
+}
+
+.filter-group:hover .filter-dropdown,
+.filter-group:focus-within .filter-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+
+.filter-dropdown button {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 13px;
+  text-align: left;
+  background: transparent;
+  border: none;
+  color: #e5e7eb;
+  cursor: pointer;
+}
+
+.filter-dropdown button:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.filter-dropdown button.active {
+  background: rgba(34, 197, 94, 0.15);
+  color: #22c55e;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.filterbar {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+}
+
+.filter-button {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  color: #111827;
+}
+
+.filter-button:hover {
+  border-color: #16a34a;
+}
+.filterbar {
+  z-index: 30;
+}
+

@@ -1,0 +1,140 @@
+.locality-section {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(31, 41, 55, 0.5);
+  animation: fadeIn 0.4s ease forwards;
+}
+
+/* Header */
+.locality-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #e5e7eb;
+}
+
+.locality-header svg {
+  width: 16px;
+  height: 16px;
+  color: #22c55e;
+}
+
+/* List */
+.locality-list {
+  display: grid;
+  gap: 12px;
+}
+
+/* Card */
+.locality-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(31, 41, 55, 0.6);
+  border-radius: 12px;
+  padding: 12px;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.locality-card:hover {
+  border-color: rgba(34, 197, 94, 0.35);
+  transform: translateY(-2px);
+}
+
+/* Top row */
+.locality-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.locality-top h5 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #e5e7eb;
+}
+
+/* Demand */
+.locality-demand {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.locality-demand strong {
+  color: #22c55e;
+  font-weight: 600;
+}
+
+/* Stats */
+.locality-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stat span {
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+.stat strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: #e5e7eb;
+}
+
+.stat strong em {
+  font-style: normal;
+  font-size: 11px;
+  margin-left: 6px;
+  color: #22c55e;
+}
+
+/* Icons */
+.stat-icon {
+  padding: 6px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.stat-icon.primary {
+  background: rgba(34, 197, 94, 0.15);
+  color: #22c55e;
+}
+
+.stat-icon.accent {
+  background: rgba(59, 130, 246, 0.15);
+  color: #3b82f6;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
