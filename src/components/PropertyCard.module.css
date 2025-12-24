@@ -1,42 +1,22 @@
-/* =====================================================
-   CARD WRAPPER
-===================================================== */
+/* CARD */
 .card {
   background: #ffffff;
   border-radius: 8px;
   border: 1px solid #e5e7eb;
   overflow: hidden;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-  transition: box-shadow 0.18s ease, transform 0.18s ease;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  position: relative;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .card:hover {
-  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-  transform: translateY(-4px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+  transform: translateY(-2px);
 }
 
-/* BLUR WHEN TAP-TO-VIEW NOT ACCEPTED */
-.cardBlur {
-  filter: blur(5px) brightness(0.90);
-}
-
-/* When revealed → remove blur fully */
-.revealed {
-  filter: none !important;
-}
-
-
-/* =====================================================
-   IMAGE BLOCK
-===================================================== */
+/* IMAGE */
 .imageContainer {
   width: 100%;
-  height: 250px;
-  position: relative;
+  height: 180px;
   overflow: hidden;
   background: #f3f4f6;
 }
@@ -45,151 +25,74 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
 }
 
-
-/* =====================================================
-   TAP / LOGIN OVERLAY
-===================================================== */
-.restrictedOverlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 50;
-}
-
-.loginButton,
-.tapToViewButton {
-  padding: 14px 32px;
-  border-radius: 12px;
-  font-size: 17px;
-  font-weight: 700;
-  background-color: #28a3b3 !important;
-  color: white !important;
-  z-index: 60;
-}
-
-
-/* =====================================================
-   BADGES
-===================================================== */
-.badge,
-.topLeftBadge,
-.badgeTopLeft {
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: 600;
-  color: white;
-  line-height: 1;
-}
-
-/* Badge Colors */
-.badgeExclusive { background-color: #10b981; }
-.badgeNewly     { background-color: #3b82f6; }
-.badgeRental    { background-color: #0ea5e9; }
-.badgeFeatured  { background-color: #f59e0b !important; }
-.badgeSchool    { background-color: #0284c7; }
-.badgeDefault   { background-color: #6b7280; }
-
-.badgeTopLeft {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  z-index: 22;
-}
-
-.topLeftBadge {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background-color: #0284c7;
-  z-index: 30;
-}
-
-
-/* =====================================================
-   FOR SALE BADGE
-===================================================== */
-.bottomLeftBadge {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  background-color: #ffffff;
-  padding: 6px 14px;
-  border-radius: 7px;
-  font-size: 12px;
-  font-weight: 700;
-  color: #0284c7;
-  z-index: 20;
-}
-
-
-/* =====================================================
-   DETAILS SECTION
-===================================================== */
+/* CONTENT */
 .cardContent {
   padding: 12px 14px;
+}
+
+/* PRICE ROW */
+.priceRow {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .price {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
-  color: #0f172a;
+  color: #111827;
 }
 
-.timestamp {
+/* STATUS BADGE */
+.statusBadge {
+  padding: 4px 10px;
+  border-radius: 6px;
   font-size: 12px;
-  color: #6b7280;
-}
-
-.address {
-  font-size: 14px;
   font-weight: 600;
-  color: #0f172a;
+  color: #ffffff;
+  white-space: nowrap;
 }
 
-.propertyType {
-  font-size: 12px;
-  color: #6b7280;
+/* COLORS */
+.new {
+  background-color: #16a34a; /* Newly Listed */
 }
 
-
-/* =====================================================
-   FEATURES SECTION
-===================================================== */
-.features {
-  display: flex;
-  gap: 10px;
-  padding-top: 10px;
-  border-top: 1px solid #eef2f6;
-  margin-top: 6px;
+.sold {
+  background-color: #dc2626; /* Sold */
 }
 
-.feature {
+.rental {
+  background-color: #0ea5e9; /* For Rental */
+}
+
+.school {
+  background-color: #0284c7; /* For Schools */
+}
+
+.featured {
+  background-color: #f59e0b; /* Featured */
+}
+
+.exclusive {
+  background-color: #10b981; /* Exclusive */
+}
+
+/* LOCATION */
+.location {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 12px;
-  color: #6b7280;
+  font-size: 13px;
+  color: #374151;
+  margin-top: 6px;
 }
-
-.featureIcon {
-  width: 14px;
-  height: 14px;
-}
-
-
-/* =====================================================
-   AGENT
-===================================================== */
-.agent {
-  font-size: 12px;
-  color: #6b7280;
-}
+.new { background-color: #16a34a; }        /* Newly Listed */
+.school { background-color: #0284c7; }    /* For Schools */
+.growth { background-color: #7c3aed; }    /* High Growth */
+.rental { background-color: #0ea5e9; }    /* For Rental */
+.featured { background-color: #f59e0b; }  /* Featured */
+.exclusive { background-color: #10b981; } /* Exclusive */
+.sold { background-color: #dc2626; }      /* Sold */

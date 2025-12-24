@@ -55,29 +55,14 @@ const Alberta = () => {
           properties={featuredListings} 
         />
 
-        <PropertySection 
-          title="High Growth Areas"
-          badge="Strong Appreciation"
-          properties={highGrowth} 
-        />
 
         <PropertySection 
-          title="Sold Below Bought"
+          title="Sold"
           badge="Better Deals"
           properties={soldBelowBought} 
         />
 
-        <PropertySection 
-          title="High Returns"
-          badge="Investor Picks"
-          properties={highReturns} 
-        />
 
-        <PropertySection 
-          title="Recently Sold"
-          badge="Just Closed"
-          properties={justSold} 
-        />
       </div>
 
       {/* MARKET CHART */}
