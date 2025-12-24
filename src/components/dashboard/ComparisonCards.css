@@ -1,0 +1,194 @@
+/* ===============================
+   SECTION
+================================ */
+
+.comparison-section {
+  animation: fadeUp 0.6s ease forwards;
+}
+
+/* ===============================
+   HEADER (CENTERED & BOLD)
+================================ */
+
+.comparison-header {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.comparison-header h3 {
+  font-size: 24px;
+  font-weight: 800; /* 🔥 BOLD */
+  color: #111827;
+}
+
+.comparison-header p {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* ===============================
+   GRID
+================================ */
+
+.comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .comparison-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===============================
+   CARD (CLEAN & MODERN)
+================================ */
+
+.comparison-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.comparison-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+}
+
+.card-content {
+  padding: 28px;
+}
+
+/* ===============================
+   TITLE ROW
+================================ */
+
+.card-title {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.card-title h4 {
+  font-size: 17px;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* ===============================
+   ICON BOX
+================================ */
+
+.icon-box {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-box.primary {
+  background: #ecfdf5;
+  color: #16a34a;
+}
+
+.icon-box.accent {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+/* ===============================
+   BADGES
+================================ */
+
+.badge {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 4px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 999px;
+}
+
+.badge.growth {
+  background: #ecfdf5;
+  color: #16a34a;
+}
+
+.badge.emerging {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+/* ===============================
+   STATS
+================================ */
+
+.card-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px dashed #e5e7eb;
+  font-size: 14px;
+}
+
+.stat-row:last-child {
+  border-bottom: none;
+}
+
+.stat-row span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #6b7280;
+}
+
+.stat-row strong {
+  color: #111827;
+  font-weight: 600;
+}
+
+/* ===============================
+   ACCENT COLORS
+================================ */
+
+.positive {
+  color: #16a34a;
+}
+
+.primary-text {
+  color: #16a34a;
+}
+
+.accent-text {
+  color: #2563eb;
+}
+
+/* ===============================
+   ANIMATION
+================================ */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

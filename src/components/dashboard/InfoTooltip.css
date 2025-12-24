@@ -1,0 +1,76 @@
+/* Trigger button */
+.info-tooltip-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  margin-left: 4px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.info-tooltip-trigger:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.info-tooltip-trigger svg {
+  width: 12px;
+  height: 12px;
+  color: #9ca3af;
+}
+
+/* Tooltip content */
+.info-tooltip-content {
+  max-width: 280px;
+  padding: 12px;
+  background: #0b0f14;
+  border: 1px solid #1f2937;
+  border-radius: 10px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
+}
+
+/* Body */
+.info-tooltip-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Title */
+.info-tooltip-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #e5e7eb;
+}
+
+/* Description */
+.info-tooltip-description {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #9ca3af;
+}
+
+/* Calculation */
+.info-tooltip-calculation {
+  font-size: 11px;
+  font-style: italic;
+  color: rgba(34, 197, 94, 0.8);
+}
+.info-tooltip-content {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
+
+.info-tooltip-title {
+  color: #111827;
+}
+
+.info-tooltip-description {
+  color: #6b7280;
+}
+

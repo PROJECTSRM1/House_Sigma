@@ -1,0 +1,287 @@
+.insights-section {
+  animation: fadeUp 0.6s ease forwards;
+}
+
+/* Header */
+.insights-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.insights-title {
+  display: flex;
+  gap: 12px;
+}
+
+.insights-icon {
+  padding: 8px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(34,197,94,0.25), rgba(59,130,246,0.25));
+  border: 1px solid rgba(34,197,94,0.3);
+}
+
+.insights-icon svg {
+  width: 20px;
+  height: 20px;
+  color: #22c55e;
+}
+
+.insights-title h3 {
+  font-size: 18px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.insights-title p {
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+/* AI badge */
+.ai-badge {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(34,197,94,0.2);
+  color: #22c55e;
+  border: 1px solid rgba(34,197,94,0.3);
+}
+
+/* Filter */
+.insights-filter {
+  display: inline-flex;
+  padding: 4px;
+  background: #0b1220;
+  border: 1px solid #1f2937;
+  border-radius: 10px;
+}
+
+.filter-btn {
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 8px;
+  background: transparent;
+  border: none;
+  color: #9ca3af;
+  cursor: pointer;
+}
+
+.filter-btn.active {
+  background: #22c55e;
+  color: #0b0f14;
+  box-shadow: 0 6px 14px rgba(34,197,94,0.35);
+}
+
+/* Grid */
+.insights-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .insights-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Card */
+.insight-card {
+  position: relative;
+  background: #111827;
+  border: 1px solid #1f2937;
+  border-radius: 16px;
+  padding: 20px;
+  overflow: hidden;
+}
+
+.insight-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #22c55e, #3b82f6, #22c55e);
+  opacity: 0.6;
+}
+
+/* Top */
+.insight-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.insight-type {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.type-icon {
+  padding: 6px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.06);
+}
+
+.type-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.type-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #9ca3af;
+}
+
+/* Recommendation */
+.recommendation {
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid;
+  font-weight: 700;
+}
+
+.rec-strong-buy {
+  background: rgba(34,197,94,0.25);
+  color: #22c55e;
+  border-color: rgba(34,197,94,0.4);
+}
+
+.rec-buy {
+  background: rgba(34,197,94,0.18);
+  color: #22c55e;
+}
+
+.rec-accumulate {
+  background: rgba(59,130,246,0.2);
+  color: #3b82f6;
+}
+
+.rec-hold {
+  background: rgba(107,114,128,0.2);
+  color: #9ca3af;
+}
+
+.rec-default {
+  background: rgba(255,255,255,0.1);
+  color: #e5e7eb;
+}
+
+/* Content */
+.insight-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.insight-description {
+  font-size: 14px;
+  color: #9ca3af;
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+/* Metrics */
+.insight-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.metric-pill {
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: #0b1220;
+  border: 1px solid #1f2937;
+  font-size: 11px;
+  display: flex;
+  gap: 4px;
+}
+
+/* Confidence */
+.confidence-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.confidence-row span {
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+.confidence-bar {
+  flex: 1;
+  height: 6px;
+  background: #0b1220;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.confidence-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #22c55e, #3b82f6);
+}
+
+.confidence-row strong {
+  font-size: 12px;
+  color: #22c55e;
+}
+
+/* Disclaimer */
+.insights-disclaimer {
+  margin-top: 16px;
+  padding: 12px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid #1f2937;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.insights-disclaimer svg {
+  width: 14px;
+  height: 14px;
+  color: #22c55e;
+}
+
+.insights-disclaimer p {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+/* Animation */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.insight-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+}
+
+.insight-description {
+  color: #6b7280;
+}
+
+.metric-pill {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+}
