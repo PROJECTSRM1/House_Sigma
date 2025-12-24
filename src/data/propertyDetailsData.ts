@@ -19,12 +19,12 @@ export const propertyData = [
     parking: 2,
     propertyTax: 6840,
     images: [
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200",
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200",
-      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1200",
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200",
+     "/assets/ontario_files/oc4.jpg",
+      "/assets/Property_images/interior-1.jpg",
+      "/assets/Property_images/interior-2.jpg",
+      
     ],
-    floorPlan: "https://images.unsplash.com/photo-1574362848149-11496d93a7c7?w=900",
+    floorPlan: "/assets/Property_images/Floor plan.jpg",
     amenities: [
       { name: "Lift", available: true },
       { name: "Security", available: true },
@@ -74,11 +74,12 @@ export const propertyData = [
     parking: 1,
     propertyTax: 5120,
     images: [
-      "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200",
-      "https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=1200",
-      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1200",
+      "/assets/ontario_files/oc5.jpg",
+      "/assets/Property_images/interior-1.jpg",
+      "/assets/Property_images/interior-2.jpg",
+      
     ],
-    floorPlan: "https://images.unsplash.com/photo-1588854337221-4cf9fa96059c?w=900",
+    floorPlan: "/assets/Property_images/Floor plan.jpg",
     amenities: [
       { name: "Security", available: true },
       { name: "Parking", available: true },
@@ -121,13 +122,14 @@ export const propertyData = [
     bedrooms: 2,
     bathrooms: 1,
     parking: 0,
-    propertyTax: 2980,
+    propertyTax: 2980, 
     images: [
-      "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=1200",
-      "https://images.unsplash.com/photo-1600585154207-3a6f0d3fdc48?w=1200",
-      "https://images.unsplash.com/photo-1600607687644-c7d1b7d7b54d?w=1200",
+      "/assets/ontario_files/oc6.jpg",
+      "/assets/Property_images/interior-1.jpg",
+      "/assets/Property_images/interior-2.jpg",
+      
     ],
-    floorPlan: "https://images.unsplash.com/photo-1588854337236-688c6f77c7d5?w=900",
+    floorPlan: "/assets/Property_images/Floor plan.jpg",
     amenities: [
       { name: "Lift", available: true },
       { name: "Security", available: true },
@@ -172,11 +174,12 @@ export const propertyData = [
     parking: 1,
     propertyTax: 4580,
     images: [
-      "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1200",
-      "https://images.unsplash.com/photo-1600585154154-12a7d9b9a40b?w=1200",
-      "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1200",
+      "/assets/ontario_files/oc7.jpg",
+      "/assets/Property_images/interior-1.jpg",
+      "/assets/Property_images/interior-2.jpg",
+      
     ],
-    floorPlan: "https://images.unsplash.com/photo-1588854337191-df5c8c6f1d7a?w=900",
+    floorPlan: "/assets/Property_images/Floor plan.jpg",
     amenities: [
       { name: "Parking", available: true },
       { name: "Security", available: true },
@@ -220,11 +223,12 @@ export const propertyData = [
     parking: 0,
     propertyTax: 6100,
     images: [
-      "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1200",
-      "https://images.unsplash.com/photo-1600573472780-1a9c4d99d9d4?w=1200",
-      "https://images.unsplash.com/photo-1600585153900-3774e7fae7b9?w=1200",
+      "/assets/ontario_files/oc8.jpg",
+      "/assets/Property_images/interior-1.jpg",
+      "/assets/Property_images/interior-2.jpg",
+      
     ],
-    floorPlan: "https://images.unsplash.com/photo-1588854337057-2b5fefc6b71d?w=900",
+    floorPlan: "/assets/Property_images/Floor plan.jpg",
     amenities: [
       { name: "Security", available: true },
       { name: "Garden", available: true },
@@ -268,11 +272,12 @@ export const propertyData = [
     parking: 0,
     propertyTax: 4320,
     images: [
-      "https://images.unsplash.com/photo-1600047509782-20a66c4f70f5?w=1200",
-      "https://images.unsplash.com/photo-1600607687630-3c2f44b6fa5c?w=1200",
-      "https://images.unsplash.com/photo-1600585154084-4bba43c6c9a3?w=1200",
+      "/assets/ontario_files/oc9.jpg",
+      "/assets/Property_images/interior-1.jpg",
+      "/assets/Property_images/interior-2.jpg",
+      
     ],
-    floorPlan: "https://images.unsplash.com/photo-1588854336954-9a60a0f01c45?w=900",
+    floorPlan: "/assets/Property_images/Floor plan.jpg",
     amenities: [
       { name: "Parking", available: true },
       { name: "Security", available: true },
@@ -316,10 +321,12 @@ export const propertyData = [
     parking: 2,
     propertyTax: 11200,
     images: [
-      "https://images.unsplash.com/photo-1600585154345-81d8b9e87b40?w=1200",
-      "https://images.unsplash.com/photo-1600607687936-4f4c9d46c3f6?w=1200",
+      "/assets/ontario_files/oc13.jpg",
+      "/assets/Property_images/interior-1.jpg",
+      "/assets/Property_images/interior-2.jpg",
+      
     ],
-    floorPlan: "https://images.unsplash.com/photo-1588854336981-1d2f73bde3c6?w=900",
+    floorPlan: "/assets/Property_images/Floor plan.jpg",
     amenities: [{ name: "Garden", available: true }],
     valuation: {
       marketValue: 1920000,
@@ -353,11 +360,12 @@ export const propertyData = [
     parking: 1,
     propertyTax: 5480,
     images: [
-      "https://images.unsplash.com/photo-1600607688066-890987f18c4a?w=1200",
-      "https://images.unsplash.com/photo-1600585154203-1c7d40c9e3bb?w=1200",
-      "https://images.unsplash.com/photo-1600573472591-ee6c42c7f60f?w=1200",
+      "/assets/ontario_files/oc14.jpg",
+      "/assets/Property_images/interior-1.jpg",
+      "/assets/Property_images/interior-2.jpg",
+      
     ],
-    floorPlan: "https://images.unsplash.com/photo-1588854337162-bd0f1d29c11a?w=900",
+    floorPlan: "/assets/Property_images/Floor plan.jpg",
     amenities: [
       { name: "Lift", available: true },
       { name: "Security", available: true },
@@ -403,11 +411,12 @@ export const propertyData = [
     parking: 2,
     propertyTax: 9800,
     images: [
-      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1200",
-      "https://images.unsplash.com/photo-1600573472784-bd49c6c2a4b4?w=1200",
-      "https://images.unsplash.com/photo-1600607687618-3ae9c88dbb0f?w=1200",
+      "/assets/ontario_files/oc15.jpg",
+      "/assets/Property_images/interior-1.jpg",
+      "/assets/Property_images/interior-2.jpg",
+      
     ],
-    floorPlan: "https://images.unsplash.com/photo-1588854336999-1b9e8a5c10d4?w=900",
+    floorPlan: "/assets/Property_images/Floor plan.jpg",
     amenities: [
       { name: "Garden", available: true },
       { name: "Security", available: true },
@@ -452,10 +461,12 @@ export const propertyData = [
     parking: 2,
     propertyTax: 11350,
     images: [
-      "https://images.unsplash.com/photo-1600585154345-81d8b9e87b40?w=1200",
-      "https://images.unsplash.com/photo-1600607687935-9fef6f70d0d8?w=1200",
+      "/assets/ontario_files/oc19.jpg",
+      "/assets/Property_images/interior-1.jpg",
+      "/assets/Property_images/interior-2.jpg",
+      
     ],
-    floorPlan: "https://images.unsplash.com/photo-1588854337011-9fa8b1e1c44d?w=900",
+    floorPlan: "/assets/Property_images/Floor plan.jpg",
     amenities: [
       { name: "Garden", available: true },
       { name: "Security", available: true },
@@ -499,10 +510,12 @@ export const propertyData = [
     parking: 1,
     propertyTax: 5400,
     images: [
-      "https://images.unsplash.com/photo-1600607688090-4f7b3a5c27de?w=1200",
-      "https://images.unsplash.com/photo-1600585154116-3c40c1e1a9a8?w=1200",
+      "/assets/ontario_files/oc20.jpg",
+      "/assets/Property_images/interior-1.jpg",
+      "/assets/Property_images/interior-2.jpg",
+      
     ],
-    floorPlan: "https://images.unsplash.com/photo-1588854337034-f6bba7a67a7c?w=900",
+    floorPlan: "/assets/Property_images/Floor plan.jpg",
     amenities: [
       { name: "Lift", available: true },
       { name: "Security", available: true },
@@ -546,10 +559,12 @@ export const propertyData = [
     parking: 2,
     propertyTax: 9950,
     images: [
-      "https://images.unsplash.com/photo-1600585154206-4b6c3e19b0d4?w=1200",
-      "https://images.unsplash.com/photo-1600607687601-dacac1b33a88?w=1200",
+      "/assets/ontario_files/oc21.jpg",
+      "/assets/Property_images/interior-1.jpg",
+      "/assets/Property_images/interior-2.jpg",
+      
     ],
-    floorPlan: "https://images.unsplash.com/photo-1588854337069-0b7c97a0f59b?w=900",
+    floorPlan: "/assets/Property_images/Floor plan.jpg",
     amenities: [
       { name: "Garden", available: true },
       { name: "Parking", available: true },
@@ -593,11 +608,12 @@ export const propertyData = [
     parking: 0,
     propertyTax: 1200,
     images: [
-      "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=1200",
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200",
-      "https://images.unsplash.com/photo-1600607687644-c7d1b7d7b54d?w=1200",
+      "/assets/Britishcolumbia_files/BC1.jpg",
+      "/assets/Property_images/interior-1.jpg",
+      "/assets/Property_images/interior-2.jpg",
+      
     ],
-    floorPlan: "https://images.unsplash.com/photo-1588854337221-4cf9fa96059c?w=900",
+    floorPlan: "/assets/Property_images/Floor plan.jpg",
     amenities: [
       { name: "Lift", available: true },
       { name: "Security", available: true },
@@ -635,11 +651,12 @@ export const propertyData = [
     parking: 1,
     propertyTax: 3100,
     images: [
-      "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1200",
-      "https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=1200",
-      "https://images.unsplash.com/photo-1600585154154-12a7d9b9a40b?w=1200",
+      "/assets/Britishcolumbia_files/BC2.jpg",
+      "/assets/Property_images/interior-1.jpg",
+      "/assets/Property_images/interior-2.jpg",
+      
     ],
-    floorPlan: "https://images.unsplash.com/photo-1588854337057-2b5fefc6b71d?w=900",
+    floorPlan: "/assets/Property_images/Floor plan.jpg",
     amenities: [
       { name: "Parking", available: true },
       { name: "Security", available: true },
@@ -677,11 +694,12 @@ export const propertyData = [
     parking: 2,
     propertyTax: 2850,
     images: [
-      "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200",
-      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1200",
-      "https://images.unsplash.com/photo-1600573472784-bd49c6c2a4b4?w=1200",
+      "/assets/Britishcolumbia_files/BC3.jpg",
+      "/assets/Property_images/interior-1.jpg",
+      "/assets/Property_images/interior-2.jpg",
+      
     ],
-    floorPlan: "https://images.unsplash.com/photo-1588854337191-df5c8c6f1d7a?w=900",
+    floorPlan: "/assets/Property_images/Floor plan.jpg",
     amenities: [
       { name: "Garden", available: true },
       { name: "Parking", available: true },
@@ -719,11 +737,12 @@ export const propertyData = [
     parking: 2,
     propertyTax: 5200,
     images: [
-      "https://images.unsplash.com/photo-1600585154345-81d8b9e87b40?w=1200",
-      "https://images.unsplash.com/photo-1600607687936-4f4c9d46c3f6?w=1200",
-      "https://images.unsplash.com/photo-1600573472591-ee6c42c7f60f?w=1200",
+      "/assets/Britishcolumbia_files/BC7.jpg",
+      "/assets/Property_images/interior-1.jpg",
+      "/assets/Property_images/interior-2.jpg",
+      
     ],
-    floorPlan: "https://images.unsplash.com/photo-1588854336981-1d2f73bde3c6?w=900",
+    floorPlan: "/assets/Property_images/Floor plan.jpg",
     amenities: [
       { name: "Garden", available: true },
       { name: "Security", available: true },
@@ -761,11 +780,12 @@ export const propertyData = [
     parking: 2,
     propertyTax: 5600,
     images: [
-      "https://images.unsplash.com/photo-1600047509782-20a66c4f70f5?w=1200",
-      "https://images.unsplash.com/photo-1600585154084-4bba43c6c9a3?w=1200",
-      "https://images.unsplash.com/photo-1600607687630-3c2f44b6fa5c?w=1200",
+      "/assets/Britishcolumbia_files/BC8.jpg",
+      "/assets/Property_images/interior-1.jpg",
+      "/assets/Property_images/interior-2.jpg",
+      
     ],
-    floorPlan: "https://images.unsplash.com/photo-1588854336954-9a60a0f01c45?w=900",
+    floorPlan: "/assets/Property_images/Floor plan.jpg",
     amenities: [
       { name: "Parking", available: true },
       { name: "Security", available: true },
@@ -803,10 +823,12 @@ export const propertyData = [
     parking: 1,
     propertyTax: 3400,
     images: [
-      "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1200",
-      "https://images.unsplash.com/photo-1600585154203-1c7d40c9e3bb?w=1200",
+      "/assets/Britishcolumbia_files/BC9.jpg",
+      "/assets/Property_images/interior-1.jpg",
+      "/assets/Property_images/interior-2.jpg",
+      
     ],
-    floorPlan: "https://images.unsplash.com/photo-1588854337162-bd0f1d29c11a?w=900",
+    floorPlan: "/assets/Property_images/Floor plan.jpg",
     amenities: [
       { name: "Parking", available: true },
       { name: "Security", available: true },
@@ -844,11 +866,12 @@ export const propertyData = [
     parking: 2,
     propertyTax: 7200,
     images: [
-      "https://images.unsplash.com/photo-1600585154345-81d8b9e87b40?w=1200",
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200",
-      "https://images.unsplash.com/photo-1600573472591-ee6c42c7f60f?w=1200",
+      "/assets/Britishcolumbia_files/BC19.jpg",
+      "/assets/Property_images/interior-1.jpg",
+      "/assets/Property_images/interior-2.jpg",
+      
     ],
-    floorPlan: "https://images.unsplash.com/photo-1588854336999-1b9e8a5c10d4?w=900",
+    floorPlan: "/assets/Property_images/Floor plan.jpg",
     amenities: [
       { name: "Garden", available: true },
       { name: "Security", available: true },
@@ -893,11 +916,12 @@ export const propertyData = [
     parking: 1,
     propertyTax: 5600,
     images: [
-      "https://images.unsplash.com/photo-1600047509782-20a66c4f70f5?w=1200",
-      "https://images.unsplash.com/photo-1600585154084-4bba43c6c9a3?w=1200",
-      "https://images.unsplash.com/photo-1600607687630-3c2f44b6fa5c?w=1200",
+      "/assets/Britishcolumbia_files/BC20.jpg",
+      "/assets/Property_images/interior-1.jpg",
+      "/assets/Property_images/interior-2.jpg",
+      
     ],
-    floorPlan: "https://images.unsplash.com/photo-1588854336954-9a60a0f01c45?w=900",
+    floorPlan: "/assets/Property_images/Floor plan.jpg",
     amenities: [
       { name: "Parking", available: true },
       { name: "Security", available: true },
@@ -941,10 +965,12 @@ export const propertyData = [
     parking: 1,
     propertyTax: 4100,
     images: [
-      "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1200",
-      "https://images.unsplash.com/photo-1600585154203-1c7d40c9e3bb?w=1200",
+      "/assets/Britishcolumbia_files/BC21.jpg",
+      "/assets/Property_images/interior-1.jpg",
+      "/assets/Property_images/interior-2.jpg",
+      
     ],
-    floorPlan: "https://images.unsplash.com/photo-1588854337162-bd0f1d29c11a?w=900",
+    floorPlan: "/assets/Property_images/Floor plan.jpg",
     amenities: [
       { name: "Parking", available: true },
       { name: "Security", available: true },
@@ -988,11 +1014,12 @@ export const propertyData = [
     parking: 1,
     propertyTax: 3600,
     images: [
-      "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=1200",
-      "https://images.unsplash.com/photo-1600607687644-c7d1b7d7b54d?w=1200",
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200",
+      "/assets/Britishcolumbia_files/BC22.jpg",
+      "/assets/Property_images/interior-1.jpg",
+      "/assets/Property_images/interior-2.jpg",
+      
     ],
-    floorPlan: "https://images.unsplash.com/photo-1588854337221-4cf9fa96059c?w=900",
+    floorPlan: "/assets/Property_images/Floor plan.jpg",
     amenities: [
       { name: "Lift", available: true },
       { name: "Security", available: true },
@@ -1037,10 +1064,12 @@ export const propertyData = [
     parking: 1,
     propertyTax: 3900,
     images: [
-      "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1200",
-      "https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=1200",
+      "/assets/Britishcolumbia_files/BC23.jpg",
+      "/assets/Property_images/interior-1.jpg",
+      "/assets/Property_images/interior-2.jpg",
+      
     ],
-    floorPlan: "https://images.unsplash.com/photo-1588854337057-2b5fefc6b71d?w=900",
+    floorPlan: "/assets/Property_images/Floor plan.jpg",
     amenities: [
       { name: "Parking", available: true },
       { name: "Security", available: true },
@@ -1084,11 +1113,12 @@ export const propertyData = [
     parking: 2,
     propertyTax: 6100,
     images: [
-      "https://images.unsplash.com/photo-1600047509782-20a66c4f70f5?w=1200",
-      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1200",
-      "https://images.unsplash.com/photo-1600607687618-3ae9c88dbb0f?w=1200",
+      "/assets/Britishcolumbia_files/BC.jpg",
+      "/assets/Property_images/interior-1.jpg",
+      "/assets/Property_images/interior-2.jpg",
+      
     ],
-    floorPlan: "https://images.unsplash.com/photo-1588854337191-df5c8c6f1d7a?w=900",
+    floorPlan: "/assets/Property_images/Floor plan.jpg",
     amenities: [
       { name: "Garden", available: true },
       { name: "Parking", available: true },
@@ -1133,11 +1163,12 @@ export const propertyData = [
     parking: 2,
     propertyTax: 9400,
     images: [
-      "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200",
-      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1200",
-      "https://images.unsplash.com/photo-1600607687618-3ae9c88dbb0f?w=1200",
+      "/assets/alberta_Files/alberta1.jpg",
+      "/assets/Property_images/interior-1.jpg",
+      "/assets/Property_images/interior-2.jpg",
+      
     ],
-    floorPlan: "https://images.unsplash.com/photo-1588854337191-df5c8c6f1d7a?w=900",
+    floorPlan: "/assets/Property_images/Floor plan.jpg",
     amenities: [
       { name: "Garden", available: true },
       { name: "Security", available: true },
@@ -1176,10 +1207,12 @@ export const propertyData = [
     parking: 1,
     propertyTax: 3900,
     images: [
-      "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=1200",
-      "https://images.unsplash.com/photo-1600607687644-c7d1b7d7b54d?w=1200",
+      "/assets/alberta_Files/alberta2.jpg",
+      "/assets/Property_images/interior-1.jpg",
+      "/assets/Property_images/interior-2.jpg",
+      
     ],
-    floorPlan: "https://images.unsplash.com/photo-1588854337221-4cf9fa96059c?w=900",
+    floorPlan: "/assets/Property_images/Floor plan.jpg",
     amenities: [
       { name: "Lift", available: true },
       { name: "Security", available: true },
@@ -1217,10 +1250,12 @@ export const propertyData = [
     parking: 1,
     propertyTax: 4200,
     images: [
-      "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1200",
-      "https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=1200",
+      "/assets/alberta_Files/alberta3.jpg",
+      "/assets/Property_images/interior-1.jpg",
+      "/assets/Property_images/interior-2.jpg",
+      
     ],
-    floorPlan: "https://images.unsplash.com/photo-1588854337057-2b5fefc6b71d?w=900",
+    floorPlan: "/assets/Property_images/Floor plan.jpg",
     amenities: [
       { name: "Parking", available: true },
       { name: "Security", available: true },
@@ -1258,10 +1293,12 @@ export const propertyData = [
     parking: 2,
     propertyTax: 5100,
     images: [
-      "https://images.unsplash.com/photo-1600585154345-81d8b9e87b40?w=1200",
-      "https://images.unsplash.com/photo-1600607687936-4f4c9d46c3f6?w=1200",
+      "/assets/alberta_Files/alberta4.jpg",
+      "/assets/Property_images/interior-1.jpg",
+      "/assets/Property_images/interior-2.jpg",
+      
     ],
-    floorPlan: "https://images.unsplash.com/photo-1588854336981-1d2f73bde3c6?w=900",
+    floorPlan: "/assets/Property_images/Floor plan.jpg",
     amenities: [
       { name: "Garden", available: true },
       { name: "Parking", available: true },
@@ -1299,10 +1336,12 @@ export const propertyData = [
     parking: 1,
     propertyTax: 3900,
     images: [
-      "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=1200",
-      "https://images.unsplash.com/photo-1600607687644-c7d1b7d7b54d?w=1200",
+      "/assets/alberta_Files/alberta5.jpg",
+      "/assets/Property_images/interior-1.jpg",
+      "/assets/Property_images/interior-2.jpg",
+      
     ],
-    floorPlan: "https://images.unsplash.com/photo-1588854337221-4cf9fa96059c?w=900",
+    floorPlan: "/assets/Property_images/Floor plan.jpg",
     amenities: [
       { name: "Lift", available: true },
       { name: "Security", available: true },
@@ -1340,10 +1379,12 @@ export const propertyData = [
     parking: 2,
     propertyTax: 5400,
     images: [
-      "https://images.unsplash.com/photo-1600047509782-20a66c4f70f5?w=1200",
-      "https://images.unsplash.com/photo-1600585154084-4bba43c6c9a3?w=1200",
+      "/assets/alberta_Files/alberta6.jpg",
+      "/assets/Property_images/interior-1.jpg",
+      "/assets/Property_images/interior-2.jpg",
+      
     ],
-    floorPlan: "https://images.unsplash.com/photo-1588854336954-9a60a0f01c45?w=900",
+    floorPlan: "/assets/Property_images/Floor plan.jpg",
     amenities: [
       { name: "Parking", available: true },
       { name: "Security", available: true },
@@ -1381,10 +1422,12 @@ export const propertyData = [
     parking: 2,
     propertyTax: 5600,
     images: [
-      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1200",
-      "https://images.unsplash.com/photo-1600607687618-3ae9c88dbb0f?w=1200",
+      "/assets/alberta_Files/alberta7.jpg",
+      "/assets/Property_images/interior-1.jpg",
+      "/assets/Property_images/interior-2.jpg",
+      
     ],
-    floorPlan: "https://images.unsplash.com/photo-1588854337191-df5c8c6f1d7a?w=900",
+    floorPlan: "/assets/Property_images/Floor plan.jpg",
     amenities: [
       { name: "Garden", available: true },
       { name: "Parking", available: true },
@@ -1422,10 +1465,12 @@ export const propertyData = [
     parking: 2,
     propertyTax: 4300,
     images: [
-      "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1200",
-      "https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=1200",
+      "/assets/alberta_Files/alberta8.jpg",
+      "/assets/Property_images/interior-1.jpg",
+      "/assets/Property_images/interior-2.jpg",
+      
     ],
-    floorPlan: "https://images.unsplash.com/photo-1588854337057-2b5fefc6b71d?w=900",
+    floorPlan: "/assets/Property_images/Floor plan.jpg",
     amenities: [
       { name: "Parking", available: true },
       { name: "Security", available: true },
@@ -1463,11 +1508,12 @@ export const propertyData = [
     parking: 3,
     propertyTax: 12800,
     images: [
-      "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200",
-      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1200",
-      "https://images.unsplash.com/photo-1600607687618-3ae9c88dbb0f?w=1200",
+      "/assets/alberta_Files/alberta9.jpg",
+      "/assets/Property_images/interior-1.jpg",
+      "/assets/Property_images/interior-2.jpg",
+      
     ],
-    floorPlan: "https://images.unsplash.com/photo-1588854337191-df5c8c6f1d7a?w=900",
+    floorPlan: "/assets/Property_images/Floor plan.jpg",
     amenities: [
       { name: "Garden", available: true },
       { name: "Security", available: true },
@@ -1506,10 +1552,12 @@ export const propertyData = [
     parking: 1,
     propertyTax: 5800,
     images: [
-      "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=1200",
-      "https://images.unsplash.com/photo-1600607687644-c7d1b7d7b54d?w=1200",
+      "/assets/alberta_Files/alberta13.jpg",
+      "/assets/Property_images/interior-1.jpg",
+      "/assets/Property_images/interior-2.jpg",
+      
     ],
-    floorPlan: "https://images.unsplash.com/photo-1588854337221-4cf9fa96059c?w=900",
+    floorPlan: "/assets/Property_images/Floor plan.jpg",
     amenities: [
       { name: "Lift", available: true },
       { name: "Security", available: true },
@@ -1547,10 +1595,12 @@ export const propertyData = [
     parking: 2,
     propertyTax: 4700,
     images: [
-      "https://images.unsplash.com/photo-1600047509782-20a66c4f70f5?w=1200",
-      "https://images.unsplash.com/photo-1600585154084-4bba43c6c9a3?w=1200",
+      "/assets/alberta_Files/alberta14.jpg",
+      "/assets/Property_images/interior-1.jpg",
+      "/assets/Property_images/interior-2.jpg",
+      
     ],
-    floorPlan: "https://images.unsplash.com/photo-1588854336954-9a60a0f01c45?w=900",
+    floorPlan: "/assets/Property_images/Floor plan.jpg",
     amenities: [
       { name: "Parking", available: true },
       { name: "Security", available: true },
@@ -1588,10 +1638,12 @@ export const propertyData = [
     parking: 1,
     propertyTax: 4300,
     images: [
-      "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1200",
-      "https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=1200",
+      "/assets/alberta_Files/alberta15.jpg",
+      "/assets/Property_images/interior-1.jpg",
+      "/assets/Property_images/interior-2.jpg",
+      
     ],
-    floorPlan: "https://images.unsplash.com/photo-1588854337057-2b5fefc6b71d?w=900",
+    floorPlan: "/assets/Property_images/Floor plan.jpg",
     amenities: [
       { name: "Parking", available: true },
       { name: "Security", available: true },

@@ -60,6 +60,8 @@ const App = () => (
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/blog-lm" element={<BlogLM />} />
 
+
+
           {/* Navbar navigation */}
           <Route path="/map-search" element={<MapSearch />} />
           <Route path="/market-trends" element={<MarketTrends />} />
@@ -67,6 +69,10 @@ const App = () => (
           <Route path="/agents" element={<Agents />} />
 
           <Route path="/agents/:agentId" element={<AgentProfile />} />
+
+           <Route path="/property/:id" element={<PropertyDetail />} />
+         
+
 
 
           {/* Tools Dropdown */}
