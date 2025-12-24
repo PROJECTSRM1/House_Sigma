@@ -12,6 +12,7 @@ import NotFound from "./pages/NotFound";
 
 import MapSearch from "./pages/MapSearch";
 import MarketTrends from "./pages/MarketTrends";
+import MarketStatistics from "./pages/MarketStatistics";
 import Agents from "./pages/Agents";
 import AgentProfile from "./pages/AgentProfile";
 
@@ -65,6 +66,7 @@ const App = () => (
           {/* Navbar navigation */}
           <Route path="/map-search" element={<MapSearch />} />
           <Route path="/market-trends" element={<MarketTrends />} />
+          <Route path="/market-statistics" element={<MarketStatistics />} />
           <Route path="/home-valuation" element={<HomeValuation />} />
           <Route path="/agents" element={<Agents />} />
 
