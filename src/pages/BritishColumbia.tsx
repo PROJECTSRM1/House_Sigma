@@ -5,8 +5,7 @@ import FilterBar from '@/components/FilterBar';
 import PropertySection from '@/components/PropertySection';
 import StatsChart from './bcStatsChart';
 import Footer from '@/components/Footer';
-import CityLinks from "@/components/CityLinks";
-import { useTranslation } from "react-i18next";
+import britishHero from "/assets/Britishcolumbia_files/BC.jpg";
 
 import {
   newlyAdded,
@@ -18,9 +17,11 @@ import {
 import type { Property as BCProperty } from '@/data/BritishColumbiaMock';
 import type { PropertyListing as MockPropertyListing } from '@/data/mockData';
 
+// page-local CSS (file placed next to this component)
 import './BritishColumbia.css';
+import CityLinks from "@/components/CityLinks";
 
-/** Convert price string -> number */
+/** Convert price string -> number (e.g. "$1,200,000" -> 1200000) */
 const parsePriceToNumber = (p?: string | number): number => {
   if (p === undefined || p === null) return 0;
   if (typeof p === 'number') return p;
@@ -56,59 +57,27 @@ const rentalInvestmentListings = bestForRentalInvestment.map(toListing);
 const justSoldListings = (justSold ?? []).map(toListing);
 
 const BritishColumbia: React.FC = () => {
-  const { t } = useTranslation(); // ✅ ADDED
-
   return (
     <div className="min-h-screen">
-      <Navbar />
-      <Hero />
-      <FilterBar />
+     <Hero  />
+     <Navbar />
+       <FilterBar />
+       
+        
+      
 
-      <PropertySection
-        title={t("newlyListed")}
-        properties={newlyAddedListings}
-      />
+        <PropertySection title="Newly Listed" properties={newlyAddedListings} />
+      
+        <PropertySection title="Featured Listings" properties={featuredListings} />
 
-      <PropertySection
-        title={t("bestForRentalInvestment")}
-        properties={rentalInvestmentListings}
-      />
+        <PropertySection title="Just Sold" properties={justSoldListings} />
+        <PropertySection title="Best For Rental Investment" properties={rentalInvestmentListings} />
 
-      <PropertySection
-        title={t("bestForSchools")}
-        properties={bestForSchoolsListings}
-      />
+        {/* Stats chart */}
+        <StatsChart />
+        <CityLinks />
 
-      <PropertySection
-        title={t("featuredListings")}
-        properties={featuredListingsConverted}
-      />
-
-      <PropertySection
-        title={t("highGrowth")}
-        properties={highGrowthListings}
-      />
-
-      <PropertySection
-        title={t("soldBelowBought")}
-        properties={soldBelowListings}
-      />
-
-      <PropertySection
-        title={t("highReturns")}
-        properties={highReturnsListings}
-      />
-
-      <PropertySection
-        title={t("justSold")}
-        properties={justSoldListings}
-      />
-
-      {/* Stats chart */}
-      <StatsChart />
-
-      <CityLinks />
-
+      {/* Footer placed outside the centered container so it can be wider */}
       <Footer />
     </div>
   );

@@ -3,7 +3,6 @@ import PropertyCard from "./PropertyCard";
 import { PropertyListing } from "@/data/mockData";
 import { Property } from "@/data/albertaData";
 import styles from "./PropertySection.module.css";
-import { useTranslation } from "react-i18next";
 
 type PropertyAny = Property | PropertyListing;
 
@@ -14,8 +13,6 @@ interface PropertySectionProps {
 }
 
 const PropertySection = ({ title, properties, badge }: PropertySectionProps) => {
-  const { t } = useTranslation(); // ✅ ADDED
-
   return (
     <section className={styles.section}>
 
@@ -29,7 +26,7 @@ const PropertySection = ({ title, properties, badge }: PropertySectionProps) => 
         </div>
 
         <a href="#" className={styles.seeMore}>
-          {t("seeMore")} →
+          See More →
         </a>
       </div>
 

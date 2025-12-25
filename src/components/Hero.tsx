@@ -1,22 +1,18 @@
-import { Search, AlertCircle } from "lucide-react";
-import { Button } from "./ui/button";
-import { useState, useEffect } from "react";
-import styles from "./Hero.module.css";
-import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-
-import heroSlide1 from "/assets/hero-slide-1.jpeg";
-import heroSlide2 from "/assets/hero-slide-2.jpeg";
-import heroSlide3 from "/assets/hero-slide-3.jpeg";
-import heroSlide4 from "/assets/hero-slide-4.jpeg";
-import heroSlide5 from "/assets/hero-slide-5.jpeg";
+import { Search, AlertCircle } from 'lucide-react';
+import { Button } from './ui/button';
+import { useState, useEffect } from 'react';
+import styles from './Hero.module.css';
+import { useNavigate } from 'react-router-dom';
+import heroSlide1 from '/assets/hero-slide-1.jpeg';
+import heroSlide2 from '/assets/hero-slide-2.jpeg';
+import heroSlide3 from '/assets/hero-slide-3.jpeg';
+import heroSlide4 from '/assets/hero-slide-4.jpeg';
+import heroSlide5 from '/assets/hero-slide-5.jpeg';
 
 const Hero = () => {
   const navigate = useNavigate();
-  const { t } = useTranslation(); // ✅ ADDED
-
   const [currentSlide, setCurrentSlide] = useState(0);
-
+  
   const slides = [
     heroSlide1,
     heroSlide2,
@@ -28,7 +24,7 @@ const Hero = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 4000);
+    }, 4000); // Change slide every 5 seconds
 
     return () => clearInterval(interval);
   }, [slides.length]);
@@ -45,32 +41,30 @@ const Hero = () => {
           <div
             key={index}
             className={`${styles.slide} ${
-              index === currentSlide ? styles.slideActive : ""
+              index === currentSlide ? styles.slideActive : ''
             }`}
             style={{ backgroundImage: `url(${slide})` }}
           />
         ))}
       </div>
-
+      
       <div className={styles.overlay} />
 
       <div className={styles.content}>
         <div className={styles.textContent}>
           <h1 className={styles.title}>
-            {t("heroTitleLine1")}<br />
-            {t("heroTitleLine2")}
+            Make Better<br />Real Estate Decisions
           </h1>
-
           <p className={styles.subtitle}>
-            {t("heroSubtitleLine1")}<br />
-            {t("heroSubtitleLine2")}
+            Browse 22 years of sales history.<br />
+            Watch new listings, get notified when they're sold.
           </p>
 
           <div className={styles.searchBar}>
             <Search className={styles.searchIcon} />
             <input
               type="text"
-              placeholder={t("searchPlaceholder")}
+              placeholder="Address, Street Name or Listing#"
               className={styles.searchInput}
             />
           </div>
@@ -82,7 +76,7 @@ const Hero = () => {
               className="bg-transparent text-white border-white/60 hover:bg-white hover:text-foreground font-medium"
             >
               <AlertCircle className="h-4 w-4 mr-2" />
-              {t("scamAlert")}
+              Scam Alert
             </Button>
 
             <Button
@@ -91,7 +85,7 @@ const Hero = () => {
               className="border-white/80 bg-transparent text-white hover:bg-white hover:text-foreground font-medium transition-colors"
               onClick={handleLearnMore}
             >
-              {t("learnMore")}
+              Learn More
             </Button>
           </div>
         </div>
@@ -103,10 +97,10 @@ const Hero = () => {
           <button
             key={index}
             className={`${styles.indicator} ${
-              index === currentSlide ? styles.indicatorActive : ""
+              index === currentSlide ? styles.indicatorActive : ''
             }`}
             onClick={() => setCurrentSlide(index)}
-            aria-label={`${t("goToSlide")} ${index + 1}`}
+            aria-label={`Go to slide ${index + 1}`}
           />
         ))}
       </div>

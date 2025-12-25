@@ -1,30 +1,11 @@
-import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import {
-  Briefcase,
-  FileText,
-  Home,
-  Mail,
-  MessageCircle,
-  Mic,
-  Phone,
-  Search,
-  Settings,
-} from "lucide-react";
+import { useState } from "react";
 
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import ScamNav from "@/pages/ScamNav";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import styles from "./Contact.module.css";
 
 export default function ContactUs() {
-  const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState("");
-
-  useEffect(() => {
-    document.title = `${t("contactUs.title")} | HomeNest`;
-  }, [t]);
 
   const handleSearch = () => {
     if (searchQuery.trim()) {
@@ -32,159 +13,197 @@ export default function ContactUs() {
     }
   };
 
-  const quickTopics = [
-    { key: "payment", icon: "💳" },
-    { key: "bookingViewing", icon: "👁" },
-    { key: "pricing", icon: "🔥" },
-    { key: "listingIssues", icon: "🏠" },
-    { key: "howToUsePlatform", icon: "❓" },
-  ];
+  const [openChat, setOpenChat] = useState(false);
 
   return (
     <>
-      {/* NAVBAR */}
-      <Navbar />
+      <ScamNav />
 
-      <main className="min-h-screen bg-background">
-        {/* HEADER */}
-        <header className="bg-gradient-to-b from-muted/50 to-background pt-12 pb-8">
-          <div className="max-w-4xl mx-auto px-4 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-3">
-              {t("contactUs.title")}
+      <div className={`min-h-screen bg-white pt-4 ${styles.contactPage}`}>
+        <div className="w-full flex justify-center">
+          <div className="w-[92%] max-w-[850px] px-4 md:px-6 py-6">
+
+            {/* PAGE TITLE (Responsive) */}
+            <h1 className="text-[30px] md:text-[40px] font-bold text-[#111133] mt-4 mb-2 text-center md:text-left">
+              Contact Us
             </h1>
-            <p className="text-muted-foreground text-lg">
-              {t("contactUs.subtitle")}
-            </p>
-          </div>
-        </header>
 
-        <section className="max-w-4xl mx-auto px-4 pb-16">
-          {/* SEARCH */}
-          <div className="bg-card rounded-xl border p-6 -mt-4 mb-6">
-            <div className="flex gap-2">
-              <div className="relative flex-1">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                <Input
-                  placeholder={t("contactUs.searchPlaceholder")}
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-12 h-12"
-                />
-              </div>
-              <Button onClick={handleSearch}>
-                {t("contactUs.searchButton")}
-              </Button>
+            {/* UNDERLINE */}
+            <div className="w-[90px] h-[3px] bg-[#111133] mx-auto  mt-2 mb-6" />
+
+            {/* HEADER TEXT */}
+            <h2 className="text-[20px] md:text-[28px] font-semibold text-[#111133] mb-3 leading-[1.4] text-center md:text-left">
+              Enter your question here to search our knowledge base:
+            </h2>
+
+            {/* SEARCH BAR (Responsive) */}
+            <div className="flex w-full mb-4 border border-[#cccccc] rounded-md overflow-hidden">
+              <input
+                type="text"
+                placeholder="Search Knowledge Base"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                className={`
+                  flex-1 px-4 py-2 text-[16px] md:text-[20px] bg-white text-[#333]
+                  placeholder:text-[14px] md:placeholder:text-[18px]
+                  outline-none
+                  ${styles.noBorder}
+                `}
+              />
+
+              <button
+                onClick={handleSearch}
+                className={`
+                  px-4 md:px-6 text-[16px] md:text-[20px] font-semibold bg-white text-[#222]
+                  hover:bg-[#f0f0f0] transition whitespace-nowrap
+                  ${styles.noBorder}
+                `}
+              >
+                SEARCH
+              </button>
             </div>
-          </div>
 
-          {/* INFO */}
-          <div className="bg-accent/40 border rounded-lg p-4 mb-8">
-            <p>
-              {t("contactUs.beforeSubmit")}{" "}
+            {/* INFO TEXT */}
+            <p className="text-[15px] md:text-[17px] text-[#111133] leading-[1.6] mb-5">
+              Before submitting a customer service request, please check our{" "}
               <a
                 href="https://housesigma.com/blog-en/faq"
                 target="_blank"
-                rel="noreferrer"
-                className="underline font-medium"
+                className="text-[#4477aa] underline hover:text-[#111133]"
               >
-                {t("contactUs.knowledgeBase")}
+                Knowledge Base [link]
               </a>{" "}
-              {t("contactUs.afterSubmit")}
+              section. 90% of the inquiries we received has an answer.
             </p>
-          </div>
 
-          {/* QUICK HELP */}
-          <h2 className="font-semibold mb-4">
-            {t("contactUs.quickHelpTopics")}
-          </h2>
+            <div className="w-[90px] h-[3px] bg-[#111133] mx-auto  mt-2 mb-6" />
 
-          <div className="flex flex-wrap gap-3 mb-8">
-            {quickTopics.map((q) => (
-              <span
-                key={q.key}
-                className="px-4 py-2 border rounded-full text-sm"
+            {/* BUY / SELL / LEASE SECTION */}
+            <p className="text-[15px] md:text-[17px] text-[#111133] leading-[1.6] mb-1">
+              To inquire about Buy/Sell/Lease a property or book a viewing, please use{" "}
+              <a
+                href="https://housesigma.com/web/en/market"
+                target="_blank"
+                className="text-[#4477aa] underline hover:text-[#111133]"
               >
-                {q.icon} {t(`contactUs.${q.key}`)}
-              </span>
-            ))}
-          </div>
+                Contact HomeNest Agent
+              </a>
+            </p>
 
-          {/* TOP 3 CARDS */}
-          <div className="grid md:grid-cols-3 gap-4 mb-10">
-            <MainCard
-              icon={<Phone />}
-              title={t("contactUs.callUs")}
-              desc={t("contactUs.callUsDesc")}
-              btn={t("contactUs.getPhoneNumber")}
-            />
-            <MainCard
-              icon={<Mail />}
-              title={t("contactUs.emailSupport")}
-              desc={t("contactUs.emailSupportDesc")}
-              btn={t("contactUs.sendEmail")}
-            />
-            <MainCard
-              icon={<MessageCircle />}
-              title={t("contactUs.liveChat")}
-              desc={t("contactUs.liveChatDesc")}
-              btn={t("contactUs.startChat")}
-            />
-          </div>
+            <p className="text-[15px] md:text-[17px] text-[#111133] leading-[1.6] mb-4">
+              form on listing/market page.{" "}
+              <a
+                href="https://housesigma.com/web/en/market"
+                target="_blank"
+                className="text-[#4477aa] underline hover:text-[#111133]"
+              >
+                https://homenest.com/web/en/market
+              </a>
+            </p>
 
-          {/* 🔴 FIXED: LAST 5 → 2x2 GRID */}
-          <div className="grid md:grid-cols-2 gap-6">
-            <InfoCard
-              icon={<Home />}
-              title={t("contactUs.buySellLease")}
-              desc={t("contactUs.buySellLeaseDesc")}
-            />
-            <InfoCard
-              icon={<Settings />}
-              title={t("contactUs.techSupport")}
-              desc={t("contactUs.techSupportDesc")}
-            />
-            <InfoCard
-              icon={<FileText />}
-              title={t("contactUs.brokerageComplaints")}
-              desc={t("contactUs.brokerageComplaintsDesc")}
-            />
-            <InfoCard
-              icon={<Briefcase />}
-              title={t("contactUs.dealConveyancing")}
-              desc={t("contactUs.dealConveyancingDesc")}
-            />
-            <InfoCard
-              icon={<Mic />}
-              title={t("contactUs.mediaInquiries")}
-              desc={t("contactUs.mediaInquiriesDesc")}
-            />
-          </div>
-        </section>
-      </main>
+            <div className="w-[90px] h-[3px] bg-[#111133] mx-auto  mt-2 mb-6" />
 
-      {/* FOOTER */}
-      <Footer />
+            {/* TECHNICAL SUPPORT */}
+            <p className="font-bold text-[15px] md:text-[17px] text-[#111133] mb-1">
+              Contact technical support:
+            </p>
+
+            <a
+              href="https://housesigma.com/blog-en/faq/other/contact-technical-support/"
+              target="_blank"
+              className="text-[#4477aa] underline hover:text-[#111133] text-[14px] md:text-[15px]"
+            >
+              https://homenest.com/blog-en/faq/other/contact-technical-support/
+            </a>
+
+            <div className="my-4" />
+
+            {/* COMPLAINTS */}
+            <p className="font-bold text-[15px] md:text-[17px] text-[#111133] mb-1">
+              Complain about brokerage services:
+            </p>
+            <a
+              href="https://housesigma.com/blog-en/faq/other/complain-about-brokerage-services/"
+              target="_blank"
+              className="text-[#4477aa] underline hover:text-[#111133] text-[14px] md:text-[15px]"
+            >
+              https://homenest.com/blog-en/faq/other/complain-about-brokerage-services/
+            </a>
+
+            <div className="my-4" />
+
+            {/* DEAL MATTERS */}
+            <p className="font-bold text-[15px] md:text-[17px] text-[#111133] mb-1">
+              For deal and conveyancing related matters:
+            </p>
+
+            <p className="text-[15px] md:text-[17px] text-[#111133] leading-[1.6]">
+              Please contact{" "}
+              <a
+                href="mailto:deals@housesigma.com"
+                className="text-[#4477aa] underline hover:text-[#111133]"
+              >
+                deals@homenest.com
+              </a>
+            </p>
+
+            <div className="my-4" />
+
+            {/* MEDIA */}
+            <p className="font-bold text-[15px] md:text-[17px] text-[#111133] mb-1">
+              For media inquiries:
+            </p>
+
+            <p className="text-[15px] md:text-[17px] text-[#111133] leading-[1.6]">
+              Please contact{" "}
+              <a
+                href="mailto:press@housesigma.com"
+                className="text-[#4477aa] underline hover:text-[#111133]"
+              >
+                press@homenest.com
+              </a>
+            </p>
+
+            <div className="w-[90px] h-[3px] bg-[#111133] mx-auto  mt-2 mb-6" />
+            {/* BUY/SELL/LEASE again */}
+            <p className="text-[15px] md:text-[17px] text-[#111133] leading-[1.6] mb-1">
+              To inquire about Buy/Sell/Lease a property or book a viewing, please use{" "}
+              <a
+                href="https://housesigma.com/web/en/market"
+                target="_blank"
+                className="text-[#4477aa] underline hover:text-[#111133]"
+              >
+                Contact HomeNest Agent
+              </a>
+            </p>
+
+            <p className="text-[15px] md:text-[17px] text-[#111133] leading-[1.6] mb-10">
+              form on listing/market page.{" "}
+              <a
+                href="https://housesigma.com/web/en/market"
+                target="_blank"
+                className="text-[#4477aa] underline hover:text-[#111133]"
+              >
+                https://homenest.com/web/en/market
+              </a>
+            </p>
+
+          </div>
+        </div>
+      </div>
+      {/* Footer */}
+      <footer className="footer">
+        <div className="footer-content">
+          <div className="footer-links">
+            <a className="footer-link">HomeNest Inc. Brokerage</a>
+            <a className="footer-link">Legal</a>
+            <a className="footer-link">Privacy & Security</a>
+            <a className="footer-link">Terms & Conditions</a>
+            <a className="footer-link">Accessibility</a>
+          </div>
+        </div>
+      </footer>
     </>
   );
 }
-
-/* ---------- REUSABLE COMPONENTS ---------- */
-
-const MainCard = ({ icon, title, desc, btn }: any) => (
-  <div className="border rounded-xl p-6 text-center">
-    <div className="mx-auto mb-3">{icon}</div>
-    <h3 className="font-semibold">{title}</h3>
-    <p className="text-sm mb-4">{desc}</p>
-    <Button className="w-full">{btn}</Button>
-  </div>
-);
-
-const InfoCard = ({ icon, title, desc }: any) => (
-  <div className="border rounded-xl p-6">
-    <div className="flex items-start gap-3 mb-2">
-      {icon}
-      <h3 className="font-semibold">{title}</h3>
-    </div>
-    <p className="text-sm">{desc}</p>
-  </div>
-);

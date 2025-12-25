@@ -1,11 +1,9 @@
-import { useState } from "react";
-import styles from "./FilterBar.module.css";
+import { useState } from 'react';
+import styles from './FilterBar.module.css';
 import LoginModal from "../pages/Login";
 import ResetPasswordModal from "../pages/ResetPasswordModal";
-import { useTranslation } from "react-i18next";
 
 const FilterBar = () => {
-  const { t } = useTranslation(); // ✅ added
   const [showLogin, setShowLogin] = useState(false);
   const [showReset, setShowReset] = useState(false);
 
@@ -18,30 +16,28 @@ const FilterBar = () => {
     <>
       <div className={styles.filterBar}>
         <div className={styles.topRow}>
-          <h2 className={styles.header}>
-            {t("personalizeListings")}
-          </h2>
+          <h2 className={styles.header}>Personalize Listings</h2>
 
           <div className={styles.filterButtonContainer}>
             <button
               className={styles.filterButton}
               onClick={() => setShowLogin(true)}
             >
-              {t("allPropertyTypes")}
+              All Property Types
             </button>
 
             <button
               className={styles.filterButton}
               onClick={() => setShowLogin(true)}
             >
-              {t("priceRange")}
+              0 - Max
             </button>
 
             <button
               className={styles.filterButton}
               onClick={() => setShowLogin(true)}
             >
-              {t("allCities")}
+              All Cities
             </button>
           </div>
         </div>
