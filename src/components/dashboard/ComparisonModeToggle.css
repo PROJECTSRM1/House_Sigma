@@ -1,0 +1,77 @@
+/* ===============================
+   Comparison Mode Toggle
+================================ */
+
+.comparison-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  background: #0b1220;
+  border: 1px solid #1f2937;
+  border-radius: 10px;
+}
+
+/* Toggle button */
+.toggle-button {
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 8px;
+  background: transparent;
+  border: none;
+  color: #9ca3af;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.toggle-button:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #e5e7eb;
+}
+
+.toggle-button.active {
+  background: #22c55e;
+  color: #0b0f14;
+  box-shadow: 0 4px 10px rgba(34, 197, 94, 0.35);
+}
+
+/* ===============================
+   Percentage Change Badge
+================================ */
+
+.percentage-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+/* Sizes */
+.percentage-badge.sm {
+  font-size: 12px;
+  padding: 2px 8px;
+}
+
+.percentage-badge.md {
+  font-size: 14px;
+  padding: 4px 10px;
+}
+
+/* Icons */
+.percentage-badge svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Colors */
+.percentage-badge.positive {
+  background: rgba(34, 197, 94, 0.2);
+  color: #22c55e;
+}
+
+.percentage-badge.negative {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}

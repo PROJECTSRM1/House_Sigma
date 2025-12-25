@@ -11,17 +11,13 @@ import CityLinks from "@/components/CityLinks";
 import Footer from "@/components/Footer";
 
 import {
-  exclusivePrecon,
   newlyListed,
   rentalInvestment,
-  bestForSchools,
   featuredListings,
-  highGrowth,
   soldBelow
 } from "@/data/mockData";
 
-import FloatingChatButton from "../components/floatingWindowChatBot";
-import ChatBot from "../components/chatbot";
+import { useState } from 'react';
 
 const Index = () => {
   const { t } = useTranslation(); // ✅ ADDED
@@ -73,9 +69,6 @@ const Index = () => {
       <AgentSection />
       <CityLinks />
       <Footer />
-
-      {openChat && <ChatBot onClose={() => setOpenChat(false)} />}
-      <FloatingChatButton onOpen={() => setOpenChat(true)} />
     </div>
   );
 };

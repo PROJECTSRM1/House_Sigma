@@ -5,6 +5,7 @@ import { Button } from "./ui/button";
 import LoginModal from "../pages/Login";
 import ResetPasswordModal from "../pages/ResetPasswordModal";
 import { useTranslation } from "react-i18next";
+import MarketStatistics from "@/pages/MarketStatistics";
 
 import logo from "/assets/HOME.png";
 import { useAuth } from "@/context/AuthContext";
@@ -92,6 +93,19 @@ const Navbar: React.FC = () => {
               <NavLink to="/home-valuation">{t("homeValuation")}</NavLink>
               <NavLink to="/agents">{t("agents")}</NavLink>
 
+              <NavLink to="/market-statistics" className={({ isActive }) => (isActive ? styles.activeNavLink : styles.navLink)}>
+                Market statistics
+              </NavLink>
+
+              <NavLink to="/home-valuation" className={({ isActive }) => (isActive ? styles.activeNavLink : styles.navLink)}>
+                Home Valuation
+              </NavLink>
+
+              <NavLink to="/agents" className={({ isActive }) => (isActive ? styles.activeNavLink : styles.navLink)}>
+                Agents
+              </NavLink>
+
+              {/* Tools */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <button className={styles.navDropdown}>

@@ -10,12 +10,9 @@ import { useTranslation } from "react-i18next";
 
 import {
   newlyAdded,
-  bestForSchools,
+  rentalInvestment,
   featuredListings,
-  highGrowth,
   soldBelowBought,
-  highReturns,
-  justSold
 } from "@/data/albertaData";
 
 const Alberta = () => {
@@ -44,10 +41,10 @@ const Alberta = () => {
           properties={newlyAdded}
         />
 
-        <PropertySection
-          title={t("bestForSchools")}
-          badge={t("topRatedAreas")}
-          properties={bestForSchools}
+        <PropertySection 
+          title="Best For Rental Investment"
+          badge="Top Rated Areas"
+          properties={rentalInvestment} 
         />
 
         <PropertySection

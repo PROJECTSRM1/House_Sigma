@@ -1,12 +1,15 @@
 import React from "react";
-import { Bed, Bath, Car } from "lucide-react";
-import { PropertyListing } from "@/data/mockData";
-import { Property } from "@/data/albertaData";
+import { MapPin } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import styles from "./PropertyCard.module.css";
 import { useTranslation } from "react-i18next";
+import { Property } from "@/data/albertaData";
+import { PropertyListing } from "@/data/mockData";
+
+type UnifiedProperty = Property | PropertyListing;
 
 interface PropertyCardProps {
-  property: Property | PropertyListing;
+  property: UnifiedProperty;
 }
 
 const PropertyCard = ({ property }: PropertyCardProps) => {
@@ -31,20 +34,76 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
     }
 
     if (!badge) return `${base} ${styles.badgeDefault}`;
+  const navigate = useNavigate();
 
-    const text = badge.toLowerCase();
-    if (text.includes("exclusive")) return `${base} ${styles.badgeExclusive}`;
-    if (text.includes("rental") || text.includes("yield")) return `${base} ${styles.badgeRental}`;
-    if (text.includes("school") || text.includes("score")) return `${base} ${styles.badSchool}`;
-    if (text.includes("featured")) return `${base} ${styles.badgeFeatured}`;
-    if (text.includes("new")) return `${base} ${styles.badgeNewly}`;
+  const price =
+    typeof property.price === "number"
+      ? `$${property.price.toLocaleString()}`
+      : property.price;
 
-    return `${base} ${styles.badgeDefault}`;
+  const getStatusLabel = () => {
+    if (property.status === "Sold") return "Sold";
+
+    if ("schoolScore" in property && property.schoolScore) return "For Schools";
+
+    if (
+      "badge" in property &&
+      property.badge?.toLowerCase().includes("school")
+    )
+      return "For Schools";
+
+    if ("growthScore" in property && property.growthScore)
+      return "High Growth";
+
+    if (
+      "badge" in property &&
+      property.badge?.toLowerCase().includes("rental")
+    )
+      return "For Rental";
+
+    if (
+      "badge" in property &&
+      property.badge?.toLowerCase().includes("featured")
+    )
+      return "Featured";
+
+    if (
+      "badge" in property &&
+      property.badge?.toLowerCase().includes("exclusive")
+    )
+      return "Exclusive";
+
+    return "Newly Listed";
+  };
+
+  const getStatusClass = () => {
+    const label = getStatusLabel();
+
+    switch (label) {
+      case "Sold":
+        return styles.sold;
+      case "For Schools":
+        return styles.school;
+      case "High Growth":
+        return styles.growth;
+      case "For Rental":
+        return styles.rental;
+      case "Featured":
+        return styles.featured;
+      case "Exclusive":
+        return styles.exclusive;
+      default:
+        return styles.new;
+    }
+  };
+
+  const handleCardClick = () => {
+    navigate(`/property/${property.id}`);
   };
 
   return (
-    <div className={styles.card}>
-      {/* IMAGE SECTION */}
+    <div className={styles.card} onClick={handleCardClick}>
+      {/* IMAGE */}
       <div className={styles.imageContainer}>
         {"schoolScore" in property && property.schoolScore && (
           <span className={styles.topLeftBadge}>
@@ -72,12 +131,12 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
 
         <img
           src={property.image}
-          alt={property.address || "Property"}
+          alt={property.address}
           className={styles.image}
         />
       </div>
 
-      {/* CONTENT SECTION */}
+      {/* CONTENT */}
       <div className={styles.cardContent}>
         <div className={styles.price}>
           {t("listed")}:{" "}
@@ -85,26 +144,18 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
             ? `$${property.price.toLocaleString()}`
             : property.price}
         </div>
+        <div className={styles.priceRow}>
+          <div className={styles.price}>Price: {price}</div>
 
-        <div className={styles.timestamp}>{date}</div>
-        <div className={styles.address}>{property.address}</div>
-        <div className={styles.propertyType}>{property.type}</div>
-
-        <div className={styles.features}>
-          <div className={styles.feature}>
-            <Bed className={styles.featureIcon} /> <span>{beds}</span>
-          </div>
-          <div className={styles.feature}>
-            <Bath className={styles.featureIcon} /> <span>{baths}</span>
-          </div>
-          <div className={styles.feature}>
-            <Car className={styles.featureIcon} /> <span>{parking}</span>
-          </div>
+          <span className={`${styles.statusBadge} ${getStatusClass()}`}>
+            {getStatusLabel()}
+          </span>
         </div>
 
-        {"agent" in property && property.agent && (
-          <div className={styles.agent}>{property.agent}</div>
-        )}
+        <div className={styles.location}>
+          <MapPin size={14} />
+          {property.address}
+        </div>
       </div>
     </div>
   );

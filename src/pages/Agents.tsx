@@ -1,10 +1,14 @@
 // src/pages/Agents.tsx
 import React, { useEffect, useMemo, useRef, useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+
+
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import agentsData from "../data/agents";
 import styles from "./Agent.module.css";
 import { useTranslation } from "react-i18next";
+
 
 
 // Image compressor helpers (their types are unknown to us here)
@@ -30,6 +34,8 @@ export type Agent = {
 };
 
 const PROVINCES = ["Ontario", "British Columbia", "Alberta"] as const;
+
+
 
 /* Simple inline SVG placeholder (blank box) */
 const SVG_PLACEHOLDER =
@@ -195,7 +201,14 @@ async function compressAndCacheUrl(url: string, bump: () => void): Promise<void>
 }
 
 /* -------------------- AgentCard -------------------- */
-function AgentCard({ agent }: { agent: Agent }): JSX.Element {
+function AgentCard({
+  agent,
+  onClick,
+}: {
+  agent: Agent;
+  onClick?: () => void;
+}): JSX.Element {
+
   // get current best URL: compressed if available, otherwise original avatar, otherwise placeholder
   const baseUrl = agent.avatar;
   const cachedCompressed = baseUrl ? compressedUrlCache.get(baseUrl) : undefined;
@@ -232,7 +245,8 @@ function AgentCard({ agent }: { agent: Agent }): JSX.Element {
   );
 
   return (
-    <article className={styles.agentCard}>
+    <article className={styles.agentCard} onClick={onClick} style={{ cursor: "pointer" }}>
+
       <div className={styles.avatarWrap}>
         <img
           src={src}
@@ -456,6 +470,7 @@ function Filters(props: {
 export default function AgentsPage(): JSX.Element {
 
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const [activeProvince, setActiveProvince] = useState<string>(PROVINCES[0]);
   const [selectedArea, setSelectedArea] = useState<string>("");
@@ -587,7 +602,12 @@ export default function AgentsPage(): JSX.Element {
 
         <section className={styles.agentsGrid}>
           {filtered.map((agent) => (
-            <AgentCard key={agent.id} agent={agent} />
+            <AgentCard
+           key={agent.id}
+           agent={agent}
+           onClick={() => navigate(`/agents/${agent.id}`)}
+/>
+
           ))}
 
           {filtered.length === 0 && (
