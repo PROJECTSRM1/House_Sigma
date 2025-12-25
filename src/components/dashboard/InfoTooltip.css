@@ -74,3 +74,103 @@
   color: #6b7280;
 }
 
+/* ===============================
+   TABLET (≤ 768px)
+================================ */
+
+@media (max-width: 768px) {
+  .info-tooltip-content {
+    max-width: 260px;
+    padding: 11px;
+    border-radius: 9px;
+  }
+
+  .info-tooltip-title {
+    font-size: 12px;
+  }
+
+  .info-tooltip-description {
+    font-size: 11.5px;
+  }
+}
+
+/* ===============================
+   MOBILE LARGE (≤ 475px)
+================================ */
+
+@media (max-width: 475px) {
+  .info-tooltip-content {
+    max-width: 240px;
+    padding: 10px;
+  }
+
+  .info-tooltip-trigger {
+    width: 18px;
+    height: 18px;
+  }
+
+  .info-tooltip-trigger svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  .info-tooltip-title {
+    font-size: 12px;
+  }
+
+  .info-tooltip-description {
+    font-size: 11px;
+  }
+
+  .info-tooltip-calculation {
+    font-size: 10.5px;
+  }
+}
+
+/* ===============================
+   MOBILE MEDIUM (≤ 375px)
+================================ */
+
+@media (max-width: 375px) {
+  .info-tooltip-content {
+    max-width: 220px;
+    padding: 9px;
+    border-radius: 8px;
+  }
+
+  .info-tooltip-trigger {
+    width: 16px;
+    height: 16px;
+  }
+
+  .info-tooltip-title {
+    font-size: 11.5px;
+  }
+
+  .info-tooltip-description {
+    font-size: 10.5px;
+  }
+}
+
+/* ===============================
+   MOBILE SMALL (≤ 320px)
+================================ */
+
+@media (max-width: 320px) {
+  .info-tooltip-content {
+    max-width: 200px;
+    padding: 8px;
+  }
+
+  .info-tooltip-title {
+    font-size: 11px;
+  }
+
+  .info-tooltip-description {
+    font-size: 10px;
+  }
+
+  .info-tooltip-calculation {
+    font-size: 10px;
+  }
+}

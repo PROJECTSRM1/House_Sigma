@@ -20,10 +20,7 @@ import {
 } from 'recharts';
 import { useState } from 'react';
 
-import {
-  cityComparisonData,
-  CityWithLocalities,
-} from '@/data/mockData';
+import { cityComparisonData } from '@/data/mockData';
 import {
   ComparisonModeToggle,
   ComparisonMode,
@@ -44,9 +41,37 @@ export const CityComparison = () => {
   const [expandedCity, setExpandedCity] =
     useState<string | null>(null);
 
+  /* =========================
+     MODE → METRIC KEY
+  ========================= */
+  const activeMetricKey =
+    comparisonMode === 'current'
+      ? 'searchDemand'
+      : comparisonMode === 'yoy'
+      ? 'yoyChange'
+      : 'qoqChange';
+
+  /* =========================
+     SORTED DATA
+  ========================= */
   const sortedData = [...cityComparisonData].sort((a, b) => {
     const multiplier = sortDirection === 'desc' ? -1 : 1;
-    return (a[sortBy] - b[sortBy]) * multiplier;
+
+    const aValue =
+      comparisonMode === 'current'
+        ? a[sortBy]
+        : comparisonMode === 'yoy'
+        ? a.yoyChange
+        : a.qoqChange;
+
+    const bValue =
+      comparisonMode === 'current'
+        ? b[sortBy]
+        : comparisonMode === 'yoy'
+        ? b.yoyChange
+        : b.qoqChange;
+
+    return (aValue - bValue) * multiplier;
   });
 
   const handleSort = (key: SortKey) => {
@@ -64,7 +89,7 @@ export const CityComparison = () => {
 
   return (
     <section className="city-section">
-      {/* Header */}
+      {/* HEADER */}
       <div className="city-header">
         <div>
           <h3>
@@ -88,46 +113,68 @@ export const CityComparison = () => {
       </div>
 
       <div className="city-layout">
-        {/* Chart */}
+        {/* ================= CHART ================= */}
         <div className="city-chart">
           <ResponsiveContainer width="100%" height={300}>
             <BarChart
-              data={cityComparisonData}
+              data={sortedData}
               layout="vertical"
               margin={{ top: 10, right: 10, left: 60, bottom: 0 }}
             >
               <CartesianGrid
                 strokeDasharray="3 3"
-                stroke="#1f2937"
                 vertical={false}
               />
+
               <XAxis
                 type="number"
                 tickLine={false}
                 axisLine={false}
                 fontSize={12}
               />
+
               <YAxis
                 dataKey="city"
                 type="category"
                 tickLine={false}
                 axisLine={false}
-                width={60}
+                width={80}
                 fontSize={12}
               />
-              <Tooltip />
+
+              <Tooltip
+                formatter={(value: number) =>
+                  comparisonMode === 'current'
+                    ? value
+                    : `${value}%`
+                }
+              />
+
               <Legend iconType="circle" iconSize={8} />
+
               <Bar
-                dataKey="searchDemand"
-                name="Search Demand"
-                fill="#22c55e"
-                radius={[0, 4, 4, 0]}
+                dataKey={activeMetricKey}
+                name={
+                  comparisonMode === 'current'
+                    ? 'Search Demand'
+                    : comparisonMode === 'yoy'
+                    ? 'YoY Change (%)'
+                    : 'QoQ Change (%)'
+                }
+                fill={
+                  comparisonMode === 'current'
+                    ? '#22c55e'
+                    : comparisonMode === 'yoy'
+                    ? '#2563eb'
+                    : '#f59e0b'
+                }
+                radius={[0, 6, 6, 0]}
               />
             </BarChart>
           </ResponsiveContainer>
         </div>
 
-        {/* Table */}
+        {/* ================= TABLE ================= */}
         <div className="city-table">
           <table>
             <thead>
@@ -177,8 +224,13 @@ export const CityComparison = () => {
 
                     <td className="right">
                       <span className="primary">
-                        {city.searchDemand}
+                        {comparisonMode === 'current'
+                          ? city.searchDemand
+                          : `${comparisonMode === 'yoy'
+                              ? city.yoyChange
+                              : city.qoqChange}%`}
                       </span>
+
                       {comparisonMode !== 'current' && (
                         <PercentageChange
                           value={
@@ -186,7 +238,6 @@ export const CityComparison = () => {
                               ? city.yoyChange
                               : city.qoqChange
                           }
-                          size="sm"
                         />
                       )}
                     </td>

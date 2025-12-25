@@ -1,81 +1,107 @@
+/* ===============================
+   SECTION
+================================ */
+
 .locality-section {
-  margin-top: 16px;
-  padding-top: 16px;
-  border-top: 1px solid rgba(31, 41, 55, 0.5);
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #e5e7eb;
   animation: fadeIn 0.4s ease forwards;
 }
 
-/* Header */
+/* ===============================
+   HEADER
+================================ */
+
 .locality-header {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 12px;
-  font-size: 14px;
-  font-weight: 600;
-  color: #e5e7eb;
+  margin-bottom: 16px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #111827;
 }
 
 .locality-header svg {
   width: 16px;
   height: 16px;
-  color: #22c55e;
+  color: #16a34a;
 }
 
-/* List */
+/* ===============================
+   LIST
+================================ */
+
 .locality-list {
   display: grid;
-  gap: 12px;
+  gap: 14px;
 }
 
-/* Card */
+/* ===============================
+   CARD
+================================ */
+
 .locality-card {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(31, 41, 55, 0.6);
-  border-radius: 12px;
-  padding: 12px;
-  transition: border-color 0.2s ease, transform 0.2s ease;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 14px;
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .locality-card:hover {
-  border-color: rgba(34, 197, 94, 0.35);
-  transform: translateY(-2px);
+  border-color: rgba(22, 163, 74, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
 }
 
-/* Top row */
+/* ===============================
+   TOP ROW
+================================ */
+
 .locality-top {
   display: flex;
   justify-content: space-between;
   gap: 12px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .locality-top h5 {
-  font-size: 14px;
-  font-weight: 600;
-  color: #e5e7eb;
+  font-size: 15px;
+  font-weight: 700;
+  color: #111827;
 }
 
-/* Demand */
+/* ===============================
+   DEMAND
+================================ */
+
 .locality-demand {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   margin-top: 4px;
   font-size: 12px;
-  color: #9ca3af;
+  color: #6b7280;
 }
 
 .locality-demand strong {
-  color: #22c55e;
-  font-weight: 600;
+  color: #16a34a;
+  font-weight: 700;
 }
 
-/* Stats */
+/* ===============================
+   STATS
+================================ */
+
 .locality-stats {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  gap: 14px;
 }
 
 .stat {
@@ -86,27 +112,30 @@
 
 .stat span {
   font-size: 11px;
-  color: #9ca3af;
+  color: #6b7280;
 }
 
 .stat strong {
   display: block;
   font-size: 14px;
   font-weight: 700;
-  color: #e5e7eb;
+  color: #111827;
 }
 
 .stat strong em {
   font-style: normal;
   font-size: 11px;
   margin-left: 6px;
-  color: #22c55e;
+  color: #16a34a;
 }
 
-/* Icons */
+/* ===============================
+   ICONS
+================================ */
+
 .stat-icon {
-  padding: 6px;
-  border-radius: 8px;
+  padding: 8px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -118,23 +147,141 @@
 }
 
 .stat-icon.primary {
-  background: rgba(34, 197, 94, 0.15);
-  color: #22c55e;
+  background: #ecfdf5;
+  color: #16a34a;
 }
 
 .stat-icon.accent {
-  background: rgba(59, 130, 246, 0.15);
-  color: #3b82f6;
+  background: #eff6ff;
+  color: #2563eb;
 }
 
-/* Animation */
+/* ===============================
+   ANIMATION
+================================ */
+
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(6px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+/* ===============================
+   TABLET (≤ 768px)
+================================ */
+
+@media (max-width: 768px) {
+  .locality-header {
+    font-size: 14px;
+  }
+
+  .locality-top h5 {
+    font-size: 14px;
+  }
+
+  .locality-stats {
+    gap: 12px;
+  }
+
+  .stat strong {
+    font-size: 13px;
+  }
+}
+
+/* ===============================
+   MOBILE LARGE (≤ 475px)
+================================ */
+
+@media (max-width: 475px) {
+  .locality-section {
+    margin-top: 20px;
+    padding-top: 16px;
+  }
+
+  .locality-card {
+    padding: 12px;
+    border-radius: 12px;
+  }
+
+  .locality-top {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .locality-top h5 {
+    font-size: 14px;
+  }
+
+  .locality-demand {
+    font-size: 11px;
+  }
+
+  .locality-stats {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+/* ===============================
+   MOBILE MEDIUM (≤ 375px)
+================================ */
+
+@media (max-width: 375px) {
+  .locality-header {
+    font-size: 13px;
+    gap: 6px;
+  }
+
+  .locality-header svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .stat {
+    gap: 8px;
+  }
+
+  .stat-icon {
+    padding: 6px;
+    border-radius: 8px;
+  }
+
+  .stat strong {
+    font-size: 13px;
+  }
+
+  .stat span {
+    font-size: 10px;
+  }
+}
+
+/* ===============================
+   MOBILE SMALL (≤ 320px)
+================================ */
+
+@media (max-width: 320px) {
+  .locality-card {
+    padding: 10px;
+  }
+
+  .locality-top h5 {
+    font-size: 13px;
+  }
+
+  .locality-demand {
+    font-size: 10px;
+  }
+
+  .stat strong {
+    font-size: 12px;
+  }
+
+  .stat strong em {
+    font-size: 10px;
+    margin-left: 4px;
   }
 }

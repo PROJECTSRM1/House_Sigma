@@ -191,3 +191,125 @@
     transform: translateY(0);
   }
 }
+/* ===============================
+   TABLET (≤ 768px)
+================================ */
+
+@media (max-width: 768px) {
+  .city-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .city-header h3 {
+    font-size: 20px;
+  }
+
+  .city-layout {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .city-chart,
+  .city-table {
+    border-radius: 16px;
+  }
+
+  .city-table th,
+  .city-table td {
+    padding: 12px 14px;
+    font-size: 13px;
+  }
+}
+
+/* ===============================
+   MOBILE LARGE (≤ 425px)
+================================ */
+
+@media (max-width: 425px) {
+  .city-header h3 {
+    font-size: 18px;
+  }
+
+  .city-header p {
+    font-size: 13px;
+  }
+
+  .city-chart {
+    padding: 16px;
+  }
+
+  .city-table {
+    overflow-x: auto;
+  }
+
+  .city-table table {
+    min-width: 520px; /* enables horizontal scroll */
+  }
+
+  .city-table th {
+    font-size: 10px;
+  }
+
+  .city-table td {
+    font-size: 13px;
+  }
+}
+
+/* ===============================
+   MOBILE MEDIUM (≤ 375px)
+================================ */
+
+@media (max-width: 375px) {
+  .city-header h3 {
+    font-size: 17px;
+    gap: 6px;
+  }
+
+  .city-name {
+    font-size: 13px;
+  }
+
+  .city-name svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .city-chart {
+    padding: 14px;
+  }
+
+  .city-table td,
+  .city-table th {
+    padding: 10px 12px;
+  }
+}
+
+/* ===============================
+   MOBILE SMALL (≤ 320px)
+================================ */
+
+@media (max-width: 320px) {
+  .city-header h3 {
+    font-size: 16px;
+  }
+
+  .city-header p {
+    font-size: 12px;
+  }
+
+  .city-chart {
+    padding: 12px;
+  }
+
+  .city-name {
+    gap: 6px;
+  }
+
+  .city-table td,
+  .city-table th {
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+}
