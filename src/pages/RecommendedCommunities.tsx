@@ -5,6 +5,8 @@ import Footer from "@/components/Footer";
 import FloatingChatButton from "../components/floatingWindowChatBot";
 import ChatBot from "../components/chatbot";
 import styles from "./RecommendedCommunities.module.css";
+import { useTranslation } from "react-i18next";
+import { t } from "i18next";
 
 const TICK_VALUES = [0, 500000, 1000000, 1500000, 2000000, 2500000, 3000000, 3500000, 4000000, 4500000, 5000000];
 
@@ -14,8 +16,20 @@ const PRICE_MARKS = TICK_VALUES.map((v) => {
   return `$${v / 1000}K`;
 });
 
-const investmentOptions = ["School", "Growth", "Rental Yield", "Land"];
-const propertyTypes = ["Detached", "Semi-Detached", "Townhouse", "Condo Apt"];
+const investmentOptions = [
+  t("recommendCommunities.school"),
+  t("recommendCommunities.growth"),
+  t("recommendCommunities.rentalYield"),
+  t("recommendCommunities.land"),
+];
+
+const propertyTypes = [
+  t("recommendCommunities.detached"),
+  t("recommendCommunities.semiDetached"),
+  t("recommendCommunities.townhouse"),
+  t("recommendCommunities.condo"),
+];
+
 
 const cities: { [key: string]: string[] } = {
   "GTA - Central": ["Toronto", "North York", "Scarborough", "Etobicoke"],
@@ -47,6 +61,7 @@ const formatAdaptive = (value: number) => {
 };
 
 export default function RecommendedCommunities() {
+  const { t } = useTranslation();
   const [selectedInvestment, setSelectedInvestment] = useState<string[]>([]);
   const [selectedProperty, setSelectedProperty] = useState<string[]>([]);
   const [selectedCities, setSelectedCities] = useState<string[]>([]);
@@ -219,10 +234,12 @@ export default function RecommendedCommunities() {
               </svg>
               <span>Community Finder</span>
             </div>
-            <h1 className={styles.heroTitle}>Find Your Perfect Community</h1>
-            <p className={styles.heroSubtitle}>
-              Discover the best neighborhoods that match your lifestyle and investment goals
-            </p>
+             <h1 className={styles.heroTitle}>
+              {t("recommendCommunities.title")}
+             </h1>
+              <p className={styles.heroSubtitle}>
+                    {t("recommendCommunities.subtitle")}
+                    </p>
           </div>
         </div>
 
@@ -295,7 +312,8 @@ export default function RecommendedCommunities() {
                       <line x1="12" y1="1" x2="12" y2="23"/>
                       <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
                     </svg>
-                    <h3>Price Range</h3>
+                    <h3>{t("recommendCommunities.priceRange")}</h3>
+
                   </div>
                 </div>
 
@@ -389,7 +407,8 @@ export default function RecommendedCommunities() {
                     <svg className={styles.cardIcon} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
                     </svg>
-                    <h3>Investment Requirement</h3>
+                    <h3>{t("recommendCommunities.investmentRequirement")}</h3>
+
                   </div>
                   <button
                     className={styles.selectAllBtn}
@@ -436,7 +455,8 @@ export default function RecommendedCommunities() {
                       <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
                       <polyline points="9 22 9 12 15 12 15 22"/>
                     </svg>
-                    <h3>Property Type</h3>
+                    <h3>{t("recommendCommunities.propertyType")}</h3>
+
                   </div>
                   <button
                     className={styles.selectAllBtn}
@@ -485,7 +505,8 @@ export default function RecommendedCommunities() {
                       <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
                       <circle cx="12" cy="10" r="3"/>
                     </svg>
-                    <h3>Select Cities</h3>
+                   <h3>{t("recommendCommunities.selectCities")}</h3>
+
                   </div>
                 </div>
 

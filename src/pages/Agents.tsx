@@ -7,6 +7,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import agentsData from "../data/agents";
 import styles from "./Agent.module.css";
+import { useTranslation } from "react-i18next";
+
 
 
 // Image compressor helpers (their types are unknown to us here)
@@ -18,6 +20,7 @@ import {
 
 import FloatingChatButton from "../components/floatingWindowChatBot";
 import ChatBot from "../components/chatbot";
+import { t } from "i18next";
 
 /* Types */
 export type Agent = {
@@ -52,6 +55,8 @@ type CompressResult = string | Blob | File;
 const typedCompressImageFile = compressImageFile as unknown as (input: File | string) => Promise<CompressResult>;
 const typedCompressImageFiles = compressImageFiles as unknown as (input: string[]) => Promise<unknown>;
 const typedGetFileSizeKB = getFileSizeKB as unknown as (f: File) => Promise<number>;
+
+
 
 /**
  * Convert a Blob -> File (useful because helpers may expect File)
@@ -437,7 +442,9 @@ function Filters(props: {
             options={areas}
             value={selectedArea}
             onChange={setSelectedArea}
-            placeholder="All areas"
+          placeholder={t("allAreas")}
+
+
             width={230}
             menuWidth={330}
           />
@@ -448,7 +455,8 @@ function Filters(props: {
             options={languages}
             value={selectedLanguage}
             onChange={setSelectedLanguage}
-            placeholder="All languages"
+           placeholder={t("allLanguages")}
+
             width={230}
           />
         </div>
@@ -460,6 +468,8 @@ function Filters(props: {
 /* -------------------- AgentsPage (main) -------------------- */
 
 export default function AgentsPage(): JSX.Element {
+
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const [activeProvince, setActiveProvince] = useState<string>(PROVINCES[0]);
@@ -601,7 +611,8 @@ export default function AgentsPage(): JSX.Element {
           ))}
 
           {filtered.length === 0 && (
-            <p className={styles.noResults}>No agents found.</p>
+            <p className={styles.noResults}>{t("noAgentsFound")}</p>
+
           )}
         </section>
       </main>
