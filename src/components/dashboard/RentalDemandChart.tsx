@@ -84,7 +84,10 @@ export const RentalDemandChart = ({ data }: RentalDemandChartProps) => {
       {/* Chart */}
       <div className="chart-wrapper">
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={data}>
+         <AreaChart
+              data={data}
+              margin={{ top: 26, right: 12, left: -8, bottom: 18 }}
+            >
             <defs>
               <linearGradient id="demandGradient" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor="#22c55e" stopOpacity={0.3} />
@@ -94,8 +97,18 @@ export const RentalDemandChart = ({ data }: RentalDemandChartProps) => {
 
             <CartesianGrid strokeDasharray="3 3" vertical={false} />
 
-            <XAxis dataKey="month" tickLine={false} axisLine={false} />
-            <YAxis domain={[60, 100]} tickLine={false} axisLine={false} />
+            <XAxis
+                dataKey="month"
+                tickMargin={10}
+                tickLine={false}
+                axisLine={false}
+              />
+           <YAxis
+              domain={[60, 'dataMax + 4']}
+              tickMargin={8}
+              tickLine={false}
+              axisLine={false}
+            />
 
             <Tooltip />
 
