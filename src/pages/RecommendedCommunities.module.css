@@ -17,7 +17,12 @@
 
 /* ==================== HERO SECTION ==================== */
 .heroSection {
-  background: linear-gradient(135deg, #0f93ff 0%, #0066cc 100%);
+  background: linear-gradient(
+  135deg,
+  #1f3550 0%,
+  #2b5ea8 50%,
+  #2b9df4 100%
+);
   padding: 128px 20px 100px;
   position: relative;
   overflow: hidden;
@@ -90,7 +95,7 @@
   background: #ffffff;
   border-radius: 20px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-  border: 2px solid #0f93ff;
+  border: 2px solid #1e4a7a;
   padding: 24px;
   margin-bottom: 28px;
 }
@@ -113,7 +118,7 @@
   border-radius: 12px;
   font-size: 14px;
   font-weight: 700;
-  color: #0f93ff;
+  color: #1e4a7a;
 }
 
 .clearAllLink {
@@ -128,7 +133,7 @@
 }
 
 .clearAllLink:hover {
-  color: #0f93ff;
+  color: #1e4a7a;
 }
 
 .filterTagsContainer {
@@ -143,11 +148,11 @@
   gap: 6px;
   padding: 8px 14px;
   background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-  border: 1px solid #0f93ff;
+  border: 1px solid #1e4a7a;
   border-radius: 20px;
   font-size: 13px;
   font-weight: 600;
-  color: #0f93ff;
+  color: #1e4a7a;
 }
 
 .filterTagMore {
@@ -200,7 +205,7 @@
 }
 
 .cardIcon {
-  color: #0f93ff;
+  color: #1e4a7a;
   flex-shrink: 0;
 }
 
@@ -214,7 +219,7 @@
 .selectAllBtn {
   background: none;
   border: none;
-  color: #0f93ff;
+  color: #1e4a7a;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
@@ -279,7 +284,7 @@
 }
 
 .priceInput:focus {
-  border-color: #0f93ff;
+  border-color: #1e4a7a;
   background: #ffffff;
   box-shadow: 0 0 0 4px rgba(15, 147, 255, 0.1);
 }
@@ -294,7 +299,7 @@
 .rangeDisplay {
   font-size: 20px;
   font-weight: 700;
-  color: #0f93ff;
+  color: #1e4a7a;
   margin-bottom: 24px;
   text-align: center;
   padding: 12px;
@@ -329,7 +334,12 @@
   position: absolute;
   top: 50%;
   height: 6px;
-  background: linear-gradient(90deg, #0f93ff 0%, #0066cc 100%);
+background: linear-gradient(
+  135deg,
+  #1f3550 0%,
+  #2b5ea8 50%,
+  #2b9df4 100%
+);
   border-radius: 3px;
   transform: translateY(-50%);
   z-index: 2;
@@ -352,7 +362,7 @@
   width: 20px;
   border-radius: 50%;
   background: #ffffff;
-  border: 3px solid #0f93ff;
+  border: 3px solid #1e4a7a;
   cursor: pointer;
   pointer-events: auto;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
@@ -369,7 +379,7 @@
   width: 20px;
   border-radius: 50%;
   background: #ffffff;
-  border: 3px solid #0f93ff;
+  border: 3px solid #1e4a7a;
   cursor: pointer;
   pointer-events: auto;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
@@ -421,20 +431,30 @@
 }
 
 .optionChip:hover {
-  border-color: #0f93ff;
+  border-color: #1e4a7a;
   background: #eff6ff;
   transform: translateY(-2px);
 }
 
 .optionChipActive {
-  background: linear-gradient(135deg, #0f93ff 0%, #0066cc 100%);
+  background: linear-gradient(
+  135deg,
+  #1f3550 0%,
+  #2b5ea8 50%,
+  #2b9df4 100%
+);
   color: #ffffff;
-  border-color: #0f93ff;
+  border-color: #1e4a7a;
   box-shadow: 0 4px 12px rgba(15, 147, 255, 0.3);
 }
 
 .optionChipActive:hover {
-  background: linear-gradient(135deg, #0f93ff 0%, #0066cc 100%);
+  background: linear-gradient(
+  135deg,
+  #1f3550 0%,
+  #2b5ea8 50%,
+  #2b9df4 100%
+);
   transform: translateY(-2px);
 }
 
@@ -473,7 +493,7 @@
 }
 
 .citySearchInput:focus {
-  border-color: #0f93ff;
+  border-color: #1e4a7a;
   background: #ffffff;
   box-shadow: 0 0 0 4px rgba(15, 147, 255, 0.1);
 }
@@ -562,19 +582,29 @@
 }
 
 .cityChip:hover {
-  border-color: #0f93ff;
+  border-color: #1e4a7a;
   background: #eff6ff;
 }
 
 .cityChipActive {
-  background: linear-gradient(135deg, #0f93ff 0%, #0066cc 100%);
+ background: linear-gradient(
+  135deg,
+  #1f3550 0%,
+  #2b5ea8 50%,
+  #2b9df4 100%
+);
   color: #ffffff;
-  border-color: #0f93ff;
+  border-color: #1e4a7a;
   box-shadow: 0 2px 8px rgba(15, 147, 255, 0.3);
 }
 
 .cityChipActive:hover {
-  background: linear-gradient(135deg, #0f93ff 0%, #0066cc 100%);
+  background: linear-gradient(
+  135deg,
+  #1f3550 0%,
+  #2b5ea8 50%,
+  #2b9df4 100%
+);
 }
 
 /* ==================== DISCLAIMER ==================== */
@@ -632,7 +662,7 @@
 .filterCountBadge {
   padding: 8px 16px;
   background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-  color: #0f93ff;
+  color: #1e4a7a;
   border-radius: 12px;
   font-size: 14px;
   font-weight: 700;
@@ -660,8 +690,8 @@
 }
 
 .clearButton:hover {
-  border-color: #0f93ff;
-  color: #0f93ff;
+  border-color: #1e4a7a;
+  color: #1e4a7a;
   background: #eff6ff;
 }
 
@@ -672,7 +702,12 @@
   padding: 12px 28px;
   font-size: 15px;
   font-weight: 700;
-  background: linear-gradient(135deg, #0f93ff 0%, #0066cc 100%);
+ background: linear-gradient(
+  135deg,
+  #1f3550 0%,
+  #2b5ea8 50%,
+  #2b9df4 100%
+);
   color: #ffffff;
   border: none;
   border-radius: 12px;
