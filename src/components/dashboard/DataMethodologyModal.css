@@ -3,28 +3,43 @@
 ================================ */
 
 .methodology-trigger {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 16px;
-  font-size: 14px;
-  font-weight: 600;
 
-  background: #111827;        /* BLACK BUTTON */
-  color: #ffffff;             /* WHITE TEXT */
+  height: 50px;                 /* ✅ EXACT filter height */
+  padding: 0 13px;              /* ✅ same horizontal padding */
+  font-size: 13px;              /* ✅ same text size */
+  font-weight: 500;
+  line-height: 16px;            /* ✅ prevents extra height */
 
-  border: 1px solid #1f2937;
-  border-radius: 10px;
+  background: #111827;
+  color: #ffffff;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;          /* ✅ EXACT same radius */
+
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: border-color 0.2s ease, background 0.2s ease;
+
+  box-sizing: border-box;
+  margin-right: 35px;
+  margin-top: 8px;
+  margin-bottom: 30px;
 }
 
+.methodology-trigger svg {
+  width: 14px;
+  height: 14px;
+  color: inherit;
+}
 
 .methodology-trigger:hover {
   background: #f9fafb;
-  border-color: #16a34a;
   color: #111827;
+  border-color: #16a34a;
 }
+
 
 /* ===============================
    MODAL CONTAINER (WHITE)
@@ -159,4 +174,131 @@
   font-size: 12px;
   color: #166534;
   line-height: 1.5;
+}
+/* .methodology-trigger svg {
+  width: 16px;
+  height: 16px;
+} */
+
+/* ===============================
+   TABLET (≤ 768px)
+================================ */
+
+@media (max-width: 768px) {
+  .methodology-trigger {
+    height: 46px;
+    font-size: 13px;
+    padding: 0 12px;
+    margin-right: 20px;
+  }
+
+  .methodology-dialog {
+    max-width: 90%;
+    border-radius: 14px;
+  }
+
+  .methodology-title {
+    font-size: 18px;
+  }
+
+  .methodology-card {
+    padding: 14px;
+  }
+}
+
+/* ===============================
+   MOBILE LARGE (≤ 475px)
+================================ */
+
+@media (max-width: 475px) {
+  .methodology-trigger {
+    height: 44px;
+    font-size: 12px;
+    padding: 0 10px;
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .methodology-trigger svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  .methodology-dialog {
+    max-width: 95%;
+    max-height: 85vh;
+    border-radius: 12px;
+  }
+
+  .methodology-title {
+    font-size: 17px;
+  }
+
+  .methodology-intro {
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+
+  .methodology-card-title {
+    font-size: 14px;
+  }
+}
+
+/* ===============================
+   MOBILE MEDIUM (≤ 375px)
+================================ */
+
+@media (max-width: 375px) {
+  .methodology-trigger {
+    height: 42px;
+    font-size: 12px;
+    padding: 0 9px;
+  }
+
+  .methodology-title {
+    font-size: 16px;
+  }
+
+  .methodology-description {
+    font-size: 12px;
+  }
+
+  .detail-row {
+    font-size: 11px;
+    gap: 6px;
+  }
+
+  .detail-row svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+/* ===============================
+   MOBILE SMALL (≤ 320px)
+================================ */
+
+@media (max-width: 320px) {
+  .methodology-trigger {
+    height: 40px;
+    font-size: 11px;
+    padding: 0 8px;
+  }
+
+  .methodology-dialog {
+    max-width: 98%;
+    border-radius: 10px;
+  }
+
+  .methodology-title {
+    font-size: 15px;
+  }
+
+  .methodology-card {
+    padding: 12px;
+  }
+
+  .methodology-note p {
+    font-size: 11px;
+  }
 }

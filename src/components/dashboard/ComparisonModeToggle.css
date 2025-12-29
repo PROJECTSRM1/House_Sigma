@@ -75,3 +75,96 @@
   background: rgba(239, 68, 68, 0.2);
   color: #ef4444;
 }
+/* ===============================
+   TABLET (≤ 768px)
+================================ */
+
+@media (max-width: 768px) {
+  .comparison-toggle {
+    padding: 4px;
+    border-radius: 10px;
+  }
+
+  .toggle-button {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  .percentage-badge.md {
+    font-size: 13px;
+    padding: 3px 8px;
+  }
+}
+
+/* ===============================
+   MOBILE LARGE (≤ 475px)
+================================ */
+
+@media (max-width: 475px) {
+  .comparison-toggle {
+    gap: 2px;
+    padding: 3px;
+  }
+
+  .toggle-button {
+    font-size: 11px;
+    padding: 5px 8px;
+    border-radius: 7px;
+  }
+
+  .percentage-badge.md {
+    font-size: 12px;
+    padding: 3px 8px;
+  }
+
+  .percentage-badge svg {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+/* ===============================
+   MOBILE MEDIUM (≤ 375px)
+================================ */
+
+@media (max-width: 375px) {
+  .comparison-toggle {
+    border-radius: 8px;
+  }
+
+  .toggle-button {
+    font-size: 11px;
+    padding: 4px 7px;
+  }
+
+  .percentage-badge.sm {
+    font-size: 11px;
+    padding: 2px 6px;
+  }
+}
+
+/* ===============================
+   MOBILE SMALL (≤ 320px)
+================================ */
+
+@media (max-width: 320px) {
+  .comparison-toggle {
+    padding: 2px;
+  }
+
+  .toggle-button {
+    font-size: 10px;
+    padding: 4px 6px;
+  }
+
+  .percentage-badge.sm,
+  .percentage-badge.md {
+    font-size: 11px;
+    padding: 2px 6px;
+  }
+
+  .percentage-badge svg {
+    width: 11px;
+    height: 11px;
+  }
+}

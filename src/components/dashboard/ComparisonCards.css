@@ -192,3 +192,131 @@
     transform: translateY(0);
   }
 }
+/* ===============================
+   TABLET (≤ 768px)
+================================ */
+
+@media (max-width: 768px) {
+  .comparison-header h3 {
+    font-size: 22px;
+  }
+
+  .comparison-header p {
+    font-size: 13px;
+  }
+
+  .comparison-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .card-content {
+    padding: 24px;
+  }
+
+  .card-title {
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+}
+
+/* ===============================
+   MOBILE LARGE (≤ 475px)
+================================ */
+
+@media (max-width: 475px) {
+  .comparison-header h3 {
+    font-size: 20px;
+  }
+
+  .comparison-header p {
+    font-size: 13px;
+  }
+
+  .card-content {
+    padding: 20px;
+  }
+
+  .card-title h4 {
+    font-size: 16px;
+  }
+
+  .icon-box {
+    width: 44px;
+    height: 44px;
+  }
+
+  .stat-row {
+    font-size: 13px;
+    padding: 8px 0;
+  }
+}
+
+/* ===============================
+   MOBILE MEDIUM (≤ 375px)
+================================ */
+
+@media (max-width: 375px) {
+  .comparison-header h3 {
+    font-size: 18px;
+  }
+
+  .card-title {
+    gap: 10px;
+  }
+
+  .card-title h4 {
+    font-size: 15px;
+  }
+
+  .icon-box {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+  }
+
+  .badge {
+    font-size: 10px;
+    padding: 3px 10px;
+  }
+
+  .stat-row span {
+    font-size: 12px;
+  }
+
+  .stat-row strong {
+    font-size: 13px;
+  }
+}
+
+/* ===============================
+   MOBILE SMALL (≤ 320px)
+================================ */
+
+@media (max-width: 320px) {
+  .comparison-header h3 {
+    font-size: 17px;
+  }
+
+  .comparison-header p {
+    font-size: 12px;
+  }
+
+  .card-content {
+    padding: 16px;
+  }
+
+  .card-title h4 {
+    font-size: 14px;
+  }
+
+  .icon-box {
+    width: 36px;
+    height: 36px;
+  }
+
+  .stat-row {
+    font-size: 12px;
+    padding: 6px 0;
+  }
+}

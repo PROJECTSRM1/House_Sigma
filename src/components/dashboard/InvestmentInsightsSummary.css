@@ -285,3 +285,150 @@
   background: #f9fafb;
   border: 1px solid #e5e7eb;
 }
+
+/* ===============================
+   TABLET (≤ 768px)
+================================ */
+
+@media (max-width: 768px) {
+  .insights-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .insights-title h3 {
+    font-size: 17px;
+  }
+
+  .insights-title p {
+    font-size: 13px;
+  }
+
+  .insights-filter {
+    align-self: flex-start;
+  }
+
+  .insight-title {
+    font-size: 15px;
+  }
+
+  .insight-description {
+    font-size: 13px;
+  }
+}
+
+/* ===============================
+   MOBILE LARGE (≤ 475px)
+================================ */
+
+@media (max-width: 475px) {
+  .insights-icon {
+    padding: 6px;
+    border-radius: 8px;
+  }
+
+  .insights-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .insights-title h3 {
+    font-size: 16px;
+  }
+
+  .ai-badge {
+    font-size: 10px;
+    padding: 2px 6px;
+  }
+
+  .filter-btn {
+    font-size: 11px;
+    padding: 5px 10px;
+  }
+
+  .insight-card {
+    padding: 16px;
+    border-radius: 14px;
+  }
+
+  .metric-pill {
+    font-size: 10.5px;
+    padding: 5px 8px;
+  }
+}
+
+/* ===============================
+   MOBILE MEDIUM (≤ 375px)
+================================ */
+
+@media (max-width: 375px) {
+  .insights-title {
+    gap: 10px;
+  }
+
+  .insights-title h3 {
+    font-size: 15px;
+  }
+
+  .insights-title p {
+    font-size: 12px;
+  }
+
+  .insight-title {
+    font-size: 14px;
+  }
+
+  .insight-description {
+    font-size: 12px;
+  }
+
+  .recommendation {
+    font-size: 10px;
+    padding: 3px 8px;
+  }
+
+  .confidence-row span {
+    font-size: 10px;
+  }
+
+  .confidence-row strong {
+    font-size: 11px;
+  }
+}
+
+/* ===============================
+   MOBILE SMALL (≤ 320px)
+================================ */
+
+@media (max-width: 320px) {
+  .insights-header {
+    gap: 10px;
+  }
+
+  .insights-title h3 {
+    font-size: 14px;
+  }
+
+  .insights-title p {
+    font-size: 11px;
+  }
+
+  .filter-btn {
+    font-size: 10px;
+    padding: 4px 8px;
+  }
+
+  .insight-card {
+    padding: 14px;
+  }
+
+  .metric-pill {
+    font-size: 10px;
+    padding: 4px 6px;
+  }
+
+  .insights-disclaimer p {
+    font-size: 11px;
+  }
+}
