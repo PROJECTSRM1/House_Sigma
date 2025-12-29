@@ -6,8 +6,8 @@ import sharp from "sharp";
 const __dirname = process.cwd(); // assumes you run: node compress-avatars.mjs from project root
 
 // INPUT & OUTPUT FOLDERS – change if needed
-const INPUT_DIR = path.join(__dirname, "src", "assets", "alberta_images");
-const OUTPUT_DIR = path.join(__dirname, "src", "assets", "agents_optimized");
+const INPUT_DIR = path.join(__dirname, "public", "assets", "Property_images");
+const OUTPUT_DIR = path.join(__dirname, "src", "assets", "Property_optimized");
 
 // Target size for avatars (matches your <img width={160} height={160}>)
 const TARGET_WIDTH = 160;
