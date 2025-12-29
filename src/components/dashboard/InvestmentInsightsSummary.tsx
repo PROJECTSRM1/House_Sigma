@@ -1,5 +1,7 @@
 import './InvestmentInsightsSummary.css';
 
+import { useTranslation } from "react-i18next";
+
 import { useState } from 'react';
 import {
   Sparkles,
@@ -47,6 +49,9 @@ const getRecommendationClass = (recommendation: string) => {
 };
 
 export const InvestmentInsightsSummary = () => {
+
+  const { t } = useTranslation();
+
   const [filter, setFilter] = useState<'all' | 'short-term' | 'long-term'>(
     'all'
   );
@@ -64,11 +69,9 @@ export const InvestmentInsightsSummary = () => {
             <Sparkles />
           </div>
           <div>
-            <h3>
-              Investment Insights Summary
-              <span className="ai-badge">AI-Powered</span>
+            <h3>{t("investment_insights_summary")}<span className="ai-badge">{t("ai_powered")}</span>
             </h3>
-            <p>Smart recommendations based on market trends</p>
+            <p>{t("smart_recommendations_based_on_market_trends")}</p>
           </div>
         </div>
 
@@ -91,7 +94,6 @@ export const InvestmentInsightsSummary = () => {
           ))}
         </div>
       </div>
-
       {/* Cards */}
       <div className="insights-grid">
         {filteredInsights.map((insight) => (
@@ -135,7 +137,7 @@ export const InvestmentInsightsSummary = () => {
 
             {/* Confidence */}
             <div className="confidence-row">
-              <span>Confidence</span>
+              <span>{t("confidence")}</span>
               <div className="confidence-bar">
                 <div
                   className="confidence-fill"
@@ -147,14 +149,12 @@ export const InvestmentInsightsSummary = () => {
           </div>
         ))}
       </div>
-
       {/* Disclaimer */}
       <div className="insights-disclaimer">
         <Sparkles />
-        <p>
-          Insights are generated based on historical trends and market analysis.
-          Always consult a financial advisor before making investment decisions.
-        </p>
+        <p>{t(
+          "insights_are_generated_based_on_historical_trends_and_market_analysis_always_consult_a_financial_advisor_before_making_investment_decisions"
+        )}</p>
       </div>
     </section>
   );

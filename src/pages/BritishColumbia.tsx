@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import FilterBar from '@/components/FilterBar';
@@ -57,6 +58,8 @@ const rentalInvestmentListings = bestForRentalInvestment.map(toListing);
 const justSoldListings = (justSold ?? []).map(toListing);
 
 const BritishColumbia: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="min-h-screen">
      <Hero  />

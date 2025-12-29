@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from "react-i18next";
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import styles from "./Blog.module.css";
@@ -15,6 +16,8 @@ interface BlogPost {
 }
 
 const Blog: React.FC = () => {
+  const { t } = useTranslation();
+
   const blogPosts: BlogPost[] = [
     {
       id: 1,
@@ -179,16 +182,14 @@ const Blog: React.FC = () => {
   return (
     <div className={styles.blogContainer}>
       <Navbar />
-
       <section className={styles.heroSection}>
         <div className={styles.heroContent}>
-          <h1 className={styles.heroTitle}>Real Estate Insights & Market Analysis</h1>
-          <p className={styles.heroDescription}>
-            Stay informed with expert analysis, market trends, and insider knowledge about Ontario's real estate landscape
-          </p>
+          <h1 className={styles.heroTitle}>{t("real_estate_insights_market_analysis")}</h1>
+          <p className={styles.heroDescription}>{t(
+            "stay_informed_with_expert_analysis_market_trends_and_insider_knowledge_about_ontario_s_real_estate_landscape"
+          )}</p>
         </div>
       </section>
-
       <main className={styles.blogMain}>
         <div className={styles.contentWrapper}>
           <div className={styles.categoryFilter}>
@@ -221,10 +222,8 @@ const Blog: React.FC = () => {
                   <p className={styles.cardExcerpt}>{post.excerpt}</p>
 
                   <div className={styles.cardFooter}>
-                    <span className={styles.author}>By {post.author}</span>
-                    <a href={`/blog/${post.id}`} className={styles.readMore}>
-                      Read more →
-                    </a>
+                    <span className={styles.author}>{t("by")}{post.author}</span>
+                    <a href={`/blog/${post.id}`} className={styles.readMore}>{t("read_more")}</a>
                   </div>
                 </div>
               </article>
@@ -235,24 +234,24 @@ const Blog: React.FC = () => {
             <button className={`${styles.pageBtn} ${styles.active}`}>1</button>
             <button className={styles.pageBtn}>2</button>
             <button className={styles.pageBtn}>3</button>
-            <span className={styles.pageDots}>...</span>
+            <span className={styles.pageDots}>{t("")}</span>
             <button className={styles.pageBtn}>5</button>
-            <button className={`${styles.pageBtn} ${styles.next}`}>Next Posts »</button>
+            <button className={`${styles.pageBtn} ${styles.next}`}>{t("next_posts")}</button>
           </div>
         </div>
       </main>
-
       <section className={styles.newsletterSection}>
         <div className={styles.newsletterContent}>
-          <h3>Stay Updated with Market Insights</h3>
-          <p>Subscribe to receive the latest real estate analysis and market reports directly to your inbox</p>
+          <h3>{t("stay_updated_with_market_insights")}</h3>
+          <p>{t(
+            "subscribe_to_receive_the_latest_real_estate_analysis_and_market_reports_directly_to_your_inbox"
+          )}</p>
           <form className={styles.newsletterForm} onSubmit={(e) => e.preventDefault()}>
             <input type="email" placeholder="Enter your email address" required />
-            <button type="submit">Subscribe</button>
+            <button type="submit">{t("subscribe")}</button>
           </form>
         </div>
       </section>
-
       <Footer />
     </div>
   );

@@ -1,6 +1,10 @@
 import { Agent } from "@/pages/Agents";
 
+import { useTranslation } from "react-i18next";
+
 const agents: Agent[] = [
+
+  
   // ================= ONTARIO =================
   {
     id: 1,

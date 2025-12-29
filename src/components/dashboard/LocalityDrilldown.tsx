@@ -1,5 +1,7 @@
 import './LocalityDrilldown.css';
 
+import { useTranslation } from "react-i18next";
+
 import { MapPin, IndianRupee, Home } from 'lucide-react';
 import { LocalityData } from '@/data/mockData';
 import { PercentageChange } from './ComparisonModeToggle';
@@ -15,14 +17,16 @@ export const LocalityDrilldown = ({
   localities,
   cityName,
 }: LocalityDrilldownProps) => {
+
+  const { t } = useTranslation();
+
   return (
     <section className="locality-section">
       {/* Header */}
       <div className="locality-header">
         <MapPin />
-        <span>Top Localities in {cityName}</span>
+        <span>{t("top_localities_in")}{cityName}</span>
       </div>
-
       {/* List */}
       <div className="locality-list">
         {localities.map((locality, index) => (
@@ -36,8 +40,8 @@ export const LocalityDrilldown = ({
               <div>
                 <h5>{locality.name}</h5>
                 <div className="locality-demand">
-                  <span>Demand:</span>
-                  <strong>{locality.demandScore}/100</strong>
+                  <span>{t("demand")}</span>
+                  <strong>{locality.demandScore}{t("100")}</strong>
 
                   <InfoTooltip
                     title={dataMethodology.demandScore.title}
@@ -60,7 +64,7 @@ export const LocalityDrilldown = ({
                   <IndianRupee />
                 </div>
                 <div>
-                  <span>Avg. Price / sqft</span>
+                  <span>{t("avg_price_sqft")}</span>
                   <strong>
                     ₹{locality.avgPrice.toLocaleString()}
                   </strong>
@@ -72,7 +76,7 @@ export const LocalityDrilldown = ({
                   <Home />
                 </div>
                 <div>
-                  <span>Avg. Rent / mo</span>
+                  <span>{t("avg_rent_mo")}</span>
                   <strong>
                     ₹{locality.avgRent.toLocaleString()}
                     <em>+{locality.rentChange}%</em>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Folder, FileText } from "lucide-react";
 import { Link } from "react-router-dom";
 import "./FAQ.css";
@@ -126,6 +127,8 @@ const sidebarCategories: SidebarCategory[] = faqData.map((c) => ({
 // =========================
 
 const FAQ = () => {
+  const { t } = useTranslation();
+
   const [searchQuery, setSearchQuery] = useState("");
   const [openSidebarId, setOpenSidebarId] = useState<string | null>(null);
 
@@ -135,80 +138,78 @@ const FAQ = () => {
 
   return (
     <>
-    <ScamNav/>
-    <div className="faq-container">
-      <div className="faq-wrapper">
-        <h1 className="faq-title">FAQ</h1>
+      <ScamNav/>
+      <div className="faq-container">
+        <div className="faq-wrapper">
+          <h1 className="faq-title">{t("faq")}</h1>
 
-        <div className="faq-layout">
+          <div className="faq-layout">
 
-          <div className="faq-main-content">
-            <SearchBar
-              searchQuery={searchQuery}
-              setSearchQuery={setSearchQuery}
-              onSearch={() => console.log("Searching:", searchQuery)}
-            />
+            <div className="faq-main-content">
+              <SearchBar
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
+                onSearch={() => console.log("Searching:", searchQuery)}
+              />
 
-            <div className="faq-categories-grid">
-              {faqData.map((category) => (
-                <div key={category.id} className="faq-category-card">
+              <div className="faq-categories-grid">
+                {faqData.map((category) => (
+                  <div key={category.id} className="faq-category-card">
 
-                  <div className="faq-category-accent" />
+                    <div className="faq-category-accent" />
 
-                  <div className="faq-category-content">
-                    <div className="faq-category-header">
-                      <Folder className="faq-category-icon" />
-                      <h3 className="faq-category-title">
-                        {category.title} ({category.count})
-                      </h3>
+                    <div className="faq-category-content">
+                      <div className="faq-category-header">
+                        <Folder className="faq-category-icon" />
+                        <h3 className="faq-category-title">
+                          {category.title} ({category.count})
+                        </h3>
+                      </div>
+
+                      <ul className="faq-articles-list">
+                      {category.articles.slice(0, 6).map((article) => (
+                        <li key={article.id}>
+                          <Link
+                            to={`/faq/${category.id}/${article.slug}`}
+                            className="faq-article-link"
+                          >
+                            <FileText className="faq-article-icon" />
+                            {article.question}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <div className="view-all-container">
+                      <Link
+                        to={`/faq/${category.id}`}
+                        className="faq-view-all-link"
+                      >{t("view_all")}{category.count}{t("articles")}</Link>
                     </div>
-
-                    <ul className="faq-articles-list">
-                    {category.articles.slice(0, 6).map((article) => (
-                      <li key={article.id}>
-                        <Link
-                          to={`/faq/${category.id}/${article.slug}`}
-                          className="faq-article-link"
-                        >
-                          <FileText className="faq-article-icon" />
-                          {article.question}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="view-all-container">
-                    <Link
-                      to={`/faq/${category.id}`}
-                      className="faq-view-all-link"
-                    >
-                      View all {category.count} articles
-                    </Link>
+                    </div>
                   </div>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
 
-          <Sidebar
-            faqData={faqData}
-            sidebarCategories={sidebarCategories}
-            openSidebarId={openSidebarId}
-            toggleSidebar={toggleSidebar}
-          />
+            <Sidebar
+              faqData={faqData}
+              sidebarCategories={sidebarCategories}
+              openSidebarId={openSidebarId}
+              toggleSidebar={toggleSidebar}
+            />
+          </div>
         </div>
       </div>
-    </div>
-    {/* Footer */}
+      {/* Footer */}
       <footer className="footer">
         <div className="footer-content">
           <div className="footer-links">
-            <a className="footer-link">HomeNest Inc. Brokerage</a>
-            <a className="footer-link">Legal</a>
-            <a className="footer-link">Privacy & Security</a>
-            <a className="footer-link">Terms & Conditions</a>
-            <a className="footer-link">Accessibility</a>
+            <a className="footer-link">{t("homenest_inc_brokerage")}</a>
+            <a className="footer-link">{t("legal")}</a>
+            <a className="footer-link">{t("privacy_security")}</a>
+            <a className="footer-link">{t("terms_conditions")}</a>
+            <a className="footer-link">{t("accessibility")}</a>
           </div>
         </div>
       </footer>

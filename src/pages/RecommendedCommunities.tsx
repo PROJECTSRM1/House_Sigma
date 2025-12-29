@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -47,6 +48,8 @@ const formatAdaptive = (value: number) => {
 };
 
 export default function RecommendedCommunities() {
+  const { t } = useTranslation();
+
   const [selectedInvestment, setSelectedInvestment] = useState<string[]>([]);
   const [selectedProperty, setSelectedProperty] = useState<string[]>([]);
   const [selectedCities, setSelectedCities] = useState<string[]>([]);
@@ -207,7 +210,6 @@ export default function RecommendedCommunities() {
   return (
     <>
       <Navbar />
-
       <div className={styles.pageContainer}>
         {/* Hero Section */}
         <div className={styles.heroSection}>
@@ -217,12 +219,12 @@ export default function RecommendedCommunities() {
                 <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
                 <polyline points="9 22 9 12 15 12 15 22"/>
               </svg>
-              <span>Community Finder</span>
+              <span>{t("community_finder")}</span>
             </div>
-            <h1 className={styles.heroTitle}>Find Your Perfect Community</h1>
-            <p className={styles.heroSubtitle}>
-              Discover the best neighborhoods that match your lifestyle and investment goals
-            </p>
+            <h1 className={styles.heroTitle}>{t("find_your_perfect_community")}</h1>
+            <p className={styles.heroSubtitle}>{t(
+              "discover_the_best_neighborhoods_that_match_your_lifestyle_and_investment_goals"
+            )}</p>
           </div>
         </div>
 
@@ -235,11 +237,9 @@ export default function RecommendedCommunities() {
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
                   </svg>
-                  <span>{activeFiltersCount} Active Filter{activeFiltersCount !== 1 ? 's' : ''}</span>
+                  <span>{activeFiltersCount}{t("active_filter")}{activeFiltersCount !== 1 ? 's' : ''}</span>
                 </div>
-                <button onClick={clearAll} className={styles.clearAllLink}>
-                  Clear all
-                </button>
+                <button onClick={clearAll} className={styles.clearAllLink}>{t("clear_all")}</button>
               </div>
               <div className={styles.filterTagsContainer}>
                 {(priceMin > 0 || priceMax < 5000000) && (
@@ -277,7 +277,7 @@ export default function RecommendedCommunities() {
                   </span>
                 ))}
                 {selectedCities.length > 3 && (
-                  <span className={styles.filterTagMore}>+{selectedCities.length - 3} more cities</span>
+                  <span className={styles.filterTagMore}>+{selectedCities.length - 3}{t("more_cities")}</span>
                 )}
               </div>
             </div>
@@ -295,13 +295,13 @@ export default function RecommendedCommunities() {
                       <line x1="12" y1="1" x2="12" y2="23"/>
                       <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
                     </svg>
-                    <h3>Price Range</h3>
+                    <h3>{t("price_range")}</h3>
                   </div>
                 </div>
 
                 <div className={styles.priceInputsRow}>
                   <div className={styles.priceInputWrapper}>
-                    <label className={styles.priceLabel}>Min Price</label>
+                    <label className={styles.priceLabel}>{t("min_price")}</label>
                     <div className={styles.priceInputBox}>
                       <span className={styles.priceCurrency}>$</span>
                       <input
@@ -316,7 +316,7 @@ export default function RecommendedCommunities() {
                   </div>
 
                   <div className={styles.priceInputWrapper}>
-                    <label className={styles.priceLabel}>Max Price</label>
+                    <label className={styles.priceLabel}>{t("max_price")}</label>
                     <div className={styles.priceInputBox}>
                       <span className={styles.priceCurrency}>$</span>
                       <input
@@ -389,7 +389,7 @@ export default function RecommendedCommunities() {
                     <svg className={styles.cardIcon} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
                     </svg>
-                    <h3>Investment Requirement</h3>
+                    <h3>{t("investment_requirement")}</h3>
                   </div>
                   <button
                     className={styles.selectAllBtn}
@@ -436,7 +436,7 @@ export default function RecommendedCommunities() {
                       <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
                       <polyline points="9 22 9 12 15 12 15 22"/>
                     </svg>
-                    <h3>Property Type</h3>
+                    <h3>{t("property_type")}</h3>
                   </div>
                   <button
                     className={styles.selectAllBtn}
@@ -485,7 +485,7 @@ export default function RecommendedCommunities() {
                       <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
                       <circle cx="12" cy="10" r="3"/>
                     </svg>
-                    <h3>Select Cities</h3>
+                    <h3>{t("select_cities")}</h3>
                   </div>
                 </div>
 
@@ -564,17 +564,15 @@ export default function RecommendedCommunities() {
                     <line x1="12" y1="16" x2="12" y2="12"/>
                     <line x1="12" y1="8" x2="12.01" y2="8"/>
                   </svg>
-                  <p className={styles.disclaimerText}>
-                    Good School, Value Appreciation, Rental Yield and Land Size are estimated values
-                    based on HouseSigma's internal algorithm.
-                  </p>
+                  <p className={styles.disclaimerText}>{t(
+                    "good_school_value_appreciation_rental_yield_and_land_size_are_estimated_values_based_on_housesigma_s_internal_algorithm"
+                  )}</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-
       {/* Sticky Bottom Action Bar */}
       <div className={styles.actionBar}>
         <div className={styles.actionBarContent}>
@@ -588,9 +586,7 @@ export default function RecommendedCommunities() {
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <line x1="18" y1="6" x2="6" y2="18"/>
                 <line x1="6" y1="6" x2="18" y2="18"/>
-              </svg>
-              Clear All
-            </button>
+              </svg>{t("clear_all")}</button>
 
             <button
               onClick={() => alert(`Finding communities with ${activeFiltersCount} filters...`)}
@@ -599,13 +595,10 @@ export default function RecommendedCommunities() {
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <circle cx="11" cy="11" r="8"/>
                 <path d="m21 21-4.35-4.35"/>
-              </svg>
-              Find Communities
-            </button>
+              </svg>{t("find_communities")}</button>
           </div>
         </div>
       </div>
-
       <Footer />
       {openChat && <ChatBot onClose={() => setOpenChat(false)} />}
       <FloatingChatButton onOpen={() => setOpenChat(true)} />
