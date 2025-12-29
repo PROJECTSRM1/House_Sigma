@@ -10,13 +10,14 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color:#0f93ff ;
+  background-color: #2b5ea8
+;
 }
 
 /* ================= HERO ================= */
 
 .heroSection {
-  background-color: #0f93ff;
+  background-color: #2b5ea8;
   padding: 4rem 2rem 3rem;
   text-align: center;
   color: #ffffff;
@@ -83,15 +84,15 @@
 }
 
 .categoryBtn:hover {
-  border-color: #0f93ff;
+  border-color: #2b5ea8;
   /* color: #0f93ff; */
   transform: translateY(-2px);
 }
 
 .active {
-  background-color: #0f93ff;
+  background-color: #2b5ea8;
   color: #ffffff;
-  border-color: #0f93ff;
+  border-color:#2b5ea8;
 }
 
 /* ================= BLOG GRID ================= */
@@ -209,7 +210,7 @@
 }
 
 .readMore {
-  color: #0f93ff;
+  color: #2b5ea8;
   text-decoration: none;
   font-weight: 700;
   font-size: 0.85rem;
@@ -233,14 +234,14 @@
 .pageBtn {
   padding: 0.6rem 1.1rem;
   border: 2px solid #e0e0e0;
-  background-color: #0f93ff;
+  background-color: #2b5ea8;
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
 }
 
 .pageBtn:hover {
-  background-color: #0f93ff;
+  background-color:#2b5ea8;
   color: #ffffff;
 }
 
@@ -255,7 +256,7 @@
 /* ================= NEWSLETTER ================= */
 
 .newsletterSection {
-  background: linear-gradient(135deg, #0f93ff);
+  background: linear-gradient(135deg, #2b5ea8);
   padding: 3.5rem 2rem;
   color: #ffffff;
   text-align: center;
