@@ -20,7 +20,6 @@
   color: var(--pd-text-primary);
   line-height: 1.5;
   min-height: 100vh;
-  margin-top: 50px;
 }
 
 .property-detail-page * {

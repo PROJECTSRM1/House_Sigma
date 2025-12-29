@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
@@ -6,6 +6,8 @@ import FilterBar from '@/components/FilterBar';
 import PropertySection from '@/components/PropertySection';
 import StatsChart from './bcStatsChart';
 import Footer from '@/components/Footer';
+import FloatingChatButton from "../components/floatingWindowChatBot";
+import ChatBot from "../components/chatbot";
 import britishHero from "/assets/Britishcolumbia_files/BC.jpg";
 
 import {
@@ -58,6 +60,7 @@ const rentalInvestmentListings = bestForRentalInvestment.map(toListing);
 const justSoldListings = (justSold ?? []).map(toListing);
 
 const BritishColumbia: React.FC = () => {
+  const [openChat, setOpenChat] = useState(false);
   const { t } = useTranslation();
 
   return (
@@ -82,6 +85,8 @@ const BritishColumbia: React.FC = () => {
 
       {/* Footer placed outside the centered container so it can be wider */}
       <Footer />
+      {openChat && <ChatBot onClose={() => setOpenChat(false)} />}
+      <FloatingChatButton onOpen={() => setOpenChat(true)} />
     </div>
   );
 };

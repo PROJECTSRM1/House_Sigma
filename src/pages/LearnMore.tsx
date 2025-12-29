@@ -6,10 +6,14 @@ import scam1 from "/assets/scam.png";
 import scam2 from "/assets/scam2.png";
 import scam3 from "/assets/scam3.png";
 import ScamNav from '@/pages/ScamNav';
+import FloatingChatButton from "../components/floatingWindowChatBot";
+import ChatBot from "../components/chatbot";
+import { useState } from "react";
 
 
 const LearnMore = () => {
   const { t } = useTranslation();
+  const [openChat, setOpenChat] = useState(false);
 
   return (
     <div className="learn-more-container">
@@ -156,6 +160,8 @@ const LearnMore = () => {
           </div>
         </div>
       </footer>
+      {openChat && <ChatBot onClose={() => setOpenChat(false)} />}
+      <FloatingChatButton onOpen={() => setOpenChat(true)} />
     </div>
   );
 };

@@ -12,6 +12,9 @@ import { InvestmentHotspots } from "@/components/dashboard/InvestmentHotspots";
 import { CityComparison } from "@/components/dashboard/CityComparison";
 import { DataMethodologyModal } from "@/components/dashboard/DataMethodologyModal";
 
+import FloatingChatButton from "../components/floatingWindowChatBot";
+import ChatBot from "../components/chatbot";
+
 import { priceTrendsData, rentalDemandData } from "@/data/mockData";
 
 type Filters = {
@@ -38,6 +41,7 @@ const getMonthLimit = (timeRange: string) => {
 };
 
 const MarketTrends = () => {
+  const [openChat, setOpenChat] = useState(false);
   const [filters, setFilters] = useState<Filters>({
     city: "All Cities",
     propertyType: "All Types",
@@ -122,6 +126,8 @@ const filteredRentalData = useMemo(() => {
       </div>
     </div>
     <Footer/>
+    {openChat && <ChatBot onClose={() => setOpenChat(false)} />}
+      <FloatingChatButton onOpen={() => setOpenChat(true)} />
     </div>
   );
 };

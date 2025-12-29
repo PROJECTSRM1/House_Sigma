@@ -43,7 +43,7 @@
   width: 100px;
   height: 4px;
   /* background: linear-gradient(90deg, #0f93ff 0%, #0f93ff 100%); */
-  background: linear-gradient(90deg, 0%#0f93ff, #0f93ff 100%);
+  background:#1e4a7a;
   margin: 0 auto 1rem;
   border-radius: 2px;
 }
@@ -82,7 +82,7 @@
 }
 
 .searchWrapper:focus-within {
-  border-color: #0f93ff;
+  border-color: #1e4a7a;
   box-shadow: 0 0 0 3px rgba(255, 122, 0, 0.1);
 }
 
@@ -108,7 +108,7 @@
 .searchButton {
   padding: 0.625rem 1.5rem;
   /* background: linear-gradient(135deg, #0f93ff 0%, #0f93ff 100%); */
-  background: linear-gradient(135deg, #0f93ff 0%, #0f93ff 100%);
+  background: #1e4a7a;
   color: white;
   border: none;
   border-radius: 8px;
@@ -121,7 +121,12 @@
 
 .searchButton:hover {
   /* background: linear-gradient(135deg, #0f93ff 0%, #d54d00 100%); */
-  background: linear-gradient(135deg, #0f93ff 0%, #0f93ff 100%);
+ background: linear-gradient(
+  135deg,
+  #1f3550 0%,
+  #2b5ea8 50%,
+  #2b9df4 100%
+);
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(255, 122, 0, 0.3);
 }
@@ -129,7 +134,7 @@
 /* Info Card */
 .infoCard {
   background: #fef3c7;
-  border: 1px solid #0f93ff;
+  border: 1px solid #1e4a7a;
   border-radius: 12px;
   padding: 1.25rem;
   margin-bottom: 2rem;
@@ -149,14 +154,14 @@
 }
 
 .link {
-  color: #0f93ff;
+  color: #1e4a7a;
   font-weight: 600;
   text-decoration: underline;
   transition: color 0.2s;
 }
 
 .link:hover {
-  color: #0f93ff;
+  color: #1e4a7a;
 }
 
 /* Quick Help Section */
@@ -192,8 +197,8 @@
 
 .chip:hover {
   background: #fff7ed;
-  border-color: #0f93ff;
-  color: #0f93ff;
+  border-color: #1e4a7a;
+  color: #1e4a7a;
   transform: translateY(-2px);
 }
 
@@ -224,7 +229,7 @@
 .contactOptionCard:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
-  border-color: #0f93ff;
+  border-color: #1e4a7a;
 }
 
 .iconCircle {
@@ -256,7 +261,12 @@
   width: 100%;
   padding: 0.625rem 1.25rem;
   /* background: linear-gradient(135deg, #0f93ff 0%, #0f93ff 100%); */
-  background: linear-gradient(135deg, #0f93ff 0%, #1194ff 100%);
+  background: linear-gradient(
+  135deg,
+  #1f3550 0%,
+  #2b5ea8 50%,
+  #2b9df4 100%
+);
   color: white;
   border: none;
   border-radius: 8px;
@@ -268,7 +278,12 @@
 
 .primaryButton:hover {
   /* background: linear-gradient(135deg, #0f93ff 0%, #d54d00 100%); */
-   background: linear-gradient(135deg, #0f93ff 0%, #0f93ff 100%);
+   background: linear-gradient(
+  135deg,
+  #1f3550 0%,
+  #2b5ea8 50%,
+  #2b9df4 100%
+);
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(255, 122, 0, 0.3);
 }
@@ -348,7 +363,7 @@
 }
 
 .contactLink {
-  color: #0f93ff;
+  color: #1e4a7a;
   font-size: 0.9375rem;
   text-decoration: underline;
   transition: color 0.2s;
@@ -356,15 +371,20 @@
 }
 
 .contactLink:hover {
-  color: #0f93ff;
+  color: linear-gradient(
+  135deg,
+  #1f3550 0%,
+  #2b5ea8 50%,
+  #2b9df4 100%
+);
 }
 
 .emailButton {
   display: inline-block;
   padding: 0.625rem 1.25rem;
   background: white;
-  border: 2px solid #0f93ff;
-  color: #0f93ff;
+  border: 2px solid #1e4a7a;
+  color: #1e4a7a;
   border-radius: 8px;
   font-weight: 600;
   font-size: 0.875rem;
@@ -381,8 +401,8 @@
   display: inline-block;
   padding: 0.625rem 1.5rem;
   background: white;
-  border: 2px solid #0f93ff;
-  color: #0f93ff;
+  border: 2px solid #1e4a7a;
+  color: #1e4a7a;
   border-radius: 8px;
   font-weight: 600;
   font-size: 0.9375rem;

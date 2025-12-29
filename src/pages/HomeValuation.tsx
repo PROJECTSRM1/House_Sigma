@@ -24,6 +24,9 @@ import styles from "./HomeValuation.module.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
+import FloatingChatButton from "../components/floatingWindowChatBot";
+import ChatBot from "../components/chatbot";
+
 interface InputProps {
   label: string;
   suffix?: string;
@@ -40,6 +43,7 @@ interface CounterProps {
 }
 
 export default function HomeValuation() {
+  const [openChat, setOpenChat] = useState(false);
   const { t } = useTranslation();
 
 
@@ -340,6 +344,8 @@ export default function HomeValuation() {
         </div>
       </div>
       <Footer />
+      {openChat && <ChatBot onClose={() => setOpenChat(false)} />}
+      <FloatingChatButton onOpen={() => setOpenChat(true)} />
     </div>
   );
 }

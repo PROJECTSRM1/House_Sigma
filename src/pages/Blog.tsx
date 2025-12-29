@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from "react-i18next";
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import styles from "./Blog.module.css";
+import FloatingChatButton from "../components/floatingWindowChatBot";
+import ChatBot from "../components/chatbot";
 
 interface BlogPost {
   id: number;
@@ -17,6 +19,7 @@ interface BlogPost {
 
 const Blog: React.FC = () => {
   const { t } = useTranslation();
+  const [openChat, setOpenChat] = useState(false);
 
   const blogPosts: BlogPost[] = [
     {
@@ -253,6 +256,8 @@ const Blog: React.FC = () => {
         </div>
       </section>
       <Footer />
+      {openChat && <ChatBot onClose={() => setOpenChat(false)} />}
+      <FloatingChatButton onOpen={() => setOpenChat(true)} />
     </div>
   );
 };
