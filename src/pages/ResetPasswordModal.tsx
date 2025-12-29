@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import "./ResetPasswordModal.css";
 
 interface CountryOption {
@@ -23,6 +24,10 @@ export default function ResetPasswordModal({
   initiallyTab = "email",
   onFinished = () => {},
 }: ResetPasswordModalProps) {
+  const {
+    t: t
+  } = useTranslation();
+
   const [step, setStep] = useState<number>(1);
   const [tab, setTab] = useState<"email" | "phone">(initiallyTab);
 
@@ -177,7 +182,7 @@ export default function ResetPasswordModal({
       <div className="rp-modal">
         <button className="rp-close" onClick={closeReset}>×</button>
 
-        <h3 className="rp-title">Reset Password by</h3>
+        <h3 className="rp-title">{t("reset_password_by")}</h3>
 
         <div className="rp-steps">
           <div className={`rp-step-circle ${step >= 1 ? "active" : ""}`}>1</div>
@@ -189,15 +194,11 @@ export default function ResetPasswordModal({
           <button
             className={`rp-tab ${tab === "email" ? "active" : ""}`}
             onClick={() => setTab("email")}
-          >
-            Email
-          </button>
+          >{t("email")}</button>
           <button
             className={`rp-tab ${tab === "phone" ? "active" : ""}`}
             onClick={() => setTab("phone")}
-          >
-            Mobile Phone
-          </button>
+          >{t("mobile_phone")}</button>
         </div>
 
         <div className="rp-content">

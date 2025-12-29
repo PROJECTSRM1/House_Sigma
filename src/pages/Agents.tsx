@@ -1,5 +1,6 @@
 // src/pages/Agents.tsx
 import React, { useEffect, useMemo, useRef, useState, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 
@@ -57,6 +58,10 @@ const typedGetFileSizeKB = getFileSizeKB as unknown as (f: File) => Promise<numb
  * Convert a Blob -> File (useful because helpers may expect File)
  */
 function blobToFile(blob: Blob, filename = "image"): File {
+  const {
+    t: t
+  } = useTranslation();
+
   try {
     return new File([blob], filename, { type: blob.type || "image/jpeg" });
   } catch {
@@ -69,6 +74,10 @@ function blobToFile(blob: Blob, filename = "image"): File {
  * Fetch a URL and return a Blob (or null).
  */
 async function fetchBlob(url: string): Promise<Blob | null> {
+  const {
+    t: t
+  } = useTranslation();
+
   try {
     const resp = await fetch(url, { method: "GET", cache: "force-cache" });
     if (!resp.ok) return null;
@@ -83,6 +92,10 @@ async function fetchBlob(url: string): Promise<Blob | null> {
  * Prefer calling the provided helper if it expects File; otherwise fallback.
  */
 async function sizeKBOf(input: string | Blob | File): Promise<number | null> {
+  const {
+    t: t
+  } = useTranslation();
+
   // If input is a data URL string, estimate from base64
   if (typeof input === "string") {
     if (input.startsWith("data:")) {
@@ -119,6 +132,10 @@ async function sizeKBOf(input: string | Blob | File): Promise<number | null> {
  * This function fetches the original as a Blob -> File and calls the compressor with File.
  */
 async function compressAndCacheUrl(url: string, bump: () => void): Promise<void> {
+  const {
+    t: t
+  } = useTranslation();
+
   if (!url) return;
   if (compressedUrlCache.has(url)) return;
   if (compressingUrls.has(url)) return;
@@ -203,6 +220,9 @@ function AgentCard({
   agent: Agent;
   onClick?: () => void;
 }): JSX.Element {
+  const {
+    t: t
+  } = useTranslation();
 
   // get current best URL: compressed if available, otherwise original avatar, otherwise placeholder
   const baseUrl = agent.avatar;
@@ -284,12 +304,20 @@ function CustomSelect({
   width?: number;
   menuWidth?: number;
 }) {
+  const {
+    t: t
+  } = useTranslation();
+
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement | null>(null);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
     function onDoc(e: MouseEvent) {
+      const {
+        t: t
+      } = useTranslation();
+
       if (!rootRef.current) return;
       if (rootRef.current.contains(e.target as Node)) return;
       setOpen(false);
@@ -300,6 +328,10 @@ function CustomSelect({
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
+      const {
+        t: t
+      } = useTranslation();
+
       if (!open) return;
       if (e.key === "Escape") setOpen(false);
     }
@@ -333,7 +365,6 @@ function CustomSelect({
           ▼
         </span>
       </button>
-
       {open && (
         <div
           className={styles.customSelectMenu}
@@ -354,7 +385,7 @@ function CustomSelect({
                   }}
                 />
                 <span className={styles.customRadio} />
-                <span className={styles.customOptionLabel}>All areas</span>
+                <span className={styles.customOptionLabel}>{t("all_areas")}</span>
               </label>
             </li>
 
@@ -394,6 +425,10 @@ function Filters(props: {
   selectedLanguage: string;
   setSelectedLanguage: (l: string) => void;
 }) {
+  const {
+    t: t
+  } = useTranslation();
+
   const {
     provinces,
     activeProvince,
@@ -460,6 +495,9 @@ function Filters(props: {
 /* -------------------- AgentsPage (main) -------------------- */
 
 export default function AgentsPage(): JSX.Element {
+  const { t } = useTranslation();
+
+
   const navigate = useNavigate();
 
   const [activeProvince, setActiveProvince] = useState<string>(PROVINCES[0]);
@@ -601,12 +639,11 @@ export default function AgentsPage(): JSX.Element {
           ))}
 
           {filtered.length === 0 && (
-            <p className={styles.noResults}>No agents found.</p>
+            <p className={styles.noResults}>{t("no_agents_found")}</p>
           )}
         </section>
       </main>
       <Footer />
-
       {openChat && <ChatBot onClose={() => setOpenChat(false)} />}
       <FloatingChatButton onOpen={() => setOpenChat(true)} />
     </>

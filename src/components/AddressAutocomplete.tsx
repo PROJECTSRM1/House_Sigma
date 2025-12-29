@@ -1,7 +1,12 @@
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import styles from "./AddressAutocomplete.module.css"; // We'll create this style
 
 export default function AddressAutocomplete({ value, onChange }) {
+
+  const { t } = useTranslation();
+
+
   const [suggestions, setSuggestions] = useState([]);
   const [showList, setShowList] = useState(false);
 

@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Home,
   Bed,
@@ -39,6 +40,9 @@ interface CounterProps {
 }
 
 export default function HomeValuation() {
+  const { t } = useTranslation();
+
+
   const [bed, setBed] = useState(3);
   const [pbed, setPbed] = useState(0);
   const [bath, setBath] = useState(2);
@@ -87,7 +91,6 @@ export default function HomeValuation() {
   return (
     <div className={styles.pageWrapper}>
       <Navbar />
-
       {/* Hero Section - Redesigned */}
       <div className={styles.hero}>
         <div className={styles.heroOverlay} />
@@ -96,34 +99,31 @@ export default function HomeValuation() {
             <Zap size={16} />
             {/* <span>AI-Powered Valuation</span> */}
           </div>
-          <h1 className={styles.heroTitle}>
-            Unlock Your Home's
-            <span className={styles.heroTitleAccent}> True Market Value</span>
+          <h1 className={styles.heroTitle}>{t("unlock_your_home_s")}<span className={styles.heroTitleAccent}>{t("true_market_value")}</span>
           </h1>
-          <p className={styles.heroSubtitle}>
-            Get an instant, accurate property estimate using real-time market data from thousands of comparable properties.
-          </p>
+          <p className={styles.heroSubtitle}>{t(
+            "get_an_instant_accurate_property_estimate_using_real_time_market_data_from_thousands_of_comparable_properties"
+          )}</p>
           
           {/* Quick Stats */}
           <div className={styles.heroStats}>
             <div className={styles.statItem}>
-              <div className={styles.statValue}>98%</div>
-              <div className={styles.statLabel}>Accuracy Rate</div>
+              <div className={styles.statValue}>{t("98")}</div>
+              <div className={styles.statLabel}>{t("accuracy_rate")}</div>
             </div>
             <div className={styles.statDivider} />
             <div className={styles.statItem}>
-              <div className={styles.statValue}>500K+</div>
-              <div className={styles.statLabel}>Valuations</div>
+              <div className={styles.statValue}>{t("500k")}</div>
+              <div className={styles.statLabel}>{t("valuations")}</div>
             </div>
             <div className={styles.statDivider} />
             <div className={styles.statItem}>
-              <div className={styles.statValue}>Free</div>
-              <div className={styles.statLabel}>Instant Valuation</div>
+              <div className={styles.statValue}>{t("free")}</div>
+              <div className={styles.statLabel}>{t("instant_valuation")}</div>
             </div>
           </div>
         </div>
       </div>
-
       <div className={styles.container}>
         {/* Two Column Layout */}
         <div className={styles.mainGrid}>
@@ -133,12 +133,12 @@ export default function HomeValuation() {
             <div className={styles.stepIndicator}>
               <div className={styles.stepItem}>
                 <div className={styles.stepNumber}>1</div>
-                <span className={styles.stepText}>Property Details</span>
+                <span className={styles.stepText}>{t("property_details")}</span>
               </div>
               <div className={styles.stepLine} />
               <div className={styles.stepItem}>
                 <div className={styles.stepNumber}>2</div>
-                <span className={styles.stepText}>Get Estimate</span>
+                <span className={styles.stepText}>{t("get_estimate")}</span>
               </div>
             </div>
 
@@ -149,8 +149,8 @@ export default function HomeValuation() {
                   <MapPin size={20} />
                 </div>
                 <div>
-                  <h3 className={styles.sectionTitle}>Property Location</h3>
-                  <p className={styles.sectionDescription}>Enter the complete address for accurate results</p>
+                  <h3 className={styles.sectionTitle}>{t("property_location")}</h3>
+                  <p className={styles.sectionDescription}>{t("enter_the_complete_address_for_accurate_results")}</p>
                 </div>
               </div>
               
@@ -173,8 +173,8 @@ export default function HomeValuation() {
                   <Home size={20} />
                 </div>
                 <div>
-                  <h3 className={styles.sectionTitle}>Property Specifications</h3>
-                  <p className={styles.sectionDescription}>Tell us about your property features</p>
+                  <h3 className={styles.sectionTitle}>{t("property_specifications")}</h3>
+                  <p className={styles.sectionDescription}>{t("tell_us_about_your_property_features")}</p>
                 </div>
               </div>
 
@@ -227,13 +227,13 @@ export default function HomeValuation() {
             {/* CTA Button */}
             {!isLoggedIn ? (
               <button className={styles.ctaButton} onClick={handleLoginClick}>
-                <span>Log In to Get Your Free Estimate</span>
+                <span>{t("log_in_to_get_your_free_estimate")}</span>
                 <ArrowRight size={20} />
               </button>
             ) : (
               <button className={styles.ctaButton} onClick={handleEstimate}>
                 <TrendingUp size={20} />
-                <span>Calculate Property Value</span>
+                <span>{t("calculate_property_value")}</span>
                 <ArrowRight size={20} />
               </button>
             )}
@@ -245,15 +245,15 @@ export default function HomeValuation() {
             <div className={styles.trustCard}>
               <div className={styles.trustHeader}>
                 <Shield size={24} className={styles.trustIcon} />
-                <h3 className={styles.trustTitle}>Why Choose Sigma Estimate?</h3>
+                <h3 className={styles.trustTitle}>{t("why_choose_sigma_estimate")}</h3>
               </div>
               
               <div className={styles.benefitsList}>
                 <div className={styles.benefitItem}>
                   <CheckCircle size={20} className={styles.benefitIcon} />
                   <div>
-                    <h4 className={styles.benefitTitle}>Real-Time Data</h4>
-                    <p className={styles.benefitText}>Updated daily with latest market trends</p>
+                    <h4 className={styles.benefitTitle}>{t("real_time_data")}</h4>
+                    <p className={styles.benefitText}>{t("updated_daily_with_latest_market_trends")}</p>
                   </div>
                 </div>
                 
@@ -268,16 +268,16 @@ export default function HomeValuation() {
                 <div className={styles.benefitItem}>
                   <CheckCircle size={20} className={styles.benefitIcon} />
                   <div>
-                    <h4 className={styles.benefitTitle}>Local Market Expertise</h4>
-                    <p className={styles.benefitText}>Neighborhood-specific insights included</p>
+                    <h4 className={styles.benefitTitle}>{t("local_market_expertise")}</h4>
+                    <p className={styles.benefitText}>{t("neighborhood_specific_insights_included")}</p>
                   </div>
                 </div>
                 
                 <div className={styles.benefitItem}>
                   <CheckCircle size={20} className={styles.benefitIcon} />
                   <div>
-                    <h4 className={styles.benefitTitle}>Detailed Report</h4>
-                    <p className={styles.benefitText}>Comprehensive breakdown and comparables</p>
+                    <h4 className={styles.benefitTitle}>{t("detailed_report")}</h4>
+                    <p className={styles.benefitText}>{t("comprehensive_breakdown_and_comparables")}</p>
                   </div>
                 </div>
               </div>
@@ -287,20 +287,20 @@ export default function HomeValuation() {
             <div className={styles.betaCard}>
               <div className={styles.betaBadge}>
                 <Award size={14} />
-                <span>BETA</span>
+                <span>{t("beta")}</span>
               </div>
               <p className={styles.betaText}>
-                <strong>Early Access:</strong> Home Nest Valuation is currently in early access. Information provided is subject to ongoing updates.
-
-              </p>
+                <strong>{t("early_access")}</strong>{t(
+                "home_nest_valuation_is_currently_in_early_access_information_provided_is_subject_to_ongoing_updates"
+              )}</p>
             </div>
 
             {/* Consultation Card */}
             {isLoggedIn && (
               <div className={styles.consultCard}>
                 <div className={styles.consultHeader}>
-                  <h3 className={styles.consultTitle}>Need Expert Guidance?</h3>
-                  <p className={styles.consultSubtitle}>Schedule a free consultation with a local property expert</p>
+                  <h3 className={styles.consultTitle}>{t("need_expert_guidance")}</h3>
+                  <p className={styles.consultSubtitle}>{t("schedule_a_free_consultation_with_a_local_property_expert")}</p>
                 </div>
 
                 <div className={styles.consultForm}>
@@ -332,9 +332,7 @@ export default function HomeValuation() {
                     onChange={(e) => setConsultMessage(e.target.value)}
                   />
 
-                  <button className={styles.consultButton} onClick={handleConsultSubmit}>
-                    Request Free Consultation
-                  </button>
+                  <button className={styles.consultButton} onClick={handleConsultSubmit}>{t("request_free_consultation")}</button>
                 </div>
               </div>
             )}
@@ -348,6 +346,10 @@ export default function HomeValuation() {
 
 /* ------------------- ENHANCED INPUT ------------------- */
 function EnhancedInput({ label, suffix, icon, value, onChange }: InputProps) {
+  const {
+    t: t
+  } = useTranslation();
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let v = e.target.value.replace("-", "").replace(/[^0-9.]/g, "");
     onChange(v || "0");
@@ -374,6 +376,10 @@ function EnhancedInput({ label, suffix, icon, value, onChange }: InputProps) {
 
 /* ------------------- SELECT INPUT ------------------- */
 function SelectInput() {
+  const {
+    t: t
+  } = useTranslation();
+
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState("");
   const ref = useRef<HTMLDivElement>(null);
@@ -391,9 +397,7 @@ function SelectInput() {
   return (
     <div className={styles.selectWrapper} ref={ref}>
       <label className={styles.inputLabel}>
-        <Home size={18} className={styles.inputIcon} />
-        Property Type
-      </label>
+        <Home size={18} className={styles.inputIcon} />{t("property_type")}</label>
       <div
         className={`${styles.selectBox} ${open ? styles.selectBoxOpen : ""}`}
         onClick={() => setOpen(!open)}
@@ -418,7 +422,6 @@ function SelectInput() {
           />
         )}
       </div>
-
       {open && (
         <div className={styles.dropdown}>
           {OPTIONS.map((item) => (
@@ -442,6 +445,10 @@ function SelectInput() {
 
 /* ------------------- COMPACT COUNTER ------------------- */
 function CompactCounter({ label, value, setValue, icon }: CounterProps) {
+  const {
+    t: t
+  } = useTranslation();
+
   return (
     <div className={styles.compactCounter}>
       <div className={styles.compactLabel}>

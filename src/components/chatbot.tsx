@@ -1,9 +1,13 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import styles from "./chatbot.module.css";
 
 const API_BASE = "http://127.0.0.1:8000";  // your FastAPI backend
 
 export default function ChatBotWindow({ onClose }: any) {
+ const { t } = useTranslation();
+
+
   const [msg, setMsg] = useState("");
   const [messages, setMessages] = useState([
     {
@@ -49,11 +53,8 @@ export default function ChatBotWindow({ onClose }: any) {
 
   return (
     <div className={styles.chatWindow}>
-      <div className={styles.chatHeader}>
-        AI Real Estate Assistant
-        <button className={styles.closeBtn} onClick={onClose}>✕</button>
+      <div className={styles.chatHeader}>{t("ai_real_estate_assistant")}<button className={styles.closeBtn} onClick={onClose}>✕</button>
       </div>
-
       <div className={styles.chatBody}>
         {messages.map((m, i) => (
           <div
@@ -64,7 +65,6 @@ export default function ChatBotWindow({ onClose }: any) {
           </div>
         ))}
       </div>
-
       <div className={styles.chatInputArea}>
         <input
           value={msg}
@@ -72,7 +72,7 @@ export default function ChatBotWindow({ onClose }: any) {
           onKeyDown={(e) => e.key === "Enter" && sendMessage()}
           placeholder="Ask something..."
         />
-        <button onClick={sendMessage}>Send</button>
+        <button onClick={sendMessage}>{t("send")}</button>
       </div>
     </div>
   );

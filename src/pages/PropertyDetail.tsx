@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from "react-i18next";
 import './PropertyDetail.css';
 import { useParams, useNavigate } from "react-router-dom";
 import { getPropertyDetailById } from "@/data/propertyDetailsResolver";
@@ -153,6 +154,7 @@ const formatNumber = (num: number): string => {
 
 // ===== MAIN COMPONENT =====
 const PropertyDetail: React.FC = () => {
+   const { t } = useTranslation();
 
     const { id } = useParams();
   const navigate = useNavigate();
@@ -162,8 +164,8 @@ const PropertyDetail: React.FC = () => {
   if (!propertyData) {
     return (
       <div style={{ padding: 80, textAlign: "center" }}>
-        <h2>Property details not available</h2>
-        <button onClick={() => navigate("/")}>Go Back</button>
+        <h2>{t("property_details_not_available")}</h2>
+        <button onClick={() => navigate("/")}>{t("go_back")}</button>
       </div>
     );
   }
@@ -255,277 +257,272 @@ const PropertyDetail: React.FC = () => {
 
   return (
     <>
-     <Navbar />
-    
-    <div className="property-detail-page">
-      
-      {/* Header Section */}
-      <header className="pd-header">
-        <div className="pd-header-content">
-          <div className="pd-header-left">
-            <p className="pd-property-id">Property ID: {propertyData.id}</p>
-            <h1 className="pd-title">{propertyData.title}</h1>
-            <p className="pd-location">{propertyData.area}, {propertyData.city}, {propertyData.province} • {propertyData.community}</p>
-            <div className="pd-property-meta">
-              <span className="pd-property-type">{propertyData.propertyType}</span>
-              <span className="pd-meta-separator">•</span>
-              <span className="pd-construction-status">{propertyData.constructionStatus}</span>
-            </div>
-          </div>
-          <div className="pd-header-right">
-            <div className="pd-price-section">
-              <span className="pd-price-label">Listed for:</span>
-              <span className="pd-price-value">{formatCurrency(propertyData.price)}</span>
-            </div>
-            <button className="pd-save-btn">
-              <Icons.Heart />
-              Save Property
-            </button>
-          </div>
-        </div>
-
-        {/* Quick Stats */}
-        <div className="pd-quick-stats">
-          <div className="pd-stat-item">
-            <Icons.Bed />
-            <span>{propertyData.bedrooms} Bedrooms</span>
-          </div>
-          <div className="pd-stat-item">
-            <Icons.Bath />
-            <span>{propertyData.bathrooms} Bathrooms</span>
-          </div>
-          <div className="pd-stat-item">
-            <Icons.Car />
-            <span>{propertyData.parking} Parking</span>
-          </div>
-        </div>
-      </header>
-
-      {/* Main Content */}
-      <main className="pd-main">
-        <div className="pd-layout">
-          <div className="pd-content">
-          {/* Gallery Section */}
-          <section className="pd-section">
-            <h2 className="pd-section-title">Property Images & Floor Plan</h2>
-            <div className="pd-gallery">
-              <div className="pd-gallery-main" onClick={() => openModal(activeImageIndex)}>
-                <img src={allImages[activeImageIndex]} alt={`Property view ${activeImageIndex + 1}`} />
-                <div className="pd-gallery-overlay">
-                  <Icons.Images />
-                  <span>{activeImageIndex + 1} / {allImages.length}</span>
-                </div>
+      <Navbar />
+      <div className="property-detail-page">
+        
+        {/* Header Section */}
+        <header className="pd-header">
+          <div className="pd-header-content">
+            <div className="pd-header-left">
+              <p className="pd-property-id">{t("property_id")}{propertyData.id}</p>
+              <h1 className="pd-title">{propertyData.title}</h1>
+              <p className="pd-location">{propertyData.area}, {propertyData.city}, {propertyData.province} • {propertyData.community}</p>
+              <div className="pd-property-meta">
+                <span className="pd-property-type">{propertyData.propertyType}</span>
+                <span className="pd-meta-separator">•</span>
+                <span className="pd-construction-status">{propertyData.constructionStatus}</span>
               </div>
-              <div className="pd-gallery-thumbnails">
-                {allImages.map((img, index) => (
-                  <div
-                    key={index}
-                    className={`pd-thumbnail ${activeImageIndex === index ? 'active' : ''}`}
-                    onClick={() => setActiveImageIndex(index)}
-                  >
-                    <img src={img} alt={`Thumbnail ${index + 1}`} />
-                    {index === allImages.length - 1 && <span className="pd-thumbnail-label">Floor Plan</span>}
+            </div>
+            <div className="pd-header-right">
+              <div className="pd-price-section">
+                <span className="pd-price-label">{t("listed_for")}</span>
+                <span className="pd-price-value">{formatCurrency(propertyData.price)}</span>
+              </div>
+              <button className="pd-save-btn">
+                <Icons.Heart />{t("save_property")}</button>
+            </div>
+          </div>
+
+          {/* Quick Stats */}
+          <div className="pd-quick-stats">
+            <div className="pd-stat-item">
+              <Icons.Bed />
+              <span>{propertyData.bedrooms}{t("bedrooms")}</span>
+            </div>
+            <div className="pd-stat-item">
+              <Icons.Bath />
+              <span>{propertyData.bathrooms}{t("bathrooms")}</span>
+            </div>
+            <div className="pd-stat-item">
+              <Icons.Car />
+              <span>{propertyData.parking}{t("parking")}</span>
+            </div>
+          </div>
+        </header>
+
+        {/* Main Content */}
+        <main className="pd-main">
+          <div className="pd-layout">
+            <div className="pd-content">
+            {/* Gallery Section */}
+            <section className="pd-section">
+              <h2 className="pd-section-title">{t("property_images_floor_plan")}</h2>
+              <div className="pd-gallery">
+                <div className="pd-gallery-main" onClick={() => openModal(activeImageIndex)}>
+                  <img src={allImages[activeImageIndex]} alt={`Property view ${activeImageIndex + 1}`} />
+                  <div className="pd-gallery-overlay">
+                    <Icons.Images />
+                    <span>{activeImageIndex + 1} / {allImages.length}</span>
                   </div>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          {/* Key Property Details */}
-          <section className="pd-section">
-            <h2 className="pd-section-title">Key Property Details</h2>
-            <div className="pd-details-grid">
-              <div className="pd-detail-item">
-                <span className="pd-detail-label">Built-up Area</span>
-                <span className="pd-detail-value">{formatNumber(propertyData.builtUpArea)} sq. ft.</span>
-              </div>
-              <div className="pd-detail-item">
-                <span className="pd-detail-label">Plot Area</span>
-                <span className="pd-detail-value">{formatNumber(propertyData.plotArea)} sq. ft.</span>
-              </div>
-              <div className="pd-detail-item">
-                <span className="pd-detail-label">Bedrooms</span>
-                <span className="pd-detail-value">{propertyData.bedrooms}</span>
-              </div>
-              <div className="pd-detail-item">
-                <span className="pd-detail-label">Bathrooms</span>
-                <span className="pd-detail-value">{propertyData.bathrooms}</span>
-              </div>
-              <div className="pd-detail-item">
-                <span className="pd-detail-label">Parking</span>
-                <span className="pd-detail-value">{propertyData.parking} Spaces</span>
-              </div>
-              <div className="pd-detail-item">
-                <span className="pd-detail-label">Property Tax</span>
-                <span className="pd-detail-value">{formatCurrency(propertyData.propertyTax)}/year</span>
-              </div>
-            </div>
-          </section>
-
-          {/* Amenities Section */}
-          <section className="pd-section">
-            <h2 className="pd-section-title">Amenities</h2>
-            <div className="pd-amenities-grid">
-              {propertyData.amenities.map((amenity) => {
-                const IconComponent = amenityIcons[amenity.name] || Icons.Square;
-                return (
-                  <div key={amenity.name} className={`pd-amenity-item ${!amenity.available ? 'unavailable' : ''}`}>
-                    <div className="pd-amenity-icon">
-                      <IconComponent />
+                </div>
+                <div className="pd-gallery-thumbnails">
+                  {allImages.map((img, index) => (
+                    <div
+                      key={index}
+                      className={`pd-thumbnail ${activeImageIndex === index ? 'active' : ''}`}
+                      onClick={() => setActiveImageIndex(index)}
+                    >
+                      <img src={img} alt={`Thumbnail ${index + 1}`} />
+                      {index === allImages.length - 1 && <span className="pd-thumbnail-label">{t("floor_plan")}</span>}
                     </div>
-                    <span className="pd-amenity-name">{amenity.name}</span>
-                    <span className="pd-amenity-status">{amenity.available ? '✓' : '✗'}</span>
-                  </div>
-                );
-              })}
-            </div>
-          </section>
-
-          {/* Valuation Section */}
-          <section className="pd-section">
-            <h2 className="pd-section-title">Property Valuation & Price Insights</h2>
-            <div className="pd-valuation-grid">
-              <div className="pd-valuation-item">
-                <span className="pd-valuation-label">Estimated Market Value</span>
-                <span className="pd-valuation-value">{formatCurrency(propertyData.valuation.marketValue)}</span>
-              </div>
-              <div className="pd-valuation-item">
-                <span className="pd-valuation-label">Seller Quoted Price</span>
-                <span className="pd-valuation-value">{formatCurrency(propertyData.valuation.sellerPrice)}</span>
-              </div>
-              <div className="pd-valuation-item">
-                <span className="pd-valuation-label">Customer Expected Price</span>
-                <span className="pd-valuation-value">{formatCurrency(propertyData.valuation.expectedPrice)}</span>
-              </div>
-            </div>
-            <div className="pd-valuation-status">
-              <span className="pd-status-indicator" style={{ backgroundColor: statusInfo.color }}></span>
-              <span className="pd-status-text">{statusInfo.text}</span>
-            </div>
-            <p className="pd-valuation-note">Based on recent market transactions and location trends.</p>
-          </section>
-
-          {/* Nearby Infrastructure */}
-          <section className="pd-section">
-            <h2 className="pd-section-title">Nearby Infrastructure</h2>
-            <div className="pd-nearby-list">
-              {Object.entries(propertyData.nearby).map(([category, items]) => {
-                const IconComponent = nearbyIcons[category] || Icons.MapPin;
-                const isExpanded = expandedCategories.includes(category);
-                return (
-                  <div key={category} className="pd-nearby-category">
-                    <button className="pd-nearby-header" onClick={() => toggleCategory(category)}>
-                      <div className="pd-nearby-header-left">
-                        <div className="pd-nearby-icon">
-                          <IconComponent />
-                        </div>
-                        <span className="pd-nearby-title">{nearbyLabels[category]}</span>
-                        <span className="pd-nearby-count">({items.length})</span>
-                      </div>
-                      <div className="pd-nearby-toggle">
-                        {isExpanded ? <Icons.Minus /> : <Icons.Plus />}
-                      </div>
-                    </button>
-                    {isExpanded && (
-                      <div className="pd-nearby-items">
-                        {items.map((item, index) => (
-                          <div key={index} className="pd-nearby-item">
-                            <span className="pd-nearby-name">{item.name}</span>
-                            <div className="pd-nearby-meta">
-                              <span className="pd-nearby-rating">
-                                <Icons.Star />
-                                {item.rating}/10
-                              </span>
-                              <span className="pd-nearby-distance">{item.distance} km</span>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </section>
-
-          </div>
-
-          {/* Schedule Viewing Sidebar */}
-          <aside className="pd-sidebar">
-            <div className="pd-schedule-form-card">
-              <h3 className="pd-form-title">Schedule Viewing</h3>
-              <p className="pd-form-subtitle">Tour with Property Agent</p>
-              <form onSubmit={handleFormSubmit} className="pd-schedule-form">
-                <div className="pd-form-group">
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Your Name *"
-                    value={formData.name}
-                    onChange={handleFormChange}
-                    required
-                  />
+                  ))}
                 </div>
-                <div className="pd-form-row">
+              </div>
+            </section>
+
+            {/* Key Property Details */}
+            <section className="pd-section">
+              <h2 className="pd-section-title">{t("key_property_details")}</h2>
+              <div className="pd-details-grid">
+                <div className="pd-detail-item">
+                  <span className="pd-detail-label">{t("built_up_area")}</span>
+                  <span className="pd-detail-value">{formatNumber(propertyData.builtUpArea)}{t("sq_ft")}</span>
+                </div>
+                <div className="pd-detail-item">
+                  <span className="pd-detail-label">{t("plot_area")}</span>
+                  <span className="pd-detail-value">{formatNumber(propertyData.plotArea)}{t("sq_ft")}</span>
+                </div>
+                <div className="pd-detail-item">
+                  <span className="pd-detail-label">{t("bedrooms")}</span>
+                  <span className="pd-detail-value">{propertyData.bedrooms}</span>
+                </div>
+                <div className="pd-detail-item">
+                  <span className="pd-detail-label">{t("bathrooms")}</span>
+                  <span className="pd-detail-value">{propertyData.bathrooms}</span>
+                </div>
+                <div className="pd-detail-item">
+                  <span className="pd-detail-label">{t("parking")}</span>
+                  <span className="pd-detail-value">{propertyData.parking}</span>
+                </div>
+                <div className="pd-detail-item">
+                  <span className="pd-detail-label">{t("property_tax")}</span>
+                  <span className="pd-detail-value">{formatCurrency(propertyData.propertyTax)}{t("year")}</span>
+                </div>
+              </div>
+            </section>
+
+            {/* Amenities Section */}
+            <section className="pd-section">
+              <h2 className="pd-section-title">{t("amenities")}</h2>
+              <div className="pd-amenities-grid">
+                {propertyData.amenities.map((amenity) => {
+                  const IconComponent = amenityIcons[amenity.name] || Icons.Square;
+                  return (
+                    <div key={amenity.name} className={`pd-amenity-item ${!amenity.available ? 'unavailable' : ''}`}>
+                      <div className="pd-amenity-icon">
+                        <IconComponent />
+                      </div>
+                      <span className="pd-amenity-name">{amenity.name}</span>
+                      <span className="pd-amenity-status">{amenity.available ? '✓' : '✗'}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </section>
+
+            {/* Valuation Section */}
+            <section className="pd-section">
+              <h2 className="pd-section-title">{t("property_valuation_price_insights")}</h2>
+              <div className="pd-valuation-grid">
+                <div className="pd-valuation-item">
+                  <span className="pd-valuation-label">{t("estimated_market_value")}</span>
+                  <span className="pd-valuation-value">{formatCurrency(propertyData.valuation.marketValue)}</span>
+                </div>
+                <div className="pd-valuation-item">
+                  <span className="pd-valuation-label">{t("seller_quoted_price")}</span>
+                  <span className="pd-valuation-value">{formatCurrency(propertyData.valuation.sellerPrice)}</span>
+                </div>
+                <div className="pd-valuation-item">
+                  <span className="pd-valuation-label">{t("customer_expected_price")}</span>
+                  <span className="pd-valuation-value">{formatCurrency(propertyData.valuation.expectedPrice)}</span>
+                </div>
+              </div>
+              <div className="pd-valuation-status">
+                <span className="pd-status-indicator" style={{ backgroundColor: statusInfo.color }}></span>
+                <span className="pd-status-text">{statusInfo.text}</span>
+              </div>
+              <p className="pd-valuation-note">{t("based_on_recent_market_transactions_and_location_trends")}</p>
+            </section>
+
+            {/* Nearby Infrastructure */}
+            <section className="pd-section">
+              <h2 className="pd-section-title">{t("nearby_infrastructure")}</h2>
+              <div className="pd-nearby-list">
+                {Object.entries(propertyData.nearby).map(([category, items]) => {
+                  const IconComponent = nearbyIcons[category] || Icons.MapPin;
+                  const isExpanded = expandedCategories.includes(category);
+                  return (
+                    <div key={category} className="pd-nearby-category">
+                      <button className="pd-nearby-header" onClick={() => toggleCategory(category)}>
+                        <div className="pd-nearby-header-left">
+                          <div className="pd-nearby-icon">
+                            <IconComponent />
+                          </div>
+                          <span className="pd-nearby-title">{nearbyLabels[category]}</span>
+                          <span className="pd-nearby-count">({items.length})</span>
+                        </div>
+                        <div className="pd-nearby-toggle">
+                          {isExpanded ? <Icons.Minus /> : <Icons.Plus />}
+                        </div>
+                      </button>
+                      {isExpanded && (
+                        <div className="pd-nearby-items">
+                          {items.map((item, index) => (
+                            <div key={index} className="pd-nearby-item">
+                              <span className="pd-nearby-name">{item.name}</span>
+                              <div className="pd-nearby-meta">
+                                <span className="pd-nearby-rating">
+                                  <Icons.Star />
+                                  {item.rating}{t("10")}</span>
+                                <span className="pd-nearby-distance">{item.distance}{t("km")}</span>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </section>
+
+            </div>
+
+            {/* Schedule Viewing Sidebar */}
+            <aside className="pd-sidebar">
+              <div className="pd-schedule-form-card">
+                <h3 className="pd-form-title">{t("schedule_viewing")}</h3>
+                <p className="pd-form-subtitle">{t("tour_with_property_agent")}</p>
+                <form onSubmit={handleFormSubmit} className="pd-schedule-form">
                   <div className="pd-form-group">
                     <input
-                      type="tel"
-                      name="phone"
-                      placeholder="Your Contact Number"
-                      value={formData.phone}
-                      onChange={handleFormChange}
-                    />
-                  </div>
-                  <div className="pd-form-group">
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder="Your Email Address *"
-                      value={formData.email}
+                      type="text"
+                      name="name"
+                      placeholder="Your Name *"
+                      value={formData.name}
                       onChange={handleFormChange}
                       required
                     />
                   </div>
-                </div>
-                <div className="pd-form-group">
-                  <textarea
-                    name="message"
-                    placeholder="Message"
-                    rows={4}
-                    value={formData.message}
-                    onChange={handleFormChange}
-                  />
-                </div>
-                <p className="pd-form-note">* Required field</p>
-                <button type="submit" className="pd-submit-btn">Schedule Viewing</button>
-              </form>
-            </div>
-          </aside>
-        </div>
-      </main>
-
-      {/* Image Modal */}
-      {isModalOpen && (
-        <div className="pd-modal-overlay" onClick={closeModal}>
-          <div className="pd-modal" onClick={(e) => e.stopPropagation()}>
-            <button className="pd-modal-close" onClick={closeModal}>
-              <Icons.X />
-            </button>
-            <button className="pd-modal-nav pd-modal-prev" onClick={() => navigateImage('prev')}>
-              <Icons.ChevronLeft />
-            </button>
-            <img src={allImages[activeImageIndex]} alt={`Property view ${activeImageIndex + 1}`} />
-            <button className="pd-modal-nav pd-modal-next" onClick={() => navigateImage('next')}>
-              <Icons.ChevronRight />
-            </button>
-            <div className="pd-modal-counter">{activeImageIndex + 1} / {allImages.length}</div>
+                  <div className="pd-form-row">
+                    <div className="pd-form-group">
+                      <input
+                        type="tel"
+                        name="phone"
+                        placeholder="Your Contact Number"
+                        value={formData.phone}
+                        onChange={handleFormChange}
+                      />
+                    </div>
+                    <div className="pd-form-group">
+                      <input
+                        type="email"
+                        name="email"
+                        placeholder="Your Email Address *"
+                        value={formData.email}
+                        onChange={handleFormChange}
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div className="pd-form-group">
+                    <textarea
+                      name="message"
+                      placeholder="Message"
+                      rows={4}
+                      value={formData.message}
+                      onChange={handleFormChange}
+                    />
+                  </div>
+                  <p className="pd-form-note">{t("required_field")}</p>
+                  <button type="submit" className="pd-submit-btn">{t("schedule_viewing")}</button>
+                </form>
+              </div>
+            </aside>
           </div>
-        </div>
-      )}
-    </div>
-    <Footer />
+        </main>
+
+        {/* Image Modal */}
+        {isModalOpen && (
+          <div className="pd-modal-overlay" onClick={closeModal}>
+            <div className="pd-modal" onClick={(e) => e.stopPropagation()}>
+              <button className="pd-modal-close" onClick={closeModal}>
+                <Icons.X />
+              </button>
+              <button className="pd-modal-nav pd-modal-prev" onClick={() => navigateImage('prev')}>
+                <Icons.ChevronLeft />
+              </button>
+              <img src={allImages[activeImageIndex]} alt={`Property view ${activeImageIndex + 1}`} />
+              <button className="pd-modal-nav pd-modal-next" onClick={() => navigateImage('next')}>
+                <Icons.ChevronRight />
+              </button>
+              <div className="pd-modal-counter">{activeImageIndex + 1} / {allImages.length}</div>
+            </div>
+          </div>
+        )}
+      </div>
+      <Footer />
     </>
-    
   );
 };
 

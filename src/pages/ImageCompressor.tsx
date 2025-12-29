@@ -12,6 +12,7 @@ export type CompressOptions = {
 };
 
 export function getFileSizeKB(file: File | Blob): number {
+  
   return Math.round(file.size / 1024);
 }
 
@@ -26,6 +27,10 @@ export async function compressImageFile(
   file: File,
   opts: CompressOptions = {}
 ): Promise<File> {
+
+  const { t } = useTranslation();
+  
+
   const {
     maxSizeKB = 300,
     maxDimension = 1920,
@@ -106,6 +111,10 @@ export async function compressImageFiles(
   files: File[],
   opts: CompressOptions = {}
 ): Promise<File[]> {
+  const {
+    t: t
+  } = useTranslation();
+
   const out: File[] = [];
   for (const f of files) {
     if (!f.type.startsWith("image/")) {
@@ -126,6 +135,10 @@ export async function compressImageFiles(
 /* ---------- helpers ---------- */
 
 function loadImageFromFile(file: File): Promise<HTMLImageElement> {
+  const {
+    t: t
+  } = useTranslation();
+
   return new Promise((resolve, reject) => {
     const url = URL.createObjectURL(file);
     const img = new Image();
@@ -146,6 +159,10 @@ function canvasToBlob(
   mimeType: string,
   quality: number
 ): Promise<Blob | null> {
+  const {
+    t: t
+  } = useTranslation();
+
   return new Promise((resolve) => {
     if (canvas.toBlob) {
       canvas.toBlob((b) => resolve(b), mimeType, quality);
@@ -161,6 +178,10 @@ function canvasToBlob(
 }
 
 function dataURLToBlob(dataURL: string): Blob {
+  const {
+    t: t
+  } = useTranslation();
+
   const parts = dataURL.split(",");
   const meta = parts[0];
   const base64 = parts[1] ?? "";
@@ -173,5 +194,13 @@ function dataURLToBlob(dataURL: string): Blob {
 }
 
 function blobToFile(blob: Blob, filename: string, mimeType?: string): File {
+  const {
+    t: t
+  } = useTranslation();
+
   return new File([blob], filename, { type: mimeType ?? blob.type });
 }
+function useTranslation(): { t: any; } {
+  throw new Error("Function not implemented.");
+}
+

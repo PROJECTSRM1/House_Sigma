@@ -1,33 +1,22 @@
 import styles from "./AlbertaDisclaimer.module.css";
 
+import { useTranslation } from "react-i18next";
+
 const AlbertaDisclaimer = () => {
+  const { t } = useTranslation();
+
   return (
     <div className={styles.disclaimerSection}>
-      <p>
-        Data is supplied by Pillar 9™ MLS® System. Pillar 9™ is the owner of the
-        copyright in its MLS® System. Data is deemed reliable but is not
-        guaranteed accurate by Pillar 9™. The trademarks MLS®, Multiple Listing
-        Service® and the associated logos are owned by The Canadian Real Estate
-        Association (CREA) and identify the quality of services provided by real
-        estate professionals who are members of CREA. Used under license.
-      </p>
-
-      <p>
-        Data is deemed reliable but is not guaranteed accurate by the REALTORS®
-        Association of Edmonton. Copyright 2025 by the REALTORS® Association of
-        Edmonton. All Rights Reserved.
-      </p>
-
-      <p>
-        The trademarks REALTOR®, REALTORS®, and the REALTOR® logo are controlled
-        by The Canadian Real Estate Association (CREA) and identify real estate
-        professionals who are members of CREA. The trademarks MLS®, Multiple
-        Listing Service® and the associated logos are owned by CREA and identify
-        the quality of services provided by real estate professionals who are
-        members of CREA. Used under license.
-      </p>
-
-      <p>Data is provided courtesy of Canadian Real Estate Association.</p>
+      <p>{t(
+        "data_is_supplied_by_pillar_9_mls_system_pillar_9_is_the_owner_of_the_copyright_in_its_mls_system_data_is_deemed_reliable_but_is_not_guaranteed_accurate_by_pillar_9_the_trademarks_mls_multiple_listing_service_and_the_associated_logos_are_owned_by_the_canadian_real_estate_association_crea_and_identify_the_quality_of_services_provided_by_real_estate_professionals_who_are_members_of_crea_used_under_license"
+      )}</p>
+      <p>{t(
+        "data_is_deemed_reliable_but_is_not_guaranteed_accurate_by_the_realtors_association_of_edmonton_copyright_2025_by_the_realtors_association_of_edmonton_all_rights_reserved"
+      )}</p>
+      <p>{t(
+        "the_trademarks_realtor_realtors_and_the_realtor_logo_are_controlled_by_the_canadian_real_estate_association_crea_and_identify_real_estate_professionals_who_are_members_of_crea_the_trademarks_mls_multiple_listing_service_and_the_associated_logos_are_owned_by_crea_and_identify_the_quality_of_services_provided_by_real_estate_professionals_who_are_members_of_crea_used_under_license"
+      )}</p>
+      <p>{t("data_is_provided_courtesy_of_canadian_real_estate_association")}</p>
     </div>
   );
 };

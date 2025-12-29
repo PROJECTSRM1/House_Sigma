@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingChatButton from "../components/floatingWindowChatBot";
@@ -6,6 +7,9 @@ import ChatBot from "../components/chatbot";
 import styles from "./Contact.module.css";
 
 export default function Contact() {
+  const { t } = useTranslation();
+
+
   const [searchQuery, setSearchQuery] = useState("");
   const [openChat, setOpenChat] = useState(false);
 
@@ -18,20 +22,19 @@ export default function Contact() {
   return (
     <>
       <Navbar />
-
       <div className={styles.pageWrapper}>
         <div className={styles.container}>
           {/* HERO SECTION */}
           <div className={styles.hero}>
-            <h1 className={styles.heroTitle}>Contact Us</h1>
+            <h1 className={styles.heroTitle}>{t("contact_us")}</h1>
             <div className={styles.heroUnderline} />
-            <p className={styles.heroSubtitle}>How can we help you today?</p>
+            <p className={styles.heroSubtitle}>{t("how_can_we_help_you_today")}</p>
           </div>
 
           {/* SEARCH BAR */}
           <div className={styles.searchCard}>
             <div className={styles.searchWrapper}>
-              <div className={styles.searchIcon}>🔍</div>
+              <div className={styles.searchIcon}>{t("")}</div>
               <input
                 type="text"
                 placeholder="Search Knowledge Base..."
@@ -40,36 +43,29 @@ export default function Contact() {
                 onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                 className={styles.searchInput}
               />
-              <button onClick={handleSearch} className={styles.searchButton}>
-                Search
-              </button>
+              <button onClick={handleSearch} className={styles.searchButton}>{t("search")}</button>
             </div>
           </div>
 
           {/* INFO CARD */}
           <div className={styles.infoCard}>
-            <p className={styles.infoText}>
-              Before submitting a customer service request, please check our{" "}
+            <p className={styles.infoText}>{t("before_submitting_a_customer_service_request_please_check_our")}{" "}
               <a
                 href="https://housesigma.com/blog-en/faq"
                 target="_blank"
                 className={styles.link}
-              >
-                Knowledge Base
-              </a>{" "}
-              section. 90% of the inquiries we received have an answer.
-            </p>
+              >{t("knowledge_base")}</a>{" "}{t("section_90_of_the_inquiries_we_received_have_an_answer")}</p>
           </div>
 
           {/* QUICK HELP CHIPS */}
           <div className={styles.quickHelpSection}>
-            <h3 className={styles.quickHelpTitle}>Quick Help Topics</h3>
+            <h3 className={styles.quickHelpTitle}>{t("quick_help_topics")}</h3>
             <div className={styles.chipGrid}>
-              <button className={styles.chip}>💳 Payment</button>
-              <button className={styles.chip}>👁️ Booking a Viewing</button>
-              <button className={styles.chip}>💰 Pricing</button>
-              <button className={styles.chip}>🏠 Listing Issues</button>
-              <button className={styles.chip}>❓ How to Use Platform</button>
+              <button className={styles.chip}>{t("payment")}</button>
+              <button className={styles.chip}>{t("booking_a_viewing")}</button>
+              <button className={styles.chip}>{t("pricing")}</button>
+              <button className={styles.chip}>{t("listing_issues")}</button>
+              <button className={styles.chip}>{t("how_to_use_platform")}</button>
             </div>
           </div>
 
@@ -77,26 +73,26 @@ export default function Contact() {
           <div className={styles.contactOptionsGrid}>
             {/* CALL US */}
             <div className={styles.contactOptionCard}>
-              <div className={styles.iconCircle}>☎️</div>
-              <h3 className={styles.cardTitle}>Call Us</h3>
-              <p className={styles.cardText}>Speak with our support team</p>
-              <button className={styles.primaryButton}>Get Phone Number</button>
+              <div className={styles.iconCircle}>{t("")}</div>
+              <h3 className={styles.cardTitle}>{t("call_us")}</h3>
+              <p className={styles.cardText}>{t("speak_with_our_support_team")}</p>
+              <button className={styles.primaryButton}>{t("get_phone_number")}</button>
             </div>
 
             {/* EMAIL SUPPORT */}
             <div className={styles.contactOptionCard}>
-              <div className={styles.iconCircle}>✉️</div>
-              <h3 className={styles.cardTitle}>Email Support</h3>
-              <p className={styles.cardText}>Send us your questions</p>
-              <button className={styles.primaryButton}>Send Email</button>
+              <div className={styles.iconCircle}>{t("")}</div>
+              <h3 className={styles.cardTitle}>{t("email_support")}</h3>
+              <p className={styles.cardText}>{t("send_us_your_questions")}</p>
+              <button className={styles.primaryButton}>{t("send_email")}</button>
             </div>
 
             {/* LIVE CHAT */}
             <div className={styles.contactOptionCard}>
-              <div className={styles.iconCircle}>💬</div>
-              <h3 className={styles.cardTitle}>Live Chat</h3>
-              <p className={styles.cardText}>Chat with us in real-time</p>
-              <button className={styles.primaryButton}>Start Chat</button>
+              <div className={styles.iconCircle}>{t("")}</div>
+              <h3 className={styles.cardTitle}>{t("live_chat")}</h3>
+              <p className={styles.cardText}>{t("chat_with_us_in_real_time")}</p>
+              <button className={styles.primaryButton}>{t("start_chat")}</button>
             </div>
           </div>
 
@@ -105,106 +101,87 @@ export default function Contact() {
             {/* REAL ESTATE AGENT */}
             <div className={styles.card}>
               <div className={styles.cardHeader}>
-                <div className={styles.cardIcon}>🏡</div>
-                <h2 className={styles.cardHeading}>Buy / Sell / Lease Property</h2>
+                <div className={styles.cardIcon}>{t("")}</div>
+                <h2 className={styles.cardHeading}>{t("buy_sell_lease_property")}</h2>
               </div>
-              <p className={styles.cardDescription}>
-                To inquire about buying, selling, or leasing a property, or to book a viewing:
-              </p>
+              <p className={styles.cardDescription}>{t(
+                "to_inquire_about_buying_selling_or_leasing_a_property_or_to_book_a_viewing"
+              )}</p>
               <a
                 href="https://housesigma.com/web/en/market"
                 target="_blank"
                 className={styles.outlineButton}
-              >
-                Contact HomeNest Agent →
-              </a>
+              >{t("contact_homenest_agent")}</a>
             </div>
 
             {/* TECHNICAL SUPPORT */}
             <div className={styles.card}>
               <div className={styles.cardHeader}>
-                <div className={styles.cardIcon}>🛠️</div>
-                <h2 className={styles.cardHeading}>Technical Support</h2>
+                <div className={styles.cardIcon}>{t("")}</div>
+                <h2 className={styles.cardHeading}>{t("technical_support")}</h2>
               </div>
-              <p className={styles.cardDescription}>
-                Need help with technical issues or platform features?
-              </p>
+              <p className={styles.cardDescription}>{t("need_help_with_technical_issues_or_platform_features")}</p>
               <div className={styles.contactItem}>
-                <span className={styles.contactLabel}>Support Portal:</span>
+                <span className={styles.contactLabel}>{t("support_portal")}</span>
                 <a
                   href="https://housesigma.com/blog-en/faq/other/contact-technical-support/"
                   target="_blank"
                   className={styles.contactLink}
-                >
-                  Open Support Ticket
-                </a>
+                >{t("open_support_ticket")}</a>
               </div>
             </div>
 
             {/* COMPLAINTS */}
             <div className={styles.card}>
               <div className={styles.cardHeader}>
-                <div className={styles.cardIcon}>📄</div>
-                <h2 className={styles.cardHeading}>Brokerage Complaints</h2>
+                <div className={styles.cardIcon}>{t("")}</div>
+                <h2 className={styles.cardHeading}>{t("brokerage_complaints")}</h2>
               </div>
-              <p className={styles.cardDescription}>
-                Have concerns about brokerage services?
-              </p>
+              <p className={styles.cardDescription}>{t("have_concerns_about_brokerage_services")}</p>
               <div className={styles.contactItem}>
-                <span className={styles.contactLabel}>Complaints Portal:</span>
+                <span className={styles.contactLabel}>{t("complaints_portal")}</span>
                 <a
                   href="https://housesigma.com/blog-en/faq/other/complain-about-brokerage-services/"
                   target="_blank"
                   className={styles.contactLink}
-                >
-                  File a Complaint
-                </a>
+                >{t("file_a_complaint")}</a>
               </div>
             </div>
 
             {/* DEAL & CONVEYANCING */}
             <div className={styles.card}>
               <div className={styles.cardHeader}>
-                <div className={styles.cardIcon}>🏦</div>
-                <h2 className={styles.cardHeading}>Deal & Conveyancing</h2>
+                <div className={styles.cardIcon}>{t("")}</div>
+                <h2 className={styles.cardHeading}>{t("deal_conveyancing")}</h2>
               </div>
-              <p className={styles.cardDescription}>
-                For deal and conveyancing related matters:
-              </p>
+              <p className={styles.cardDescription}>{t("for_deal_and_conveyancing_related_matters")}</p>
               <div className={styles.contactItem}>
-                <span className={styles.contactLabel}>Email:</span>
+                <span className={styles.contactLabel}>{t("email")}</span>
                 <a
                   href="mailto:deals@housesigma.com"
                   className={styles.emailButton}
-                >
-                  📩 deals@homenest.com
-                </a>
+                >{t("deals_homenest_com")}</a>
               </div>
             </div>
 
             {/* MEDIA INQUIRIES */}
             <div className={styles.card}>
               <div className={styles.cardHeader}>
-                <div className={styles.cardIcon}>📣</div>
-                <h2 className={styles.cardHeading}>Media Inquiries</h2>
+                <div className={styles.cardIcon}>{t("")}</div>
+                <h2 className={styles.cardHeading}>{t("media_inquiries")}</h2>
               </div>
-              <p className={styles.cardDescription}>
-                Press and media related questions:
-              </p>
+              <p className={styles.cardDescription}>{t("press_and_media_related_questions")}</p>
               <div className={styles.contactItem}>
-                <span className={styles.contactLabel}>Email:</span>
+                <span className={styles.contactLabel}>{t("email")}</span>
                 <a
                   href="mailto:press@housesigma.com"
                   className={styles.emailButton}
-                >
-                  📩 press@homenest.com
-                </a>
+                >{t("press_homenest_com")}</a>
               </div>
             </div>
           </div>
         </div>
       </div>
-
       <Footer />
       {openChat && <ChatBot onClose={() => setOpenChat(false)} />}
       <FloatingChatButton onOpen={() => setOpenChat(true)} />

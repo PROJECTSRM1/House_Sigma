@@ -1,5 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 
+import { useTranslation } from "react-i18next";
+
 interface ReportCardProps {
   image: string;
   title: string;
@@ -7,6 +9,7 @@ interface ReportCardProps {
 }
 
 const ReportCard = ({ image, title, description }: ReportCardProps) => {
+   const { t } = useTranslation();
   return (
     <Card className="overflow-hidden rounded-[18px] border border-gray-200 shadow-sm hover:shadow-md transition">
       

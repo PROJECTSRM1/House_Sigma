@@ -15,6 +15,7 @@ import {
   ArrowDownRight,
   BarChart3,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "./market-statistics.css";
@@ -34,6 +35,7 @@ const StatCard = ({ icon, title, value, change, positive }: any) => (
 );
 
 const CommunityCard = ({ name, listings, price, change, demand }: any) => {
+   const { t } = useTranslation();
   const isPositive = change.startsWith("+");
   return (
     <div className="community-card">
@@ -41,11 +43,11 @@ const CommunityCard = ({ name, listings, price, change, demand }: any) => {
         <h3>{name}</h3>
         <ChevronRight size={20} />
       </div>
-      <p className="listings">{listings} active listings</p>
-      <p className="price-label">Avg. Price/sqft</p>
+      <p className="listings">{listings}{t("active_listings")}</p>
+      <p className="price-label">{t("avg_price_sqft")}</p>
       <h2 className="price">{price}</h2>
       <div className="community-footer">
-        <span className={`demand ${demand.toLowerCase()}`}>{demand} Demand</span>
+        <span className={`demand ${demand.toLowerCase()}`}>{demand}{t("demand")}</span>
         <span className={`change ${isPositive ? "up" : "down"}`}>
           {isPositive ? <ArrowUpRight size={14} /> : <ArrowDownRight size={14} />}
           {change}
@@ -79,6 +81,9 @@ const ProximityCard = ({ icon, title, text }: any) => (
 );
 
 export default function MarketStatistics() {
+  
+ const { t } = useTranslation();
+
   const demandData = [
     { name: "Downtown Metro", percentage: 92 },
     { name: "Westside Heights", percentage: 85 },
@@ -91,18 +96,15 @@ export default function MarketStatistics() {
   return (
     <div className="page">
       <Navbar />
-
       <header className="hero">
         <div className="hero-inner">
-          <p className="hero-tag">REAL ESTATE ANALYTICS</p>
-          <h1>Market Statistics</h1>
-          <p className="hero-sub">
-            Comprehensive insights and data-driven analytics to help you make
-            informed real estate investment decisions.
-          </p>
+          <p className="hero-tag">{t("real_estate_analytics")}</p>
+          <h1>{t("market_statistics")}</h1>
+          <p className="hero-sub">{t(
+            "comprehensive_insights_and_data_driven_analytics_to_help_you_make_informed_real_estate_investment_decisions"
+          )}</p>
         </div>
       </header>
-
       <main className="container">
         <section>
           <div className="section-title">
@@ -110,8 +112,8 @@ export default function MarketStatistics() {
               <BarChart3 size={20} />
             </div>
             <div>
-              <h2>Overall Statistics</h2>
-              <p>Key performance indicators across all markets</p>
+              <h2>{t("overall_statistics")}</h2>
+              <p>{t("key_performance_indicators_across_all_markets")}</p>
             </div>
           </div>
 
@@ -129,8 +131,8 @@ export default function MarketStatistics() {
               <MapPin size={20} />
             </div>
             <div>
-              <h2>Community & Locality Insights</h2>
-              <p>Pricing trends and demand analysis by neighborhood</p>
+              <h2>{t("community_locality_insights")}</h2>
+              <p>{t("pricing_trends_and_demand_analysis_by_neighborhood")}</p>
             </div>
           </div>
 
@@ -146,7 +148,7 @@ export default function MarketStatistics() {
 
         <section>
           <div className="demand-section">
-            <h2>Demand Analysis by Locality</h2>
+            <h2>{t("demand_analysis_by_locality")}</h2>
             {demandData.map((item) => (
               <DemandBar key={item.name} name={item.name} percentage={item.percentage} />
             ))}
@@ -159,8 +161,8 @@ export default function MarketStatistics() {
               <Users size={20} />
             </div>
             <div>
-              <h2>Proximity-Based Analysis</h2>
-              <p>Nearby facilities for evaluating livability and long-term value</p>
+              <h2>{t("proximity_based_analysis")}</h2>
+              <p>{t("nearby_facilities_for_evaluating_livability_and_long_term_value")}</p>
             </div>
           </div>
 
@@ -177,11 +179,10 @@ export default function MarketStatistics() {
         <section>
           <div className="livability-section">
             <div className="livability-text">
-              <h2>Overall Livability Score</h2>
-              <p>
-                Based on proximity to essential facilities, transportation access, and community
-                amenities. Higher scores indicate better quality of life.
-              </p>
+              <h2>{t("overall_livability_score")}</h2>
+              <p>{t(
+                "based_on_proximity_to_essential_facilities_transportation_access_and_community_amenities_higher_scores_indicate_better_quality_of_life"
+              )}</p>
             </div>
             <div className="livability-score">
               <div className="score-circle">
@@ -189,20 +190,20 @@ export default function MarketStatistics() {
                   <circle className="bg" cx="50" cy="50" r="42" />
                   <circle className="progress" cx="50" cy="50" r="42" />
                 </svg>
-                <span className="score-value">87</span>
+                <span className="score-value">{t("87")}</span>
               </div>
               <div className="score-legend">
                 <div className="legend-item">
                   <div className="legend-dot excellent" />
-                  <span>Excellent (80-100)</span>
+                  <span>{t("excellent_80_100")}</span>
                 </div>
                 <div className="legend-item">
                   <div className="legend-dot good" />
-                  <span>Good (60-79)</span>
+                  <span>{t("good_60_79")}</span>
                 </div>
                 <div className="legend-item">
                   <div className="legend-dot average" />
-                  <span>Average (&lt;60)</span>
+                  <span>{t("average_60")}</span>
                 </div>
               </div>
             </div>
@@ -210,28 +211,27 @@ export default function MarketStatistics() {
         </section>
 
         <section className="quick">
-          <h2>Quick Market Insights</h2>
+          <h2>{t("quick_market_insights")}</h2>
           <div className="grid-4">
             <div className="quick-card">
-              <p>Properties Sold (30 days)</p>
-              <h3>1,247</h3>
+              <p>{t("properties_sold_30_days")}</p>
+              <h3>{t("1_247")}</h3>
             </div>
             <div className="quick-card">
-              <p>Avg. Days on Market</p>
-              <h3>28</h3>
+              <p>{t("avg_days_on_market")}</p>
+              <h3>{t("28")}</h3>
             </div>
             <div className="quick-card">
-              <p>New Listings (This Week)</p>
-              <h3>342</h3>
+              <p>{t("new_listings_this_week")}</p>
+              <h3>{t("342")}</h3>
             </div>
             <div className="quick-card">
-              <p>Price Reductions</p>
-              <h3>156</h3>
+              <p>{t("price_reductions")}</p>
+              <h3>{t("156")}</h3>
             </div>
           </div>
         </section>
       </main>
-
       <Footer />
     </div>
   );

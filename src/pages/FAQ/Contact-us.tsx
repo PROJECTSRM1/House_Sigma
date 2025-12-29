@@ -1,4 +1,5 @@
 import { useParams,useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { FileText } from "lucide-react";
 import SearchBar from "./search";
 import Sidebar from "./Sidebar";
@@ -11,6 +12,8 @@ import { faqData } from "../FAQ/FAQ";
 import ScamNav from "../ScamNav";
 
 const ContactUs = () => {
+  const { t } = useTranslation();
+
   const { articleSlug } = useParams();
   const navigate = useNavigate();
 
@@ -24,66 +27,58 @@ const ContactUs = () => {
       case "contact-technical-support":
         return (
           <>
-            <p>
-              For technical issues such as login problems, app crashes, or data
-              display errors, please reach out to our support team.
-            </p>
-            <p>
-              Provide as much detail as possible, including screenshots if
-              applicable.
-            </p>
+            <p>{t(
+              "for_technical_issues_such_as_login_problems_app_crashes_or_data_display_errors_please_reach_out_to_our_support_team"
+            )}</p>
+            <p>{t("provide_as_much_detail_as_possible_including_screenshots_if_applicable")}</p>
           </>
         );
 
       case "complain-about-brokerage-services":
         return (
           <>
-            <p>
-              If you wish to submit a complaint regarding brokerage services,
-              please include:
-            </p>
+            <p>{t(
+              "if_you_wish_to_submit_a_complaint_regarding_brokerage_services_please_include"
+            )}</p>
             <ul>
-              <li>Your full name</li>
-              <li>Property address (if relevant)</li>
-              <li>Agent or brokerage name</li>
-              <li>Detailed description of the issue</li>
+              <li>{t("your_full_name")}</li>
+              <li>{t("property_address_if_relevant")}</li>
+              <li>{t("agent_or_brokerage_name")}</li>
+              <li>{t("detailed_description_of_the_issue")}</li>
             </ul>
-            <p>
-              Our compliance team will review your submission and respond within
-              2–3 business days.
-            </p>
+            <p>{t(
+              "our_compliance_team_will_review_your_submission_and_respond_within_2_3_business_days"
+            )}</p>
           </>
         );
 
       case "technical-support-steps":
         return (
           <>
-            <p>To troubleshoot issues, please try the following steps:</p>
+            <p>{t("to_troubleshoot_issues_please_try_the_following_steps")}</p>
             <ul>
-              <li>Restart the app or refresh your browser</li>
-              <li>Ensure your app is updated to the latest version</li>
-              <li>Disable VPN or proxy connections</li>
-              <li>Clear cache and cookies</li>
+              <li>{t("restart_the_app_or_refresh_your_browser")}</li>
+              <li>{t("ensure_your_app_is_updated_to_the_latest_version")}</li>
+              <li>{t("disable_vpn_or_proxy_connections")}</li>
+              <li>{t("clear_cache_and_cookies")}</li>
             </ul>
-            <p>If the issue persists, contact support with screenshots.</p>
+            <p>{t("if_the_issue_persists_contact_support_with_screenshots")}</p>
           </>
         );
 
       case "how-to-post-my-property-listing-on-housesigma":
         return (
           <>
-            <p>
-              To post your property listing on HomeNest, you must be a
-              licensed real estate agent with access to your regional MLS board.
-            </p>
-            <p>
-              Listings sync automatically from the MLS. If your listing is not
-              appearing, verify that:
-            </p>
+            <p>{t(
+              "to_post_your_property_listing_on_homenest_you_must_be_a_licensed_real_estate_agent_with_access_to_your_regional_mls_board"
+            )}</p>
+            <p>{t(
+              "listings_sync_automatically_from_the_mls_if_your_listing_is_not_appearing_verify_that"
+            )}</p>
             <ul>
-              <li>The listing is active on MLS</li>
-              <li>All required fields are completed</li>
-              <li>Your board supports VOW/IDX data sharing</li>
+              <li>{t("the_listing_is_active_on_mls")}</li>
+              <li>{t("all_required_fields_are_completed")}</li>
+              <li>{t("your_board_supports_vow_idx_data_sharing")}</li>
             </ul>
           </>
         );
@@ -91,107 +86,101 @@ const ContactUs = () => {
       case "feedback-and-feature-requests":
         return (
           <>
-            <p>We welcome feedback to improve our platform.</p>
-            <p>
-              To submit a feature request, include the feature idea, why you
-              need it, and how it will help your workflow.
-            </p>
-            <p>
-              Our product team reviews suggestions regularly and may reach out
-              if more information is needed.
-            </p>
+            <p>{t("we_welcome_feedback_to_improve_our_platform")}</p>
+            <p>{t(
+              "to_submit_a_feature_request_include_the_feature_idea_why_you_need_it_and_how_it_will_help_your_workflow"
+            )}</p>
+            <p>{t(
+              "our_product_team_reviews_suggestions_regularly_and_may_reach_out_if_more_information_is_needed"
+            )}</p>
           </>
         );
 
       default:
-        return <p>No content available.</p>;
+        return <p>{t("no_content_available")}</p>;
     }
   };
 
   return (
     <>
-    <ScamNav />
-    <div className="faq-container">
-      
-      <div className="faq-wrapper">
+      <ScamNav />
+      <div className="faq-container">
+        
+        <div className="faq-wrapper">
 
-        {/* Breadcrumb */}
-        <div className="breadcrumb">
-          <span
-            className="breadcrumb-link"
-            onClick={() => navigate("/faq")}
-          >
-            FAQ
-          </span>
+          {/* Breadcrumb */}
+          <div className="breadcrumb">
+            <span
+              className="breadcrumb-link"
+              onClick={() => navigate("/faq")}
+            >{t("faq")}</span>
 
-          <span> › </span>
+            <span> › </span>
 
-          <span
-            className="breadcrumb-link"
-            onClick={() => navigate("/faq/contact-us")}
-          >
-            Contact Us
-          </span>
+            <span
+              className="breadcrumb-link"
+              onClick={() => navigate("/faq/contact-us")}
+            >{t("contact_us")}</span>
 
-          <span> › </span>
+            <span> › </span>
 
-          <span>{article?.question}</span>
-        </div>
+            <span>{article?.question}</span>
+          </div>
 
-        {/* FULL 2-COLUMN LAYOUT */}
-        <div className="page-layout">
+          {/* FULL 2-COLUMN LAYOUT */}
+          <div className="page-layout">
 
-          {/* LEFT PANEL */}
-          <div className="left-panel">
+            {/* LEFT PANEL */}
+            <div className="left-panel">
 
-            {/* Search Bar */}
-            <SearchBar
-              searchQuery=""
-              setSearchQuery={() => {}}
-              onSearch={() => {}}
-            />
+              {/* Search Bar */}
+              <SearchBar
+                searchQuery=""
+                setSearchQuery={() => {}}
+                onSearch={() => {}}
+              />
 
-            {/* Title */}
-            <div className="article-title-row">
-              <FileText className="article-title-icon" />
-              <h1 className="article-title">{article?.question}</h1>
+              {/* Title */}
+              <div className="article-title-row">
+                <FileText className="article-title-icon" />
+                <h1 className="article-title">{article?.question}</h1>
+              </div>
+
+              {/* Content Box */}
+              <div className="article-content-box">
+                <div className="article-content-inner">{renderContent()}</div>
+              </div>
+
             </div>
 
-            {/* Content Box */}
-            <div className="article-content-box">
-              <div className="article-content-inner">{renderContent()}</div>
+            {/* RIGHT PANEL — Sidebar */}
+            <div className="right-panel">
+              <Sidebar
+                faqData={faqData}
+                sidebarCategories={faqData}
+                openSidebarId={"contact-us"}
+                toggleSidebar={() => {}}
+                highlightArticleSlug={articleSlug}
+              />
             </div>
 
           </div>
-
-          {/* RIGHT PANEL — Sidebar */}
-          <div className="right-panel">
-            <Sidebar
-              faqData={faqData}
-              sidebarCategories={faqData}
-              openSidebarId={"contact-us"}
-              toggleSidebar={() => {}}
-              highlightArticleSlug={articleSlug}
-            />
-          </div>
-
         </div>
+         
       </div>
-       
-    </div>
-    {/* Footer */}
+      {/* Footer */}
       <footer className="footer">
         <div className="footer-content">
           <div className="footer-links">
-            <a className="footer-link">HomeNest Inc. Brokerage</a>
-            <a className="footer-link">Legal</a>
-            <a className="footer-link">Privacy & Security</a>
-            <a className="footer-link">Terms & Conditions</a>
-            <a className="footer-link">Accessibility</a>
+            <a className="footer-link">{t("homenest_inc_brokerage")}</a>
+            <a className="footer-link">{t("legal")}</a>
+            <a className="footer-link">{t("privacy_security")}</a>
+            <a className="footer-link">{t("terms_conditions")}</a>
+            <a className="footer-link">{t("accessibility")}</a>
           </div>
         </div>
       </footer>
-      </>
+    </>
   );
 };
 

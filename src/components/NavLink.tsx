@@ -1,4 +1,5 @@
 import { NavLink as RouterNavLink, NavLinkProps } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { forwardRef } from "react";
 import { cn } from "@/lib/utils";
 
@@ -10,6 +11,8 @@ interface NavLinkCompatProps extends Omit<NavLinkProps, "className"> {
 
 const NavLink = forwardRef<HTMLAnchorElement, NavLinkCompatProps>(
   ({ className, activeClassName, pendingClassName, to, ...props }, ref) => {
+    const { t } = useTranslation();
+
     return (
       <RouterNavLink
         ref={ref}

@@ -1,4 +1,5 @@
 import Navbar from '@/components/Navbar';
+import { useTranslation } from "react-i18next";
 import Hero from '@/components/Hero';
 import FilterBar from '@/components/FilterBar';
 import PropertySection from '@/components/PropertySection';
