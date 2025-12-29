@@ -1,0 +1,176 @@
+/* Trigger button */
+.info-tooltip-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  margin-left: 4px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.info-tooltip-trigger:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.info-tooltip-trigger svg {
+  width: 12px;
+  height: 12px;
+  color: #9ca3af;
+}
+
+/* Tooltip content */
+.info-tooltip-content {
+  max-width: 280px;
+  padding: 12px;
+  background: #0b0f14;
+  border: 1px solid #1f2937;
+  border-radius: 10px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
+}
+
+/* Body */
+.info-tooltip-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Title */
+.info-tooltip-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #e5e7eb;
+}
+
+/* Description */
+.info-tooltip-description {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #9ca3af;
+}
+
+/* Calculation */
+.info-tooltip-calculation {
+  font-size: 11px;
+  font-style: italic;
+  color: rgba(34, 197, 94, 0.8);
+}
+.info-tooltip-content {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
+
+.info-tooltip-title {
+  color: #111827;
+}
+
+.info-tooltip-description {
+  color: #6b7280;
+}
+
+/* ===============================
+   TABLET (≤ 768px)
+================================ */
+
+@media (max-width: 768px) {
+  .info-tooltip-content {
+    max-width: 260px;
+    padding: 11px;
+    border-radius: 9px;
+  }
+
+  .info-tooltip-title {
+    font-size: 12px;
+  }
+
+  .info-tooltip-description {
+    font-size: 11.5px;
+  }
+}
+
+/* ===============================
+   MOBILE LARGE (≤ 475px)
+================================ */
+
+@media (max-width: 475px) {
+  .info-tooltip-content {
+    max-width: 240px;
+    padding: 10px;
+  }
+
+  .info-tooltip-trigger {
+    width: 18px;
+    height: 18px;
+  }
+
+  .info-tooltip-trigger svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  .info-tooltip-title {
+    font-size: 12px;
+  }
+
+  .info-tooltip-description {
+    font-size: 11px;
+  }
+
+  .info-tooltip-calculation {
+    font-size: 10.5px;
+  }
+}
+
+/* ===============================
+   MOBILE MEDIUM (≤ 375px)
+================================ */
+
+@media (max-width: 375px) {
+  .info-tooltip-content {
+    max-width: 220px;
+    padding: 9px;
+    border-radius: 8px;
+  }
+
+  .info-tooltip-trigger {
+    width: 16px;
+    height: 16px;
+  }
+
+  .info-tooltip-title {
+    font-size: 11.5px;
+  }
+
+  .info-tooltip-description {
+    font-size: 10.5px;
+  }
+}
+
+/* ===============================
+   MOBILE SMALL (≤ 320px)
+================================ */
+
+@media (max-width: 320px) {
+  .info-tooltip-content {
+    max-width: 200px;
+    padding: 8px;
+  }
+
+  .info-tooltip-title {
+    font-size: 11px;
+  }
+
+  .info-tooltip-description {
+    font-size: 10px;
+  }
+
+  .info-tooltip-calculation {
+    font-size: 10px;
+  }
+}

@@ -1,4 +1,5 @@
 import { Home } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import "./LearnMore.css";
 
 import scam1 from "/assets/scam.png";
@@ -8,11 +9,11 @@ import ScamNav from '@/pages/ScamNav';
 
 
 const LearnMore = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="learn-more-container">
-
       <ScamNav />
-
       {/* Main Content */}
       <main className="main-content">
         <article className="article-container">
@@ -27,28 +28,24 @@ const LearnMore = () => {
 
           {/* Article Header */}
           <header className="article-header">
-            <h1 className="article-title">
-              Beware of scam offering payment for reviewing real estate listings
-            </h1>
-            <p className="article-meta">
-              September 17, 2025 / Joannah Connolly / AB, BC, ON, Real Estate
-            </p>
+            <h1 className="article-title">{t("beware_of_scam_offering_payment_for_reviewing_real_estate_listings")}</h1>
+            <p className="article-meta">{t("september_17_2025_joannah_connolly_ab_bc_on_real_estate")}</p>
           </header>
 
           {/* Article Body */}
           <div className="article-body">
 
-            <p className="article-paragraph">
-              We've all been targeted with one fraudulent scheme or another at some point in our adult lives. Now, there is a very realistic-looking scam that falsely claims to be legitimate paid work reviewing home listings, and is illegally branded with HomeNest's logo and colour palette.
-            </p>
+            <p className="article-paragraph">{t(
+              "we_ve_all_been_targeted_with_one_fraudulent_scheme_or_another_at_some_point_in_our_adult_lives_now_there_is_a_very_realistic_looking_scam_that_falsely_claims_to_be_legitimate_paid_work_reviewing_home_listings_and_is_illegally_branded_with_homenest_s_logo_and_colour_palette"
+            )}</p>
 
-            <p className="article-paragraph">
-              Consumers across Canada are warned to avoid this prolific, highly convincing scam that HomeNest has been made aware of by concerned consumers, some of whom have been targeted. The scammers approach victims through various platforms, such as adding WhatsApp and Telegram users to the scam's chat groups, posting jobs on LinkedIn and Indeed to advertise the fake opportunity, cold calling and texting victims, and more.
-            </p>
+            <p className="article-paragraph">{t(
+              "consumers_across_canada_are_warned_to_avoid_this_prolific_highly_convincing_scam_that_homenest_has_been_made_aware_of_by_concerned_consumers_some_of_whom_have_been_targeted_the_scammers_approach_victims_through_various_platforms_such_as_adding_whatsapp_and_telegram_users_to_the_scam_s_chat_groups_posting_jobs_on_linkedin_and_indeed_to_advertise_the_fake_opportunity_cold_calling_and_texting_victims_and_more"
+            )}</p>
 
-            <p className="article-paragraph">
-              Each path takes the unsuspecting consumer to a scam website that illegally uses HomeNest's logo and branding, and claims to offer payment to "analyze and promote the most profitable properties" on a freelance basis. They may also use other similar methods that are designed to make victims send them funds.
-            </p>
+            <p className="article-paragraph">{t(
+              "each_path_takes_the_unsuspecting_consumer_to_a_scam_website_that_illegally_uses_homenest_s_logo_and_branding_and_claims_to_offer_payment_to_analyze_and_promote_the_most_profitable_properties_on_a_freelance_basis_they_may_also_use_other_similar_methods_that_are_designed_to_make_victims_send_them_funds"
+            )}</p>
 
             {/* scam2 */}
             <div className="content-image-wrapper">
@@ -61,34 +58,32 @@ const LearnMore = () => {
 
             {/* scam3 */}
             <div className="content-image-wrapper">
-              <p className="image-caption">
-                Image: Screenshot of the scam website home page, falsely branded as HomeNest
-              </p>
+              <p className="image-caption">{t(
+                "image_screenshot_of_the_scam_website_home_page_falsely_branded_as_homenest"
+              )}</p>
             </div>
 
-            <p className="article-paragraph">
-              Like many such scams, the victims are asked to deposit funds into an account to get the "job," with the promise that this will be far outweighed by earnings. This is followed by the scammers demanding increasingly high deposits to keep their account active.
-            </p>
+            <p className="article-paragraph">{t(
+              "like_many_such_scams_the_victims_are_asked_to_deposit_funds_into_an_account_to_get_the_job_with_the_promise_that_this_will_be_far_outweighed_by_earnings_this_is_followed_by_the_scammers_demanding_increasingly_high_deposits_to_keep_their_account_active"
+            )}</p>
 
-            <p className="article-paragraph">
-              However much the victim pays into the account, they will never see that money again, and they will never be paid.
-            </p>
+            <p className="article-paragraph">{t(
+              "however_much_the_victim_pays_into_the_account_they_will_never_see_that_money_again_and_they_will_never_be_paid"
+            )}</p>
 
-            <h2 className="article-heading">
-              Thousands of dollars lost
-            </h2>
+            <h2 className="article-heading">{t("thousands_of_dollars_lost")}</h2>
 
-            <p className="article-paragraph">
-              HomeNest has learned of at least one user who believed the scam and has unfortunately lost thousands of dollars that they cannot recover, along with another who has lost hundreds.
-            </p>
+            <p className="article-paragraph">{t(
+              "homenest_has_learned_of_at_least_one_user_who_believed_the_scam_and_has_unfortunately_lost_thousands_of_dollars_that_they_cannot_recover_along_with_another_who_has_lost_hundreds"
+            )}</p>
 
-            <p className="article-paragraph">
-              The scam also uses HomeNest's branding on letterhead to send official-looking, watermarked legal "breach of contract" notices, claiming the victim did not file their work within a certain period and demanding huge fines be paid.
-            </p>
+            <p className="article-paragraph">{t(
+              "the_scam_also_uses_homenest_s_branding_on_letterhead_to_send_official_looking_watermarked_legal_breach_of_contract_notices_claiming_the_victim_did_not_file_their_work_within_a_certain_period_and_demanding_huge_fines_be_paid"
+            )}</p>
 
-            <p className="article-paragraph">
-              HomeNest has received a copy of such a letter from a scam victim who reached out to us. Much of the letter's text is extremely badly written and challenging to understand. What is clear is that the copy HomeNest received demands $87,140 USDT (Tether, a form of cryptocurrency) in payment, claiming that the fine will be refunded if the full amount is paid, and threatening legal action if it is not (see screenshot below).
-            </p>
+            <p className="article-paragraph">{t(
+              "homenest_has_received_a_copy_of_such_a_letter_from_a_scam_victim_who_reached_out_to_us_much_of_the_letter_s_text_is_extremely_badly_written_and_challenging_to_understand_what_is_clear_is_that_the_copy_homenest_received_demands_87_140_usdt_tether_a_form_of_cryptocurrency_in_payment_claiming_that_the_fine_will_be_refunded_if_the_full_amount_is_paid_and_threatening_legal_action_if_it_is_not_see_screenshot_below"
+            )}</p>
 
             {/* scam3 again (letter screenshot) */}
             <div className="content-image-wrapper">
@@ -97,73 +92,70 @@ const LearnMore = () => {
                 alt="Scam letter screenshot"
                 className="content-image with-border"
               />
-              <p className="image-caption">
-                Image: Screenshot of a letter sent to a victim of the scam, falsely claiming to be from HomeNest
-              </p>
+              <p className="image-caption">{t(
+                "image_screenshot_of_a_letter_sent_to_a_victim_of_the_scam_falsely_claiming_to_be_from_homenest"
+              )}</p>
             </div>
 
-            <p className="article-paragraph">
-              The letter is signed "John Steen, Project Director, HomeNest" and marked with a convincing-looking stamp. No such employee or role exists at HomeNest, Inc.
-            </p>
+            <p className="article-paragraph">{t(
+              "the_letter_is_signed_john_steen_project_director_homenest_and_marked_with_a_convincing_looking_stamp_no_such_employee_or_role_exists_at_homenest_inc"
+            )}</p>
 
-            <h2 className="article-heading">Authorities have been advised</h2>
+            <h2 className="article-heading">{t("authorities_have_been_advised")}</h2>
 
-            <p className="article-paragraph">
-              The HomeNest team can confirm that this fraudulent scheme has no link of any kind to HomeNest, Inc. or any of its associates, and that the company has no control over the scammers' illegal activity.
-            </p>
+            <p className="article-paragraph">{t(
+              "the_homenest_team_can_confirm_that_this_fraudulent_scheme_has_no_link_of_any_kind_to_homenest_inc_or_any_of_its_associates_and_that_the_company_has_no_control_over_the_scammers_illegal_activity"
+            )}</p>
 
-            <p className="article-paragraph">
-              HomeNest further wishes to clarify that it never makes job offers via WhatsApp or Telegram, nor does it pay users for clicking on listings or "reviewing" them.
-            </p>
+            <p className="article-paragraph">{t(
+              "homenest_further_wishes_to_clarify_that_it_never_makes_job_offers_via_whatsapp_or_telegram_nor_does_it_pay_users_for_clicking_on_listings_or_reviewing_them"
+            )}</p>
 
-            <p className="article-paragraph">
-              Michael Carney, HomeNest's Director of Business Development, said, "We at HomeNest are appalled that scammers are hijacking the HomeNest brand to shake down prospective job seekers. We're extremely concerned that people are losing money and we want to sound the alarm to help prevent this from happening to anyone else."
-            </p>
+            <p className="article-paragraph">{t(
+              "michael_carney_homenest_s_director_of_business_development_said_we_at_homenest_are_appalled_that_scammers_are_hijacking_the_homenest_brand_to_shake_down_prospective_job_seekers_we_re_extremely_concerned_that_people_are_losing_money_and_we_want_to_sound_the_alarm_to_help_prevent_this_from_happening_to_anyone_else"
+            )}</p>
 
-            <p className="article-paragraph">
-              HomeNest has now notified the appropriate law enforcement agencies about the scam.
-            </p>
+            <p className="article-paragraph">{t(
+              "homenest_has_now_notified_the_appropriate_law_enforcement_agencies_about_the_scam"
+            )}</p>
 
-            <p className="article-paragraph">
-              Any users who are concerned about possible scams branded as HomeNest, or have questions about the legitimacy of roles advertised under HomeNest's name, may reach out to us at{" "}
-              <a href="mailto:scam-alerts@HomeNest.com" className="article-link">
-                scam-alerts@HomeNest.com
-              </a>
+            <p className="article-paragraph">{t(
+              "any_users_who_are_concerned_about_possible_scams_branded_as_homenest_or_have_questions_about_the_legitimacy_of_roles_advertised_under_homenest_s_name_may_reach_out_to_us_at"
+            )}{" "}
+              <a href="mailto:scam-alerts@HomeNest.com" className="article-link">{t("scam_alerts_homenest_com")}</a>
             </p>
 
             {/* Tags */}
             <div className="tags-container">
-              <span className="tag">real estate</span>
-              <span className="tag">scam</span>
+              <span className="tag">{t("real_estate")}</span>
+              <span className="tag">{t("scam")}</span>
             </div>
 
             {/* Navigation Links */}
             <div className="nav-links-container">
-              <a className="nav-link-block">
-                « EXPLORE EDMONTON WITH HomeNest: NOW FEATURING SOLD DATA FROM EDMONTON REAL ESTATE BOARD
-              </a>
-              <a className="nav-link-block">
-                FROM CLICKS TO FOOTSTEPS: NEW HomeNest TOOL GAUGES BUYER COMPETITION ON LISTINGS »
-              </a>
+              <a className="nav-link-block">{t(
+                "explore_edmonton_with_homenest_now_featuring_sold_data_from_edmonton_real_estate_board"
+              )}</a>
+              <a className="nav-link-block">{t(
+                "from_clicks_to_footsteps_new_homenest_tool_gauges_buyer_competition_on_listings"
+              )}</a>
             </div>
 
           </div>
         </article>
       </main>
-
       {/* Footer */}
       <footer className="footer">
         <div className="footer-content">
           <div className="footer-links">
-            <a className="footer-link">HomeNest Inc. Brokerage</a>
-            <a className="footer-link">Legal</a>
-            <a className="footer-link">Privacy & Security</a>
-            <a className="footer-link">Terms & Conditions</a>
-            <a className="footer-link">Accessibility</a>
+            <a className="footer-link">{t("homenest_inc_brokerage")}</a>
+            <a className="footer-link">{t("legal")}</a>
+            <a className="footer-link">{t("privacy_security")}</a>
+            <a className="footer-link">{t("terms_conditions")}</a>
+            <a className="footer-link">{t("accessibility")}</a>
           </div>
         </div>
       </footer>
-
     </div>
   );
 };

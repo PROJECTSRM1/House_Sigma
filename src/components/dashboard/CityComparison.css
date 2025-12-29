@@ -1,0 +1,315 @@
+/* ===============================
+   SECTION
+================================ */
+
+.city-section {
+  animation: fadeUp 0.6s ease forwards;
+}
+
+/* ===============================
+   HEADER
+================================ */
+
+.city-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+
+.city-header h3 {
+  font-size: 22px;
+  font-weight: 800;
+  color: #111827;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.city-header p {
+  font-size: 14px;
+  color: #6b7280;
+  margin-top: 6px;
+}
+
+/* ===============================
+   LAYOUT
+================================ */
+
+.city-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 28px;
+}
+
+@media (max-width: 1024px) {
+  .city-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===============================
+   CHART CARD
+================================ */
+
+.city-chart {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  padding: 20px;
+  transition: box-shadow 0.25s ease;
+}
+
+.city-chart:hover {
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.08);
+}
+
+/* ===============================
+   TABLE CARD
+================================ */
+
+.city-table {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+/* ===============================
+   TABLE
+================================ */
+
+.city-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Header row */
+.city-table thead {
+  background: #f9fafb;
+}
+
+.city-table th {
+  padding: 14px 16px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #6b7280;
+  text-align: right;
+  cursor: pointer;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.city-table th:first-child {
+  text-align: left;
+}
+
+.city-table th span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Body cells */
+.city-table td {
+  padding: 14px 16px;
+  font-size: 14px;
+  color: #111827;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.city-table td.right {
+  text-align: right;
+}
+
+/* ===============================
+   ROWS
+================================ */
+
+.city-row {
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.city-row:hover {
+  background: #f9fafb;
+}
+
+.city-row.expanded {
+  background: #ecfdf5;
+}
+
+/* ===============================
+   CITY NAME
+================================ */
+
+.city-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+
+.city-name svg {
+  width: 16px;
+  height: 16px;
+  color: #6b7280;
+}
+
+/* ===============================
+   COLORS
+================================ */
+
+.primary {
+  color: #16a34a;
+  font-weight: 700;
+}
+
+/* ===============================
+   DRILLDOWN
+================================ */
+
+.drilldown-cell {
+  padding: 16px;
+  background: #f9fafb;
+  border-top: 1px dashed #e5e7eb;
+}
+
+/* ===============================
+   ANIMATION
+================================ */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* ===============================
+   TABLET (≤ 768px)
+================================ */
+
+@media (max-width: 768px) {
+  .city-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .city-header h3 {
+    font-size: 20px;
+  }
+
+  .city-layout {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .city-chart,
+  .city-table {
+    border-radius: 16px;
+  }
+
+  .city-table th,
+  .city-table td {
+    padding: 12px 14px;
+    font-size: 13px;
+  }
+}
+
+/* ===============================
+   MOBILE LARGE (≤ 425px)
+================================ */
+
+@media (max-width: 425px) {
+  .city-header h3 {
+    font-size: 18px;
+  }
+
+  .city-header p {
+    font-size: 13px;
+  }
+
+  .city-chart {
+    padding: 16px;
+  }
+
+  .city-table {
+    overflow-x: auto;
+  }
+
+  .city-table table {
+    min-width: 520px; /* enables horizontal scroll */
+  }
+
+  .city-table th {
+    font-size: 10px;
+  }
+
+  .city-table td {
+    font-size: 13px;
+  }
+}
+
+/* ===============================
+   MOBILE MEDIUM (≤ 375px)
+================================ */
+
+@media (max-width: 375px) {
+  .city-header h3 {
+    font-size: 17px;
+    gap: 6px;
+  }
+
+  .city-name {
+    font-size: 13px;
+  }
+
+  .city-name svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .city-chart {
+    padding: 14px;
+  }
+
+  .city-table td,
+  .city-table th {
+    padding: 10px 12px;
+  }
+}
+
+/* ===============================
+   MOBILE SMALL (≤ 320px)
+================================ */
+
+@media (max-width: 320px) {
+  .city-header h3 {
+    font-size: 16px;
+  }
+
+  .city-header p {
+    font-size: 12px;
+  }
+
+  .city-chart {
+    padding: 12px;
+  }
+
+  .city-name {
+    gap: 6px;
+  }
+
+  .city-table td,
+  .city-table th {
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+}

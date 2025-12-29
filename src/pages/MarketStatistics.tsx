@@ -19,6 +19,9 @@ import {
   ChevronDown,
   HelpCircle,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import {
   Area,
   AreaChart,
@@ -87,6 +90,8 @@ const priceRanges = ["all", "under500k", "500k-1m", "over1m"];
 const formatPrice = (price: number) => price >= 1000000 ? `$${(price / 1000000).toFixed(1)}M` : `$${(price / 1000).toFixed(0)}K`;
 
 const MarketStatistics = () => {
+
+  const { t } = useTranslation();
   const [selectedCommunity, setSelectedCommunity] = useState<string | null>(null);
   const [selectedFacility, setSelectedFacility] = useState<string | null>(null);
   const [dateRange, setDateRange] = useState("12M");

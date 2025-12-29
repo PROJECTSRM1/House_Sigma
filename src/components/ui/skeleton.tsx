@@ -1,6 +1,12 @@
 import { cn } from "@/lib/utils";
 
+import { useTranslation } from "react-i18next";
+
 function Skeleton({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  const {
+    t: t
+  } = useTranslation();
+
   return <div className={cn("animate-pulse rounded-md bg-muted", className)} {...props} />;
 }
 

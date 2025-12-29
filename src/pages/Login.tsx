@@ -1,5 +1,6 @@
 declare const google: any;
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { NavLink, useNavigate } from "react-router-dom";
 import "./Login.css";
 import googleLogo from "/assets/google.png";
@@ -33,6 +34,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
 
   redirectTo = "/",
 }) => {
+  const { t } = useTranslation();
   const { setUser } = useAuth();   // ✅ Context
 
   const [activeTab, setActiveTab] = useState<"email" | "mobile">("email");
@@ -173,21 +175,17 @@ const LoginModal: React.FC<LoginModalProps> = ({
           ✕
         </button>
 
-        <h2 className="login-title">Log in</h2>
+        <h2 className="login-title">{t("log_in")}</h2>
 
         <div className="tabs">
           <button
             className={activeTab === "email" ? "tab active" : "tab"}
             onClick={() => setActiveTab("email")}
-          >
-            Email
-          </button>
+          >{t("email")}</button>
           <button
             className={activeTab === "mobile" ? "tab active" : "tab"}
             onClick={() => setActiveTab("mobile")}
-          >
-            Mobile Number
-          </button>
+          >{t("mobile_number")}</button>
         </div>
 
         {activeTab === "email" && (
@@ -253,41 +251,16 @@ const LoginModal: React.FC<LoginModalProps> = ({
           </span>
         </div>
 
-        <button className="login-btn" onClick={handleLogin}>
-          Log in
-        </button>
+        <button className="login-btn" onClick={handleLogin}>{t("log_in")}</button>
 
-        <p className="forgot-text" onClick={onForgotPassword}>
-          Forgot Password?
-        </p>
+        <p className="forgot-text" onClick={onForgotPassword}>{t("forgot_password")}</p>
 
         <div className="divider"></div>
 
         <button className="social-btn" onClick={handleGoogleLogin}>
-          <img src={googleLogo} alt="google" className="social-icon" />
-          Sign in with Google
-        </button>
+          <img src={googleLogo} alt="google" className="social-icon" />{t("sign_in_with_google")}</button>
 
-        <button className="social-btn">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png"
-            alt="facebook"
-            className="social-icon"
-          />
-          Sign in with Facebook
-        </button>
-
-        <button className="social-btn">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"
-            alt="linkedin"
-            className="social-icon"
-          />
-          Sign in with LinkedIn
-        </button>
-
-        <p className="signup-text">
-          New user? <NavLink to="/join">Sign-up here</NavLink>
+        <p className="signup-text">{t("new_user")}<NavLink to="/join">{t("sign_up_here")}</NavLink>
         </p>
       </div>
     </div>

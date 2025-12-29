@@ -1,10 +1,15 @@
 import { useState } from "react";
 
+import { useTranslation } from "react-i18next";
+
 import ScamNav from "@/pages/ScamNav";
 
 import styles from "./Contact.module.css";
 
 export default function ContactUs() {
+  const { t } = useTranslation();
+
+
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleSearch = () => {
@@ -18,23 +23,18 @@ export default function ContactUs() {
   return (
     <>
       <ScamNav />
-
       <div className={`min-h-screen bg-white pt-4 ${styles.contactPage}`}>
         <div className="w-full flex justify-center">
           <div className="w-[92%] max-w-[850px] px-4 md:px-6 py-6">
 
             {/* PAGE TITLE (Responsive) */}
-            <h1 className="text-[30px] md:text-[40px] font-bold text-[#111133] mt-4 mb-2 text-center md:text-left">
-              Contact Us
-            </h1>
+            <h1 className="text-[30px] md:text-[40px] font-bold text-[#111133] mt-4 mb-2 text-center md:text-left">{t("contact_us")}</h1>
 
             {/* UNDERLINE */}
             <div className="w-[90px] h-[3px] bg-[#111133] mx-auto  mt-2 mb-6" />
 
             {/* HEADER TEXT */}
-            <h2 className="text-[20px] md:text-[28px] font-semibold text-[#111133] mb-3 leading-[1.4] text-center md:text-left">
-              Enter your question here to search our knowledge base:
-            </h2>
+            <h2 className="text-[20px] md:text-[28px] font-semibold text-[#111133] mb-3 leading-[1.4] text-center md:text-left">{t("enter_your_question_here_to_search_our_knowledge_base")}</h2>
 
             {/* SEARCH BAR (Responsive) */}
             <div className="flex w-full mb-4 border border-[#cccccc] rounded-md overflow-hidden">
@@ -59,134 +59,97 @@ export default function ContactUs() {
                   hover:bg-[#f0f0f0] transition whitespace-nowrap
                   ${styles.noBorder}
                 `}
-              >
-                SEARCH
-              </button>
+              >{t("search")}</button>
             </div>
 
             {/* INFO TEXT */}
-            <p className="text-[15px] md:text-[17px] text-[#111133] leading-[1.6] mb-5">
-              Before submitting a customer service request, please check our{" "}
+            <p className="text-[15px] md:text-[17px] text-[#111133] leading-[1.6] mb-5">{t("before_submitting_a_customer_service_request_please_check_our")}{" "}
               <a
                 href="https://housesigma.com/blog-en/faq"
                 target="_blank"
                 className="text-[#4477aa] underline hover:text-[#111133]"
-              >
-                Knowledge Base [link]
-              </a>{" "}
-              section. 90% of the inquiries we received has an answer.
-            </p>
+              >{t("knowledge_base_link")}</a>{" "}{t("section_90_of_the_inquiries_we_received_has_an_answer")}</p>
 
             <div className="w-[90px] h-[3px] bg-[#111133] mx-auto  mt-2 mb-6" />
 
             {/* BUY / SELL / LEASE SECTION */}
-            <p className="text-[15px] md:text-[17px] text-[#111133] leading-[1.6] mb-1">
-              To inquire about Buy/Sell/Lease a property or book a viewing, please use{" "}
+            <p className="text-[15px] md:text-[17px] text-[#111133] leading-[1.6] mb-1">{t("to_inquire_about_buy_sell_lease_a_property_or_book_a_viewing_please_use")}{" "}
               <a
                 href="https://housesigma.com/web/en/market"
                 target="_blank"
                 className="text-[#4477aa] underline hover:text-[#111133]"
-              >
-                Contact HomeNest Agent
-              </a>
+              >{t("contact_homenest_agent")}</a>
             </p>
 
-            <p className="text-[15px] md:text-[17px] text-[#111133] leading-[1.6] mb-4">
-              form on listing/market page.{" "}
+            <p className="text-[15px] md:text-[17px] text-[#111133] leading-[1.6] mb-4">{t("form_on_listing_market_page")}{" "}
               <a
                 href="https://housesigma.com/web/en/market"
                 target="_blank"
                 className="text-[#4477aa] underline hover:text-[#111133]"
-              >
-                https://homenest.com/web/en/market
-              </a>
+              >{t("https_homenest_com_web_en_market")}</a>
             </p>
 
             <div className="w-[90px] h-[3px] bg-[#111133] mx-auto  mt-2 mb-6" />
 
             {/* TECHNICAL SUPPORT */}
-            <p className="font-bold text-[15px] md:text-[17px] text-[#111133] mb-1">
-              Contact technical support:
-            </p>
+            <p className="font-bold text-[15px] md:text-[17px] text-[#111133] mb-1">{t("contact_technical_support")}</p>
 
             <a
               href="https://housesigma.com/blog-en/faq/other/contact-technical-support/"
               target="_blank"
               className="text-[#4477aa] underline hover:text-[#111133] text-[14px] md:text-[15px]"
-            >
-              https://homenest.com/blog-en/faq/other/contact-technical-support/
-            </a>
+            >{t("https_homenest_com_blog_en_faq_other_contact_technical_support")}</a>
 
             <div className="my-4" />
 
             {/* COMPLAINTS */}
-            <p className="font-bold text-[15px] md:text-[17px] text-[#111133] mb-1">
-              Complain about brokerage services:
-            </p>
+            <p className="font-bold text-[15px] md:text-[17px] text-[#111133] mb-1">{t("complain_about_brokerage_services")}</p>
             <a
               href="https://housesigma.com/blog-en/faq/other/complain-about-brokerage-services/"
               target="_blank"
               className="text-[#4477aa] underline hover:text-[#111133] text-[14px] md:text-[15px]"
-            >
-              https://homenest.com/blog-en/faq/other/complain-about-brokerage-services/
-            </a>
+            >{t("https_homenest_com_blog_en_faq_other_complain_about_brokerage_services")}</a>
 
             <div className="my-4" />
 
             {/* DEAL MATTERS */}
-            <p className="font-bold text-[15px] md:text-[17px] text-[#111133] mb-1">
-              For deal and conveyancing related matters:
-            </p>
+            <p className="font-bold text-[15px] md:text-[17px] text-[#111133] mb-1">{t("for_deal_and_conveyancing_related_matters")}</p>
 
-            <p className="text-[15px] md:text-[17px] text-[#111133] leading-[1.6]">
-              Please contact{" "}
+            <p className="text-[15px] md:text-[17px] text-[#111133] leading-[1.6]">{t("please_contact")}{" "}
               <a
                 href="mailto:deals@housesigma.com"
                 className="text-[#4477aa] underline hover:text-[#111133]"
-              >
-                deals@homenest.com
-              </a>
+              >{t("deals_homenest_com")}</a>
             </p>
 
             <div className="my-4" />
 
             {/* MEDIA */}
-            <p className="font-bold text-[15px] md:text-[17px] text-[#111133] mb-1">
-              For media inquiries:
-            </p>
+            <p className="font-bold text-[15px] md:text-[17px] text-[#111133] mb-1">{t("for_media_inquiries")}</p>
 
-            <p className="text-[15px] md:text-[17px] text-[#111133] leading-[1.6]">
-              Please contact{" "}
+            <p className="text-[15px] md:text-[17px] text-[#111133] leading-[1.6]">{t("please_contact")}{" "}
               <a
                 href="mailto:press@housesigma.com"
                 className="text-[#4477aa] underline hover:text-[#111133]"
-              >
-                press@homenest.com
-              </a>
+              >{t("press_homenest_com")}</a>
             </p>
 
             <div className="w-[90px] h-[3px] bg-[#111133] mx-auto  mt-2 mb-6" />
             {/* BUY/SELL/LEASE again */}
-            <p className="text-[15px] md:text-[17px] text-[#111133] leading-[1.6] mb-1">
-              To inquire about Buy/Sell/Lease a property or book a viewing, please use{" "}
+            <p className="text-[15px] md:text-[17px] text-[#111133] leading-[1.6] mb-1">{t("to_inquire_about_buy_sell_lease_a_property_or_book_a_viewing_please_use")}{" "}
               <a
                 href="https://housesigma.com/web/en/market"
                 target="_blank"
                 className="text-[#4477aa] underline hover:text-[#111133]"
-              >
-                Contact HomeNest Agent
-              </a>
+              >{t("contact_homenest_agent")}</a>
             </p>
 
-            <p className="text-[15px] md:text-[17px] text-[#111133] leading-[1.6] mb-10">
-              form on listing/market page.{" "}
+            <p className="text-[15px] md:text-[17px] text-[#111133] leading-[1.6] mb-10">{t("form_on_listing_market_page")}{" "}
               <a
                 href="https://housesigma.com/web/en/market"
                 target="_blank"
                 className="text-[#4477aa] underline hover:text-[#111133]"
-              >
-                https://homenest.com/web/en/market
-              </a>
+              >{t("https_homenest_com_web_en_market")}</a>
             </p>
 
           </div>
@@ -196,11 +159,11 @@ export default function ContactUs() {
       <footer className="footer">
         <div className="footer-content">
           <div className="footer-links">
-            <a className="footer-link">HomeNest Inc. Brokerage</a>
-            <a className="footer-link">Legal</a>
-            <a className="footer-link">Privacy & Security</a>
-            <a className="footer-link">Terms & Conditions</a>
-            <a className="footer-link">Accessibility</a>
+            <a className="footer-link">{t("homenest_inc_brokerage")}</a>
+            <a className="footer-link">{t("legal")}</a>
+            <a className="footer-link">{t("privacy_security")}</a>
+            <a className="footer-link">{t("terms_conditions")}</a>
+            <a className="footer-link">{t("accessibility")}</a>
           </div>
         </div>
       </footer>

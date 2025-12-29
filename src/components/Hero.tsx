@@ -1,4 +1,5 @@
 import { Search, AlertCircle } from 'lucide-react';
+import { useTranslation } from "react-i18next";
 import { Button } from './ui/button';
 import { useState, useEffect } from 'react';
 import styles from './Hero.module.css';
@@ -10,6 +11,9 @@ import heroSlide4 from '/assets/hero-slide-4.jpeg';
 import heroSlide5 from '/assets/hero-slide-5.jpeg';
 
 const Hero = () => {
+
+  const { t } = useTranslation();
+
   const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
   
@@ -47,18 +51,11 @@ const Hero = () => {
           />
         ))}
       </div>
-      
       <div className={styles.overlay} />
-
       <div className={styles.content}>
         <div className={styles.textContent}>
-          <h1 className={styles.title}>
-            Make Better<br />Real Estate Decisions
-          </h1>
-          <p className={styles.subtitle}>
-            Browse 22 years of sales history.<br />
-            Watch new listings, get notified when they're sold.
-          </p>
+          <h1 className={styles.title}>{t("make_better")}<br />{t("real_estate_decisions")}</h1>
+          <p className={styles.subtitle}>{t("browse_22_years_of_sales_history")}<br />{t("watch_new_listings_get_notified_when_they_re_sold")}</p>
 
           <div className={styles.searchBar}>
             <Search className={styles.searchIcon} />
@@ -75,22 +72,17 @@ const Hero = () => {
               size="sm"
               className="bg-transparent text-white border-white/60 hover:bg-white hover:text-foreground font-medium"
             >
-              <AlertCircle className="h-4 w-4 mr-2" />
-              Scam Alert
-            </Button>
+              <AlertCircle className="h-4 w-4 mr-2" />{t("scam_alert")}</Button>
 
             <Button
               variant="outline"
               size="sm"
               className="border-white/80 bg-transparent text-white hover:bg-white hover:text-foreground font-medium transition-colors"
               onClick={handleLearnMore}
-            >
-              Learn More
-            </Button>
+            >{t("learn_more")}</Button>
           </div>
         </div>
       </div>
-
       {/* Slide Indicators */}
       <div className={styles.indicators}>
         {slides.map((_, index) => (
