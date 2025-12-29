@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import './search.css'
 
 interface SearchBarProps {
@@ -12,6 +13,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
   setSearchQuery,
   onSearch,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="faq-search-container">
       <form
@@ -29,9 +32,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
           className="faq-search-input"
         />
 
-        <button type="submit" className="faq-search-button">
-          SEARCH
-        </button>
+        <button type="submit" className="faq-search-button">{t("search")}</button>
       </form>
     </div>
   );

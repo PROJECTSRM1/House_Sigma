@@ -1,4 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { FileText } from "lucide-react";
 import SearchBar from "./search";
 import "./Sidebar.css";
@@ -11,6 +12,8 @@ import ScamNav from "@/pages/ScamNav";
 import { faqData } from "../FAQ/FAQ";
 
 const ArticlePage = () => {
+  const { t } = useTranslation();
+
   const navigate = useNavigate();
   const { articleSlug } = useParams();
 
@@ -25,49 +28,38 @@ const ArticlePage = () => {
         return (
           <>
             <ol className="article-list">
-              <li>Check spam folder</li>
+              <li>{t("check_spam_folder")}</li>
+
+              <li>{t(
+                "some_email_providers_reject_our_email_yahoo_cogeco_bell_please_use_a_different_email_provider_such_as_hotmail_com_gmail_com"
+              )}</li>
+
+              <li>{t(
+                "do_not_use_corporate_email_many_companies_have_very_aggressive_spam_blockers_which_block_our_email"
+              )}</li>
 
               <li>
-                Some email providers reject our email (Yahoo, Cogeco, Bell).
-                Please use a different email provider such as hotmail.com,
-                gmail.com.
-              </li>
-
-              <li>
-                Do not use corporate email. Many companies have very aggressive
-                spam blockers, which block our email.
-              </li>
-
-              <li>
-                <strong>
-                  Do not use email provided by cogeco, rogers or qq.com.
-                </strong>
+                <strong>{t("do_not_use_email_provided_by_cogeco_rogers_or_qq_com")}</strong>
               </li>
             </ol>
-
+            <p className="article-note">{t("if_all_of_the_above_does_not_work_send_a_request_to_support")}</p>
             <p className="article-note">
-              If all of the above does not work, send a request to support.
-            </p>
-
-            <p className="article-note">
-              <strong>Keyword:</strong> verification code email signup register
-              reset password
-            </p>
+              <strong>{t("keyword")}</strong>{t("verification_code_email_signup_register_reset_password")}</p>
           </>
         );
 
       case "why-it-requires-sign-up-to-view-some-properties":
         return (
           <>
-            <p>Sold data must be password protected since 2018.</p>
-            <p>All real estate websites must follow this rule.</p>
+            <p>{t("sold_data_must_be_password_protected_since_2018")}</p>
+            <p>{t("all_real_estate_websites_must_follow_this_rule")}</p>
           </>
         );
 
       case "how-to-delete-my-account":
         return (
           <>
-            <p>Follow the steps to delete your account.</p>
+            <p>{t("follow_the_steps_to_delete_your_account")}</p>
             <img src={img2} className="article-image" />
           </>
         );
@@ -75,11 +67,11 @@ const ArticlePage = () => {
       case "sign-up-reset-password-does-not-work":
         return (
           <>
-            <p>Robot detection may block sign-up/reset requests.</p>
+            <p>{t("robot_detection_may_block_sign_up_reset_requests")}</p>
             <ul>
-              <li>Corporate networks</li>
-              <li>VPN</li>
-              <li>Auto scripts</li>
+              <li>{t("corporate_networks")}</li>
+              <li>{t("vpn")}</li>
+              <li>{t("auto_scripts")}</li>
             </ul>
           </>
         );
@@ -87,7 +79,7 @@ const ArticlePage = () => {
       case "why-my-account-watch-list-is-wiped":
         return (
           <>
-            <p>Usually caused by registering multiple accounts.</p>
+            <p>{t("usually_caused_by_registering_multiple_accounts")}</p>
             <img src={img1} className="article-image" />
           </>
         );
@@ -95,99 +87,78 @@ const ArticlePage = () => {
       case "vow-restrictions-for-real-estate-agents-and-commercial-users":
         return (
           <>
-            <p>TRREB restricts VOW data…</p>
-            <a href="https://housesigma.com/blog-en/faq/contact-us/contact-technical-support">
-              Contact Support
-            </a>
+            <p>{t("trreb_restricts_vow_data")}</p>
+            <a href="https://housesigma.com/blog-en/faq/contact-us/contact-technical-support">{t("contact_support")}</a>
           </>
         );
 
       case "request-to-delete-account":
         return (
           <>
-            <p>
-              The form below is for HomeNest user technical support only. We{" "}
-              <strong>can not</strong> provide buy/sell/lease advice through the
-              following form.
-            </p>
-
-            <p>To have your account deleted, there are two methods:</p>
-
+            <p>{t("the_form_below_is_for_homenest_user_technical_support_only_we")}{" "}
+              <strong>{t("can_not")}</strong>{t("provide_buy_sell_lease_advice_through_the_following_form")}</p>
+            <p>{t("to_have_your_account_deleted_there_are_two_methods")}</p>
             <ul>
-              <li>
-                Method 1: Login to HomeNest App, use app → account → profile → delete
-              </li>
-              <li>
-                Method 2: Use the following form, a technical support person will assist you.
-              </li>
+              <li>{t("method_1_login_to_homenest_app_use_app_account_profile_delete")}</li>
+              <li>{t(
+                "method_2_use_the_following_form_a_technical_support_person_will_assist_you"
+              )}</li>
             </ul>
-
             <form className="delete-form">
-              <label>Your Name</label>
+              <label>{t("your_name")}</label>
               <input type="text" placeholder="Enter your name" required />
 
-              <label>Your Email (required)</label>
+              <label>{t("your_email_required")}</label>
               <input type="email" placeholder="Enter your email" required />
 
-              <label>Reason for contact</label>
+              <label>{t("reason_for_contact")}</label>
               <select required>
-                <option>Request to delete account</option>
-                <option>General Inquiry</option>
+                <option>{t("request_to_delete_account")}</option>
+                <option>{t("general_inquiry")}</option>
               </select>
 
-              <label>Your Message</label>
+              <label>{t("your_message")}</label>
               <textarea placeholder="Write your message..." required></textarea>
 
-              <label className="checkbox-label-title">
-                What other information you would request to delete
-              </label>
+              <label className="checkbox-label-title">{t("what_other_information_you_would_request_to_delete")}</label>
 
               <div className="checkbox-group">
                 <label>
-                  <input type="checkbox" /> Customer profile
-                </label>
+                  <input type="checkbox" />{t("customer_profile")}</label>
 
                 <label>
-                  <input type="checkbox" /> Contact info
-                </label>
+                  <input type="checkbox" />{t("contact_info")}</label>
               </div>
 
-              <button type="submit" className="send-btn">SEND</button>
+              <button type="submit" className="send-btn">{t("send")}</button>
             </form>
-
-            <p className="privacy-note">
-              This form is compliant with Google Play data safety and privacy requirement.
-            </p>
+            <p className="privacy-note">{t(
+              "this_form_is_compliant_with_google_play_data_safety_and_privacy_requirement"
+            )}</p>
           </>
         );
 
       default:
-        return <p>No content available.</p>;
+        return <p>{t("no_content_available")}</p>;
     }
   };
 
   return (
     <div className="faq-page-container">
-
       {/* NAVBAR AT TOP */}
       <ScamNav />
-
       <div className="faq-wrapper">
 
         {/* Breadcrumb */}
         <div className="breadcrumb">
-          <span className="breadcrumb-link" onClick={() => navigate("/faq")}>
-            FAQ
-          </span>
+          <span className="breadcrumb-link" onClick={() => navigate("/faq")}>{t("faq")}</span>
 
           <span> › </span>
 
           <span
             className="breadcrumb-link"
             onClick={() => navigate("/faq/user-account")}
-          >
-            User Account
-          </span>
+          >{t("user_account")}</span>
 
           <span> › </span>
 
@@ -234,16 +205,15 @@ const ArticlePage = () => {
 
         </div>
       </div>
-
       {/* FOOTER AT BOTTOM */}
       <footer className="footer">
         <div className="footer-content">
           <div className="footer-links">
-            <a className="footer-link">HomeNest Inc. Brokerage</a>
-            <a className="footer-link">Legal</a>
-            <a className="footer-link">Privacy & Security</a>
-            <a className="footer-link">Terms & Conditions</a>
-            <a className="footer-link">Accessibility</a>
+            <a className="footer-link">{t("homenest_inc_brokerage")}</a>
+            <a className="footer-link">{t("legal")}</a>
+            <a className="footer-link">{t("privacy_security")}</a>
+            <a className="footer-link">{t("terms_conditions")}</a>
+            <a className="footer-link">{t("accessibility")}</a>
           </div>
         </div>
       </footer>

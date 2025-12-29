@@ -1,4 +1,5 @@
 import "./MarketTrends.css";
+import { useTranslation } from "react-i18next";
 import { useState, useMemo } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";

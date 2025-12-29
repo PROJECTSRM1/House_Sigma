@@ -104,6 +104,7 @@
   text-decoration: none;
   color: #ffffff;
   transition: 0.25s ease;
+  cursor: pointer;
 }
 
 .link:hover {
@@ -135,14 +136,115 @@
 }
 
 /* ================================
-   COPYRIGHT BAR
+   BOTTOM SECTION (COPYRIGHT + LANGUAGE)
 ================================ */
-.bottomBar {
-  text-align: center;
-  padding-top: 1.2rem;
+.bottomSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.18);
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.bottomBar {
   font-size: 0.8rem;
   opacity: 0.8;
+  flex: 1;
+}
+
+/* ================================
+   LANGUAGE SWITCHER
+================================ */
+.languageSwitcher {
+  display: flex;
+  align-items: center;
+}
+
+.languageButtonContainer {
+  position: relative;
+}
+
+.languageToggleBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.languageToggleBtn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.languageToggleBtn:active {
+  transform: scale(0.98);
+}
+
+.languageDropdown {
+  position: absolute;
+  bottom: calc(100% + 0.5rem);
+  right: 0;
+  background: #1a2a3a;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  min-width: 140px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  animation: slideUp 0.2s ease forwards;
+  z-index: 100;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.languageOption {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 0.9rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  opacity: 0.75;
+}
+
+.languageOption:hover {
+  background: rgba(255, 255, 255, 0.1);
+  opacity: 1;
+}
+
+.languageOption.active {
+  background: rgba(255, 255, 255, 0.15);
+  opacity: 1;
+  font-weight: 600;
+  position: relative;
+}
+
+.languageOption.active::before {
+  content: "✓";
+  position: absolute;
+  left: 0.5rem;
 }
 
 /* ================================
@@ -167,6 +269,16 @@
   .socialRow {
     justify-content: center;
   }
+
+  .bottomSection {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .bottomBar {
+    flex: unset;
+  }
 }
 
 @media (max-width: 650px) {
@@ -176,5 +288,25 @@
 
   .storeBadge {
     width: 150px;
+  }
+
+  .bottomSection {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .languageToggleBtn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .languageDropdown {
+    position: fixed;
+    bottom: auto;
+    top: 50%;
+    left: 50%;
+    right: auto;
+    transform: translate(-50%, -50%);
+    min-width: 160px;
   }
 }

@@ -9,6 +9,8 @@ import {
   ResponsiveContainer
 } from "recharts";
 
+import { useTranslation } from "react-i18next";
+
 import { Link } from "react-router-dom";
 import styles from "./StatsChart.module.css";
 
@@ -28,17 +30,17 @@ const data = [
 ];
 
 const StatsChart = () => {
+  const { t } = useTranslation();
+
   return (
     <div className={styles.chartSection}>
       {/* Heading */}
-      <h2 className={styles.title}>Calgary Statistics *(All property types)</h2>
-
+      <h2 className={styles.title}>{t("calgary_statistics_all_property_types")}</h2>
       {/* Legend ABOVE chart - CENTERED */}
       <div className={styles.topLegend}>
-        <span className={styles.legendItemBlue}>● Median Price</span>
-        <span className={styles.legendItemOrange}>■ Total Sold</span>
+        <span className={styles.legendItemBlue}>{t("median_price")}</span>
+        <span className={styles.legendItemOrange}>{t("total_sold")}</span>
       </div>
-
       <ResponsiveContainer width="100%" height={380}>
         <ComposedChart data={data}>
           <CartesianGrid strokeDasharray="3 3" />
@@ -60,17 +62,14 @@ const StatsChart = () => {
           />
         </ComposedChart>
       </ResponsiveContainer>
-
       {/* Larger Source Text */}
-      <p className={styles.source}>
-        * Source: Based on analysis of information from past listings from
-        respective real estate boards.
-      </p>
-
+      <p className={styles.source}>{t(
+        "source_based_on_analysis_of_information_from_past_listings_from_respective_real_estate_boards"
+      )}</p>
       {/* Right aligned button - Navigate to Market Trends */}
       <div className={styles.buttonRow}>
         <Link to="/market-trends">
-          <button className={styles.statsButton}>View More Stats</button>
+          <button className={styles.statsButton}>{t("view_more_stats")}</button>
         </Link>
       </div>
     </div>

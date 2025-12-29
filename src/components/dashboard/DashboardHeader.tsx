@@ -1,4 +1,5 @@
 import './DashboardHeader.css';
+import { useTranslation } from "react-i18next";
 import {
   BarChart3,
   TrendingUp,
@@ -21,6 +22,9 @@ export const DashboardHeader = ({
      SIMPLE DERIVED VALUES
      (mock logic – API-ready)
   ========================= */
+
+  const { t } = useTranslation();
+
 
   const appreciation =
     timeRange === 'Last 3 Months'
@@ -67,7 +71,7 @@ export const DashboardHeader = ({
             <div className="header-icon">
               <BarChart3 size={20} />
             </div>
-            <h1>Market Trends & Insights</h1>
+            <h1>{t("market_trends_insights")}</h1>
           </div>
 
           <p className="header-subtitle">
@@ -77,12 +81,9 @@ export const DashboardHeader = ({
 
         <div className="header-right">
           <div className="live-badge">
-            <Sparkles size={16} />
-            Live Data
-          </div>
+            <Sparkles size={16} />{t("live_data")}</div>
         </div>
       </div>
-
       {/* ================= STATS ================= */}
       <div className="stats-grid">
         {/* Appreciation */}
@@ -90,9 +91,7 @@ export const DashboardHeader = ({
           <div className="stat-label">
             <div className="stat-icon green">
               <TrendingUp size={16} />
-            </div>
-            Avg Appreciation
-          </div>
+            </div>{t("avg_appreciation")}</div>
           <strong>+{appreciation}%</strong>
           <small className="positive">
             {timeRange === 'Last 12 Months'
@@ -106,9 +105,7 @@ export const DashboardHeader = ({
           <div className="stat-label">
             <div className="stat-icon blue">
               <Building2 size={16} />
-            </div>
-            Active Listings
-          </div>
+            </div>{t("active_listings")}</div>
           <strong>{activeListings.toLocaleString()}</strong>
           <small className="accent">
             {propertyType === 'All Types'
@@ -122,13 +119,9 @@ export const DashboardHeader = ({
           <div className="stat-label">
             <div className="stat-icon purple">
               <BarChart3 size={16} />
-            </div>
-            Avg Rental Yield
-          </div>
+            </div>{t("avg_rental_yield")}</div>
           <strong>{rentalYield}%</strong>
-          <small className="secondary">
-            Based on demand trends
-          </small>
+          <small className="secondary">{t("based_on_demand_trends")}</small>
         </div>
 
         {/* Hotspot */}
@@ -136,13 +129,9 @@ export const DashboardHeader = ({
           <div className="stat-label">
             <div className="stat-icon orange">
               <Sparkles size={16} />
-            </div>
-            Top Hotspot
-          </div>
+            </div>{t("top_hotspot")}</div>
           <strong>{topHotspot}</strong>
-          <small className="positive">
-            High investor interest
-          </small>
+          <small className="positive">{t("high_investor_interest")}</small>
         </div>
       </div>
     </header>

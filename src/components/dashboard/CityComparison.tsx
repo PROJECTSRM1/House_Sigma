@@ -1,5 +1,7 @@
 import './CityComparison.css';
 
+import { useTranslation } from "react-i18next";
+
 import {
   ArrowUpDown,
   Search,
@@ -33,6 +35,9 @@ import { dataMethodology } from '@/data/mockData';
 type SortKey = 'searchDemand' | 'salesVolume' | 'rentalInquiries';
 
 export const CityComparison = () => {
+
+  const { t } = useTranslation();
+
   const [sortBy, setSortBy] = useState<SortKey>('searchDemand');
   const [sortDirection, setSortDirection] =
     useState<'asc' | 'desc'>('desc');
@@ -92,18 +97,13 @@ export const CityComparison = () => {
       {/* HEADER */}
       <div className="city-header">
         <div>
-          <h3>
-            City-wise Demand Comparison
-            <InfoTooltip
+          <h3>{t("city_wise_demand_comparison")}<InfoTooltip
               title={dataMethodology.demandScore.title}
               description={dataMethodology.demandScore.description}
               calculation={dataMethodology.demandScore.calculation}
             />
           </h3>
-          <p>
-            Compare property demand across major cities • Click a
-            city to drill down
-          </p>
+          <p>{t("compare_property_demand_across_major_cities_click_a_city_to_drill_down")}</p>
         </div>
 
         <ComparisonModeToggle
@@ -111,7 +111,6 @@ export const CityComparison = () => {
           onChange={setComparisonMode}
         />
       </div>
-
       <div className="city-layout">
         {/* ================= CHART ================= */}
         <div className="city-chart">
@@ -179,23 +178,23 @@ export const CityComparison = () => {
           <table>
             <thead>
               <tr>
-                <th>City</th>
+                <th>{t("city")}</th>
 
                 <th onClick={() => handleSort('searchDemand')}>
                   <span>
-                    <Search /> Search <ArrowUpDown />
+                    <Search />{t("search")}<ArrowUpDown />
                   </span>
                 </th>
 
                 <th onClick={() => handleSort('salesVolume')}>
                   <span>
-                    <ShoppingBag /> Sales <ArrowUpDown />
+                    <ShoppingBag />{t("sales")}<ArrowUpDown />
                   </span>
                 </th>
 
                 <th onClick={() => handleSort('rentalInquiries')}>
                   <span>
-                    <MessageSquare /> Rentals <ArrowUpDown />
+                    <MessageSquare />{t("rentals")}<ArrowUpDown />
                   </span>
                 </th>
               </tr>

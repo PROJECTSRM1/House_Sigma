@@ -1,5 +1,7 @@
 import './FilterBar.css';
 
+import { useTranslation } from "react-i18next";
+
 import { useState } from 'react';
 import {
   ChevronDown,
@@ -22,6 +24,9 @@ interface FilterBarProps {
 type OpenDropdown = 'city' | 'type' | 'time' | null;
 
 export const FilterBar = ({ onFilterChange }: FilterBarProps) => {
+
+  const { t } = useTranslation();
+
   const [selectedCity, setSelectedCity] = useState('All Cities');
   const [selectedType, setSelectedType] = useState('All Types');
   const [selectedTime, setSelectedTime] = useState('Last 12 Months');
@@ -72,9 +77,8 @@ export const FilterBar = ({ onFilterChange }: FilterBarProps) => {
       {/* Header */}
       <div className="filterbar-header">
         <Filter />
-        <span>Filters</span>
+        <span>{t("filters")}</span>
       </div>
-
       <div className="filterbar-controls">
         {/* ================= CITY ================= */}
         <div className="filter-group">

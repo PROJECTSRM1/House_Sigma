@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "./Join.css";
@@ -17,6 +18,8 @@ const countryList = [
 ];
 
 const Join: React.FC = () => {
+
+  const { t } = useTranslation();
   const [step, setStep] = useState(1);
   const navigate = useNavigate();
   const { setUser } = useAuth();
@@ -212,9 +215,8 @@ const Join: React.FC = () => {
   return (
     <>
       <Navbar />
-
       <div className="join-container">
-        <h2 className="join-title">Create Account</h2>
+        <h2 className="join-title">{t("create_account")}</h2>
 
         <div className="step-indicator">
           <div className={step >= 1 ? "circle active" : "circle"}>1</div>
@@ -234,9 +236,7 @@ const Join: React.FC = () => {
                   setActiveTab("email");
                   setError("");
                 }}
-              >
-                Email
-              </button>
+              >{t("email")}</button>
 
               <button
                 className={activeTab === "mobile" ? "tab active" : "tab"}
@@ -244,9 +244,7 @@ const Join: React.FC = () => {
                   setActiveTab("mobile");
                   setError("");
                 }}
-              >
-                Mobile Number
-              </button>
+              >{t("mobile_number")}</button>
             </div>
 
             <input
@@ -340,88 +338,53 @@ const Join: React.FC = () => {
         {step === 2 && (
           <div className="step-box">
             <div className="scroll-card">
-              <center><h3>HomeNest Terms of Use</h3></center>
-              <p>
-                By using this website, you are agreeing to comply and be bound by the following terms of service and use.
-                Please review the following terms in their entirety and ensure their comprehension before using and
-                viewing this website.
-                <br /><br />
+              <center><h3>{t("homenest_terms_of_use")}</h3></center>
+              <p>{t(
+                "by_using_this_website_you_are_agreeing_to_comply_and_be_bound_by_the_following_terms_of_service_and_use_please_review_the_following_terms_in_their_entirety_and_ensure_their_comprehension_before_using_and_viewing_this_website"
+              )}<br /><br />{t(
+                "acknowledge_and_understand_that_the_terms_of_use_do_not_create_an_agency_relationship_and_do_not_impose_a_financial_obligation_on_the_registrant_or_create_any_representation_agreement_between_the_registrant_and_the_participant"
+              )}<br /><br />{t(
+                "acknowledges_that_you_are_entering_into_a_lawful_broker_consumer_relationship_with_the_homenest_inc_brokerage"
+              )}<br /><br />{t(
+                "acknowledges_that_after_the_terms_of_use_agreement_is_opened_for_viewing_a_mouse_click_is_sufficient_to_acknowledge_agreement_to_those_terms"
+              )}<br /><br />{t(
+                "understand_that_homenest_assumes_no_responsibility_for_the_accuracy_of_any_information_shown_on_the_homenest_website_and_mobile_app"
+              )}<br /><br />{t(
+                "understand_that_all_data_obtained_from_the_vow_virtual_office_website_is_intended_only_for_your_personal_non_commercial_use"
+              )}<br /><br />{t(
+                "do_have_a_bona_fide_interest_in_the_purchase_sale_or_lease_of_real_estate_of_the_type_being_offered_through_the_vow"
+              )}<br /><br />{t(
+                "agree_not_to_copy_redistribute_retransmit_or_otherwise_use_any_of_the_data_or_listing_information_provided_except_in_connection_with_the_consumer_s_consideration_of_the_purchase_sale_or_lease_of_an_individual_property"
+              )}<br /><br />{t(
+                "acknowledge_the_board_association_ownership_of_and_the_validity_of_the_copyright_in_the_mls_database"
+              )}<br /><br />{t(
+                "if_at_any_time_an_agreement_is_entered_between_homenest_inc_and_consumer_imposing_a_financial_obligation_on_the_consumer_or_creating_representation_of_the_consumer_by_homenest_inc_it_must_be_established_separately_from_the_terms_of_use_and_may_not_be_accepted_solely_by_mouse_click"
+              )}<br /><br />
 
-                Acknowledge and understand that the Terms of Use do not create an agency relationship and do not impose
-                a financial obligation on the Registrant or create any representation agreement between the Registrant
-                and the Participant.
-                <br /><br />
-
-                Acknowledges that you are entering into a lawful broker-consumer relationship with the HomeNest Inc.
-                Brokerage.
-                <br /><br />
-
-                Acknowledges that after the Terms of Use agreement is opened for viewing, a “mouse click” is sufficient
-                to acknowledge agreement to those terms.
-                <br /><br />
-
-                Understand that HomeNest assumes no responsibility for the accuracy of any information shown on the
-                HomeNest website and mobile app.
-                <br /><br />
-
-                Understand that all data obtained from the VOW (Virtual Office Website) is intended only for your
-                personal, non-commercial use.
-                <br /><br />
-
-                Do have a bona fide interest in the purchase, sale, or lease of real estate of the type being offered
-                through the VOW.
-                <br /><br />
-
-                Agree not to copy, redistribute, retransmit, or otherwise use any of the data or Listing Information
-                provided, except in connection with the Consumer’s consideration of the purchase, sale, or lease of an
-                individual property.
-                <br /><br />
-
-                Acknowledge the Board/Association ownership of and the validity of the copyright in the MLS® database.
-                <br /><br />
-
-                If at any time, an agreement is entered between HomeNest Inc. and Consumer imposing a financial
-                obligation on the Consumer or creating representation of the Consumer by HomeNest Inc., it must be
-                established separately from the Terms of Use and may not be accepted solely by mouse click.
-                <br /><br />
-
-                <strong>Copyright</strong><br />
-                The content on this website is protected by copyright laws and is intended solely for private,
-                non-commercial use. Any reproduction, distribution, or use beyond personal purposes is prohibited.
-              </p>
+                <strong>{t("copyright")}</strong><br />{t(
+                "the_content_on_this_website_is_protected_by_copyright_laws_and_is_intended_solely_for_private_non_commercial_use_any_reproduction_distribution_or_use_beyond_personal_purposes_is_prohibited"
+              )}</p>
             </div>
 
             <div className="scroll-card">
-              <center><h3>Canadian Real Estate Association Terms of Use</h3></center>
-              <p>
-                You are agreeing to comply and be bound by the following terms of service and use.
-                <br /><br />
-
-                The information provided on this site is based in whole or in part on information provided by members of
-                The Canadian Real Estate Association, who are responsible for its accuracy. CREA assumes no responsibility
-                for its accuracy.
-                <br /><br />
-
-                CREA owns the REALTOR® and MLS® trademarks. These marks identify real estate professionals who are
-                members of CREA and who must follow CREA's rules, By-Laws, and REALTOR® Code.
-                <br /><br />
-
-                The information may only be used by consumers with a bona fide interest in real estate transactions and
-                cannot be used for commercial purposes.
-                <br /><br />
-
-                RAHB and OREB make no representations regarding the accuracy or suitability of the listing information.
-              </p>
+              <center><h3>{t("canadian_real_estate_association_terms_of_use")}</h3></center>
+              <p>{t(
+                "you_are_agreeing_to_comply_and_be_bound_by_the_following_terms_of_service_and_use"
+              )}<br /><br />{t(
+                "the_information_provided_on_this_site_is_based_in_whole_or_in_part_on_information_provided_by_members_of_the_canadian_real_estate_association_who_are_responsible_for_its_accuracy_crea_assumes_no_responsibility_for_its_accuracy"
+              )}<br /><br />{t(
+                "crea_owns_the_realtor_and_mls_trademarks_these_marks_identify_real_estate_professionals_who_are_members_of_crea_and_who_must_follow_crea_s_rules_by_laws_and_realtor_code"
+              )}<br /><br />{t(
+                "the_information_may_only_be_used_by_consumers_with_a_bona_fide_interest_in_real_estate_transactions_and_cannot_be_used_for_commercial_purposes"
+              )}<br /><br />{t(
+                "rahb_and_oreb_make_no_representations_regarding_the_accuracy_or_suitability_of_the_listing_information"
+              )}</p>
             </div>
 
             <div className="step2-actions">
-              <button className="reject-btn" onClick={() => setStep(1)}>
-                Reject
-              </button>
+              <button className="reject-btn" onClick={() => setStep(1)}>{t("reject")}</button>
 
-              <button className="agree-btn" onClick={() => setStep(3)}>
-                Agree
-              </button>
+              <button className="agree-btn" onClick={() => setStep(3)}>{t("agree")}</button>
             </div>
           </div>
         )}
@@ -429,19 +392,16 @@ const Join: React.FC = () => {
         {/* STEP 3 - OTP */}
         {step === 3 && (
           <div className="step-box-small">
-            <p className="verification-text">
-              Enter the verification code sent to:
-              <br />
+            <p className="verification-text">{t("enter_the_verification_code_sent_to")}<br />
               <span className="verification-email">{email}</span>
             </p>
 
             {/* TIMER */}
             <p className="timer-text">
               {otpExpired ? (
-                <span style={{ color: "red" }}>OTP expired</span>
+                <span style={{ color: "red" }}>{t("otp_expired")}</span>
               ) : (
-                <>
-                  OTP valid for:{" "}
+                <>{t("otp_valid_for")}{" "}
                   <b>
                     {Math.floor(timer / 60)}:
                     {String(timer % 60).padStart(2, "0")}
@@ -471,7 +431,6 @@ const Join: React.FC = () => {
           </div>
         )}
       </div>
-
       <Footer />
     </>
   );

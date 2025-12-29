@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from "react-i18next";
 import {
   ComposedChart,
   Line,
@@ -32,12 +33,13 @@ const data = [
 ];
 
 const StatsChart: React.FC = () => {
+  const { t } = useTranslation();
+
   const navigate = useNavigate();
 
   return (
     <section className={styles.chartSection}>
-      <h2 className={styles.title}>British Columbia Statistics</h2>
-
+      <h2 className={styles.title}>{t("british_columbia_statistics")}</h2>
       {/* Chart */}
       <div className={styles.chartWrapper}>
         <ResponsiveContainer width="100%" height="100%">
@@ -86,18 +88,17 @@ const StatsChart: React.FC = () => {
           </ComposedChart>
         </ResponsiveContainer>
       </div>
-
       {/* Footer row */}
       <div className={styles.chartFooter}>
         <div className={styles.sourceText}>
-          <p className={styles.sourceLead}>
-            * Source: Based on analysis of information from past listings from respective real estate boards.
-          </p>
+          <p className={styles.sourceLead}>{t(
+            "source_based_on_analysis_of_information_from_past_listings_from_respective_real_estate_boards"
+          )}</p>
 
           <ul className={styles.sourceList}>
-            <li>Sales Records in Real Estate Board of Greater Vancouver</li>
-            <li>Sales Records in Fraser Valley Real Estate Board</li>
-            <li>Sales Records in Chilliwack & District Real Estate Board</li>
+            <li>{t("sales_records_in_real_estate_board_of_greater_vancouver")}</li>
+            <li>{t("sales_records_in_fraser_valley_real_estate_board")}</li>
+            <li>{t("sales_records_in_chilliwack_district_real_estate_board")}</li>
           </ul>
         </div>
 
@@ -106,9 +107,7 @@ const StatsChart: React.FC = () => {
             className={styles.statsButton}
             onClick={() => navigate("/market-trends")}
             type="button"
-          >
-            View More Stats
-          </button>
+          >{t("view_more_stats")}</button>
         </div>
       </div>
     </section>

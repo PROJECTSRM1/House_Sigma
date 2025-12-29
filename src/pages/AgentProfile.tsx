@@ -1,4 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -7,6 +8,9 @@ import styles from "./AgentProfile.module.css";
 import emptyProfile from "@/assets/empty_profile.webp";
 
 export default function AgentProfile() {
+ const { t } = useTranslation();
+
+
   const { agentId } = useParams();
   const navigate = useNavigate();
 
@@ -19,10 +23,8 @@ export default function AgentProfile() {
       <>
         <Navbar />
         <main className={styles.page}>
-          <h2>Agent not found</h2>
-          <button onClick={() => navigate("/agents")} className={styles.backBtn}>
-            Back to Agents
-          </button>
+          <h2>{t("agent_not_found")}</h2>
+          <button onClick={() => navigate("/agents")} className={styles.backBtn}>{t("back_to_agents")}</button>
         </main>
         <Footer />
       </>
@@ -64,7 +66,6 @@ export default function AgentProfile() {
   return (
     <>
       <Navbar />
-
       <main className={styles.page}>
         {/* ================= BREADCRUMB ================= */}
         <nav className={styles.breadcrumb}>
@@ -72,11 +73,11 @@ export default function AgentProfile() {
             className={styles.breadcrumbLink}
             onClick={() => navigate("/agents")}
           >
-            Agents
+            {t("agents")}
           </span>
           <span className={styles.breadcrumbSeparator}> / </span>
           <span className={styles.breadcrumbCurrent}>
-            {agent.name} Profile
+            {agent.name} {t("profile")}
           </span>
         </nav>
 
@@ -123,7 +124,7 @@ export default function AgentProfile() {
           {/* ===== LEFT ===== */}
           <div className={styles.left}>
             <section className={styles.section}>
-              <h2 className={styles.sectionTitle}>Agent Details</h2>
+              <h2 className={styles.sectionTitle}>{t("agent_details")}</h2>
 
               <div className={styles.statsGrid}>
                 <StatCard value={`${experienceYears} Years`} label="Experience" />
@@ -150,6 +151,34 @@ export default function AgentProfile() {
                 ))}
               </div>
 
+            {/* ---- Customer Feedback ---- */}
+<section className={styles.section}>
+  <h2 className={styles.sectionTitle}>{t("customer_feedback")}</h2>
+
+  <div className={styles.feedbackList}>
+    <div className={styles.feedbackCard}>
+      <p className={styles.feedbackText}>{t(
+        "very_knowledgeable_and_responsive_helped_us_understand_the_market_and_guided_us_confidently_through_the_entire_process"
+      )}</p>
+      <span className={styles.feedbackAuthor}>{t("verified_client")}</span>
+    </div>
+
+    <div className={styles.feedbackCard}>
+      <p className={styles.feedbackText}>{t(
+        "professional_transparent_and_always_available_made_buying_our_home_a_smooth_and_stress_free_experience"
+      )}</p>
+      <span className={styles.feedbackAuthor}>{t("home_buyer")}</span>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
               {feedbacks.length > 2 && (
                 <button
                   className={styles.showMoreBtn}
@@ -163,17 +192,20 @@ export default function AgentProfile() {
             </section>
 
             <section className={styles.section}>
-              <h2 className={styles.sectionTitle}>About</h2>
+              <h2 className={styles.sectionTitle}>{t("about")}</h2>
               <p className={styles.aboutText}>
-                {agent.name} is a licensed real estate professional serving
-                clients across {agent.area} and surrounding areas. With over{" "}
-                {experienceYears} years of experience, {agent.name} specializes
-                in residential property transactions, offering strategic pricing
-                insights, market analysis, and client-first guidance.
-              </p>
+  {agent.name}{t("is_a_licensed_real_estate_professional_serving_clients_across")}{" "}
+  {agent.area}{t("and_surrounding_areas_with_over")}{experienceYears}{t("years_of_experience")}{agent.name}{t(
+                "specializes_in_residential_property_transactions_offering_strategic_pricing_insights_market_analysis_and_client_first_guidance"
+              )}<br />
+  <br />{t("known_for_professionalism_and_transparency")}{agent.name}{t(
+                "works_closely_with_buyers_and_sellers_to_ensure_confident_well_informed_decisions_at_every_stage_of_the_process"
+              )}</p>
+
             </section>
 
             <section className={styles.section}>
+              <h2 className={styles.sectionTitle}>{t("team_performance_overview")}</h2>
               <h2 className={styles.sectionTitle}>
                 Team Performance Overview
               </h2>
@@ -189,7 +221,7 @@ export default function AgentProfile() {
           {/* ===== RIGHT ===== */}
           <aside className={styles.right}>
             <div className={styles.contactCard}>
-              <h3>Contact Agent</h3>
+              <h3>{t("contact_agent")}</h3>
 
               <input
                 type="text"
@@ -207,8 +239,7 @@ export default function AgentProfile() {
                 className={styles.textarea}
               />
 
-              <button className={styles.contactBtn}>
-                Contact {agent.name}
+              <button className={styles.contactBtn}>{t("contact")}{agent.name}
               </button>
             </div>
           </aside>
@@ -222,11 +253,9 @@ export default function AgentProfile() {
         </button>
       </main>
 
-      <div className={styles.disclaimer}>
-        The information provided herein must only be used by consumers that have
-        a bona fide interest in the purchase, sale, or lease of real estate and
-        may not be used for any commercial purpose or any other purpose.
-      </div>
+      <div className={styles.disclaimer}>{t(
+        "the_information_provided_herein_must_only_be_used_by_consumers_that_have_a_bona_fide_interest_in_the_purchase_sale_or_lease_of_real_estate_and_may_not_be_used_for_any_commercial_purpose_or_any_other_purpose"
+      )}</div>
 
       <Footer />
     </>
@@ -234,13 +263,11 @@ export default function AgentProfile() {
 }
 
 /* ---------------- SMALL COMPONENT ---------------- */
-function StatCard({
-  value,
-  label,
-}: {
-  value: string | number;
-  label: string;
-}) {
+function StatCard({ value, label }: { value: string | number; label: string }) {
+  const {
+    t: t
+  } = useTranslation();
+
   return (
     <div className={styles.statCard}>
       <div className={styles.statValue}>{value}</div>

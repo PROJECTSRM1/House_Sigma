@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import { useTranslation } from "react-i18next";
 import Hero from "@/components/Hero";
 import FilterBar from "@/components/FilterBar";
 import PropertySection from "@/components/PropertySection";
@@ -16,6 +17,8 @@ import {
 } from "@/data/albertaData";
 
 const Alberta = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="min-h-screen bg-bg text-text">
       {/* NAVIGATION */}

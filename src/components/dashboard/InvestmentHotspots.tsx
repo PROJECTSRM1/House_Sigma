@@ -1,5 +1,7 @@
 import './InvestmentHotspots.css';
 
+import { useTranslation } from "react-i18next";
+
 import {
   MapPin,
   TrendingUp,
@@ -12,6 +14,9 @@ import { investmentHotspots, dataMethodology } from '@/data/mockData';
 import { InfoTooltip } from './InfoTooltip';
 
 export const InvestmentHotspots = () => {
+
+  const { t } = useTranslation();
+
   const getBadgeClass = (badge: string) => {
     switch (badge) {
       case 'high-growth':
@@ -38,10 +43,9 @@ export const InvestmentHotspots = () => {
     <section className="hotspots-section">
       {/* Header */}
       <div className="hotspots-header">
-        <h3>Investment Hotspots</h3>
-        <p>Top areas for real estate investment</p>
+        <h3>{t("investment_hotspots")}</h3>
+        <p>{t("top_areas_for_real_estate_investment")}</p>
       </div>
-
       {/* Grid */}
       <div className="hotspots-grid">
         {investmentHotspots.map((hotspot, index) => (
@@ -74,9 +78,7 @@ export const InvestmentHotspots = () => {
             <div className="hotspot-metrics">
               <div className="metric-card">
                 <div className="metric-label">
-                  <TrendingUp />
-                  Appreciation
-                  <InfoTooltip
+                  <TrendingUp />{t("appreciation")}<InfoTooltip
                     title={dataMethodology.appreciation.title}
                     description={dataMethodology.appreciation.description}
                   />
@@ -88,9 +90,7 @@ export const InvestmentHotspots = () => {
 
               <div className="metric-card">
                 <div className="metric-label">
-                  <Percent />
-                  Rental Yield
-                  <InfoTooltip
+                  <Percent />{t("rental_yield")}<InfoTooltip
                     title={dataMethodology.rentalYield.title}
                     description={dataMethodology.rentalYield.description}
                   />
@@ -102,9 +102,7 @@ export const InvestmentHotspots = () => {
 
               <div className="metric-card">
                 <div className="metric-label">
-                  <Building2 />
-                  Infrastructure
-                  <InfoTooltip
+                  <Building2 />{t("infrastructure")}<InfoTooltip
                     title={dataMethodology.infrastructureScore.title}
                     description={dataMethodology.infrastructureScore.description}
                   />
@@ -116,9 +114,7 @@ export const InvestmentHotspots = () => {
 
               <div className="metric-card">
                 <div className="metric-label">
-                  <Activity />
-                  Sales Activity
-                </div>
+                  <Activity />{t("sales_activity")}</div>
                 <strong>
                   {hotspot.salesActivity}
                 </strong>
