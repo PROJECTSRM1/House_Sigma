@@ -1,7 +1,7 @@
 :root {
-  --accent: #0f93ff;
+  --accent: #1e4a7a;
   --pill-bg: #eaf8f7;
-  --pill-hover: #0f93ff;
+  --pill-hover: #1e4a7a;
   --muted: #6f7376;
   --border: #e6e9eb;
   --select-shadow: rgba(34, 34, 34, 0.06);
@@ -98,13 +98,13 @@
 
 /* ACTIVE (clicked) state */
 .provinceInnerActive {
-  background: #0f93ff;
+  background: #1e4a7a;
   color: white;
   box-shadow: 0 6px 14px rgba(31,169,161,0.15);
 }
 
 .provinceBtn:hover .provinceInnerActive {
-  background: #0f93ff !important;
+  background: #1e4a7a !important;
   color: white !important;
 }
 

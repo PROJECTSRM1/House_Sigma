@@ -1078,3 +1078,237 @@
 .legend-dot.average { 
     background: #e2e8f0;
 }
+
+
+/* ============================
+   Methodology Button
+============================ */
+
+.ms-methodology-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 1px solid #1e4a7a;
+  background: #ffffff;
+  color: #1e4a7a;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  transition: all 0.25s ease;
+}
+
+.ms-methodology-btn:hover {
+  background: linear-gradient(
+    135deg,
+    #1e4a7a,
+    #2563eb
+  );
+  color: #ffffff;
+  border-color: transparent;
+}
+
+/* ============================
+   Methodology Overlay
+============================ */
+
+.ms-methodology-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 1rem;
+  backdrop-filter: blur(6px);
+}
+
+/* ============================
+   Methodology Modal
+============================ */
+
+.ms-methodology-modal {
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+  max-height: 80vh;
+  overflow-y: auto;
+  background: #ffffff;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 25px 60px rgba(15, 23, 42, 0.25);
+  animation: methodologySlide 0.3s ease;
+}
+
+@keyframes methodologySlide {
+  from {
+    opacity: 0;
+    transform: translateY(-18px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Close Button */
+
+.ms-methodology-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.375rem;
+  border: none;
+  background: #f1f5f9;
+  color: #334155;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.ms-methodology-close:hover {
+  background: linear-gradient(
+    135deg,
+    #dc2626,
+    #ef4444
+  );
+  color: #ffffff;
+}
+
+/* ============================
+   Modal Content
+============================ */
+
+.ms-methodology-modal h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.75rem;
+  padding-right: 2.5rem;
+}
+
+.ms-methodology-intro {
+  font-size: 0.9375rem;
+  color: #475569;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* ============================
+   Sections
+============================ */
+
+.ms-methodology-section {
+  margin-bottom: 1.25rem;
+}
+
+.ms-methodology-section h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ms-methodology-section h4::before {
+  content: "";
+  width: 4px;
+  height: 1rem;
+  background: linear-gradient(
+    180deg,
+    #1e4a7a,
+    #38bdf8
+  );
+  border-radius: 2px;
+}
+
+.ms-methodology-section p {
+  font-size: 0.875rem;
+  color: #475569;
+  line-height: 1.6;
+  padding-left: 0.875rem;
+  margin: 0;
+}
+
+/* ============================
+   Definition Highlight
+============================ */
+
+.ms-term-definition {
+  background: #f8fafc;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  margin-top: 0.5rem;
+  border-left: 3px solid;
+  border-image: linear-gradient(
+    180deg,
+    #1e4a7a,
+    #38bdf8
+  ) 1;
+}
+
+.ms-term-definition strong {
+  color: #1e293b;
+}
+
+/* ============================
+   Formula Box
+============================ */
+
+.ms-formula {
+  margin-top: 0.75rem;
+  padding: 1rem;
+  background: #f1f5f9;
+  border-radius: 0.5rem;
+  margin-left: 0.875rem;
+  border-left: 3px solid;
+  border-image: linear-gradient(
+    180deg,
+    #1e4a7a,
+    #38bdf8
+  ) 1;
+}
+
+.ms-formula code {
+  display: block;
+  font-family: Consolas, monospace;
+  font-size: 0.8rem;
+  color: #0f172a;
+  background: #ffffff;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+  margin-bottom: 0.5rem;
+}
+
+.ms-formula-example {
+  font-size: 0.75rem;
+  color: #64748b;
+  font-style: italic;
+  border-top: 1px dashed #cbd5f5;
+  padding-top: 0.5rem;
+}
+
+/* ============================
+   Mobile
+============================ */
+
+@media (max-width: 768px) {
+  .ms-methodology-modal {
+    padding: 1.5rem;
+  }
+
+  .ms-methodology-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

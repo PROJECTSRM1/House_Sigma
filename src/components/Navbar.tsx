@@ -113,15 +113,15 @@ const Navbar: React.FC = () => {
                 </DropdownMenuTrigger>
 
                 <DropdownMenuContent align="start" sideOffset={8} className={styles.dropdownContent}>
-                  <DropdownMenuItem asChild>
+                  <DropdownMenuItem asChild className={styles.DropdownMenuItem}>
                     <NavLink to="/province/on" onClick={() => setSelectedProvince("ON")}>{t("ontario_on")}</NavLink>
                   </DropdownMenuItem>
 
-                  <DropdownMenuItem asChild>
+                  <DropdownMenuItem asChild className={styles.DropdownMenuItem}>
                     <NavLink to="/province/bc" onClick={() => setSelectedProvince("BC")}>{t("british_columbia_bc")}</NavLink>
                   </DropdownMenuItem>
 
-                  <DropdownMenuItem asChild>
+                  <DropdownMenuItem asChild className={styles.DropdownMenuItem}>
                     <NavLink to="/province/ab" onClick={() => setSelectedProvince("AB")}>{t("alberta_ab")}</NavLink>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
@@ -157,9 +157,9 @@ const Navbar: React.FC = () => {
                 </DropdownMenuTrigger>
 
                 <DropdownMenuContent align="end" className={styles.dropdownContent}>
-                  <DropdownMenuItem asChild><NavLink to="/blog">{t("blog")}</NavLink></DropdownMenuItem>
-                  <DropdownMenuItem asChild><NavLink to="/recommend-communities">{t("recommend_communities")}</NavLink></DropdownMenuItem>
-                  <DropdownMenuItem asChild><NavLink to="/contact">{t("contact_us")}</NavLink></DropdownMenuItem>
+                  <DropdownMenuItem asChild className={styles.DropdownMenuItem}><NavLink to="/blog">{t("blog")}</NavLink></DropdownMenuItem>
+                  <DropdownMenuItem asChild className={styles.DropdownMenuItem}><NavLink to="/recommend-communities">{t("recommend_communities")}</NavLink></DropdownMenuItem>
+                  <DropdownMenuItem asChild className={styles.DropdownMenuItem}><NavLink to="/contact">{t("contact_us")}</NavLink></DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             </nav>

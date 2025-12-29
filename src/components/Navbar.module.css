@@ -157,6 +157,10 @@ html, body {
   border-radius: 10px;
 }
 
+.DropdownMenuItem:hover{
+  background: #1e4a7a !important;
+}
+
 .bar::before { top: -7px; }
 .bar::after { top: 7px; }
 
@@ -289,6 +293,10 @@ html, body {
   border-radius: 10px !important;
   backdrop-filter: blur(8px);
   background-color: #0f93ff;
+}
+
+.loginBtn:hover{
+  background-color: #1e4a7a !important;
 }
 
 .profileButton {
