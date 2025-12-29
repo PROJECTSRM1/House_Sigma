@@ -26,24 +26,24 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  border: 2px solid #00a5a3;
+  border: 2px solid #1e4a7a;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: 600;
-  color: #00a5a3;
+  color: #1e4a7a;
   background: #fff;
 }
 
 .circle.active {
-  background: #00a5a3;
+  background: #1e4a7a;
   color: #fff;
 }
 
 .line {
   width: 45px;
   height: 2px;
-  background: #00a5a3;
+  background: #1e4a7a;
 }
 
 /* ===== STEP 1 & STEP 3 CARD BOX ===== */
@@ -81,8 +81,8 @@
 }
 
 .tab.active {
-  color: #00a5a3;
-  border-bottom: 2px solid #00a5a3;
+  color: #1e4a7a;
+  border-bottom: 2px solid #1e4a7a;
 }
 
 /* ===== INPUTS ===== */
@@ -113,7 +113,7 @@
   width: 100%;
   padding: 10px;
   margin-top: 20px;
-  background: #00a5a3;
+  background: #1e4a7a;
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -218,7 +218,7 @@
 }
 
 .country-dropdown-list::-webkit-scrollbar-thumb {
-  background: #00a5a3;
+  background: #1e4a7a;
   border-radius: 5px;
 }
 
@@ -292,7 +292,7 @@
 }
 
 .scroll-card::-webkit-scrollbar-thumb {
-  background: #00a5a3;
+  background: #1e4a7a;
   border-radius: 5px;
 }
 
@@ -313,13 +313,13 @@
 }
 
 .reject-btn {
-  border: 2px solid #00a5a3;
-  color: #00a5a3;
+  border: 2px solid #1e4a7a;
+  color: #1e4a7a;
   background: #fff;
 }
 
 .agree-btn {
-  background: #00a5a3;
+  background: #1e4a7a;
   color: #fff;
   border: none;
 }
@@ -333,7 +333,7 @@
 }
 
 .verification-email {
-  color: #00a5a3;
+  color: #1e4a7a;
   font-weight: 600;
 }
 
