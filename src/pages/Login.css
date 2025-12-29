@@ -64,8 +64,8 @@
 }
 
 .tab.active {
-  color: #00b8b0;
-  border-bottom: 2px solid #00b8b0;
+  color: #1e4a7a;
+  border-bottom: 2px solid #1e4a7a;
 }
 
 /* ===== INPUT GROUP ===== */
@@ -80,7 +80,7 @@
 }
 
 .input-group input:focus {
-  border-color: #00b8b0;
+  border-color: #1e4a7a;
 }
 
 /* ===== MOBILE NUMBER GROUP ===== */
@@ -97,7 +97,7 @@
 }
 
 .combined-mobile-box:focus-within {
-  border-color: #00b8b0;
+  border-color: #1e4a7a;
 }
 
 .country-box {
@@ -166,7 +166,7 @@
 }
 
 .password-wrapper input:focus {
-  border-color: #00b8b0;
+  border-color: #1e4a7a;
 }
 
 .eye-btn {
@@ -180,7 +180,7 @@
 .login-btn {
   width: 100%;
   padding: 10px;
-  background: #00a5a3;
+  background: #1e4a7a;
   color: white;
   border: none;
   border-radius: 6px;
@@ -191,13 +191,18 @@
 }
 
 .login-btn:hover {
-  background: #00918f;
+ background: linear-gradient(
+  135deg,
+  #1f3550 0%,
+  #2b5ea8 50%,
+  #2b9df4 100%
+);
 }
 
 .forgot-text {
   text-align: center;
   margin-top: 12px;
-  color: #00a5a3;
+  color: #1e4a7a;
   cursor: pointer;
 }
 
@@ -239,7 +244,7 @@
 }
 
 .signup-text a {
-  color: #00a5a3;
+  color: #1e4a7a;
   font-weight: 600;
 }
 

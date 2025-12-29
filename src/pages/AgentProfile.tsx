@@ -1,13 +1,11 @@
-// src/pages/AgentProfile.tsx
 import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import agents from "@/data/agents";
 import styles from "./AgentProfile.module.css";
 import emptyProfile from "@/assets/empty_profile.webp";
-
-const EMPTY_PROFILE = "src/assets/empty_profile.webp";
 
 export default function AgentProfile() {
  const { t } = useTranslation();
@@ -15,6 +13,8 @@ export default function AgentProfile() {
 
   const { agentId } = useParams();
   const navigate = useNavigate();
+
+  const [showAllFeedback, setShowAllFeedback] = useState(false);
 
   const agent = agents.find((a) => a.id === Number(agentId));
 
@@ -31,7 +31,6 @@ export default function AgentProfile() {
     );
   }
 
-  // ---- Derived business metrics (safe demo values) ----
   const experienceYears = 3 + (agent.id % 7);
   const activeListings = 5 + (agent.id % 10);
   const totalSales = 30 + agent.id;
@@ -41,52 +40,89 @@ export default function AgentProfile() {
     (a) => a.province === agent.province
   ).length;
 
+  const feedbacks = [
+    {
+      text:
+        "Very knowledgeable and responsive. Helped us understand the market and guided us confidently through the entire process.",
+      author: "Verified Client",
+    },
+    {
+      text:
+        "Professional, transparent, and always available. Made buying our home a smooth and stress-free experience.",
+      author: "Home Buyer",
+    },
+    {
+      text:
+        "Excellent communication and strong negotiation skills. Highly recommended.",
+      author: "Property Seller",
+    },
+    {
+      text:
+        "Handled everything professionally and kept us informed at every step.",
+      author: "First-time Buyer",
+    },
+  ];
+
   return (
     <>
       <Navbar />
       <main className={styles.page}>
-        {/* ================= HEADER ================= */}
-
         {/* ================= BREADCRUMB ================= */}
-<nav className={styles.breadcrumb}>
-  <span
-    className={styles.breadcrumbLink}
-    onClick={() => navigate("/agents")}
-  >{t("agents")}</span>
-  <span className={styles.breadcrumbSeparator}> / </span>
-  <span className={styles.breadcrumbCurrent}>
-    {agent.name}{t("profile")}</span>
-</nav>
+        <nav className={styles.breadcrumb}>
+          <span
+            className={styles.breadcrumbLink}
+            onClick={() => navigate("/agents")}
+          >
+            {t("agents")}
+          </span>
+          <span className={styles.breadcrumbSeparator}> / </span>
+          <span className={styles.breadcrumbCurrent}>
+            {agent.name} {t("profile")}
+          </span>
+        </nav>
 
+        {/* ================= HEADER ================= */}
         <section className={styles.header}>
           <img
-  src={emptyProfile}
-  alt={agent.name}
-  className={styles.avatar}
-/>
-
+            src={emptyProfile}
+            alt={agent.name}
+            className={styles.avatar}
+          />
 
           <div className={styles.headerInfo}>
             <h1 className={styles.name}>{agent.name}</h1>
-            <p className={styles.role}>{agent.role}</p>
-            <p className={styles.meta}>
-              {agent.area}, {agent.province}
-            </p>
-<p className={styles.languages}>
-  <span className={styles.languagesLabel}>{t("languages_spoken")}</span>
-  <span className={styles.languagesValue}>
-    {agent.languages.join(", ")}
-  </span>
-</p>
 
+            {/* ✅ CLEAN, ALIGNED META GRID */}
+            <div className={styles.headerMeta}>
+              <p className={styles.meta}>
+                <strong>Agent ID:</strong> AG-{agent.id.toString().padStart(3, "0")}
+              </p>
+
+              <p className={styles.meta}>
+                <strong>Role:</strong> {agent.role}
+              </p>
+
+              <p className={styles.meta}>
+                <strong>Specialization:</strong> Residential Properties
+              </p>
+
+              <p className={styles.meta}>
+                <strong>Location:</strong> {agent.area}, {agent.province}
+              </p>
+            </div>
+
+            <div className={styles.languages}>
+              <span className={styles.languagesLabel}>Languages spoken</span>
+              <span className={styles.languagesValue}>
+                {agent.languages.join(", ")}
+              </span>
+            </div>
           </div>
         </section>
 
-        {/* ================= MAIN GRID ================= */}
         <section className={styles.grid}>
-          {/* ===== LEFT CONTENT ===== */}
+          {/* ===== LEFT ===== */}
           <div className={styles.left}>
-            {/* ---- Agent Details ---- */}
             <section className={styles.section}>
               <h2 className={styles.sectionTitle}>{t("agent_details")}</h2>
 
@@ -98,6 +134,22 @@ export default function AgentProfile() {
               </div>
             </section>
 
+            <section className={styles.section}>
+              <h2 className={styles.sectionTitle}>Customer Feedback</h2>
+
+              <div className={styles.feedbackList}>
+                {(showAllFeedback
+                  ? feedbacks
+                  : feedbacks.slice(0, 2)
+                ).map((fb, index) => (
+                  <div key={index} className={styles.feedbackCard}>
+                    <p className={styles.feedbackText}>“{fb.text}”</p>
+                    <span className={styles.feedbackAuthor}>
+                      — {fb.author}
+                    </span>
+                  </div>
+                ))}
+              </div>
 
             {/* ---- Customer Feedback ---- */}
 <section className={styles.section}>
@@ -127,8 +179,18 @@ export default function AgentProfile() {
 
 
 
+              {feedbacks.length > 2 && (
+                <button
+                  className={styles.showMoreBtn}
+                  onClick={() =>
+                    setShowAllFeedback((prev) => !prev)
+                  }
+                >
+                  {showAllFeedback ? "Show Less" : "Show More"}
+                </button>
+              )}
+            </section>
 
-            {/* ---- About Agent ---- */}
             <section className={styles.section}>
               <h2 className={styles.sectionTitle}>{t("about")}</h2>
               <p className={styles.aboutText}>
@@ -142,28 +204,21 @@ export default function AgentProfile() {
 
             </section>
 
-            {/* ---- Team Performance ---- */}
             <section className={styles.section}>
               <h2 className={styles.sectionTitle}>{t("team_performance_overview")}</h2>
+              <h2 className={styles.sectionTitle}>
+                Team Performance Overview
+              </h2>
 
               <div className={styles.statsGrid}>
-                <StatCard
-                  value={agentsInProvince}
-                  label="Agents in Province"
-                />
-                <StatCard
-                  value={agents.length * 8}
-                  label="Total Properties Listed"
-                />
-                <StatCard
-                  value={agents.length * 6}
-                  label="Total Properties Sold"
-                />
+                <StatCard value={agentsInProvince} label="Agents in Province" />
+                <StatCard value={agents.length * 8} label="Total Properties Listed" />
+                <StatCard value={agents.length * 6} label="Total Properties Sold" />
               </div>
             </section>
           </div>
 
-          {/* ===== RIGHT SIDEBAR ===== */}
+          {/* ===== RIGHT ===== */}
           <aside className={styles.right}>
             <div className={styles.contactCard}>
               <h3>{t("contact_agent")}</h3>
@@ -190,12 +245,18 @@ export default function AgentProfile() {
           </aside>
         </section>
 
-        <button className={styles.backBtn} onClick={() => navigate("/agents")}>{t("back_to_agents")}</button>
+        <button
+          className={styles.backBtn}
+          onClick={() => navigate("/agents")}
+        >
+          ← Back to Agents
+        </button>
       </main>
-      {/* ===== Legal Disclaimer ===== */}
+
       <div className={styles.disclaimer}>{t(
         "the_information_provided_herein_must_only_be_used_by_consumers_that_have_a_bona_fide_interest_in_the_purchase_sale_or_lease_of_real_estate_and_may_not_be_used_for_any_commercial_purpose_or_any_other_purpose"
       )}</div>
+
       <Footer />
     </>
   );

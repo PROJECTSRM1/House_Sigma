@@ -7,7 +7,13 @@
 /* ==================== HERO SECTION ==================== */
 .hero {
   position: relative;
-  background: linear-gradient(135deg, #0f93ff 0%, #0066cc 100%);
+ background: linear-gradient(
+  135deg,
+  #1f3550 0%,
+  #2b5ea8 50%,
+  #2b9df4 100%
+);
+
   padding: 120px 24px 80px;
   overflow: hidden;
 }
@@ -151,7 +157,12 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #0f93ff 0%, #0066cc 100%);
+  background: linear-gradient(
+  135deg,
+  #1f3550 0%,
+  #2b5ea8 50%,
+  #2b9df4 100%
+);
   color: #ffffff;
   display: flex;
   align-items: center;
@@ -198,7 +209,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #0f93ff;
+  color:#1e4a7a;
   flex-shrink: 0;
 }
 
@@ -225,7 +236,7 @@
   left: 18px;
   top: 50%;
   transform: translateY(-50%);
-  color: #0f93ff;
+  color:#1e4a7a;
   pointer-events: none;
 }
 
@@ -243,7 +254,7 @@
 }
 
 .addressInput:focus {
-  border-color: #0f93ff;
+  border-color:#1e4a7a;
   box-shadow: 0 0 0 4px rgba(15, 147, 255, 0.1);
 }
 
@@ -273,7 +284,7 @@
 }
 
 .compactIcon {
-  color: #0f93ff;
+  color:#1e4a7a;
   display: flex;
 }
 
@@ -296,7 +307,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #0f93ff;
+  color:#1e4a7a;
   transition: all 0.2s;
 }
 
@@ -345,7 +356,7 @@
 }
 
 .inputIcon {
-  color: #0f93ff;
+  color:#1e4a7a;
   display: flex;
 }
 
@@ -371,7 +382,7 @@
 }
 
 .input:focus {
-  border-color: #0f93ff;
+  border-color:#1e4a7a;
   background: #ffffff;
   box-shadow: 0 0 0 4px rgba(15, 147, 255, 0.1);
 }
@@ -412,7 +423,7 @@
 }
 
 .selectBoxOpen {
-  border-color: #0f93ff;
+  border-color:#1e4a7a;
   background: #ffffff;
   box-shadow: 0 0 0 4px rgba(15, 147, 255, 0.1);
 }
@@ -429,7 +440,7 @@
 }
 
 .clearIcon {
-  color: #0f93ff;
+  color:#1e4a7a;
   cursor: pointer;
   transition: all 0.2s;
 }
@@ -483,8 +494,8 @@
 }
 
 .radioSelected {
-  background: #0f93ff;
-  border-color: #0f93ff;
+  background:#1e4a7a;
+  border-color:#1e4a7a;
   box-shadow: inset 0 0 0 3px white;
 }
 
@@ -492,7 +503,13 @@
 .ctaButton {
   width: 100%;
   height: 60px;
-  background: linear-gradient(135deg, #0f93ff 0%, #0066cc 100%);
+  background: linear-gradient(
+  135deg,
+  #1f3550 0%,
+  #2b5ea8 50%,
+  #2b9df4 100%
+);
+
   color: #ffffff;
   border: none;
   border-radius: 16px;
@@ -542,7 +559,7 @@
 }
 
 .trustIcon {
-  color: #0f93ff;
+  color:#1e4a7a;
 }
 
 .trustTitle {
@@ -596,7 +613,7 @@
   align-items: center;
   gap: 6px;
   padding: 6px 12px;
-  background: #0f93ff;
+  background:#1e4a7a;
   color: #ffffff;
   font-size: 11px;
   font-weight: 700;
@@ -662,7 +679,7 @@
 }
 
 .consultInput:focus {
-  border-color: #0f93ff;
+  border-color:#1e4a7a;
   background: #ffffff;
   box-shadow: 0 0 0 4px rgba(15, 147, 255, 0.1);
 }
@@ -682,14 +699,19 @@
 }
 
 .consultTextarea:focus {
-  border-color: #0f93ff;
+  border-color:#1e4a7a;
   background: #ffffff;
   box-shadow: 0 0 0 4px rgba(15, 147, 255, 0.1);
 }
 
 .consultButton {
   height: 48px;
-  background: linear-gradient(135deg, #0f93ff 0%, #0066cc 100%);
+  background: linear-gradient(
+  135deg,
+  #1f3550 0%,
+  #2b5ea8 50%,
+  #2b9df4 100%
+);
   color: #ffffff;
   border: none;
   border-radius: 12px;
