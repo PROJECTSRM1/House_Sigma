@@ -334,12 +334,7 @@
   position: absolute;
   top: 50%;
   height: 6px;
-background: linear-gradient(
-  135deg,
-  #1f3550 0%,
-  #2b5ea8 50%,
-  #2b9df4 100%
-);
+background:#1e4a7a;
   border-radius: 3px;
   transform: translateY(-50%);
   z-index: 2;
@@ -702,12 +697,7 @@ background: linear-gradient(
   padding: 12px 28px;
   font-size: 15px;
   font-weight: 700;
- background: linear-gradient(
-  135deg,
-  #1f3550 0%,
-  #2b5ea8 50%,
-  #2b9df4 100%
-);
+ background: #1e4a7a;
   color: #ffffff;
   border: none;
   border-radius: 12px;
@@ -719,6 +709,12 @@ background: linear-gradient(
 .findButton:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(15, 147, 255, 0.5);
+  background: linear-gradient(
+  135deg,
+  #1f3550 0%,
+  #2b5ea8 50%,
+  #2b9df4 100%
+);
 }
 
 .findButton:active {
