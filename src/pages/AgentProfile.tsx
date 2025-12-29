@@ -6,9 +6,13 @@ import Footer from "@/components/Footer";
 import agents from "@/data/agents";
 import styles from "./AgentProfile.module.css";
 import emptyProfile from "@/assets/empty_profile.webp";
+import FloatingChatButton from "../components/floatingWindowChatBot";
+import ChatBot from "../components/chatbot";
+
 
 export default function AgentProfile() {
  const { t } = useTranslation();
+ const [openChat, setOpenChat] = useState(false);
 
 
   const { agentId } = useParams();
@@ -258,6 +262,8 @@ export default function AgentProfile() {
       )}</div>
 
       <Footer />
+      {openChat && <ChatBot onClose={() => setOpenChat(false)} />}
+      <FloatingChatButton onOpen={() => setOpenChat(true)} />
     </>
   );
 }

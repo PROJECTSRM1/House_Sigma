@@ -6,6 +6,8 @@ import "./FAQ.css";
 import SearchBar from "./search";
 import Sidebar from "./Sidebar";
 import ScamNav from "../ScamNav";
+import FloatingChatButton from "../../components/floatingWindowChatBot";
+import ChatBot from "../../components/chatbot";
 
 interface FAQArticle {
   id: string;
@@ -128,6 +130,7 @@ const sidebarCategories: SidebarCategory[] = faqData.map((c) => ({
 
 const FAQ = () => {
   const { t } = useTranslation();
+  const [openChat, setOpenChat] = useState(false);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [openSidebarId, setOpenSidebarId] = useState<string | null>(null);
@@ -213,6 +216,8 @@ const FAQ = () => {
           </div>
         </div>
       </footer>
+      {openChat && <ChatBot onClose={() => setOpenChat(false)} />}
+      <FloatingChatButton onOpen={() => setOpenChat(true)} />
     </>
   );
 };

@@ -7,6 +7,8 @@ import StatsChart from "@/components/StatsChart";
 import Footer from "@/components/Footer";
 import CityLinks from "@/components/CityLinks";
 import AlbertaDisclaimer from "@/components/AlbertaDisclaimer";
+import FloatingChatButton from "../components/floatingWindowChatBot";
+import ChatBot from "../components/chatbot";
 import albertaHero from "/assets/alberta_Files/alberta.jpg";
 
 import {
@@ -15,9 +17,11 @@ import {
   featuredListings,
   soldBelowBought,
 } from "@/data/albertaData";
+import { useState } from "react";
 
 const Alberta = () => {
   const { t } = useTranslation();
+  const [openChat, setOpenChat] = useState(false);
 
   return (
     <div className="min-h-screen bg-bg text-text">
@@ -82,6 +86,8 @@ const Alberta = () => {
 
       {/* FOOTER */}
       <Footer />
+      {openChat && <ChatBot onClose={() => setOpenChat(false)} />}
+      <FloatingChatButton onOpen={() => setOpenChat(true)} />
     </div>
   );
 };

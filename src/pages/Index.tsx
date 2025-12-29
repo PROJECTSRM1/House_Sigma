@@ -7,6 +7,8 @@ import StatsChart from '@/components/StatsChart';
 import AgentSection from '@/components/AgentSection';
 import CityLinks from '@/components/CityLinks';
 import Footer from '@/components/Footer';
+import FloatingChatButton from "../components/floatingWindowChatBot";
+import ChatBot from "../components/chatbot";
 import ontarioHero from "@/assets/hero-home.jpg";
 import {
   newlyListed,
@@ -34,6 +36,8 @@ const Index = () => {
       <AgentSection />
       <CityLinks />
       <Footer />
+      {openChat && <ChatBot onClose={() => setOpenChat(false)} />}
+      <FloatingChatButton onOpen={() => setOpenChat(true)} />
     </div>
   );
 };

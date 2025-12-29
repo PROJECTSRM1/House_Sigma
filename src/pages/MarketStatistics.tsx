@@ -35,6 +35,9 @@ import "./market-statistics.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
+import FloatingChatButton from "../components/floatingWindowChatBot";
+import ChatBot from "../components/chatbot";
+
 // Mock Data
 const allTrendData = [
   { month: "Jan", downtown: 850, suburban: 620, waterfront: 1100 },
@@ -88,6 +91,7 @@ const priceRanges = ["all", "under500k", "500k-1m", "over1m"];
 const formatPrice = (price: number) => price >= 1000000 ? `$${(price / 1000000).toFixed(1)}M` : `$${(price / 1000).toFixed(0)}K`;
 
 const MarketStatistics = () => {
+  const [openChat, setOpenChat] = useState(false);
 
   const { t } = useTranslation();
   const [selectedCommunity, setSelectedCommunity] = useState<string | null>(null);
@@ -665,6 +669,8 @@ const MarketStatistics = () => {
         {showFilters && <div className="ms-filter-overlay" onClick={() => setShowFilters(false)} />}
       </div>
       <Footer />
+      {openChat && <ChatBot onClose={() => setOpenChat(false)} />}
+      <FloatingChatButton onOpen={() => setOpenChat(true)} />
     </>
   );
 };

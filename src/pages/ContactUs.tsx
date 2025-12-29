@@ -5,9 +5,14 @@ import { useTranslation } from "react-i18next";
 import ScamNav from "@/pages/ScamNav";
 
 import styles from "./Contact.module.css";
+import FloatingChatButton from "../components/floatingWindowChatBot";
+import ChatBot from "../components/chatbot";
+
 
 export default function ContactUs() {
+
   const { t } = useTranslation();
+  
 
 
   const [searchQuery, setSearchQuery] = useState("");
@@ -28,13 +33,13 @@ export default function ContactUs() {
           <div className="w-[92%] max-w-[850px] px-4 md:px-6 py-6">
 
             {/* PAGE TITLE (Responsive) */}
-            <h1 className="text-[30px] md:text-[40px] font-bold text-[#111133] mt-4 mb-2 text-center md:text-left">{t("contact_us")}</h1>
+            <h1 className="text-[30px] md:text-[40px] font-bold text-[ #1e4a7a] mt-4 mb-2 text-center md:text-left">{t("contact_us")}</h1>
 
             {/* UNDERLINE */}
-            <div className="w-[90px] h-[3px] bg-[#111133] mx-auto  mt-2 mb-6" />
+            <div className="w-[90px] h-[3px] bg-[ #1e4a7a] mx-auto  mt-2 mb-6" />
 
             {/* HEADER TEXT */}
-            <h2 className="text-[20px] md:text-[28px] font-semibold text-[#111133] mb-3 leading-[1.4] text-center md:text-left">{t("enter_your_question_here_to_search_our_knowledge_base")}</h2>
+            <h2 className="text-[20px] md:text-[28px] font-semibold text-[ #1e4a7a] mb-3 leading-[1.4] text-center md:text-left">{t("enter_your_question_here_to_search_our_knowledge_base")}</h2>
 
             {/* SEARCH BAR (Responsive) */}
             <div className="flex w-full mb-4 border border-[#cccccc] rounded-md overflow-hidden">
@@ -63,92 +68,92 @@ export default function ContactUs() {
             </div>
 
             {/* INFO TEXT */}
-            <p className="text-[15px] md:text-[17px] text-[#111133] leading-[1.6] mb-5">{t("before_submitting_a_customer_service_request_please_check_our")}{" "}
+            <p className="text-[15px] md:text-[17px] text-[ #1e4a7a] leading-[1.6] mb-5">{t("before_submitting_a_customer_service_request_please_check_our")}{" "}
               <a
                 href="https://housesigma.com/blog-en/faq"
                 target="_blank"
-                className="text-[#4477aa] underline hover:text-[#111133]"
+                className="text-[#4477aa] underline hover:text-[ #1e4a7a]"
               >{t("knowledge_base_link")}</a>{" "}{t("section_90_of_the_inquiries_we_received_has_an_answer")}</p>
 
-            <div className="w-[90px] h-[3px] bg-[#111133] mx-auto  mt-2 mb-6" />
+            <div className="w-[90px] h-[3px] bg-[ #1e4a7a] mx-auto  mt-2 mb-6" />
 
             {/* BUY / SELL / LEASE SECTION */}
-            <p className="text-[15px] md:text-[17px] text-[#111133] leading-[1.6] mb-1">{t("to_inquire_about_buy_sell_lease_a_property_or_book_a_viewing_please_use")}{" "}
+            <p className="text-[15px] md:text-[17px] text-[ #1e4a7a] leading-[1.6] mb-1">{t("to_inquire_about_buy_sell_lease_a_property_or_book_a_viewing_please_use")}{" "}
               <a
                 href="https://housesigma.com/web/en/market"
                 target="_blank"
-                className="text-[#4477aa] underline hover:text-[#111133]"
+                className="text-[#4477aa] underline hover:text-[ #1e4a7a]"
               >{t("contact_homenest_agent")}</a>
             </p>
 
-            <p className="text-[15px] md:text-[17px] text-[#111133] leading-[1.6] mb-4">{t("form_on_listing_market_page")}{" "}
+            <p className="text-[15px] md:text-[17px] text-[ #1e4a7a] leading-[1.6] mb-4">{t("form_on_listing_market_page")}{" "}
               <a
                 href="https://housesigma.com/web/en/market"
                 target="_blank"
-                className="text-[#4477aa] underline hover:text-[#111133]"
+                className="text-[#4477aa] underline hover:text-[ #1e4a7a]"
               >{t("https_homenest_com_web_en_market")}</a>
             </p>
 
-            <div className="w-[90px] h-[3px] bg-[#111133] mx-auto  mt-2 mb-6" />
+            <div className="w-[90px] h-[3px] bg-[ #1e4a7a] mx-auto  mt-2 mb-6" />
 
             {/* TECHNICAL SUPPORT */}
-            <p className="font-bold text-[15px] md:text-[17px] text-[#111133] mb-1">{t("contact_technical_support")}</p>
+            <p className="font-bold text-[15px] md:text-[17px] text-[ #1e4a7a] mb-1">{t("contact_technical_support")}</p>
 
             <a
               href="https://housesigma.com/blog-en/faq/other/contact-technical-support/"
               target="_blank"
-              className="text-[#4477aa] underline hover:text-[#111133] text-[14px] md:text-[15px]"
+              className="text-[#4477aa] underline hover:text-[ #1e4a7a] text-[14px] md:text-[15px]"
             >{t("https_homenest_com_blog_en_faq_other_contact_technical_support")}</a>
 
             <div className="my-4" />
 
             {/* COMPLAINTS */}
-            <p className="font-bold text-[15px] md:text-[17px] text-[#111133] mb-1">{t("complain_about_brokerage_services")}</p>
+            <p className="font-bold text-[15px] md:text-[17px] text-[ #1e4a7a] mb-1">{t("complain_about_brokerage_services")}</p>
             <a
               href="https://housesigma.com/blog-en/faq/other/complain-about-brokerage-services/"
               target="_blank"
-              className="text-[#4477aa] underline hover:text-[#111133] text-[14px] md:text-[15px]"
+              className="text-[#4477aa] underline hover:text-[ #1e4a7a] text-[14px] md:text-[15px]"
             >{t("https_homenest_com_blog_en_faq_other_complain_about_brokerage_services")}</a>
 
             <div className="my-4" />
 
             {/* DEAL MATTERS */}
-            <p className="font-bold text-[15px] md:text-[17px] text-[#111133] mb-1">{t("for_deal_and_conveyancing_related_matters")}</p>
+            <p className="font-bold text-[15px] md:text-[17px] text-[ #1e4a7a] mb-1">{t("for_deal_and_conveyancing_related_matters")}</p>
 
-            <p className="text-[15px] md:text-[17px] text-[#111133] leading-[1.6]">{t("please_contact")}{" "}
+            <p className="text-[15px] md:text-[17px] text-[ #1e4a7a] leading-[1.6]">{t("please_contact")}{" "}
               <a
                 href="mailto:deals@housesigma.com"
-                className="text-[#4477aa] underline hover:text-[#111133]"
+                className="text-[#4477aa] underline hover:text-[ #1e4a7a]"
               >{t("deals_homenest_com")}</a>
             </p>
 
             <div className="my-4" />
 
             {/* MEDIA */}
-            <p className="font-bold text-[15px] md:text-[17px] text-[#111133] mb-1">{t("for_media_inquiries")}</p>
+            <p className="font-bold text-[15px] md:text-[17px] text-[ #1e4a7a] mb-1">{t("for_media_inquiries")}</p>
 
-            <p className="text-[15px] md:text-[17px] text-[#111133] leading-[1.6]">{t("please_contact")}{" "}
+            <p className="text-[15px] md:text-[17px] text-[ #1e4a7a] leading-[1.6]">{t("please_contact")}{" "}
               <a
                 href="mailto:press@housesigma.com"
-                className="text-[#4477aa] underline hover:text-[#111133]"
+                className="text-[#4477aa] underline hover:text-[ #1e4a7a]"
               >{t("press_homenest_com")}</a>
             </p>
 
-            <div className="w-[90px] h-[3px] bg-[#111133] mx-auto  mt-2 mb-6" />
+            <div className="w-[90px] h-[3px] bg-[ #1e4a7a] mx-auto  mt-2 mb-6" />
             {/* BUY/SELL/LEASE again */}
-            <p className="text-[15px] md:text-[17px] text-[#111133] leading-[1.6] mb-1">{t("to_inquire_about_buy_sell_lease_a_property_or_book_a_viewing_please_use")}{" "}
+            <p className="text-[15px] md:text-[17px] text-[ #1e4a7a] leading-[1.6] mb-1">{t("to_inquire_about_buy_sell_lease_a_property_or_book_a_viewing_please_use")}{" "}
               <a
                 href="https://housesigma.com/web/en/market"
                 target="_blank"
-                className="text-[#4477aa] underline hover:text-[#111133]"
+                className="text-[#4477aa] underline hover:text-[ #1e4a7a]"
               >{t("contact_homenest_agent")}</a>
             </p>
 
-            <p className="text-[15px] md:text-[17px] text-[#111133] leading-[1.6] mb-10">{t("form_on_listing_market_page")}{" "}
+            <p className="text-[15px] md:text-[17px] text-[ #1e4a7a] leading-[1.6] mb-10">{t("form_on_listing_market_page")}{" "}
               <a
                 href="https://housesigma.com/web/en/market"
                 target="_blank"
-                className="text-[#4477aa] underline hover:text-[#111133]"
+                className="text-[#4477aa] underline hover:text-[ #1e4a7a]"
               >{t("https_homenest_com_web_en_market")}</a>
             </p>
 
@@ -167,6 +172,8 @@ export default function ContactUs() {
           </div>
         </div>
       </footer>
+      {openChat && <ChatBot onClose={() => setOpenChat(false)} />}
+      <FloatingChatButton onOpen={() => setOpenChat(true)} />
     </>
   );
 }

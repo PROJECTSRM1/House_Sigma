@@ -5,6 +5,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { getPropertyDetailById } from "@/data/propertyDetailsResolver";
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import FloatingChatButton from "../components/floatingWindowChatBot";
+import ChatBot from "../components/chatbot";
 
 
 // ===== ICONS (Inline SVG) =====
@@ -155,6 +157,7 @@ const formatNumber = (num: number): string => {
 // ===== MAIN COMPONENT =====
 const PropertyDetail: React.FC = () => {
    const { t } = useTranslation();
+   const [openChat, setOpenChat] = useState(false);
 
     const { id } = useParams();
   const navigate = useNavigate();
@@ -278,8 +281,6 @@ const PropertyDetail: React.FC = () => {
                 <span className="pd-price-label">{t("listed_for")}</span>
                 <span className="pd-price-value">{formatCurrency(propertyData.price)}</span>
               </div>
-              <button className="pd-save-btn">
-                <Icons.Heart />{t("save_property")}</button>
             </div>
           </div>
 
@@ -522,6 +523,8 @@ const PropertyDetail: React.FC = () => {
         )}
       </div>
       <Footer />
+      {openChat && <ChatBot onClose={() => setOpenChat(false)} />}
+      <FloatingChatButton onOpen={() => setOpenChat(true)} />
     </>
   );
 };
