@@ -1,5 +1,7 @@
 import './PriceTrendsChart.css';
 
+import { useTranslation } from "react-i18next";
+
 import { TrendingUp, TrendingDown } from 'lucide-react';
 import {
   LineChart,
@@ -24,6 +26,9 @@ export const PriceTrendsChart = ({
   /* =========================
      SELECT PROPERTY KEY
   ========================= */
+
+  const { t } = useTranslation();
+
   const dataKey =
     propertyType === 'Villa'
       ? 'villa'
@@ -52,9 +57,8 @@ export const PriceTrendsChart = ({
       {/* ================= HEADER ================= */}
       <div className="price-header">
         <div>
-          <h3>Property Price Trends</h3>
-          <p>
-            Avg price per sq.ft •{' '}
+          <h3>{t("property_price_trends")}</h3>
+          <p>{t("avg_price_per_sq_ft")}{' '}
             {propertyType === 'All Types'
               ? 'All Properties'
               : propertyType}
@@ -63,7 +67,7 @@ export const PriceTrendsChart = ({
 
         <div className="price-summary">
           <div className="price-value">
-            <span>Avg. Price / sqft</span>
+            <span>{t("avg_price_sqft")}</span>
             <strong>₹{currentPrice.toLocaleString()}</strong>
           </div>
 
@@ -80,7 +84,6 @@ export const PriceTrendsChart = ({
           </div>
         </div>
       </div>
-
       {/* ================= CHART ================= */}
       <div className="chart-wrapper large">
         <ResponsiveContainer width="100%" height="100%">

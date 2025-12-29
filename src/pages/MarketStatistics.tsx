@@ -21,6 +21,9 @@ import {
   Activity,
   Compass,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import {
   Area,
   AreaChart,
@@ -33,8 +36,6 @@ import {
   YAxis,
 } from "recharts";
 import "./market-statistics.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 // Mock Data
 const allTrendData = [
   { month: "Jan", downtown: 850, suburban: 620, waterfront: 1100 },
@@ -500,11 +501,10 @@ const MarketStatistics = () => {
           </div>
           <div className="livability-section">
             <div className="livability-text">
-              <h2>Overall Livability Score</h2>
-              <p>
-                Based on proximity to essential facilities, transportation access, and community
-                amenities. Higher scores indicate better quality of life.
-              </p>
+              <h2>{t("overall_livability_score")}</h2>
+              <p>{t(
+                "based_on_proximity_to_essential_facilities_transportation_access_and_community_amenities_higher_scores_indicate_better_quality_of_life"
+              )}</p>
             </div>
             <div className="livability-score">
               <div className="score-circle">
@@ -512,20 +512,20 @@ const MarketStatistics = () => {
                   <circle className="bg" cx="50" cy="50" r="42" />
                   <circle className="progress" cx="50" cy="50" r="42" />
                 </svg>
-                <span className="score-value">87</span>
+                <span className="score-value">{t("87")}</span>
               </div>
               <div className="score-legend">
                 <div className="legend-item">
                   <div className="legend-dot excellent" />
-                  <span>Excellent (80-100)</span>
+                  <span>{t("excellent_80_100")}</span>
                 </div>
                 <div className="legend-item">
                   <div className="legend-dot good" />
-                  <span>Good (60-79)</span>
+                  <span>{t("good_60_79")}</span>
                 </div>
                 <div className="legend-item">
                   <div className="legend-dot average" />
-                  <span>Average (&lt;60)</span>
+                  <span>{t("average_60")}</span>
                 </div>
               </div>
             </div>

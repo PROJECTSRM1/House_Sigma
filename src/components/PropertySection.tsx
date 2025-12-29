@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import PropertyCard from "./PropertyCard";
 import { PropertyListing } from "@/data/mockData";
 import { Property } from "@/data/albertaData";
@@ -13,9 +14,10 @@ interface PropertySectionProps {
 }
 
 const PropertySection = ({ title, properties, badge }: PropertySectionProps) => {
+  const { t } = useTranslation();
+
   return (
     <section className={styles.section}>
-
       {/* Header */}
       <div className={styles.header}>
         <div className={styles.left}>
@@ -25,18 +27,14 @@ const PropertySection = ({ title, properties, badge }: PropertySectionProps) => 
           {badge && <span className={styles.badge}>{badge}</span>}
         </div>
 
-        <a href="#" className={styles.seeMore}>
-          See More →
-        </a>
+        <a href="#" className={styles.seeMore}>{t("see_more")}</a>
       </div>
-
       {/* Property Grid */}
       <div className={styles.grid}>
         {properties.map((property) => (
           <PropertyCard key={property.id} property={property} />
         ))}
       </div>
-
     </section>
   );
 };

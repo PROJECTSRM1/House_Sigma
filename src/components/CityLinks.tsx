@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   ontarioCities,
   bcCities,
@@ -20,6 +21,9 @@ interface ProvinceBlockProps {
 }
 
 const ProvinceBlock = ({ title, provinces }: ProvinceBlockProps) => {
+
+  const { t } = useTranslation();
+
   const [openProvince, setOpenProvince] = useState<string | null>(null);
 
   return (

@@ -1,5 +1,7 @@
 import './RentalDemandChart.css';
 
+import { useTranslation } from "react-i18next";
+
 import { Users, Percent, Banknote } from 'lucide-react';
 import {
   AreaChart,
@@ -28,6 +30,10 @@ type RentalDemandChartProps = {
 };
 
 export const RentalDemandChart = ({ data }: RentalDemandChartProps) => {
+
+
+  const { t } = useTranslation();
+
   if (!data || data.length === 0) return null;
 
   const latest = data[data.length - 1];
@@ -48,16 +54,15 @@ export const RentalDemandChart = ({ data }: RentalDemandChartProps) => {
     <div className="rental-chart">
       {/* Header */}
       <div className="rental-header">
-        <h3>Rental Demand Trends</h3>
-        <p>Rental yield and demand analysis</p>
+        <h3>{t("rental_demand_trends")}</h3>
+        <p>{t("rental_yield_and_demand_analysis")}</p>
       </div>
-
       {/* Stats */}
       <div className="rental-stats">
         <div className="stat-card">
           <div className="stat-label">
             <Percent />
-            <span>Rental Yield</span>
+            <span>{t("rental_yield")}</span>
           </div>
           <strong>{currentYield}%</strong>
         </div>
@@ -65,7 +70,7 @@ export const RentalDemandChart = ({ data }: RentalDemandChartProps) => {
         <div className="stat-card">
           <div className="stat-label">
             <Banknote />
-            <span>Avg Rent</span>
+            <span>{t("avg_rent")}</span>
           </div>
           <strong>₹{(currentRent / 1000).toFixed(0)}k</strong>
         </div>
@@ -73,14 +78,13 @@ export const RentalDemandChart = ({ data }: RentalDemandChartProps) => {
         <div className="stat-card">
           <div className="stat-label">
             <Users />
-            <span>Demand</span>
+            <span>{t("demand")}</span>
           </div>
           <strong className={demandLevel.className}>
             {demandLevel.label}
           </strong>
         </div>
       </div>
-
       {/* Chart */}
       <div className="chart-wrapper">
         <ResponsiveContainer width="100%" height="100%">

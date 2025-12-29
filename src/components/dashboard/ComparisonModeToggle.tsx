@@ -1,5 +1,7 @@
 import './ComparisonModeToggle.css';
 
+import { useTranslation } from "react-i18next";
+
 import { TrendingUp, TrendingDown } from 'lucide-react';
 
 export type ComparisonMode = 'current' | 'yoy' | 'qoq';
@@ -13,6 +15,8 @@ export const ComparisonModeToggle = ({
   value,
   onChange,
 }: ComparisonModeToggleProps) => {
+  const { t } = useTranslation();
+
   const modes: {
     id: ComparisonMode;
     label: string;

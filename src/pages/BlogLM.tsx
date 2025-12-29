@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import { useTranslation } from "react-i18next";
 import Footer from "@/components/Footer";
 import ReportCard from "./ReportCard";
 
@@ -56,6 +57,9 @@ type BlogItem = {
 };
 
 const Blog = () => {
+
+  const { t } = useTranslation();
+
 
   
   // --- Blog data with type applied ---
@@ -272,9 +276,8 @@ const Blog = () => {
   return (
     <>
       <ScamNav />
-
       <div className="pt-[4.5rem] p-6 md:p-10 max-w-[1000px] mx-auto">
-        <h2 className={styles.headingPrimary}>Blog</h2>
+        <h2 className={styles.headingPrimary}>{t("blog")}</h2>
 
         {/* BLOG ITEMS PAGINATED */}
         <div className={styles.gridLayout}>
@@ -322,20 +325,18 @@ const Blog = () => {
           </button>
         </div>
       </div>
-
       {/* FOOTER */}
       <footer className="footer">
         <div className="footer-content">
           <div className="footer-links">
-            <a className="footer-link">HomeNest Inc. Brokerage</a>
-            <a className="footer-link">Legal</a>
-            <a className="footer-link">Privacy & Security</a>
-            <a className="footer-link">Terms & Conditions</a>
-            <a className="footer-link">Accessibility</a>
+            <a className="footer-link">{t("homenest_inc_brokerage")}</a>
+            <a className="footer-link">{t("legal")}</a>
+            <a className="footer-link">{t("privacy_security")}</a>
+            <a className="footer-link">{t("terms_conditions")}</a>
+            <a className="footer-link">{t("accessibility")}</a>
           </div>
         </div>
       </footer>
-
       {openChat && <ChatBot onClose={() => setOpenChat(false)} />}
       <FloatingChatButton onOpen={() => setOpenChat(true)} />
     </>

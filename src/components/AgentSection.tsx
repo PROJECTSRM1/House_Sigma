@@ -1,15 +1,17 @@
 import { agents } from '@/data/mockData';
+import { useTranslation } from "react-i18next";
 import styles from './AgentSection.module.css';
 
 const AgentSection = () => {
+
+  const { t } = useTranslation();
+
   return (
     <section className={styles.section}>
       <div className={styles.inner}>
         <div className={styles.header}>
-          <h2 className={styles.title}>Our Agent Team</h2>
-          <a href="#" className={styles.seeMore}>
-            See More
-          </a>
+          <h2 className={styles.title}>{t("our_agent_team")}</h2>
+          <a href="#" className={styles.seeMore}>{t("see_more")}</a>
         </div>
 
         <div className={styles.grid}>

@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Folder, FileText, ChevronRight, ChevronDown } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import "./Sidebar.css";
@@ -36,6 +37,8 @@ const Sidebar: React.FC<SidebarProps> = ({
   toggleSidebar,
   highlightArticleSlug,
 }) => {
+  const { t } = useTranslation();
+
   const navigate = useNavigate();
 
   return (

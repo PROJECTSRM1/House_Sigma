@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { MapPin } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import styles from "./PropertyCard.module.css";
@@ -12,6 +13,9 @@ interface PropertyCardProps {
 }
 
 const PropertyCard = ({ property }: PropertyCardProps) => {
+
+  const { t } = useTranslation();
+
   const navigate = useNavigate();
 
   const price =
@@ -89,11 +93,10 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
           className={styles.image}
         />
       </div>
-
       {/* CONTENT */}
       <div className={styles.cardContent}>
         <div className={styles.priceRow}>
-          <div className={styles.price}>Price: {price}</div>
+          <div className={styles.price}>{t("price")}{price}</div>
 
           <span className={`${styles.statusBadge} ${getStatusClass()}`}>
             {getStatusLabel()}

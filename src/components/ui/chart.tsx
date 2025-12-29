@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useTranslation } from "react-i18next";
 import * as RechartsPrimitive from "recharts";
 
 import { cn } from "@/lib/utils";
@@ -20,6 +21,10 @@ type ChartContextProps = {
 const ChartContext = React.createContext<ChartContextProps | null>(null);
 
 function useChart() {
+  const {
+    t: t
+  } = useTranslation();
+
   const context = React.useContext(ChartContext);
 
   if (!context) {
@@ -276,6 +281,10 @@ ChartLegendContent.displayName = "ChartLegend";
 
 // Helper to extract item config from a payload.
 function getPayloadConfigFromPayload(config: ChartConfig, payload: unknown, key: string) {
+  const {
+    t: t
+  } = useTranslation();
+
   if (typeof payload !== "object" || payload === null) {
     return undefined;
   }

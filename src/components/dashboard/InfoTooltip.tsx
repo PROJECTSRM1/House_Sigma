@@ -1,5 +1,7 @@
 import './InfoTooltip.css';
 
+import { useTranslation } from "react-i18next";
+
 import { Info } from 'lucide-react';
 import {
   Tooltip,
@@ -19,6 +21,9 @@ export const InfoTooltip = ({
   description,
   calculation,
 }: InfoTooltipProps) => {
+
+  const { t } = useTranslation();
+
   return (
     <TooltipProvider delayDuration={200}>
       <Tooltip>
