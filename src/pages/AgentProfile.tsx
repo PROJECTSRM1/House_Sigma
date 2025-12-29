@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import agents from "@/data/agents";
 import styles from "./AgentProfile.module.css";
-import emptyProfile from "@/assets/empty_profile.webp";
+import emptyProfile from "/assets/empty_profile.webp";
 import FloatingChatButton from "../components/floatingWindowChatBot";
 import ChatBot from "../components/chatbot";
 
@@ -139,21 +139,6 @@ export default function AgentProfile() {
             </section>
 
             <section className={styles.section}>
-              <h2 className={styles.sectionTitle}>Customer Feedback</h2>
-
-              <div className={styles.feedbackList}>
-                {(showAllFeedback
-                  ? feedbacks
-                  : feedbacks.slice(0, 2)
-                ).map((fb, index) => (
-                  <div key={index} className={styles.feedbackCard}>
-                    <p className={styles.feedbackText}>“{fb.text}”</p>
-                    <span className={styles.feedbackAuthor}>
-                      — {fb.author}
-                    </span>
-                  </div>
-                ))}
-              </div>
 
             {/* ---- Customer Feedback ---- */}
 <section className={styles.section}>
@@ -175,14 +160,6 @@ export default function AgentProfile() {
     </div>
   </div>
 </section>
-
-
-
-
-
-
-
-
               {feedbacks.length > 2 && (
                 <button
                   className={styles.showMoreBtn}
@@ -210,9 +187,6 @@ export default function AgentProfile() {
 
             <section className={styles.section}>
               <h2 className={styles.sectionTitle}>{t("team_performance_overview")}</h2>
-              <h2 className={styles.sectionTitle}>
-                Team Performance Overview
-              </h2>
 
               <div className={styles.statsGrid}>
                 <StatCard value={agentsInProvince} label="Agents in Province" />

@@ -13,7 +13,7 @@ const agents: Agent[] = [
     province: "Ontario",
     area: "Toronto",
     languages: ["English", "French"],
-    avatar: "src/assets/empty_profile.webp",
+    avatar: "/assets/empty_profile.webp",
   },
   {
     id: 2,
@@ -22,7 +22,7 @@ const agents: Agent[] = [
     province: "Ontario",
     area: "Mississauga",
     languages: ["English", "Hindi"],
-    avatar: "src/assets/empty_profile.webp",
+    avatar: "/assets/empty_profile.webp",
   },
   {
     id: 3,
@@ -31,7 +31,7 @@ const agents: Agent[] = [
     province: "Ontario",
     area: "Brampton",
     languages: ["English", "Punjabi"],
-    avatar: "src/assets/empty_profile.webp",
+    avatar: "/assets/empty_profile.webp",
   },
   {
     id: 4,
@@ -40,7 +40,7 @@ const agents: Agent[] = [
     province: "Ontario",
     area: "Scarborough",
     languages: ["English", "Tamil"],
-    avatar: "src/assets/empty_profile.webp",
+    avatar: "/assets/empty_profile.webp",
   },
   {
     id: 5,
@@ -49,7 +49,7 @@ const agents: Agent[] = [
     province: "Ontario",
     area: "Markham",
     languages: ["English", "Mandarin"],
-    avatar: "src/assets/empty_profile.webp",
+    avatar: "/assets/empty_profile.webp",
   },
   {
     id: 6,
@@ -58,7 +58,7 @@ const agents: Agent[] = [
     province: "Ontario",
     area: "Downtown Toronto",
     languages: ["English", "French", "Spanish"],
-    avatar: "src/assets/empty_profile.webp",
+    avatar: "/assets/empty_profile.webp",
   },
 
   // ================= BRITISH COLUMBIA =================
@@ -69,7 +69,7 @@ const agents: Agent[] = [
     province: "British Columbia",
     area: "Vancouver",
     languages: ["English", "Mandarin"],
-    avatar: "src/assets/empty_profile.webp",
+    avatar: "/assets/empty_profile.webp",
   },
 
   {
@@ -79,7 +79,7 @@ const agents: Agent[] = [
     province: "British Columbia",
     area: "Richmond",
     languages: ["English", "Cantonese"],
-    avatar: "src/assets/empty_profile.webp",
+    avatar: "/assets/empty_profile.webp",
   },
   {
     id: 9,
@@ -88,7 +88,7 @@ const agents: Agent[] = [
     province: "British Columbia",
     area: "Surrey",
     languages: ["English", "Punjabi"],
-    avatar: "src/assets/empty_profile.webp",
+    avatar: "/assets/empty_profile.webp",
   },
   {
     id: 10,
@@ -97,7 +97,7 @@ const agents: Agent[] = [
     province: "British Columbia",
     area: "Coquitlam",
     languages: ["English", "Spanish"],
-    avatar: "src/assets/empty_profile.webp",
+    avatar: "/assets/empty_profile.webp",
   },
   {
     id: 11,
@@ -106,7 +106,7 @@ const agents: Agent[] = [
     province: "British Columbia",
     area: "North Vancouver",
     languages: ["English", "French"],
-    avatar: "src/assets/empty_profile.webp",
+    avatar: "/assets/empty_profile.webp",
   },
 
   // ================= ALBERTA =================
@@ -117,7 +117,7 @@ const agents: Agent[] = [
     province: "Alberta",
     area: "Calgary",
     languages: ["English"],
-    avatar: "src/assets/empty_profile.webp",
+    avatar: "/assets/empty_profile.webp",
   },
   {
     id: 13,
@@ -126,7 +126,7 @@ const agents: Agent[] = [
     province: "Alberta",
     area: "Edmonton",
     languages: ["English", "French"],
-    avatar: "src/assets/empty_profile.webp",
+    avatar: "/assets/empty_profile.webp",
   },
   {
     id: 14,
@@ -135,7 +135,7 @@ const agents: Agent[] = [
     province: "Alberta",
     area: "Red Deer",
     languages: ["English", "Ukrainian"],
-    avatar: "src/assets/empty_profile.webp",
+    avatar: "/assets/empty_profile.webp",
   },
   {
     id: 15,
@@ -144,7 +144,7 @@ const agents: Agent[] = [
     province: "Alberta",
     area: "Calgary NW",
     languages: ["English", "Arabic"],
-    avatar: "src/assets/empty_profile.webp",
+    avatar: "/assets/empty_profile.webp",
   },
   {
     id: 16,
@@ -153,7 +153,7 @@ const agents: Agent[] = [
     province: "Alberta",
     area: "Edmonton South",
     languages: ["English", "Tagalog"],
-    avatar: "src/assets/empty_profile.webp",
+    avatar: "/assets/empty_profile.webp",
   },
   {
     id: 17,
@@ -162,7 +162,7 @@ const agents: Agent[] = [
     province: "Alberta",
     area: "Calgary Downtown",
     languages: ["English", "Spanish"],
-    avatar: "src/assets/empty_profile.webp",
+    avatar: "/assets/empty_profile.webp",
   },
 ];
 
